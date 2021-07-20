@@ -24,6 +24,9 @@ default: &default
 development:
   <<: *default
   database: mie_development
+  host: "127.0.0.1"
+  user: postgres
+  port: 25432
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +61,9 @@ development:
 test:
   <<: *default
   database: mie_test
+  host: "127.0.0.1"
+  user: postgres
+  port: 25432
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
