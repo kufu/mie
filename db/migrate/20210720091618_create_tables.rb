@@ -1,6 +1,6 @@
 class CreateTables < ActiveRecord::Migration[6.1]
   def change
-    enable_extension "pgcrypto" unless extension_enabled?("pgcrypto")
+    enable_extension 'pgcrypto' unless extension_enabled?('pgcrypto')
 
     create_table :speakers, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
       t.string :name, null: false
@@ -12,9 +12,7 @@ class CreateTables < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    create_table :users, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
-      t.timestamps
-    end
+    create_table :users, id: :uuid, default: -> { 'gen_random_uuid()' }, &:timestamps
 
     create_table :schedules, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
       t.string :title, null: false
