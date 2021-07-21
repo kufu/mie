@@ -1,0 +1,24 @@
+<h1><%- @plan.title %></h1>
+
+<%= @plan.description %>
+
+<% @grouped = @schedules.group_by { |s| s.start_at.strftime("%Y-%m-%d") } %>
+<% @date_grouped = @schedules.group_by { |s| "#{s.start_at.strftime("%H:%M:%S")} - #{s.end_at.strftime("%H:%M:%S")}" } %>
+<% @date_arrays = @date_grouped.keys.sort.map { |k| s = @date_grouped[k]; [k, @grouped.keys.sort.map { |d| s.find { |t| t.start_at.strftime("%Y-%m-%d") == d } }].flatten } %>
+
+<table>
+  <tr>
+    <th>Schedule</th>
+    <% @grouped.keys.sort.each do |date| %>
+      <th><%= date %></th>
+    <% end %>
+  </tr>
+  <% @date_arrays.each do |ar| %>
+    <tr>
+      <td><%= ar[0] %></td>
+      <% ar[1..-1].each do |c| %>
+        <td><%= c.nil? ? "-" : c.title %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
