@@ -13,7 +13,25 @@
     <tr>
       <td><%= ar[0] %></td>
       <% ar[1..-1].each do |c| %>
-        <td><%= c.nil? ? "-" : c.title %></td>
+        <td>
+          <% if c.nil? %>
+           -
+          <% else %>
+            <%= c.title %>
+            <% unless @user.plans.first&.schedules&.include?(c) %>
+              <%= form_tag(@user.plans.first, method: "patch") do %>
+                <%= hidden_field_tag(:add_schedule_id, c.id) %>
+                <%= submit_tag("Add to plans") %>
+              <% end %>
+            <% end %>
+            <% if @user.plans.first&.schedules&.include?(c) %>
+              <%= form_tag(@user.plans.first, method: "patch") do %>
+                <%= hidden_field_tag(:remove_schedule_id, c.id) %>
+                <%= submit_tag("Remove from plans") %>
+              <% end %>
+            <% end %>
+          <%end %>
+        </td>
       <% end %>
     </tr>
   <% end %>

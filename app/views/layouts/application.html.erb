@@ -14,7 +14,7 @@
       <h1>RubyKaigi mie ru君</h1>
       <nav>
         <%= link_to("Event Schedule", schedules_path) %>
-        <%= link_to("Your Plans", plans_path) %>
+        <%= link_to("Your Plans", plan_path(@user.plans&.first)) %>
       </nav>
     </header>
     <%= yield %>
