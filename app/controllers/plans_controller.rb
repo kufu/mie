@@ -16,7 +16,7 @@ class PlansController < ApplicationController
       end
     end
 
-    redirect_to schedules_path
+    redirect_to request.referer || schedules_path
   end
 
   private

@@ -1,6 +1,11 @@
-<h1><%- @plan.title %></h1>
+<h1><%= @plan.title %></h1>
 
 <%= @plan.description %>
+
+<a class="twitter-share-button"
+   href="https://twitter.com/intent/tweet?text=RubyKaigiTakeoutで僕と握手"
+   data-size="large">
+  Tweet</a>
 
 <% @grouped = @schedules.group_by { |s| s.start_at.strftime("%Y-%m-%d") } %>
 <% @date_grouped = @schedules.group_by { |s| "#{s.start_at.strftime("%H:%M:%S")} - #{s.end_at.strftime("%H:%M:%S")}" } %>
@@ -17,8 +22,37 @@
     <tr>
       <td><%= ar[0] %></td>
       <% ar[1..-1].each do |c| %>
-        <td><%= c.nil? ? "-" : c.title %></td>
+        <td>
+          <% if c.nil? %>
+            -
+          <% else %>
+            <%= c.title %>
+            <% if @user.plans.first&.schedules&.include?(c) %>
+              <%= form_tag(@user.plans.first, method: "patch") do %>
+                <%= hidden_field_tag(:remove_schedule_id, c.id) %>
+                <%= submit_tag("Remove from plans") %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
       <% end %>
     </tr>
   <% end %>
 </table>
+
+<script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+        t._e.push(f);
+    };
+
+    return t;
+}(document, "script", "twitter-wjs"));</script>
