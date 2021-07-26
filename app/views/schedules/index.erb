@@ -18,6 +18,10 @@
            -
           <% else %>
             <%= c.title %>
+            <%= c.description %>
+            <img src="<%= c.speaker.thumbnail %>" class="thumbnail" />
+            <%= c.speaker.name %>(<%= c.speaker.handle %>)
+            <%= c.speaker.profile %>
             <% unless @user.plans.first&.schedules&.include?(c) %>
               <%= form_tag(@user.plans.first, method: "patch") do %>
                 <%= hidden_field_tag(:add_schedule_id, c.id) %>

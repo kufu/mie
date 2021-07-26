@@ -6,3 +6,9 @@ table, th, td {
   border-collapse: collapse;
   padding: 16px;
 }
+
+.thumbnail {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+}
