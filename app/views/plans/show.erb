@@ -44,12 +44,19 @@
                   <img src="<%= c.speaker.thumbnail %>" class="thumbnail-img" />
                 </div>
               </div>
+
               <% if @user.plans.first&.schedules&.include?(c) %>
+                <%= form_tag(@user.plans.first, method: "patch") do %>
+                  <%= hidden_field_tag(:edit_memo_schedule_id, c.id) %>
+                  <%= text_area_tag(:memo, @user.plans.first.plan_schedules.find_by(schedule: c).memo) %>
+                  <%= submit_tag("Update memo") %>
+                <% end %>
                 <%= form_tag(@user.plans.first, method: "patch") do %>
                   <%= hidden_field_tag(:remove_schedule_id, c.id) %>
                   <%= submit_tag("Remove from plans") %>
                 <% end %>
               <% end %>
+
             </div>
           <% end %>
         </td>

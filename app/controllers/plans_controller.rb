@@ -8,7 +8,13 @@ class PlansController < ApplicationController
   end
 
   def update
-    add_and_remove_plans if params[:add_schedule_id] || params[:remove_schedule_id]
+    if params[:add_schedule_id] || params[:remove_schedule_id]
+      add_and_remove_plans
+    elsif params[:edit_memo_schedule_id]
+      edit_memo
+    else
+      head :bad_request
+    end
 
     redirect_to request.referer || schedules_path
   end
@@ -27,5 +33,10 @@ class PlansController < ApplicationController
         @plan.plan_schedules.find_by(schedule: Schedule.find(params[:remove_schedule_id])).destroy!
       end
     end
+  end
+
+  def edit_memo
+    plan_schedule = @plan.plan_schedules.find_by(schedule_id: params[:edit_memo_schedule_id])
+    plan_schedule.update!(memo: params[:memo])
   end
 end
