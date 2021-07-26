@@ -19,3 +19,49 @@ header {
     height: 8em;
     padding: 2em 10%;
 }
+
+.thumbnail-img {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 344px;
+}
+
+.session-title {
+    font-size: 24px;
+}
+
+.session-description {
+    font-size: 16px;
+}
+
+.profile {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.thumbnail {
+    margin: 0 8px 0 16px;
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.handle {
+    font-weight: bold;
+}
+
+.profile {
+    font-size: 8px;
+}
