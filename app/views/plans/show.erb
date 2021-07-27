@@ -7,63 +7,72 @@
    data-size="large">
   Tweet</a>
 
-<% @grouped = @schedules.group_by { |s| s.start_at.strftime("%Y-%m-%d") } %>
-<% @date_grouped = @schedules.group_by { |s| "#{s.start_at.strftime("%H:%M:%S")} - #{s.end_at.strftime("%H:%M:%S")}" } %>
-<% @date_arrays = @date_grouped.keys.sort.map { |k| s = @date_grouped[k]; [k, @grouped.keys.sort.map { |d| s.find { |t| t.start_at.strftime("%Y-%m-%d") == d } }].flatten } %>
+<% @table_array = create_table_array(@schedules) %>
 
-<table>
-  <tr>
-    <th>Schedule</th>
-    <% @grouped.keys.sort.each do |date| %>
-      <th><%= date %></th>
+<div class="schedule-container">
+  <div class="date-selector">
+    <% @table_array.keys.sort.each_with_index do |date, i| %>
+      <a href="#day<%= i + 1 %>" onClick='<%= toggle_script(date, @table_array.keys)  %>'><%= date %></a>
     <% end %>
-  </tr>
-  <% @date_arrays.each do |ar| %>
-    <tr>
-      <td><%= ar[0] %></td>
-      <% ar[1..-1].each do |c| %>
-        <td>
-          <% if c.nil? %>
-            -
-          <% else %>
-            <div class="container">
-              <div class="session">
-                <h1 class="session-title"><%= c.title %></h1i>
-                  <h2 class="session-description"><%= c.description %></h2>
-              </div>
-              <div class="profile">
-                <div class="profile-text">
-                  <div class="name">
-                    <%= c.speaker.name %><span class="handle">(<%= c.speaker.handle %>)</span>
-                  </div>
-                  <div class="profile">
-                    <%= c.speaker.profile %>
-                  </div>
-                </div>
-                <div class="thumbnail">
-                  <img src="<%= c.speaker.thumbnail %>" class="thumbnail-img" />
-                </div>
-              </div>
+  </div>
 
-              <% if @user.plans.first&.schedules&.include?(c) %>
-                <%= form_tag(@user.plans.first, method: "patch") do %>
-                  <%= hidden_field_tag(:edit_memo_schedule_id, c.id) %>
-                  <%= text_area_tag(:memo, @user.plans.first.plan_schedules.find_by(schedule: c).memo) %>
-                  <%= submit_tag("Update memo") %>
-                <% end %>
-                <%= form_tag(@user.plans.first, method: "patch") do %>
-                  <%= hidden_field_tag(:remove_schedule_id, c.id) %>
-                  <%= submit_tag("Remove from plans") %>
-                <% end %>
-              <% end %>
-
-            </div>
+  <% @table_array.keys.sort.each do |date| %>
+    <div id="<%= date %>" style="display: <%= date == @table_array.keys.sort.first ? "block" : "none"  %>;" class="table-container">
+      <table >
+        <tr>
+          <th><%= date %></th>
+          <% @table_array[date][0][1..-1].each do |track| %>
+            <th><%= track %></th>
           <% end %>
-        </td>
-      <% end %>
-    </tr>
+        </tr>
+        <% @table_array[date][1..-1].each do |ar| %>
+          <tr>
+            <td><%= ar[0] %></td>
+            <% ar[1..-1].each do |c| %>
+              <td>
+                <% if c.nil? %>
+                  -
+                <% else %>
+                  <div class="container">
+                    <div class="session">
+                      <h1 class="session-title"><%= c.title %></h1i>
+                        <h2 class="session-description"><%= c.description %></h2>
+                    </div>
+                    <div class="profile">
+                      <div class="profile-text">
+                        <div class="name">
+                          <%= c.speaker.name %><span class="handle">(<%= c.speaker.handle %>)</span>
+                        </div>
+                        <div class="profile">
+                          <%= c.speaker.profile %>
+                        </div>
+                      </div>
+                      <div class="thumbnail">
+                        <img src="<%= c.speaker.thumbnail %>" class="thumbnail-img" />
+                      </div>
+                    </div>
+
+                    <% if @user.plans.first&.schedules&.include?(c) %>
+                      <%= form_tag(@user.plans.first, method: "patch") do %>
+                        <%= hidden_field_tag(:edit_memo_schedule_id, c.id) %>
+                        <%= text_area_tag(:memo, @user.plans.first.plan_schedules.find_by(schedule: c).memo) %>
+                        <%= submit_tag("Update memo") %>
+                      <% end %>
+                      <%= form_tag(@user.plans.first, method: "patch") do %>
+                        <%= hidden_field_tag(:remove_schedule_id, c.id) %>
+                        <%= submit_tag("Remove from plans") %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <%end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   <% end %>
-</table>
+</div>
 
 <script>window.twttr = (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],
