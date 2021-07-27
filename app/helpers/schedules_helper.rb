@@ -18,6 +18,10 @@ module SchedulesHelper
     end.to_h
   end
 
+  def toggle_script(date, dates)
+    [show_script(date), dates.reject { |d| d == date }.map { |d| hide_script(d) }].flatten.join(';')
+  end
+
   private
 
   def time_grouped_schedules(schedules)
@@ -26,5 +30,13 @@ module SchedulesHelper
 
   def track_mapping_schedules(tracks, schedules)
     tracks.map { |t| schedules.find { |s| s.track_name == t } }
+  end
+
+  def hide_script(date)
+    %(document.getElementById("#{date}").style.display = "none";)
+  end
+
+  def show_script(date)
+    %(document.getElementById("#{date}").style.display = "block";)
   end
 end
