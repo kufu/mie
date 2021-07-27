@@ -1,15 +1,46 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyString
-  start_at: 2021-07-20 18:17:33
-  end_at: 2021-07-20 18:17:33
-  speaker_id: 
+  title: "Schedule title 1"
+  description: "This is Schedule title 1 description"
+  start_at: 2021-07-20 10:00:00
+  end_at: 2021-07-20 10:40:00
+  speaker: johnny
+  track_name: TrackA
+  language: 0
 
 two:
-  title: MyString
-  description: MyString
-  start_at: 2021-07-20 18:17:33
-  end_at: 2021-07-20 18:17:33
-  speaker_id: 
+  title: "Schedule title 2"
+  description: "This is Schedule title 2 description"
+  start_at: 2021-07-20 11:00:00
+  end_at: 2021-07-20 11:40:00
+  speaker: kerry
+  track_name: TrackB
+  language: 0
+
+three:
+  title: "Schedule title 3"
+  description: "This is Schedule title 3 description"
+  start_at: 2021-07-21 10:00:00
+  end_at: 2021-07-21 10:40:00
+  speaker: nancy
+  track_name: TrackA
+  language: 1
+
+four:
+  title: "Schedule title 4"
+  description: "This is Schedule title 4 description"
+  start_at: 2021-07-21 11:00:00
+  end_at: 2021-07-21 11:40:00
+  speaker: henry
+  track_name: TrackB
+  language: 1
+
+five:
+  title: "Schedule title 5"
+  description: "This is Schedule title 5 description"
+  start_at: 2021-07-21 11:00:00
+  end_at: 2021-07-21 11:40:00
+  speaker: denny
+  track_name: TrackC
+  language: 1
