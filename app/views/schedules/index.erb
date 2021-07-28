@@ -21,27 +21,9 @@
             <td><%= ar[0] %></td>
             <% ar[1..-1].each do |c| %>
               <td>
-                <% if c.nil? %>
-                  -
-                <% else %>
+                <% unless c.nil? %>
+                  <%= react_component("ScheduleCard", title: c.title, description: c.description, speakerName: c.speaker.name, language: c.language, thumbnailUrl: c.speaker.thumbnail) %>
                   <div class="container">
-                    <div class="session">
-                      <h1 class="session-title"><%= c.title %></h1i>
-                        <h2 class="session-description"><%= c.description %></h2>
-                    </div>
-                    <div class="profile">
-                      <div class="profile-text">
-                        <div class="name">
-                          <%= c.speaker.name %><span class="handle">(<%= c.speaker.handle %>)</span>
-                        </div>
-                        <div class="profile">
-                          <%= c.speaker.profile %>
-                        </div>
-                      </div>
-                      <div class="thumbnail">
-                        <img src="<%= c.speaker.thumbnail %>" class="thumbnail-img" />
-                      </div>
-                    </div>
                     <% unless @user.plans.first&.schedules&.include?(c) %>
                       <%= form_tag(@user.plans.first, method: "patch") do %>
                         <%= hidden_field_tag(:add_schedule_id, c.id) %>
