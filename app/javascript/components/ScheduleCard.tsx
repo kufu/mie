@@ -8,7 +8,7 @@ const { BRAND, WHITE } = palette
 
 type Language = "en" | "ja"
 
-interface Props {
+export interface Props {
   title: string
   description: string
   speakerName: string
