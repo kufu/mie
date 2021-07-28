@@ -1,9 +1,1 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  plan_id: 
-  schedule_id: 
-
-two:
-  plan_id: 
-  schedule_id: 

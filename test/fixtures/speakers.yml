@@ -1,15 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  handle: MyString
-  thumbnail: MyString
-  profile: MyString
-  language: 1
+johnny:
+  name: "Johnny Silverhand"
+  handle: silverhand
+  thumbnail: "https://example.com/thumbnail1"
+  profile: rockerboy
 
-two:
-  name: MyString
-  handle: MyString
-  thumbnail: MyString
-  profile: MyString
-  language: 1
+kerry:
+  name: "Kerry Eurodyne"
+  handle: ponponshit
+  thumbnail: "https://example.com/thumbnail2"
+  profile: rockerboy
+
+nancy:
+  name: "Nancy"
+  handle: besisis
+  thumbnail: "https://example.com/thumbnail3"
+  profile: freak
+
+henry:
+  name: "Henry"
+  handle: henry
+  thumbnail: "https://example.com/thumbnail4"
+  profile: gold
+
+denny:
+  name: "Denny"
+  handle: denny
+  thumbnail: "https://example.com/thumbnail5"
+  profile: hello
