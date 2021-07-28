@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%= javascript_pack_tag 'application' %>
 <html>
   <head>
     <title>Mie</title>
@@ -11,11 +12,7 @@
 
   <body>
     <header>
-      <h1>RubyKaigi mie ru君</h1>
-      <nav>
-        <%= link_to("Event Schedule", schedules_path) %>
-        <%= link_to("Your Plans", plan_path(@user.plans&.first)) %>
-      </nav>
+      <%= react_component("Navigation", current: request.path.split("/")[1], schedulesLink: schedules_path, plansLink: plan_path(@user.plans&.first)) %>
     </header>
     <%= yield %>
   </body>

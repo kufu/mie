@@ -14,12 +14,6 @@
  *= require_self
  *= require reset
  */
-header {
-    text-align: justify;
-    letter-spacing: 1px;
-    height: 8em;
-    padding: 2em 10%;
-}
 
 .thumbnail-img {
     height: 64px;
