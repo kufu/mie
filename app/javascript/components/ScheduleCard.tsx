@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Base, LineClamp } from 'smarthr-ui'
+import { Base, LineClamp, FaBookmarkIcon, TextButton } from 'smarthr-ui'
 import { Text } from './Layout'
 import {palette} from "./Constants";
-const { BRAND, WHITE } = palette
+const { BRAND, WHITE, LIGHT_GREEN, DARK_GREEN } = palette
 
 type Language = "en" | "ja"
 
@@ -33,13 +33,13 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         <Schedule>
           <h1>{title}</h1>
           <LineClamp maxLines={6} withTooltip>{description}</LineClamp>
-          <SubmitForm {...props} />
         </Schedule>
         <Profile>
           <Thumbnail src={thumbnailUrl} />
           <Text>{speakerName}</Text>
           <Language>{language}</Language>
         </Profile>
+        <SubmitForm {...props} />
       </Container>
     </Card>
   )
@@ -53,7 +53,9 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           {method ? <input type="hidden" name="_method" value={method} /> : null}
           <input type="hidden" name="authenticity_token" value={authenticityToken} />
           <input type="hidden" name={targetKeyName} id={targetKeyName} value={targetKey} />
-          <input type="submit" name="commit" value={buttonText} data-disable-with="Remove from plans" />
+          <TextButton type="submit" name="commit" data-disable-with={buttonText === "add" ? "Add to plan" : "Remove from plan"}>
+            {buttonText === "add" ? <FaBookmarkIcon size={32} color={LIGHT_GREEN} /> : <FaBookmarkIcon size={32} color={DARK_GREEN} />}
+          </TextButton>
         </form> )
       : null
  )
