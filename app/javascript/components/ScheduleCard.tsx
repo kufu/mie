@@ -8,12 +8,21 @@ const { BRAND, WHITE } = palette
 
 type Language = "en" | "ja"
 
-export interface Props {
+export interface Props extends SubmitFormProps {
   title: string
   description: string
   speakerName: string
   thumbnailUrl: string
   language: Language
+}
+
+interface SubmitFormProps {
+  action?: string
+  method?: string
+  authenticityToken?: string
+  targetKeyName?: string
+  targetKey?: string
+  buttonText?: string
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
@@ -24,6 +33,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         <Schedule>
           <h1>{title}</h1>
           <LineClamp maxLines={6} withTooltip>{description}</LineClamp>
+          <SubmitForm {...props} />
         </Schedule>
         <Profile>
           <Thumbnail src={thumbnailUrl} />
@@ -33,6 +43,20 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       </Container>
     </Card>
   )
+}
+
+const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
+  const { action, method, authenticityToken, targetKeyName, targetKey, buttonText } = props
+  return (
+    action ? (
+        <form action={action} accept-charset="UTF-8" method="post">
+          {method ? <input type="hidden" name="_method" value={method} /> : null}
+          <input type="hidden" name="authenticity_token" value={authenticityToken} />
+          <input type="hidden" name={targetKeyName} id={targetKeyName} value={targetKey} />
+          <input type="submit" name="commit" value={buttonText} data-disable-with="Remove from plans" />
+        </form> )
+      : null
+ )
 }
 
 const Card = styled(Base)`
