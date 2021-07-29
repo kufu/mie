@@ -16,7 +16,7 @@ export interface Props extends SubmitFormProps {
   language: Language
 }
 
-interface SubmitFormProps {
+export interface SubmitFormProps {
   action?: string
   method?: string
   authenticityToken?: string

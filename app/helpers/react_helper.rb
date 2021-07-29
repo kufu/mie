@@ -38,7 +38,11 @@ module ReactHelper
   def create_plan_table_props(plan)
     props = group_schedules_by_date(plan.schedules).map do |k, v|
       rows = group_schedules_by_time(v).map do |time, schedules|
-        { time: time, schedule: schedule_to_card_props(schedules.first, plan) }
+        {
+          time: time,
+          schedule: schedule_to_card_props(schedules.first, plan),
+          memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
+        }
       end
       [k, rows]
     end

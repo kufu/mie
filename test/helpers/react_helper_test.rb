@@ -77,12 +77,16 @@ class ReactHelperTest < ActionView::TestCase
 
     expect = {
       '2021-07-20' => [
-        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[0], plan) },
-        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[1], plan) }
+        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[0], plan),
+          memo: plan.plan_schedules.find_by(schedule: schs[0]).memo },
+        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[1], plan),
+          memo: plan.plan_schedules.find_by(schedule: schs[1]).memo }
       ],
       '2021-07-21' => [
-        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[2], plan) },
-        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[3], plan) }
+        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[2], plan),
+          memo: plan.plan_schedules.find_by(schedule: schs[2]).memo },
+        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[3], plan),
+          memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
       ]
     }
     assert_equal expect, create_plan_table_props(plan)
