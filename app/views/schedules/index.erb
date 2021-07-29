@@ -1,2 +1,2 @@
 <% @table_array = create_table_array(@schedules) %>
-<%= react_component("ScheduleTable", groupedSchedules: create_schedule_table_props(@table_array), current: "2020-09-04") %>
+<%= react_component("ScheduleTable", groupedSchedules: create_schedule_table_props(@table_array, @user.plans.first), current: "2020-09-04") %>
