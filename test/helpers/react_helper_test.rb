@@ -38,4 +38,21 @@ class ReactHelperTest < ActionView::TestCase
     }
     assert_equal expect, create_schedule_table_props(table_array)
   end
+
+  test 'create_plan_table_props' do
+    plan = plans(:one)
+    schs = schedules(:one, :two, :three, :five)
+
+    expect = {
+      '2021-07-20' => [
+        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[0]) },
+        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[1]) }
+      ],
+      '2021-07-21' => [
+        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[2]) },
+        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[3]) }
+      ]
+    }
+    assert_equal expect, create_plan_table_props(plan)
+  end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ReactHelper
+  include HelperConcern
+
   def schedule_to_card_props(schedule)
     {
       title: schedule.title,
@@ -21,5 +23,16 @@ module ReactHelper
     end
 
     schedule_table_props.to_h
+  end
+
+  def create_plan_table_props(plan)
+    props = group_schedules_by_date(plan.schedules).map do |k, v|
+      rows = group_schedules_by_time(v).map do |time, schedules|
+        { time: time, schedule: schedule_to_card_props(schedules.first) }
+      end
+      [k, rows]
+    end
+
+    props.to_h
   end
 end
