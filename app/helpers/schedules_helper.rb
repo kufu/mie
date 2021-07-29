@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 module SchedulesHelper
-  DATE_FORMAT = '%Y-%m-%d'
+  include HelperConcern
+
   TIME_FORMAT = '%H:%M:%S'
 
   def create_table_array(schedules)
-    date_grouped = schedules.group_by do |s|
-      s.start_at.strftime(DATE_FORMAT)
-    end
-
-    date_grouped.map do |k, v|
+    group_schedules_by_date(schedules).map do |k, v|
       tracks = v.map(&:track_name).uniq.sort
       time_grouped = time_grouped_schedules(v)
       arrays = time_grouped.map { |time, s| [time] + track_mapping_schedules(tracks, s) }
