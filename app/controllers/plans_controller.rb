@@ -27,12 +27,22 @@ class PlansController < ApplicationController
 
   def add_and_remove_plans
     ActiveRecord::Base.transaction do
-      @plan.plan_schedules.create!(schedule: Schedule.find(params[:add_schedule_id])) if params[:add_schedule_id]
-
-      if params[:remove_schedule_id]
-        @plan.plan_schedules.find_by(schedule: Schedule.find(params[:remove_schedule_id])).destroy!
-      end
+      add_plan if params[:add_schedule_id]
+      remove_plan if params[:remove_schedule_id]
     end
+  end
+
+  def add_plan
+    ps = @plan.plan_schedules.build(schedule: Schedule.find(params[:add_schedule_id]))
+    if @plan.valid?
+      ps.save!
+    else
+      flash[:error] = @plan.errors.messages[:schedules]
+    end
+  end
+
+  def remove_plan
+    @plan.plan_schedules.find_by(schedule: Schedule.find(params[:remove_schedule_id])).destroy!
   end
 
   def edit_memo
