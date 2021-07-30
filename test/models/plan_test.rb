@@ -44,4 +44,63 @@ class PlanTest < ActiveSupport::TestCase
     p.public = nil
     assert_not p.valid?
   end
+
+  test 'set public false default when instance created' do
+    assert_not Plan.create(title: 'test').public?
+  end
+
+  test "Can't select schedules that same start-end time" do
+    schs = schedules(:four, :five)
+
+    p = Plan.create!(title: 'test', user: User.create!)
+    p.plan_schedules.create(schedule: schs[0])
+    p.plan_schedules.create(schedule: schs[1])
+    assert_not p.valid?
+  end
+
+  test "Can't select schedules that overlap start-end time" do
+    johnny, kerry = speakers(:johnny, :kerry)
+    left = Schedule.create!(
+      title: 'test1',
+      track_name: 'test track',
+      speaker: johnny,
+      start_at: Time.zone.parse('2021-07-30 12:00:00'),
+      end_at: Time.zone.parse('2021-07-30 13:00:00')
+    )
+    right = Schedule.create!(
+      title: 'test2',
+      track_name: 'test track',
+      speaker: kerry,
+      start_at: Time.zone.parse('2021-07-30 12:30:00'),
+      end_at: Time.zone.parse('2021-07-30 13:20:00')
+    )
+
+    p = Plan.create!(title: 'test', user: User.create!)
+    p.plan_schedules.create(schedule: left)
+    p.plan_schedules.create(schedule: right)
+    assert_not p.valid?
+  end
+
+  test 'select schedules first schedule end_at equals second schedule start_at' do
+    johnny, kerry = speakers(:johnny, :kerry)
+    left = Schedule.create!(
+      title: 'test1',
+      track_name: 'test track',
+      speaker: johnny,
+      start_at: Time.zone.parse('2021-07-30 12:00:00'),
+      end_at: Time.zone.parse('2021-07-30 13:00:00')
+    )
+    right = Schedule.create!(
+      title: 'test2',
+      track_name: 'test track',
+      speaker: kerry,
+      start_at: Time.zone.parse('2021-07-30 13:00:00'),
+      end_at: Time.zone.parse('2021-07-30 14:00:00')
+    )
+
+    p = Plan.create!(title: 'test', user: User.create!)
+    p.plan_schedules.create(schedule: left)
+    p.plan_schedules.create(schedule: right)
+    assert p.valid?
+  end
 end
