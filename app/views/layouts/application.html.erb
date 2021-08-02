@@ -15,5 +15,8 @@
       <%= react_component("Navigation", current: request.path.split("/")[1], schedulesLink: schedules_path, plansLink: plan_path(@user.plans&.first)) %>
     </header>
     <%= yield %>
+    <% flash.each do |k, v| %>
+    <%= react_component("Flash", type: k, message: v) %>
+  <% end %>
   </body>
 </html>
