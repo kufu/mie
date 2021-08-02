@@ -52,21 +52,25 @@ class ReactHelperTest < ActionView::TestCase
     table_array = Class.new { include SchedulesHelper }.new.create_table_array(schs)
 
     expect = {
-      '2021-07-20' => {
-        trackList: %w[TrackA TrackB],
-        rows: [
-          { time: '10:00:00 - 10:40:00', schedules: [schedule_to_card_props(schs[0], plan), nil] },
-          { time: '11:00:00 - 11:40:00', schedules: [nil, schedule_to_card_props(schs[1], plan)] }
-        ]
+      groupedSchedules: {
+        '2021-07-20' => {
+          trackList: %w[TrackA TrackB],
+          rows: [
+            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[0], plan), nil] },
+            { time: '11:00 - 11:40 (UTC)', schedules: [nil, schedule_to_card_props(schs[1], plan)] }
+          ]
+        },
+        '2021-07-21' => {
+          trackList: %w[TrackA TrackB TrackC],
+          rows: [
+            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[2], plan), nil, nil] },
+            { time: '11:00 - 11:40 (UTC)',
+              schedules: [nil, schedule_to_card_props(schs[3], plan), schedule_to_card_props(schs[4], plan)] }
+          ]
+        }
       },
-      '2021-07-21' => {
-        trackList: %w[TrackA TrackB TrackC],
-        rows: [
-          { time: '10:00:00 - 10:40:00', schedules: [schedule_to_card_props(schs[2], plan), nil, nil] },
-          { time: '11:00:00 - 11:40:00',
-            schedules: [nil, schedule_to_card_props(schs[3], plan), schedule_to_card_props(schs[4], plan)] }
-        ]
-      }
+      current: '2021-07-20',
+      i18n: { startEnd: 'Start...End time' }
     }
     assert_equal expect, create_schedule_table_props(table_array, plan)
   end
@@ -76,18 +80,22 @@ class ReactHelperTest < ActionView::TestCase
     schs = schedules(:one, :two, :three, :five)
 
     expect = {
-      '2021-07-20' => [
-        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[0], plan),
-          memo: plan.plan_schedules.find_by(schedule: schs[0]).memo },
-        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[1], plan),
-          memo: plan.plan_schedules.find_by(schedule: schs[1]).memo }
-      ],
-      '2021-07-21' => [
-        { time: '10:00:00 - 10:40:00', schedule: schedule_to_card_props(schs[2], plan),
-          memo: plan.plan_schedules.find_by(schedule: schs[2]).memo },
-        { time: '11:00:00 - 11:40:00', schedule: schedule_to_card_props(schs[3], plan),
-          memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
-      ]
+      groupedPlans: {
+        '2021-07-20' => [
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[0], plan),
+            memo: plan.plan_schedules.find_by(schedule: schs[0]).memo },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[1], plan),
+            memo: plan.plan_schedules.find_by(schedule: schs[1]).memo }
+        ],
+        '2021-07-21' => [
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[2], plan),
+            memo: plan.plan_schedules.find_by(schedule: schs[2]).memo },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[3], plan),
+            memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
+        ]
+      },
+      current: '2021-07-20',
+      i18n: { startEnd: 'Start...End time', track: 'Track name', memo: 'Memo', updateMemo: 'Update memo' }
     }
     assert_equal expect, create_plan_table_props(plan)
   end
