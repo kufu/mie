@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :set_default_plan
   before_action :set_locale
 
+  around_action :with_time_zone
+
   def set_user
     if session[:user_id]
       @user = User.find(session[:user_id])
@@ -37,5 +39,13 @@ class ApplicationController < ActionController::Base
 
     session[:locale] = params['locale']
     redirect_to request.path
+  end
+
+  def with_time_zone(&block)
+    if session[:locale]
+      Time.use_zone(session[:locale], &block)
+    else
+      yield
+    end
   end
 end
