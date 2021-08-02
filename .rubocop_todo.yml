@@ -7,23 +7,15 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
-Metrics/AbcSize:
-  Max: 21
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+Metrics/MethodLength:
+  Max: 16
 
-# Offense count: 10
+# Offense count: 12
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/plans_controller.rb'
-    - 'app/controllers/schedules_controller.rb'
-    - 'app/controllers/static_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/plans_helper.rb'
-    - 'app/helpers/schedules_helper.rb'
-    - 'app/helpers/static_helper.rb'
-    - 'app/models/application_record.rb'
-    - 'config/application.rb'
+    - 'app/**/*'
+    - 'config/**/*'
