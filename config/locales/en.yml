@@ -30,4 +30,25 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  nav:
+    label: "RubyKaigi mie planning"
+    help: "Help"
+    select_locale: "Select your timezone"
+    schedule: "Schedule"
+    plan: "My Plans"
+  table:
+    start_end: "Start...End time"
+    track: "Track name"
+    memo: "Memo"
+  button:
+    update_memo: "Update memo"
+  default_vales:
+    plan_title: "My plans"
+
+  errors:
+    time_overlap_error: "Can't select [%{left}] and [%{right}] at the same time, they are overlapping time schedule."
+
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      timetable: "%H:%M"
