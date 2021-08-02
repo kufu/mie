@@ -73,6 +73,12 @@ const Container = styled.div`
   justify-content: space-between;
 `
 
+const CardContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
+`
+
 const Schedule = styled.div`
 `
 
