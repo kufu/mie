@@ -30,15 +30,17 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
   return (
     <Card>
       <Container>
-        <Schedule>
-          <h1>{title}</h1>
-          <LineClamp maxLines={6} withTooltip>{description}</LineClamp>
-        </Schedule>
-        <Profile>
-          <Thumbnail src={thumbnailUrl} />
-          <Text>{speakerName}</Text>
-          <Language>{language}</Language>
-        </Profile>
+        <CardContent>
+          <Schedule>
+            <h1>{title}</h1>
+            <LineClamp maxLines={6} withTooltip>{description}</LineClamp>
+          </Schedule>
+          <Profile>
+            <Thumbnail src={thumbnailUrl} />
+            <Text>{speakerName}</Text>
+            <Language>{language}</Language>
+          </Profile>
+        </CardContent>
         <SubmitForm {...props} />
       </Container>
     </Card>
