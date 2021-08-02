@@ -7,7 +7,7 @@
    data-size="large">
   Tweet</a>
 
-<%= react_component("PlanTable", groupedPlans: create_plan_table_props(@plan), current: create_plan_table_props(@plan).keys.first)  %>
+<%= react_component("PlanTable",create_plan_table_props(@plan))  %>
 
 <% @table_array = create_table_array(@schedules) %>
 

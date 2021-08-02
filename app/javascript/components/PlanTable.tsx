@@ -10,14 +10,23 @@ type Row = { time: string, schedule: CardProps, memo: string }
 interface Props {
   current: string
   groupedPlans: GroupedPlans
+  i18n: {
+    startEnd: string
+    track: string
+    memo: string
+    updateMemo: string
+  }
 }
 
 interface SubmitFormWithChildrenProps extends SubmitFormProps {
   memo: string
+  i18n: {
+    updateMemo: string
+  }
 }
 
 export const PlanTable: React.VFC<{Props}> = (props) => {
-  const { groupedPlans, current } = props
+  const { groupedPlans, current, i18n } = props
 
   const [currentKey, setCurrentDate] = useState(current)
 
@@ -31,9 +40,9 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
       <Table>
         <Head>
           <Row>
-            <Cell>start ... end</Cell>
-            <Cell>Track</Cell>
-            <Cell>Comment</Cell>
+            <Cell>{i18n.startEnd}</Cell>
+            <Cell>{i18n.track}</Cell>
+            <Cell>{i18n.comment}</Cell>
           </Row>
         </Head>
         <Body>
@@ -43,7 +52,7 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
                 <Cell>{row.time}</Cell>
                 <Cell><ScheduleCard {...row.schedule} /></Cell>
                 <Cell>
-                  <SubmitForm memo={row.memo} {...row.schedule}>
+                  <SubmitForm memo={row.memo} i18n={{updateMemo: i18n.updateMemo}} {...row.schedule}>
                   </SubmitForm>
                 </Cell>
               </Row>
@@ -56,7 +65,7 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormWithChildrenProps> = (props) => {
-  const { action, method, authenticityToken, targetKey, memo } = props
+  const { action, method, authenticityToken, targetKey, memo, i18n } = props
   const [currentMemo, setCurrentMemo] = useState(memo)
 
   const textChangeHandler = (str) => {
@@ -71,7 +80,7 @@ const SubmitForm: React.VFC<SubmitFormWithChildrenProps> = (props) => {
           <input type="hidden" name="edit_memo_schedule_id" id="edit_memo_schedule_id" value={targetKey} />
           <Note value={currentMemo} name="memo" onChange={(e) => textChangeHandler(e.value)} />
           <PrimaryButton type="submit" name="commit" data-disable-with="Update memo">
-            Update memo
+            {i18n.updateMemo}
           </PrimaryButton>
         </form> )
       : null

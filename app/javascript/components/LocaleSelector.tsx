@@ -4,6 +4,7 @@ import { Select } from 'smarthr-ui'
 
 
 export interface Props {
+  i18n: { label: string }
   current?: string
   options: Array<{ label: string, options: Option[] }>
 }
@@ -23,7 +24,7 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
 
   return (
     <Container>
-      Select Location
+      {props.i18n.label}
       <Select
         value={current}
         options={props.options}

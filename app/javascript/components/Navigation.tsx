@@ -15,10 +15,16 @@ interface Props {
   schedulesLink: string
   plansLink: string
   locales: LocaleSelectorProps
+  i18n: {
+    label: string
+    scheduleButton: string
+    plansButton: string
+    help: string
+  }
 }
 
 export const Navigation: React.FC<Props> = (props) => {
-  const { current, schedulesLink, plansLink, locales } = props
+  const { current, schedulesLink, plansLink, locales, i18n } = props
   return (
     <>
       <Nav>
@@ -39,7 +45,7 @@ export const Navigation: React.FC<Props> = (props) => {
                   <HoverHeaderLabel>
                     <Container alignItems="center" justifyContent="space-between">
                       <FaQuestionCircleIcon size={16} color={WHITE} />
-                      <TextLabel>ヘルプ</TextLabel>
+                      <TextLabel>{i18n.help}</TextLabel>
                     </Container>
                   </HoverHeaderLabel>
                 </Link>
@@ -49,16 +55,16 @@ export const Navigation: React.FC<Props> = (props) => {
         </Container>
       </Nav>
       <AppNavi
-        label="RubyKaigi mie ru 君"
+        label={i18n.label}
         buttons={
           [
             {
-              children: "Schedules",
+              children: i18n.scheduleButton,
               current: current === "schedules",
               href: schedulesLink,
             },
             {
-              children: "Your plans",
+              children: i18n.plansButton,
               current: current === "plans",
               href: plansLink
             },
