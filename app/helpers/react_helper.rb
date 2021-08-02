@@ -49,4 +49,17 @@ module ReactHelper
 
     props.to_h
   end
+
+  def create_locale_selector_props
+    props = {}
+    props[:current] = session[:locale] if session[:locale]
+    props[:options] = grouped_timezones.map do |k, v|
+      {
+        label: k,
+        options: v.map { |zone| { label: zone, value: zone } }
+      }
+    end
+
+    props
+  end
 end
