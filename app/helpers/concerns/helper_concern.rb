@@ -6,7 +6,6 @@ module HelperConcern
   extend ActiveSupport::Concern
 
   DATE_FORMAT = '%Y-%m-%d'
-  TIME_FORMAT = '%H:%M:%S'
 
   private
 
@@ -17,6 +16,12 @@ module HelperConcern
   end
 
   def group_schedules_by_time(schedules)
-    schedules.group_by { |s| "#{s.start_at.strftime(TIME_FORMAT)} - #{s.end_at.strftime(TIME_FORMAT)}" }
+    schedules.group_by do |s|
+      start_at = I18n.l(s.start_at, format: :timetable)
+      end_at = I18n.l(s.end_at, format: :timetable)
+      zone = s.end_at.strftime('%Z')
+
+      "#{start_at} - #{end_at} (#{zone})"
+    end
   end
 end

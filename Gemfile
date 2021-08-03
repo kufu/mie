@@ -28,6 +28,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'rack-contrib', '~> 2.3.0'
+gem 'rails-i18n', '~> 6.0.0'
 gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
 gem 'webpacker', '~> 5.4'

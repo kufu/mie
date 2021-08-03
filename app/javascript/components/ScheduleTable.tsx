@@ -10,13 +10,15 @@ type TrackList = string[]
 type Row = { time: string, schedules: Array<CardProps | null> }
 
 interface Props {
-  dates: string[]
   current: string
   groupedSchedules: GroupedSchedules
+  i18n: {
+    startEnd: string
+  }
 }
 
 export const ScheduleTable: React.VFC<{Props}> = (props) => {
-  const { groupedSchedules, current } = props
+  const { groupedSchedules, current, i18n } = props
 
   const [currentKey, setCurrentDate] = useState(current)
 
@@ -30,7 +32,7 @@ export const ScheduleTable: React.VFC<{Props}> = (props) => {
       <Table>
         <Head>
           <Row>
-            <Cell>start ... end</Cell>
+            <Cell>{i18n.startEnd}</Cell>
           {groupedSchedules[currentKey].trackList.map(track => <Cell>{track}</Cell>)}
           </Row>
         </Head>

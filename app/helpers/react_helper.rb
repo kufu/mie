@@ -24,7 +24,52 @@ module ReactHelper
   end
 
   def create_schedule_table_props(table_array, plan)
-    schedule_table_props = table_array.map do |k, v|
+    props = {}
+    props[:groupedSchedules] = schedule_table_props(table_array, plan)
+    props[:current] = props[:groupedSchedules].keys.first
+    props[:i18n] = schedule_table_i18n
+    props
+  end
+
+  def create_plan_table_props(plan)
+    props = {}
+
+    props[:groupedPlans] = plans_table_props(plan)
+    props[:current] = props[:groupedPlans].keys.first
+    props[:i18n] = plans_table_i18n
+    props
+  end
+
+  def create_locale_selector_props
+    props = {}
+    props[:current] = session[:locale] if session[:locale]
+    props[:options] = grouped_timezones.map do |k, v|
+      {
+        label: k,
+        options: v.map { |zone| { label: zone, value: zone } }
+      }
+    end
+    props[:i18n] = {
+      label: I18n.t('nav.select_locale')
+    }
+
+    props
+  end
+
+  def create_navigation_props
+    {
+      current: request.path.split('/')[1],
+      schedulesLink: schedules_path,
+      plansLink: plan_path(@user.plans&.first),
+      locales: create_locale_selector_props,
+      i18n: navigation_i18n
+    }
+  end
+
+  private
+
+  def schedule_table_props(table_array, plan)
+    props = table_array.map do |k, v|
       track_list = v.first.compact
       rows = v[1..].map do |s|
         { time: s.first, schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan) } }
@@ -32,10 +77,14 @@ module ReactHelper
       [k, { trackList: track_list, rows: rows }]
     end
 
-    schedule_table_props.to_h
+    props.to_h
   end
 
-  def create_plan_table_props(plan)
+  def schedule_table_i18n
+    { startEnd: I18n.t('table.start_end') }
+  end
+
+  def plans_table_props(plan)
     props = group_schedules_by_date(plan.schedules).map do |k, v|
       rows = group_schedules_by_time(v).map do |time, schedules|
         {
@@ -48,5 +97,23 @@ module ReactHelper
     end
 
     props.to_h
+  end
+
+  def plans_table_i18n
+    {
+      startEnd: I18n.t('table.start_end'),
+      track: I18n.t('table.track'),
+      memo: I18n.t('table.memo'),
+      updateMemo: I18n.t('button.update_memo')
+    }
+  end
+
+  def navigation_i18n
+    {
+      label: I18n.t('nav.label'),
+      scheduleButton: I18n.t('nav.schedule'),
+      plansButton: I18n.t('nav.plan'),
+      help: I18n.t('nav.help')
+    }
   end
 end

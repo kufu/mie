@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <%= react_component("Navigation", current: request.path.split("/")[1], schedulesLink: schedules_path, plansLink: plan_path(@user.plans&.first)) %>
+      <%= react_component("Navigation", create_navigation_props) %>
     </header>
     <%= yield %>
     <% flash.each do |k, v| %>

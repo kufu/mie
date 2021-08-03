@@ -1,0 +1,23 @@
+ja:
+  nav:
+    label: "RubyKaigi mie ru 君"
+    help: "ヘルプ"
+    select_locale: "タイムゾーンを選択してください"
+    schedule: "スケジュール"
+    plan: "視聴予定"
+  table:
+    start_end: "開始/終了 時間"
+    track: "トラック名"
+    memo: "メモ"
+  button:
+    update_memo: "メモを更新"
+  default_vales:
+    plan_title: "視聴予定"
+
+  errors:
+    time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
+
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      timetable: "%H:%M"

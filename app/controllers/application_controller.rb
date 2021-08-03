@@ -3,6 +3,9 @@
 class ApplicationController < ActionController::Base
   before_action :set_user
   before_action :set_default_plan
+  before_action :set_locale
+
+  around_action :with_time_zone
 
   def set_user
     if session[:user_id]
@@ -28,5 +31,21 @@ class ApplicationController < ActionController::Base
 
   def create_default_plan(user)
     user.plans.create!(title: 'My plans')
+  end
+
+  def set_locale
+    return unless params['locale']
+    return unless ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale'])
+
+    session[:locale] = params['locale']
+    redirect_to request.path
+  end
+
+  def with_time_zone(&block)
+    if session[:locale]
+      Time.use_zone(session[:locale], &block)
+    else
+      yield
+    end
   end
 end

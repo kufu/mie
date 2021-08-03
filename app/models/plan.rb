@@ -30,7 +30,7 @@ class PlanDatetimeOverlapValidator < ActiveModel::Validator
   end
 
   def error_message(left, right)
-    "#{left.title} and #{right.title} are overlapping time"
+    I18n.t('errors.time_overlap_error', left: left.title, right: right.title)
   end
 end
 

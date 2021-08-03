@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Container, Layout, Logo, Link, Text } from './Layout'
 import { FaQuestionCircleIcon, AppNavi } from 'smarthr-ui'
 
+import LocaleSelector, { Props as LocaleSelectorProps } from './LocaleSelector'
 import { interaction, palette, size } from './Constants'
 const { BRAND, WHITE, hoverColor } = palette
 const { space } = size
@@ -13,10 +14,17 @@ interface Props {
   current: string
   schedulesLink: string
   plansLink: string
+  locales: LocaleSelectorProps
+  i18n: {
+    label: string
+    scheduleButton: string
+    plansButton: string
+    help: string
+  }
 }
 
 export const Navigation: React.FC<Props> = (props) => {
-  const { current, schedulesLink, plansLink } = props
+  const { current, schedulesLink, plansLink, locales, i18n } = props
   return (
     <>
       <Nav>
@@ -37,7 +45,7 @@ export const Navigation: React.FC<Props> = (props) => {
                   <HoverHeaderLabel>
                     <Container alignItems="center" justifyContent="space-between">
                       <FaQuestionCircleIcon size={16} color={WHITE} />
-                      <TextLabel>ヘルプ</TextLabel>
+                      <TextLabel>{i18n.help}</TextLabel>
                     </Container>
                   </HoverHeaderLabel>
                 </Link>
@@ -46,20 +54,25 @@ export const Navigation: React.FC<Props> = (props) => {
           </Layout>
         </Container>
       </Nav>
-      <AppNavi label="RubyKaigi mie ru 君" buttons={
-        [
-          {
-            children: "Schedules",
-            current: current === "schedules",
-            href: schedulesLink,
-          },
-          {
-            children: "Your plans",
-            current: current === "plans",
-            href: plansLink
-          },
-        ]
-      } />
+      <AppNavi
+        label={i18n.label}
+        buttons={
+          [
+            {
+              children: i18n.scheduleButton,
+              current: current === "schedules",
+              href: schedulesLink,
+            },
+            {
+              children: i18n.plansButton,
+              current: current === "plans",
+              href: plansLink
+            },
+          ]
+        }
+      >
+        <Child><LocaleSelector {...locales} /></Child>
+      </AppNavi>
     </>
   )
 }
@@ -98,4 +111,8 @@ const HoverHeaderLabel = styled(HeaderLabel)`
 
 const TextLabel = styled.span`
   margin: 0 0 0 ${space.XXS};
+`
+
+const Child = styled.p`
+  margin: 0 0 0 auto;
 `
