@@ -17,12 +17,14 @@ class ReactHelperTest < ActionView::TestCase
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
-      action: plan_path(plan),
-      method: 'patch',
-      authenticityToken: form_authenticity_token(''),
-      targetKeyName: 'remove_schedule_id',
-      targetKey: sch.id,
-      buttonText: 'remove'
+      form: {
+        action: plan_path(plan),
+        method: 'patch',
+        authenticityToken: form_authenticity_token(''),
+        targetKeyName: 'remove_schedule_id',
+        targetKey: sch.id,
+        buttonText: 'remove'
+      }
     }
     assert_equal expect, schedule_to_card_props(sch, plan)
   end
@@ -36,14 +38,28 @@ class ReactHelperTest < ActionView::TestCase
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
-      action: plan_path(plan),
-      method: 'patch',
-      authenticityToken: form_authenticity_token(''),
-      targetKeyName: 'add_schedule_id',
-      targetKey: sch.id,
-      buttonText: 'add'
+      form: {
+        action: plan_path(plan),
+        method: 'patch',
+        authenticityToken: form_authenticity_token(''),
+        targetKeyName: 'add_schedule_id',
+        targetKey: sch.id,
+        buttonText: 'add'
+      }
     }
     assert_equal expect, schedule_to_card_props(sch, plan)
+  end
+
+  test 'schedule_to_card_props_with_no_plan_args' do
+    sch = schedules(:one)
+    expect = {
+      title: sch.title,
+      description: sch.description,
+      speakerName: sch.speaker.name,
+      thumbnailUrl: sch.speaker.thumbnail,
+      language: sch.language
+    }
+    assert_equal expect, schedule_to_card_props(sch, nil)
   end
 
   test 'create_schedule_table_props' do

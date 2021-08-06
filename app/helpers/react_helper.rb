@@ -4,23 +4,30 @@ module ReactHelper
   include HelperConcern
 
   def schedule_to_card_props(schedule, plan)
-    include_plan = plan.schedules.include?(schedule)
-    method = 'patch'
-    action = plan_path(plan)
-
-    {
+    props = {
       title: schedule.title,
       description: schedule.description,
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
-      language: schedule.language,
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
-      targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
-      targetKey: schedule.id,
-      buttonText: include_plan ? 'remove' : 'add'
+      language: schedule.language
     }
+
+    if plan
+      include_plan = plan.schedules.include?(schedule)
+      method = 'patch'
+      action = plan_path(plan)
+
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
+        targetKey: schedule.id,
+        buttonText: include_plan ? 'remove' : 'add'
+      }
+    end
+
+    props
   end
 
   def create_schedule_table_props(table_array, plan)
@@ -60,7 +67,7 @@ module ReactHelper
     {
       current: request.path.split('/')[1],
       schedulesLink: schedules_path,
-      plansLink: plan_path(@user.plans&.first),
+      plansLink: @user.plans&.first ? plan_path(@user.plans&.first) : nil,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }
