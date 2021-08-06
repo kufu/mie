@@ -115,4 +115,22 @@ class ReactHelperTest < ActionView::TestCase
     }
     assert_equal expect, create_plan_table_props(plan)
   end
+
+  test 'create_info_panel_props' do
+    expect = {
+      form: {
+        action: '/plans',
+        authenticityToken: form_authenticity_token('/plans')
+      },
+      i18n: {
+        title: I18n.t('info.create_plan_title'),
+        openText: I18n.t('button.open_text'),
+        closeText: I18n.t('button.close_text'),
+        information: I18n.t('info.create_plan_text'),
+        termsOfService: I18n.t('info.terms_of_service'),
+        buttonText: I18n.t('button.plan_create_button')
+      }
+    }
+    assert_equal expect, create_info_panel_props
+  end
 end

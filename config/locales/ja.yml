@@ -5,12 +5,17 @@ ja:
     select_locale: "タイムゾーンを選択してください"
     schedule: "スケジュール"
     plan: "視聴予定"
+  info:
+    create_plan_title: "セッションの視聴予定を作成しませんか？"
+    create_plan_text: "RubyKaigi mie.ru 君を使って、RubyKaigi2021 Takeoutのセッション視聴予定表を作成しましょう！ 利用規約に同意の上、予定の作成ボタンを押してください。"
+    terms_of_service: "利用規約"
   table:
     start_end: "開始/終了 時間"
     track: "トラック名"
     memo: "メモ"
   button:
     update_memo: "メモを更新"
+    plan_create_button: "予定を作成"
   default_vales:
     plan_title: "視聴予定"
 
