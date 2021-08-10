@@ -23,7 +23,7 @@ interface SubmitFormWithChildrenProps {
   i18n: {
     updateMemo: string
   }
-  form: SubmitFormProps
+  form?: SubmitFormProps
 }
 
 export const PlanTable: React.VFC<{Props}> = (props) => {
@@ -53,8 +53,12 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
                 <Cell>{row.time}</Cell>
                 <Cell><ScheduleCard {...row.schedule} /></Cell>
                 <Cell>
-                  <SubmitForm memo={row.memo} i18n={{updateMemo: i18n.updateMemo}} {...row.schedule}>
-                  </SubmitForm>
+                  <MemoArea>
+                    { row.schedule.form ?
+                      <SubmitForm memo={row.memo} i18n={{updateMemo: i18n.updateMemo}} {...row.schedule} />
+                      : row.memo
+                    }
+                  </MemoArea>
                 </Cell>
               </Row>
             )
@@ -95,7 +99,11 @@ const Container = styled(Base)`
 
 const Note = styled(Textarea)`
   height: 100%;
-  width: 480px;
+  width: 312px;
+`
+
+const MemoArea = styled.div`
+  width: 320px;
 `
 
 export default PlanTable
