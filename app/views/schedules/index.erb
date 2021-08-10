@@ -6,4 +6,4 @@
   </div>
 <% end %>
 
-<%= react_component("ScheduleTable", create_schedule_table_props(@table_array, @user.plans.first)) %>
+<%= react_component("ScheduleTable", create_schedule_table_props(@table_array, @user.plans.first, @user)) %>
