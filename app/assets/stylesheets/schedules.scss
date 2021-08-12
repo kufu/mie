@@ -2,17 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.schedule-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.date-selector {
-  width: auto;
-  text-align: center;
-}
-
-.table-container {
-  width: fit-content;
+.info-container {
+  margin: 24px 0;
 }

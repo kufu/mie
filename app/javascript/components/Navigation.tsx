@@ -13,7 +13,7 @@ const { hover } = interaction
 interface Props {
   current: string
   schedulesLink: string
-  plansLink: string
+  plansLink?: string
   locales: LocaleSelectorProps
   i18n: {
     label: string
@@ -56,25 +56,34 @@ export const Navigation: React.FC<Props> = (props) => {
       </Nav>
       <AppNavi
         label={i18n.label}
-        buttons={
-          [
-            {
-              children: i18n.scheduleButton,
-              current: current === "schedules",
-              href: schedulesLink,
-            },
-            {
-              children: i18n.plansButton,
-              current: current === "plans",
-              href: plansLink
-            },
-          ]
-        }
+        buttons={generateNaviButton(props, current)}
       >
         <Child><LocaleSelector {...locales} /></Child>
       </AppNavi>
     </>
   )
+}
+
+const generateNaviButton = (props: Props, current: string) => {
+  const buttons = []
+
+  buttons.push({
+    children: props.i18n.scheduleButton,
+    current: current === "schedules",
+    href: props.schedulesLink,
+  })
+
+  if(!!props.plansLink) {
+    buttons.push(
+      {
+        children: props.i18n.plansButton,
+        current: current === "plans",
+        href: props.plansLink
+      }
+    )
+  }
+
+  return buttons
 }
 
 export default Navigation

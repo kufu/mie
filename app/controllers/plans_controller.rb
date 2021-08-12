@@ -19,6 +19,11 @@ class PlansController < ApplicationController
     redirect_to request.referer || schedules_path
   end
 
+  def create
+    @plan = @user.plans.create!(title: 'My Plans')
+    redirect_to plan_path @plan
+  end
+
   private
 
   def set_plan

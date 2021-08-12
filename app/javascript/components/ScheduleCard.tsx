@@ -8,25 +8,26 @@ const { BRAND, WHITE, LIGHT_GREEN, DARK_GREEN } = palette
 
 type Language = "en" | "ja"
 
-export interface Props extends SubmitFormProps {
+export interface Props {
   title: string
   description: string
   speakerName: string
   thumbnailUrl: string
   language: Language
+  form?: SubmitFormProps
 }
 
 export interface SubmitFormProps {
-  action?: string
-  method?: string
-  authenticityToken?: string
-  targetKeyName?: string
-  targetKey?: string
-  buttonText?: string
+  action: string
+  method: string
+  authenticityToken: string
+  targetKeyName: string
+  targetKey: string
+  buttonText: string
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, description, speakerName, thumbnailUrl, language} = props
+  const { title, description, speakerName, thumbnailUrl, language, form } = props
   return (
     <Card>
       <Container>
@@ -41,7 +42,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
             <Language>{language}</Language>
           </Profile>
         </CardContent>
-        <SubmitForm {...props} />
+        { form ? <SubmitForm {...form} /> : null }
       </Container>
     </Card>
   )

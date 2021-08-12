@@ -14,7 +14,9 @@
     <header>
       <%= react_component("Navigation", create_navigation_props) %>
     </header>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
     <% flash.each do |k, v| %>
     <%= react_component("Flash", type: k, message: v) %>
   <% end %>

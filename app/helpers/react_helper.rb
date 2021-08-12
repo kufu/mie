@@ -4,23 +4,30 @@ module ReactHelper
   include HelperConcern
 
   def schedule_to_card_props(schedule, plan)
-    include_plan = plan.schedules.include?(schedule)
-    method = 'patch'
-    action = plan_path(plan)
-
-    {
+    props = {
       title: schedule.title,
       description: schedule.description,
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
-      language: schedule.language,
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
-      targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
-      targetKey: schedule.id,
-      buttonText: include_plan ? 'remove' : 'add'
+      language: schedule.language
     }
+
+    if plan
+      include_plan = plan.schedules.include?(schedule)
+      method = 'patch'
+      action = plan_path(plan)
+
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
+        targetKey: schedule.id,
+        buttonText: include_plan ? 'remove' : 'add'
+      }
+    end
+
+    props
   end
 
   def create_schedule_table_props(table_array, plan)
@@ -60,9 +67,20 @@ module ReactHelper
     {
       current: request.path.split('/')[1],
       schedulesLink: schedules_path,
-      plansLink: plan_path(@user.plans&.first),
+      plansLink: @user.plans&.first ? plan_path(@user.plans&.first) : nil,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
+    }
+  end
+
+  def create_info_panel_props
+    action = plans_path
+    {
+      form: {
+        action: action,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: 'post' })
+      },
+      i18n: info_panel_i18n
     }
   end
 
@@ -114,6 +132,17 @@ module ReactHelper
       scheduleButton: I18n.t('nav.schedule'),
       plansButton: I18n.t('nav.plan'),
       help: I18n.t('nav.help')
+    }
+  end
+
+  def info_panel_i18n
+    {
+      title: I18n.t('info.create_plan_title'),
+      openText: I18n.t('button.open_text'),
+      closeText: I18n.t('button.close_text'),
+      information: I18n.t('info.create_plan_text'),
+      termsOfService: I18n.t('info.terms_of_service'),
+      buttonText: I18n.t('button.plan_create_button')
     }
   end
 end

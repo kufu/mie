@@ -18,11 +18,12 @@ interface Props {
   }
 }
 
-interface SubmitFormWithChildrenProps extends SubmitFormProps {
+interface SubmitFormWithChildrenProps {
   memo: string
   i18n: {
     updateMemo: string
   }
+  form: SubmitFormProps
 }
 
 export const PlanTable: React.VFC<{Props}> = (props) => {
@@ -42,7 +43,7 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
           <Row>
             <Cell>{i18n.startEnd}</Cell>
             <Cell>{i18n.track}</Cell>
-            <Cell>{i18n.comment}</Cell>
+            <Cell>{i18n.memo}</Cell>
           </Row>
         </Head>
         <Body>
@@ -65,7 +66,8 @@ export const PlanTable: React.VFC<{Props}> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormWithChildrenProps> = (props) => {
-  const { action, method, authenticityToken, targetKey, memo, i18n } = props
+  const { form, memo, i18n } = props
+  const { action, method, authenticityToken, targetKey } = form
   const [currentMemo, setCurrentMemo] = useState(memo)
 
   const textChangeHandler = (str) => {

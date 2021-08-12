@@ -23,7 +23,7 @@ export const ScheduleTable: React.VFC<{Props}> = (props) => {
   const [currentKey, setCurrentDate] = useState(current)
 
   return (
-    <Container>
+    <>
       <TabBar>
         {Object.keys(groupedSchedules).map(date => {
           return <TabItem id={date} onClick={() => {setCurrentDate(date)}} selected={date === currentKey}>{date}</TabItem>
@@ -47,12 +47,8 @@ export const ScheduleTable: React.VFC<{Props}> = (props) => {
           })}
         </Body>
       </Table>
-    </Container>
+    </>
   )
 }
-
-const Container = styled(Base)`
-  margin: 48px 80px;
-`
 
 export default ScheduleTable
