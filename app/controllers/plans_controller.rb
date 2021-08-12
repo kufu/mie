@@ -2,6 +2,7 @@
 
 class PlansController < ApplicationController
   before_action :set_plan
+  before_action :check_user_owns_plan, only: :update
 
   def show
     @schedules = @plan.schedules
@@ -53,5 +54,10 @@ class PlansController < ApplicationController
   def edit_memo
     plan_schedule = @plan.plan_schedules.find_by(schedule_id: params[:edit_memo_schedule_id])
     plan_schedule.update!(memo: params[:memo])
+  end
+
+  def check_user_owns_plan
+    return render :bad_request if @plan.nil?
+    return render :bad_request unless @user.plans.include?(@plan)
   end
 end

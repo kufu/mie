@@ -3,7 +3,7 @@
 module ReactHelper
   include HelperConcern
 
-  def schedule_to_card_props(schedule, plan)
+  def schedule_to_card_props(schedule, plan, user)
     props = {
       title: schedule.title,
       description: schedule.description,
@@ -12,7 +12,7 @@ module ReactHelper
       language: schedule.language
     }
 
-    if plan
+    if plan && plan.user == user
       include_plan = plan.schedules.include?(schedule)
       method = 'patch'
       action = plan_path(plan)
@@ -30,18 +30,18 @@ module ReactHelper
     props
   end
 
-  def create_schedule_table_props(table_array, plan)
+  def create_schedule_table_props(table_array, plan, user)
     props = {}
-    props[:groupedSchedules] = schedule_table_props(table_array, plan)
+    props[:groupedSchedules] = schedule_table_props(table_array, plan, user)
     props[:current] = props[:groupedSchedules].keys.first
     props[:i18n] = schedule_table_i18n
     props
   end
 
-  def create_plan_table_props(plan)
+  def create_plan_table_props(plan, user)
     props = {}
 
-    props[:groupedPlans] = plans_table_props(plan)
+    props[:groupedPlans] = plans_table_props(plan, user)
     props[:current] = props[:groupedPlans].keys.first
     props[:i18n] = plans_table_i18n
     props
@@ -86,11 +86,11 @@ module ReactHelper
 
   private
 
-  def schedule_table_props(table_array, plan)
+  def schedule_table_props(table_array, plan, user)
     props = table_array.map do |k, v|
       track_list = v.first.compact
       rows = v[1..].map do |s|
-        { time: s.first, schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan) } }
+        { time: s.first, schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) } }
       end
       [k, { trackList: track_list, rows: rows }]
     end
@@ -102,12 +102,12 @@ module ReactHelper
     { startEnd: I18n.t('table.start_end') }
   end
 
-  def plans_table_props(plan)
+  def plans_table_props(plan, user)
     props = group_schedules_by_date(plan.schedules).map do |k, v|
       rows = group_schedules_by_time(v).map do |time, schedules|
         {
           time: time,
-          schedule: schedule_to_card_props(schedules.first, plan),
+          schedule: schedule_to_card_props(schedules.first, plan, user),
           memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
         }
       end
