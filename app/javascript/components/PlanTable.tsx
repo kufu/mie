@@ -88,7 +88,7 @@ const SubmitForm: React.VFC<SubmitFormWithChildrenProps> = (props) => {
         <form action={action} accept-charset="UTF-8" method="post">
           {method ? <input type="hidden" name="_method" value={method} /> : null}
           <input type="hidden" name="authenticity_token" value={authenticityToken} />
-          <input type="hidden" name="edit_memo_schedule_id" id="edit_memo_schedule_id" value={targetKey} />
+          <input type="hidden" name="edit_memo_schedule_id" id={"edit_memo_schedule_id-" + targetKey} value={targetKey} />
           <Note value={currentMemo} name="memo" onChange={(e) => textChangeHandler(e.value)} />
           <PrimaryButton type="submit" name="commit" data-disable-with="Update memo">
             {i18n.updateMemo}
