@@ -33,7 +33,6 @@ module ReactHelper
   def create_schedule_table_props(table_array, plan, user)
     props = {}
     props[:groupedSchedules] = schedule_table_props(table_array, plan, user)
-    props[:current] = props[:groupedSchedules].keys.first
     props[:i18n] = schedule_table_i18n
     props
   end

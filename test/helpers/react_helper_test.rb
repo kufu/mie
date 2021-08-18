@@ -102,7 +102,6 @@ class ReactHelperTest < ActionView::TestCase
           ]
         }
       },
-      current: '2021-07-20',
       i18n: { startEnd: 'Start...End time' }
     }
     assert_equal expect, create_schedule_table_props(table_array, plan, usr)
