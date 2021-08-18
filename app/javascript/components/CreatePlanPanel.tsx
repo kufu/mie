@@ -39,7 +39,7 @@ const SubmitForm: React.VFC<{Props}> = (props) => {
   const { action, authenticityToken } = form
 
   return (
-    <form action={action} accept-charset="UTF-8" method="post">
+    <form action={action} acceptCharset="UTF-8" method="post">
       <input type="hidden" name="authenticity_token" value={authenticityToken} />
       <PrimaryButton type="submit">
         {i18n.buttonText}

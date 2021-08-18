@@ -52,7 +52,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   const { action, method, authenticityToken, targetKeyName, targetKey, buttonText } = props
   return (
     action ? (
-        <form action={action} accept-charset="UTF-8" method="post">
+        <form action={action} acceptCharset="UTF-8" method="post">
           {method ? <input type="hidden" name="_method" value={method} /> : null}
           <input type="hidden" name="authenticity_token" value={authenticityToken} />
           <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey} />
