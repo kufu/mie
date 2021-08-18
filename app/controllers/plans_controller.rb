@@ -59,8 +59,10 @@ class PlansController < ApplicationController
   end
 
   def edit_memo
-    plan_schedule = @plan.plan_schedules.find_by(schedule_id: params[:edit_memo_schedule_id])
+    schedule = Schedule.find(params[:edit_memo_schedule_id])
+    plan_schedule = @plan.plan_schedules.find_by(schedule: schedule)
     plan_schedule.update!(memo: params[:memo])
+    schedule
   end
 
   def check_user_owns_plan

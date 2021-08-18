@@ -8,7 +8,6 @@ type GroupedPlans = { [key: string]: Row[]}
 type Row = { time: string, schedule: CardProps, memo: string }
 
 interface Props {
-  current: string
   groupedPlans: GroupedPlans
   i18n: {
     startEnd: string
@@ -27,15 +26,21 @@ interface SubmitFormWithChildrenProps {
 }
 
 export const PlanTable: React.VFC<{Props}> = (props) => {
-  const { groupedPlans, current, i18n } = props
+  const { groupedPlans, i18n } = props
+  const current = window.location.hash === "" ? Object.keys(groupedPlans)[0] : window.location.hash.replace('#', '')
 
   const [currentKey, setCurrentDate] = useState(current)
+
+  const handleTabClick = (date) =>  {
+    window.location.hash = '#' + date
+    setCurrentDate(date)
+  }
 
   return (
     <Container>
       <TabBar>
         {Object.keys(groupedPlans).map(date => {
-          return <TabItem id={date} onClick={() => {setCurrentDate(date)}} selected={date === currentKey}>{date}</TabItem>
+          return <TabItem id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
       <Table>
