@@ -127,7 +127,6 @@ class ReactHelperTest < ActionView::TestCase
             memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
         ]
       },
-      current: '2021-07-20',
       i18n: { startEnd: 'Start...End time', track: 'Track name', memo: 'Memo', updateMemo: 'Update memo' }
     }
     assert_equal expect, create_plan_table_props(plan, user)
@@ -153,7 +152,6 @@ class ReactHelperTest < ActionView::TestCase
             memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
         ]
       },
-      current: '2021-07-20',
       i18n: { startEnd: 'Start...End time', track: 'Track name', memo: 'Memo', updateMemo: 'Update memo' }
     }
     assert_equal expect, create_plan_table_props(plan, user)
