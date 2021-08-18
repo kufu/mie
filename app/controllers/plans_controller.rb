@@ -9,15 +9,17 @@ class PlansController < ApplicationController
   end
 
   def update
-    if params[:add_schedule_id] || params[:remove_schedule_id]
-      add_and_remove_plans
-    elsif params[:edit_memo_schedule_id]
-      edit_memo
-    else
-      head :bad_request
-    end
+    target = if params[:add_schedule_id] || params[:remove_schedule_id]
+               add_and_remove_plans
+             elsif params[:edit_memo_schedule_id]
+               edit_memo
+             else
+               head :bad_request
+             end
 
-    redirect_to request.referer || schedules_path
+    identifier = target.start_at.strftime('%Y-%m-%d')
+
+    redirect_to (request.referer || schedules_path) + "##{identifier}"
   end
 
   def create
@@ -32,10 +34,12 @@ class PlansController < ApplicationController
   end
 
   def add_and_remove_plans
+    ret = nil
     ActiveRecord::Base.transaction do
-      add_plan if params[:add_schedule_id]
-      remove_plan if params[:remove_schedule_id]
+      ret = add_plan if params[:add_schedule_id]
+      ret = remove_plan if params[:remove_schedule_id]
     end
+    ret
   end
 
   def add_plan
@@ -45,10 +49,13 @@ class PlansController < ApplicationController
     else
       flash[:error] = @plan.errors.messages[:schedules]
     end
+    ps.schedule
   end
 
   def remove_plan
-    @plan.plan_schedules.find_by(schedule: Schedule.find(params[:remove_schedule_id])).destroy!
+    schedule = Schedule.find(params[:remove_schedule_id])
+    @plan.plan_schedules.find_by(schedule: schedule).destroy!
+    schedule
   end
 
   def edit_memo
