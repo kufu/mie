@@ -1,11 +1,12 @@
 <h1><%= @plan.title %></h1>
 
-<%= @plan.description %>
+<%= react_component("PlanDescription", create_plan_description_props(@plan)) %>
 
 <a class="twitter-share-button"
    href="https://twitter.com/intent/tweet?text=RubyKaigiTakeoutで僕と握手"
    data-size="large">
   Tweet</a>
+
 
 <%= react_component("PlanTable",create_plan_table_props(@plan, @user))  %>
 
