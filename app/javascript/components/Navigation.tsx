@@ -122,6 +122,6 @@ const TextLabel = styled.span`
   margin: 0 0 0 ${space.XXS};
 `
 
-const Child = styled.p`
+const Child = styled.div`
   margin: 0 0 0 auto;
 `

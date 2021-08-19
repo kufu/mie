@@ -10,7 +10,6 @@ type TrackList = string[]
 type Row = { time: string, schedules: Array<CardProps | null> }
 
 interface Props {
-  current: string
   groupedSchedules: GroupedSchedules
   i18n: {
     startEnd: string
@@ -18,15 +17,22 @@ interface Props {
 }
 
 export const ScheduleTable: React.VFC<{Props}> = (props) => {
-  const { groupedSchedules, current, i18n } = props
+  const { groupedSchedules, i18n } = props
+  const current = window.location.hash === "" ? Object.keys(groupedSchedules)[0] : window.location.hash.replace('#', '')
+
 
   const [currentKey, setCurrentDate] = useState(current)
+
+  const handleTabClick = (date) =>  {
+    window.location.hash = '#' + date
+    setCurrentDate(date)
+  }
 
   return (
     <>
       <TabBar>
         {Object.keys(groupedSchedules).map(date => {
-          return <TabItem id={date} onClick={() => {setCurrentDate(date)}} selected={date === currentKey}>{date}</TabItem>
+          return <TabItem id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
       <Table>
