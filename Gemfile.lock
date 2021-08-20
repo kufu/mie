@@ -104,6 +104,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    imgkit (1.6.2)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -203,6 +204,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wkhtmltoimage-binary (0.12.5)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -212,6 +214,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  imgkit
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
@@ -223,6 +226,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   tzinfo-data
   webpacker (~> 5.4)
+  wkhtmltoimage-binary
 
 RUBY VERSION
    ruby 3.0.2p107
