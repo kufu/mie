@@ -17,7 +17,17 @@ ja:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
     form_titme: "ノートを編集"
+  settings:
+    title: "設定"
+    set_password: "パスワードを設定"
+    change_visibility: "公開設定"
+    visibility_description: "公開設定変えやつ"
+    visible_text: "公開"
+    visible_description: "公開されるよ"
+    invisible_text: "非公開"
+    invisible_description: "公開されないよ"
   button:
+    settings: "設定"
     update_memo: "メモを更新"
     plan_create_button: "予定を作成"
     edit: "編集"
