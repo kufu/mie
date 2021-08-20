@@ -13,13 +13,13 @@ class PlansController < ApplicationController
                add_and_remove_plans
              elsif params[:edit_memo_schedule_id]
                edit_memo
+             elsif params[:description]
+               edit_description
              else
                head :bad_request
              end
 
-    identifier = target.start_at.strftime('%Y-%m-%d')
-
-    redirect_to (request.referer || schedules_path) + "##{identifier}"
+    redirect_to redirect_path_with_identifier(target)
   end
 
   def create
@@ -28,6 +28,11 @@ class PlansController < ApplicationController
   end
 
   private
+
+  def redirect_path_with_identifier(target)
+    identifier = target&.start_at&.strftime('%Y-%m-%d')
+    (request.referer || schedules_path) + (identifier ? "##{identifier}" : '')
+  end
 
   def set_plan
     @plan = params[:id] ? Plan.find(params[:id]) : nil
@@ -63,6 +68,11 @@ class PlansController < ApplicationController
     plan_schedule = @plan.plan_schedules.find_by(schedule: schedule)
     plan_schedule.update!(memo: params[:memo])
     schedule
+  end
+
+  def edit_description
+    @plan.update!(description: params[:description])
+    nil
   end
 
   def check_user_owns_plan

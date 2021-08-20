@@ -45,6 +45,23 @@ module ReactHelper
     props
   end
 
+  def create_plan_description_props(plan)
+    props = {}
+    props[:description] = plan.description
+    props[:i18n] = plan_description_i18n
+
+    method = 'patch'
+    action = plan_path(plan)
+    props[:form] = {
+      action: action,
+      method: method,
+      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      i18n: plan_description_form_i18n
+    }
+
+    props
+  end
+
   def create_locale_selector_props
     props = {}
     props[:current] = session[:locale] if session[:locale]
@@ -121,6 +138,22 @@ module ReactHelper
       track: I18n.t('table.track'),
       memo: I18n.t('table.memo'),
       updateMemo: I18n.t('button.update_memo')
+    }
+  end
+
+  def plan_description_i18n
+    {
+      title: I18n.t('description.title'),
+      notice: I18n.t('description.notice'),
+      button: I18n.t('button.edit')
+    }
+  end
+
+  def plan_description_form_i18n
+    {
+      title: I18n.t('description.form_titme'),
+      save: I18n.t('button.save'),
+      close: I18n.t('button.close')
     }
   end
 

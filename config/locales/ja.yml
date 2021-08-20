@@ -13,9 +13,16 @@ ja:
     start_end: "開始/終了 時間"
     track: "トラック名"
     memo: "メモ"
+  description:
+    title: "ノート"
+    notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
+    form_titme: "ノートを編集"
   button:
     update_memo: "メモを更新"
     plan_create_button: "予定を作成"
+    edit: "編集"
+    save: "保存"
+    close: "閉じる"
   default_vales:
     plan_title: "視聴予定"
 
