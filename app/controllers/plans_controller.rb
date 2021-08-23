@@ -15,6 +15,8 @@ class PlansController < ApplicationController
                edit_memo
              elsif params[:description]
                edit_description
+             elsif params[:visibility]
+               edit_password_and_visibility
              else
                head :bad_request
              end
@@ -78,5 +80,12 @@ class PlansController < ApplicationController
   def check_user_owns_plan
     return render :bad_request if @plan.nil?
     return render :bad_request unless @user.plans.include?(@plan)
+  end
+
+  def edit_password_and_visibility
+    @plan.password = params[:password] if params[:password] != ''
+    @plan.public = params[:visibility] == 'true'
+    @plan.save!
+    nil
   end
 end

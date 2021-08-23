@@ -99,6 +99,23 @@ module ReactHelper
     }
   end
 
+  def create_setting_button_props(plan)
+    props = {}
+    props[:visible] = plan.public
+    props[:i18n] = setting_button_i18n
+
+    method = 'patch'
+    action = plan_path(plan)
+
+    props[:form] = {
+      action: action,
+      method: method,
+      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      i18n: setting_button_form_i18n
+    }
+    props
+  end
+
   private
 
   def schedule_table_props(table_array, plan, user)
@@ -174,6 +191,27 @@ module ReactHelper
       information: I18n.t('info.create_plan_text'),
       termsOfService: I18n.t('info.terms_of_service'),
       buttonText: I18n.t('button.plan_create_button')
+    }
+  end
+
+  def setting_button_i18n
+    {
+      settings: I18n.t('button.settings'),
+      changeVisibility: I18n.t('settings.change_visibility'),
+      visibilityDesc: I18n.t('settings.visibility_description'),
+      setPassword: I18n.t('settings.set_password'),
+      visibleText: I18n.t('settings.visible_text'),
+      visibleDesc: I18n.t('settings.visible_description'),
+      invisibleText: I18n.t('settings.invisible_text'),
+      invisibleDesc: I18n.t('settings.invisible_description')
+    }
+  end
+
+  def setting_button_form_i18n
+    {
+      title: I18n.t('settings.title'),
+      save: I18n.t('button.save'),
+      close: I18n.t('button.close')
     }
   end
 end

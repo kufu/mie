@@ -48,7 +48,17 @@ en:
     title: "Note for the schedule"
     notice: "This memo will be placed into OGP image when share on SNS."
     form_titme: "Edit note for schedule"
+  settings:
+    title: "Settings"
+    set_password: "Set password"
+    change_visibility: "Change visibility"
+    visibility_description: "The currenty visibility is hoge"
+    visible_text: "Make public"
+    visible_description: "This schedule will be visible for anyone"
+    invisible_text: "Make private"
+    invisible_description: "This schedule will NOT be visible to anyone"
   button:
+    settings: "Settings"
     update_memo: "Update memo"
     plan_create_button: "Create my plans"
     edit: "Edit"

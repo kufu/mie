@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'bcrypt'
+
 class PlanDatetimeOverlapValidator < ActiveModel::Validator
   def validate(record)
     time_ranges = record.plan_schedules.map(&:schedule).map do |s|
@@ -35,6 +37,8 @@ class PlanDatetimeOverlapValidator < ActiveModel::Validator
 end
 
 class Plan < ApplicationRecord
+  include BCrypt
+
   belongs_to :user
   has_many :plan_schedules
   has_many :schedules, through: :plan_schedules
@@ -43,4 +47,13 @@ class Plan < ApplicationRecord
   validates :description, length: { in: 0..1024 }
   validates :public, inclusion: { in: [true, false] }
   validates_with PlanDatetimeOverlapValidator
+
+  def password
+    @password ||= Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
 end
