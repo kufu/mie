@@ -1,0 +1,140 @@
+---
+sep09:
+  events:
+  - type: keynote
+    begin: '10:00'
+    end: '10:55'
+    talks:
+      A: mametter
+  - type: talk
+    begin: '11:00'
+    end: '11:25'
+    talks:
+      A: k0kubun
+  - type: talk
+    begin: '11:30'
+    end: '11:55'
+    talks:
+      A: jeremyevans0
+      B: koic
+  - type: break
+    begin: '11:55'
+    end: '13:00'
+    name: Lunch Break
+  - type: talk
+    begin: '13:00'
+    end: '13:25'
+    talks:
+      A: Schwad
+      B: ko1
+  - type: talk
+    begin: '13:30'
+    end: '13:55'
+    talks:
+      A: peterzhu2118
+      B: coe401_
+  - type: talk
+    begin: '14:00'
+    end: '14:25'
+    talks:
+      A: vinistock
+      B: m_seki
+  - type: talk
+    begin: '14:30'
+    end: '14:55'
+    talks:
+      A: duerst
+      B: udzura
+  - type: talk
+    begin: '15:00'
+    end: '15:25'
+    talks:
+      A: paracycle
+      B: yamori813
+sep10:
+  events:
+  - type: keynote
+    begin: '10:00'
+    end: '10:55'
+    talks:
+      A: chrisgseaton
+  - type: talk
+    begin: '11:00'
+    end: '11:25'
+    talks:
+      A: eregontp
+      B: hasumikin
+  - type: talk
+    begin: '11:30'
+    end: '11:55'
+    talks:
+      A: maximecb
+      B: p_ck_
+  - type: break
+    begin: '11:55'
+    end: '13:00'
+    name: Lunch Break
+  - type: talk
+    begin: '13:00'
+    end: '13:25'
+    talks:
+      A: kddnewton
+      B: shugomaeda
+  - type: talk
+    begin: '13:30'
+    end: '13:55'
+    talks:
+      A: tagomoris
+      B: aycabta
+  - type: talk
+    begin: '14:00'
+    end: '14:55'
+    talks:
+      A: rubylangorg
+sep11:
+  events:
+  - type: talk
+    begin: '10:00'
+    end: '10:25'
+    talks:
+      A: dmagliola
+      B: pink_bangbi
+  - type: talk
+    begin: '10:30'
+    end: '10:55'
+    talks:
+      A: MauroEldritch
+      B: mrkn
+  - type: talk
+    begin: '11:00'
+    end: '11:25'
+    talks:
+      A: flavorjones
+      B: ima1zumi
+  - type: talk
+    begin: '11:30'
+    end: '11:55'
+    talks:
+      A: schneems
+      B: hsbt
+  - type: break
+    begin: '11:55'
+    end: '13:00'
+    name: Lunch Break
+  - type: talk
+    begin: '13:00'
+    end: '13:25'
+    talks:
+      A: elct9620
+      B: yu_suke1994
+  - type: talk
+    begin: '13:30'
+    end: '13:55'
+    talks:
+      A: matschaffer
+      B: ktou
+  - type: keynote
+    begin: '14:00'
+    end: '15:00'
+    talks:
+      A: yukihiro_matz
