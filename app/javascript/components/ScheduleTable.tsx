@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Base, TabBar, TabItem, Table, Body, Head, Row, Cell } from 'smarthr-ui'
+import { TabBar, TabItem } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps } from './ScheduleCard'
+import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
+import { ScheduleTime } from './Shared/ScheduleTime';
 
 type GroupedSchedules = { [key: string]: ScheduleTable}
 type ScheduleTable = {trackList: TrackList, rows: Row[]}
@@ -16,7 +18,7 @@ interface Props {
   }
 }
 
-export const ScheduleTable: React.VFC<{Props}> = (props) => {
+export const ScheduleTable: React.VFC<Props> = (props) => {
   const { groupedSchedules, i18n } = props
   const current = window.location.hash === "" ? Object.keys(groupedSchedules)[0] : window.location.hash.replace('#', '')
 
@@ -29,32 +31,52 @@ export const ScheduleTable: React.VFC<{Props}> = (props) => {
   }
 
   return (
-    <>
+    <Wrapper>
       <TabBar>
-        {Object.keys(groupedSchedules).map(date => {
-          return <TabItem id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
+        {Object.keys(groupedSchedules).map((date, index) => {
+          return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
-      <Table>
-        <Head>
-          <Row>
-            <Cell>{i18n.startEnd}</Cell>
-          {groupedSchedules[currentKey].trackList.map(track => <Cell>{track}</Cell>)}
-          </Row>
-        </Head>
-        <Body>
-          {groupedSchedules[currentKey].rows.map(row => {
-            return (
-              <Row>
-                <Cell>{row.time}</Cell>
-                {row.schedules.map(row => row === null ? <Cell /> : <Cell><ScheduleCard {...row} /></Cell>)}
-              </Row>
-            )
-          })}
-        </Body>
-      </Table>
-    </>
+      <TableWrapper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
+              {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {groupedSchedules[currentKey].rows.map((row, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableBodyCell noSidePadding>
+                    <ScheduleTime time={row.time}/>
+                  </TableBodyCell>
+                  {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableWrapper>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+`
+const TableWrapper = styled.div`
+  margin-top: 16px;
+`
+/* テーブルセル内の要素の幅高さ 100% にする */
+const CellItemStretcher = styled.div`
+  display: flex;
+  height: 100%;
+  > * {
+    width: 100%;
+  }
+`
 
 export default ScheduleTable
