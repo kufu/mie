@@ -34,6 +34,7 @@ en:
     label: "RubyKaigi mie planning"
     help: "Help"
     select_locale: "Select your timezone"
+    root: "Top"
     schedule: "Schedule"
     plan: "My Plans"
   info:

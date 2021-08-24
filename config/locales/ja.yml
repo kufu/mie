@@ -3,6 +3,7 @@ ja:
     label: "RubyKaigi mie ru 君"
     help: "ヘルプ"
     select_locale: "タイムゾーンを選択してください"
+    root: "top"
     schedule: "スケジュール"
     plan: "視聴予定"
   info:

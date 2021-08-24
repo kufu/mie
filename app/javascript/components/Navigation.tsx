@@ -1,22 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Container, Layout, Logo, Link, Text } from './Layout'
-import { FaQuestionCircleIcon, AppNavi } from 'smarthr-ui'
+import {AppNavi, Text, SmartHRLogo, FaBullhornIcon, FaCalendarAltIcon} from 'smarthr-ui'
 
 import LocaleSelector, { Props as LocaleSelectorProps } from './LocaleSelector'
-import { interaction, palette, size } from './Constants'
-const { BRAND, WHITE, hoverColor } = palette
-const { space } = size
-const { hover } = interaction
 
 interface Props {
   current: string
+  rootLink: string
   schedulesLink: string
   plansLink?: string
   locales: LocaleSelectorProps
   i18n: {
     label: string
+    rootButton: string
     scheduleButton: string
     plansButton: string
     help: string
@@ -24,34 +21,18 @@ interface Props {
 }
 
 export const Navigation: React.FC<Props> = (props) => {
-  const { current, schedulesLink, plansLink, locales, i18n } = props
+  const { current, locales, i18n } = props
   return (
     <>
       <Nav>
-        <Container alignItems="center" justifyContent="space-between">
-          <Layout>
-            <Inner alignContent="stretch" justifyContent="space-between">
-              <LogoLayout alignSelf="center">
-                <a href={"#"}>
-                  <Logo />
-                </a>
-              </LogoLayout>
-            </Inner>
-          </Layout>
-          <Layout>
-            <Inner alignContent="stretch" alignItems="center">
-              <Layout alignSelf="center" height="50px">
-                <Link color={WHITE} url={"#"} textDecoration="none" target="_blank">
-                  <HoverHeaderLabel>
-                    <Container alignItems="center" justifyContent="space-between">
-                      <FaQuestionCircleIcon size={16} color={WHITE} />
-                      <TextLabel>{i18n.help}</TextLabel>
-                    </Container>
-                  </HoverHeaderLabel>
-                </Link>
-              </Layout>
-            </Inner>
-          </Layout>
+        <Container>
+          <Text weight="bold" size="L">RubyKaigi Takeout 2021</Text>
+          <MarginWrapper>
+            <Text>Schedule.select powerd by</Text>
+          </MarginWrapper>
+          <MarginWrapper>
+            <SmartHRLogo width="95" height="16" fill="#00C4CC" />
+          </MarginWrapper>
         </Container>
       </Nav>
       <AppNavi
@@ -68,8 +49,15 @@ const generateNaviButton = (props: Props, current: string) => {
   const buttons = []
 
   buttons.push({
+    children: props.i18n.rootButton,
+    current: current === "",
+    href: props.rootLink,
+  })
+
+  buttons.push({
     children: props.i18n.scheduleButton,
     current: current === "schedules",
+    icon: FaBullhornIcon,
     href: props.schedulesLink,
   })
 
@@ -78,6 +66,7 @@ const generateNaviButton = (props: Props, current: string) => {
       {
         children: props.i18n.plansButton,
         current: current === "plans",
+        icon: FaCalendarAltIcon,
         href: props.plansLink
       }
     )
@@ -89,37 +78,23 @@ const generateNaviButton = (props: Props, current: string) => {
 export default Navigation
 
 const Nav = styled.nav`
-  background-color: ${BRAND};
-  padding: 0 ${space.S};
-`
-
-const Inner = styled(Container)`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background: #0B374D;
   height: 50px;
 `
 
-const LogoLayout = styled(Layout)`
-  margin-right: ${space.XS};
-  height: 27px;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 0 16px;
+  color: #FFF;
 `
 
-const HeaderLabel = styled.div`
-  padding: ${space.XXS} ${space.XXS};
-  height: 50px;
-  width: 100%;
-  background-color: ${BRAND};
-  color: ${WHITE};
-  box-sizing: border-box;
-`
-
-const HoverHeaderLabel = styled(HeaderLabel)`
-  transition: all ${hover.animation};
-  &:hover {
-    background-color: ${hoverColor(BRAND)};
-  }
-`
-
-const TextLabel = styled.span`
-  margin: 0 0 0 ${space.XXS};
+const MarginWrapper = styled.div`
+  margin-left: 8px;
 `
 
 const Child = styled.div`
