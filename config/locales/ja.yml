@@ -13,6 +13,10 @@ ja:
     start_end: "開始/終了 時間"
     track: "トラック名"
     memo: "メモ"
+  card:
+    add: "スケジュールに追加する"
+    added: "スケジュールに追加されています"
+    show_detail: "詳細を表示"
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"

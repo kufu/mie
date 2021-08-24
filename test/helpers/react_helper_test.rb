@@ -24,7 +24,13 @@ class ReactHelperTest < ActionView::TestCase
         authenticityToken: form_authenticity_token(''),
         targetKeyName: 'remove_schedule_id',
         targetKey: sch.id,
-        buttonText: 'remove'
+        buttonText: I18n.t('card.add'),
+        i18n: {
+          added: I18n.t('card.added')
+        }
+      },
+      i18n: {
+        showDetail: I18n.t('card.show_detail')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
@@ -46,7 +52,13 @@ class ReactHelperTest < ActionView::TestCase
         authenticityToken: form_authenticity_token(''),
         targetKeyName: 'add_schedule_id',
         targetKey: sch.id,
-        buttonText: 'add'
+        buttonText: I18n.t('card.add'),
+        i18n: {
+          added: nil
+        }
+      },
+      i18n: {
+        showDetail: I18n.t('card.show_detail')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
@@ -60,7 +72,10 @@ class ReactHelperTest < ActionView::TestCase
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
-      language: sch.language
+      language: sch.language,
+      i18n: {
+        showDetail: I18n.t('card.show_detail')
+      }
     }
     assert_equal expect, schedule_to_card_props(sch, nil, user)
   end
@@ -74,7 +89,10 @@ class ReactHelperTest < ActionView::TestCase
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
-      language: sch.language
+      language: sch.language,
+      i18n: {
+        showDetail: I18n.t('card.show_detail')
+      }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
   end

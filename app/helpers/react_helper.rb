@@ -9,7 +9,10 @@ module ReactHelper
       description: schedule.description,
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
-      language: schedule.language
+      language: schedule.language,
+      i18n: {
+        showDetail: I18n.t('card.show_detail')
+      }
     }
 
     if plan && plan.user == user
@@ -23,7 +26,10 @@ module ReactHelper
         authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
         targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
         targetKey: schedule.id,
-        buttonText: include_plan ? 'remove' : 'add'
+        buttonText: I18n.t('card.add'),
+        i18n: {
+          added: plan.schedules.include?(schedule) ? I18n.t('card.added') : nil
+        }
       }
     end
 
@@ -81,6 +87,7 @@ module ReactHelper
   def create_navigation_props
     {
       current: request.path.split('/')[1],
+      rootLinks: root_path,
       schedulesLink: schedules_path,
       plansLink: @user.plans&.first ? plan_path(@user.plans&.first) : nil,
       locales: create_locale_selector_props,
@@ -176,7 +183,7 @@ module ReactHelper
 
   def navigation_i18n
     {
-      label: I18n.t('nav.label'),
+      rootButton: I18n.t('nav.root'),
       scheduleButton: I18n.t('nav.schedule'),
       plansButton: I18n.t('nav.plan'),
       help: I18n.t('nav.help')
