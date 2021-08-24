@@ -51,7 +51,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
             <TableRow>
               <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
               <TableHeadCell textCenter>{i18n.track}</TableHeadCell>
-              <TableHeadCell>{i18n.memo}</TableHeadCell>
+              {/*<TableHeadCell>{i18n.memo}</TableHeadCell>*/}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -62,14 +62,14 @@ export const PlanTable: React.VFC<Props> = (props) => {
                     <ScheduleTime time={row.time}/>
                   </TableBodyCell>
                   <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
-                  <TableBodyCell>
-                    <MemoArea>
-                      { row.schedule.form ?
-                        <SubmitForm memo={row.memo} i18n={{updateMemo: i18n.updateMemo}} {...row.schedule} />
-                        : row.memo
-                      }
-                    </MemoArea>
-                  </TableBodyCell>
+                  {/*<TableBodyCell>*/}
+                  {/*  <MemoArea>*/}
+                  {/*    { row.schedule.form ?*/}
+                  {/*      <SubmitForm memo={row.memo} i18n={{updateMemo: i18n.updateMemo}} {...row.schedule} />*/}
+                  {/*      : row.memo*/}
+                  {/*    }*/}
+                  {/*  </MemoArea>*/}
+                  {/*</TableBodyCell>*/}
                 </TableRow>
               )
             })}
