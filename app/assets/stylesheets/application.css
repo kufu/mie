@@ -14,7 +14,9 @@
  *= require_self
  *= require reset
  */
-
+body {
+    background-color: #F8F7F6;
+}
 .container {
     margin: 48px 80px;
 }
