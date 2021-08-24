@@ -1,3 +1,13 @@
+
+<% content_for :head do %>
+  <meta property="og:title" content="<%= @plan.title %>">
+  <meta property="og:type" content="RubyKaigiTakeoutで僕と握手">
+  <meta property="og:description" content="RubyKaigiTakeoutで僕と握手">
+  <meta property="og:url" content="<%= plan_url %> %>">
+  <meta property="og:site_name" content="RubyKaigiTakeoutで僕と握手">
+  <meta property="og:image" content="<%= plan_ogp_url(@plan) %>" />
+<% end %>
+
 <div style="display: flex; align-items: center; padding: 16px;">
   <div style="margin-right: auto;">
   <h1><%= @plan.title %></h1>
