@@ -39,7 +39,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
   }
 
   return (
-    <Container>
+    <Wrapper>
       <TabBar>
         {Object.keys(groupedPlans).map((date, index) => {
           return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
@@ -76,7 +76,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
           </TableBody>
         </Table>
       </TableWrapper>
-    </Container>
+    </Wrapper>
   )
 }
 
@@ -104,8 +104,9 @@ const SubmitForm: React.VFC<SubmitFormWithChildrenProps> = (props) => {
   )
 }
 
-const Container = styled.div`
-  margin: 48px 80px;
+const Wrapper = styled.div`
+  margin: 24px auto 0;
+  max-width: 1120px;
 `
 
 const Note = styled(Textarea)`

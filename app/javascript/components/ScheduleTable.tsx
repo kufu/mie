@@ -31,7 +31,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
   }
 
   return (
-    <>
+    <Wrapper>
       <TabBar>
         {Object.keys(groupedSchedules).map((date, index) => {
           return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
@@ -59,10 +59,14 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
           </TableBody>
         </Table>
       </TableWrapper>
-    </>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+`
 const TableWrapper = styled.div`
   margin-top: 16px;
 `

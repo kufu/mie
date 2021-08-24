@@ -16,7 +16,8 @@
  */
 body {
     background-color: #F8F7F6;
+    min-width: 1280px;
 }
 .container {
-    margin: 48px 80px;
+    padding: 32px;
 }
