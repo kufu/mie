@@ -32,8 +32,8 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
   return (
     <>
       <TabBar>
-        {Object.keys(groupedSchedules).map(date => {
-          return <TabItem id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
+        {Object.keys(groupedSchedules).map((date, index) => {
+          return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
       <TableWrapper>
@@ -41,15 +41,15 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
           <TableHead>
             <TableRow>
               <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
-              {groupedSchedules[currentKey].trackList.map(track => <TableHeadCell key={track}  width="40%" textCenter>{track}</TableHeadCell>)}
+              {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
             </TableRow>
           </TableHead>
           <TableBody>
-            {groupedSchedules[currentKey].rows.map(row => {
+            {groupedSchedules[currentKey].rows.map((row, index) => {
               return (
-                <TableRow>
+                <TableRow key={index}>
                   <TableBodyCell noSidePadding>{row.time}</TableBodyCell>
-                  {row.schedules.map(row => row === null ? <TableBodyCell /> : <TableBodyCell><CellItemStretcher><ScheduleCard {...row} /></CellItemStretcher></TableBodyCell>)}
+                  {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
                 </TableRow>
               )
             })}

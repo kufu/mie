@@ -40,8 +40,8 @@ export const PlanTable: React.VFC<Props> = (props) => {
   return (
     <Container>
       <TabBar>
-        {Object.keys(groupedPlans).map(date => {
-          return <TabItem id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
+        {Object.keys(groupedPlans).map((date, index) => {
+          return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
       <TableWrapper>
@@ -54,9 +54,9 @@ export const PlanTable: React.VFC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {groupedPlans[currentKey].map(row => {
+            {groupedPlans[currentKey].map((row, index) => {
               return (
-                <TableRow>
+                <TableRow key={index}>
                   <TableBodyCell noSidePadding>{row.time}</TableBodyCell>
                   <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
                   <TableBodyCell>
