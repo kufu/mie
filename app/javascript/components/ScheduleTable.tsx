@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { TabBar, TabItem } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
+import { ScheduleTime } from './Shared/ScheduleTime';
 
 type GroupedSchedules = { [key: string]: ScheduleTable}
 type ScheduleTable = {trackList: TrackList, rows: Row[]}
@@ -48,7 +49,9 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
             {groupedSchedules[currentKey].rows.map((row, index) => {
               return (
                 <TableRow key={index}>
-                  <TableBodyCell noSidePadding>{row.time}</TableBodyCell>
+                  <TableBodyCell noSidePadding>
+                    <ScheduleTime time={row.time}/>
+                  </TableBodyCell>
                   {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
                 </TableRow>
               )

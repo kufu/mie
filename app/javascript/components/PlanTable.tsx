@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Base, TabBar, TabItem, Textarea, PrimaryButton } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, SubmitFormProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
+import {ScheduleTime} from "./Shared/ScheduleTime";
 
 type GroupedPlans = { [key: string]: Row[]}
 type Row = { time: string, schedule: CardProps, memo: string }
@@ -57,7 +58,9 @@ export const PlanTable: React.VFC<Props> = (props) => {
             {groupedPlans[currentKey].map((row, index) => {
               return (
                 <TableRow key={index}>
-                  <TableBodyCell noSidePadding>{row.time}</TableBodyCell>
+                  <TableBodyCell noSidePadding>
+                    <ScheduleTime time={row.time}/>
+                  </TableBodyCell>
                   <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
                   <TableBodyCell>
                     <MemoArea>
