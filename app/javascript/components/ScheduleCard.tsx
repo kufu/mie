@@ -65,7 +65,6 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 }
 
 const Card = styled(Base)`
-  width: 480px;
   padding: 16px;
 `
 
