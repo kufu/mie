@@ -5,7 +5,7 @@ import {Base, Heading, TextButton, FaPencilAltIcon, DialogBase, ActionDialog, Te
 
 interface Props {
   description: string
-  form: SubmitForm
+  form?: SubmitForm
   i18n: {
     title: string
     notice: string
@@ -65,30 +65,36 @@ export const PlanDescription: React.VFC<Props> = (props) => {
         />
         <TextContainer>
           {description}
-          <TextButton size="s" prefix={<FaPencilAltIcon size={11} />} onClick={() => setIsDialogOpen(true)}>
-            {i18n.button}
-          </TextButton>
+          {form ?
+            <TextButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
+              {i18n.button}
+            </TextButton>
+            : null
+          }
         </TextContainer>
       </DescriptionBase>
-      <ActionDialog
-        title={form.i18n.title}
-        actionText={form.i18n.save}
-        closeText={form.i18n.close}
-        isOpen={isDialogOpen}
-        onClickOverlay={() => setIsDialogOpen(false)}
-        onPressEscape={() => setIsDialogOpen(false)}
-        onClickAction={() => handleAction()}
-        onClickClose={() => handleClose()}
-      >
-        <DialogBody>
-          <Textarea
-            width="100%"
-            onChange={(e) => handleTextChange(e.target.value)}
-          >
-            {desc}
-          </Textarea>
-        </DialogBody>
-      </ActionDialog>
+      {form ?
+        <ActionDialog
+          title={form.i18n.title}
+          actionText={form.i18n.save}
+          closeText={form.i18n.close}
+          isOpen={isDialogOpen}
+          onClickOverlay={() => setIsDialogOpen(false)}
+          onPressEscape={() => setIsDialogOpen(false)}
+          onClickAction={() => handleAction()}
+          onClickClose={() => handleClose()}
+        >
+          <DialogBody>
+            <Textarea
+              width="100%"
+              onChange={(e) => handleTextChange(e.target.value)}
+            >
+              {desc}
+            </Textarea>
+          </DialogBody>
+        </ActionDialog>
+        : null
+      }
     </Container>
   )
 }

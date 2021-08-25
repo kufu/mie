@@ -7,7 +7,7 @@ import UpdateDialog from "./Shared/UpdateDialog";
 interface Props {
   title: string
   visible: boolean
-  form: SubmitForm
+  form?: SubmitForm
   i18n: {
     edit: string
   }
@@ -49,10 +49,14 @@ export const PlanTitle: React.VFC<Props> = (props) => {
     <Container>
       <StatusLabel skeleton={true} type={visible ? "success" : "required"}>{visible ? "public" : "private"}</StatusLabel>
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
-      <MarginWrapper>
-        <SecondaryButton prefix={<FaPencilAltIcon />} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
-      </MarginWrapper>
-      <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave} value={title} i18n={form.i18n} />
+      {form ?
+        <MarginWrapper>
+          <SecondaryButton prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
+          <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
+                        value={title} i18n={form.i18n}/>
+        </MarginWrapper>
+        : null
+      }
     </Container>
   )
 }

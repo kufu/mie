@@ -104,7 +104,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         }
       </Contents>
       <Actions>
-        { mode === "plan" ?
+        { form && mode === "plan" ?
           <UpdateMemoButton>
             <SecondaryButton prefix={<FaPencilAltIcon size="12"/>} size="s"
                              onClick={() => setIsMemoEditing(true)}>{i18n.editMemo}</SecondaryButton>

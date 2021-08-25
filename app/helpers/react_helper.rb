@@ -90,19 +90,21 @@ module ReactHelper
     props
   end
 
-  def create_plan_description_props(plan)
+  def create_plan_description_props(plan, user)
     props = {}
     props[:description] = plan.description
     props[:i18n] = plan_description_i18n
 
-    method = 'patch'
-    action = plan_path(plan)
-    props[:form] = {
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
-      i18n: plan_description_form_i18n
-    }
+    if user.plans.include?(plan)
+      method = 'patch'
+      action = plan_path(plan)
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        i18n: plan_description_form_i18n
+      }
+    end
 
     props
   end
@@ -134,7 +136,7 @@ module ReactHelper
     }
   end
 
-  def create_plan_title_props(plan)
+  def create_plan_title_props(plan, user)
     props = {
       title: plan.title,
       visible: plan.public?,
@@ -143,18 +145,21 @@ module ReactHelper
       }
     }
 
-    method = 'patch'
-    action = plan_path(plan)
-    props[:form] = {
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
-      i18n: {
-        title: I18n.t('dialog.edit_title'),
-        save: I18n.t('button.save'),
-        close: I18n.t('button.close')
+    if user.plans.include?(plan)
+      method = 'patch'
+      action = plan_path(plan)
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        i18n: {
+          title: I18n.t('dialog.edit_title'),
+          save: I18n.t('button.save'),
+          close: I18n.t('button.close')
+        }
       }
-    }
+    end
+
     props
   end
 
