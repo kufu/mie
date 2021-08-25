@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   before_action :set_user
+  before_action :set_plan
   before_action :set_locale
 
   around_action :with_time_zone
@@ -14,6 +15,11 @@ class ApplicationController < ActionController::Base
     end
   rescue ActiveRecord::RecordNotFound
     create_and_set_user
+  end
+
+  def set_plan
+    @user.plans.create!(title: 'My plan', description: 'ogehoge') if @user.plans.blank?
+    @plan = @user.plans.first
   end
 
   private

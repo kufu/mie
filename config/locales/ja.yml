@@ -40,9 +40,13 @@ ja:
     visible_description: "公開されるよ"
     invisible_text: "非公開"
     invisible_description: "公開されないよ"
+  terms_of_service:
+    description: ""
+    terms_of_service: ""
   dialog:
     edit_title: "タイトルを編集"
     edit_memo: "「%{title}」のメモを更新"
+    terms_of_service: "サービスの利用規約"
   button:
     settings: "設定"
     update_memo: "メモを更新"
@@ -50,6 +54,7 @@ ja:
     edit: "編集"
     save: "保存"
     close: "閉じる"
+    accept_to_add: "同意して追加する"
   default_vales:
     plan_title: "視聴予定"
 

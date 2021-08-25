@@ -71,9 +71,13 @@ en:
     visible_description: "This schedule will be visible for anyone"
     invisible_text: "Make private"
     invisible_description: "This schedule will NOT be visible to anyone"
+  terms_of_service:
+    description: ""
+    terms_of_service: ""
   dialog:
     edit_title: "Edit the title"
     edit_memo: "Edit a note for \"%{title}\""
+    terms_of_service: "Terms of service"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -81,6 +85,7 @@ en:
     edit: "Edit"
     save: "Save"
     close: "Close"
+    accept_to_add: "Accept and add to Plans"
   default_vales:
     plan_title: "My plans"
 

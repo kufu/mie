@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useLayoutEffect, useState} from 'react'
 import styled from 'styled-components'
 
 import {
@@ -14,6 +14,7 @@ import {
 import ScheduleDetail from "./ScheduleDetail";
 import { Props as DetailProps } from './ScheduleDetail'
 import UpdateDialog from "./Shared/UpdateDialog";
+import TermsOfServiceDialog from "./TermsOfServiceDialog";
 
 type Language = "en" | "ja"
 type Mode = "list" | "plan"
@@ -45,6 +46,13 @@ export interface SubmitFormProps {
   targetKeyName: string
   targetKey: string
   buttonText: string
+  initial?: {
+    title: string
+    description: string
+    termsOfService: string
+    close: string
+    accept: string
+  }
   i18n: {
     added: string | null
   }
@@ -122,21 +130,53 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, i18n } = props
-  return (
-    i18n.added ?
-        <AddedText><FaCheckCircleIcon size={14} /><MarginWrapper><Text weight="bold" size="S">{i18n.added}</Text></MarginWrapper></AddedText>
-      : (
-        <form action={action} acceptCharset="UTF-8" method="post">
-          <input type="hidden" name="_method" value="patch" />
-          <input type="hidden" name="authenticity_token" value={authenticityToken} />
-          <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey} />
-          <SecondaryButton prefix={<FaPlusCircleIcon size={16} />} type="submit" name="commit" size="s">
-            {buttonText}
-          </SecondaryButton>
-        </form>
-      )
-  )
+  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, i18n } = props
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const acceptHandler = () => {
+    const body = {
+      _method: "patch",
+      authenticity_token: authenticityToken,
+      edit_memo_schedule_id: targetKey,
+    }
+
+    body[targetKeyName] = targetKey
+
+    fetch(action, {
+      method: 'post',
+      credentials: 'same-origin',
+      body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
+    }).then(r => {
+      document.location.reload()
+    })
+  }
+
+  if(initial) {
+    return (
+      <>
+        <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
+          {buttonText}
+        </SecondaryButton>
+        <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} i18n={initial} />
+      </>
+    )
+  } else {
+    return (
+      i18n.added ?
+        <AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold"
+                                                                      size="S">{i18n.added}</Text></MarginWrapper></AddedText>
+        : (
+          <form action={action} acceptCharset="UTF-8" method="post">
+            <input type="hidden" name="_method" value="patch"/>
+            <input type="hidden" name="authenticity_token" value={authenticityToken}/>
+            <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
+            <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s">
+              {buttonText}
+            </SecondaryButton>
+          </form>
+        )
+    )
+  }
 }
 
 const Card = styled(Base)`

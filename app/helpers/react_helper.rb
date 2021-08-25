@@ -39,6 +39,8 @@ module ReactHelper
           added: plan.schedules.include?(schedule) ? I18n.t('card.added') : nil
         }
       }
+
+      props[:form][:initial] = terms_of_service_props if plan.initial?
     end
 
     props
@@ -266,6 +268,16 @@ module ReactHelper
       information: I18n.t('info.create_plan_text'),
       termsOfService: I18n.t('info.terms_of_service'),
       buttonText: I18n.t('button.plan_create_button')
+    }
+  end
+
+  def terms_of_service_props
+    {
+      title: I18n.t('dialog.terms_of_service'),
+      description: I18n.t('terms_of_service.description'),
+      termsOfService: I18n.t('terms_of_service.terms_of_service'),
+      close: I18n.t('button.close'),
+      accept: I18n.t('button.accept_to_add')
     }
   end
 
