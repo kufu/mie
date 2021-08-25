@@ -58,12 +58,14 @@ class PlansController < ApplicationController
     else
       flash[:error] = @plan.errors.messages[:schedules]
     end
+    @plan.update!(initial: false)
     ps.schedule
   end
 
   def remove_plan
     schedule = Schedule.find(params[:remove_schedule_id])
     @plan.plan_schedules.find_by(schedule: schedule).destroy!
+    @plan.update!(initial: false)
     schedule
   end
 
