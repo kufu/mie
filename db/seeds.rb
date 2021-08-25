@@ -17,7 +17,9 @@ ActiveRecord::Base.transaction do
       name: val['name'],
       handle: "@#{val['id']}",
       thumbnail: "https://www.gravatar.com/avatar/#{val['gravatar_hash']}/?s=268&d=https%3A%2F%2Frubykaigi.org%2F2020%2Fimages%2Fspeakers%2Fdummy-avatar.png",
-      profile: val['bio']
+      profile: val['bio'],
+      github: val['github_id'],
+      twitter: val['twitter_id']
     )
   end
 
