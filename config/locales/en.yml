@@ -73,6 +73,7 @@ en:
     invisible_description: "This schedule will NOT be visible to anyone"
   dialog:
     edit_title: "Edit the title"
+    edit_memo: "Edit a note for \"%{title}\""
   button:
     settings: "Settings"
     update_memo: "Update memo"

@@ -9,25 +9,32 @@ import {
   FaPlusCircleIcon,
   Text,
   Heading,
-  FaCheckCircleIcon
+  FaCheckCircleIcon, FaPencilAltIcon
 } from 'smarthr-ui'
-import {palette} from "./Constants";
 import ScheduleDetail from "./ScheduleDetail";
 import { Props as DetailProps } from './ScheduleDetail'
+import UpdateDialog from "./Shared/UpdateDialog";
 
 type Language = "en" | "ja"
+type Mode = "list" | "plan"
 type Details = Omit<DetailProps, "isOpen" | "handleOnClickClose">
 
 export interface Props {
   title: string
+  mode: Mode
   description: string
   speakerName: string
   thumbnailUrl: string
   language: Language
   details: Details
   form?: SubmitFormProps
+  memo?: string
   i18n: {
     showDetail: string
+    editMemo: string
+    title: string
+    save: string
+    close: string
   }
 }
 
@@ -44,11 +51,29 @@ export interface SubmitFormProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, description, speakerName, thumbnailUrl, language, form, i18n, details } = props
+  const { title, mode, description, speakerName, thumbnailUrl, language, memo, form, i18n, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
+  const [isMemoEditing, setIsMemoEditing] = useState(false)
 
   const handleCloseClick = () => {
     setIsDetailOpen(false)
+  }
+
+  const handleUpdateMemo = (updateMemo: string) => {
+    const body = {
+      _method: form.method,
+      authenticity_token: form.authenticityToken,
+      edit_memo_schedule_id: form.targetKey,
+      memo: updateMemo
+    }
+
+    fetch(form.action, {
+      method: 'post',
+      credentials: 'same-origin',
+      body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
+    }).then(r => {
+      document.location.reload()
+    })
   }
 
   const detailProps: DetailProps = {
@@ -70,8 +95,24 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       <Contents>
         <Title type="sectionTitle" tag="h3">{title}</Title>
         <Description maxLines={4}>{description}</Description>
+        { mode === "plan" ?
+          <MemoArea>
+            <MemoHead type="subSubBlockTitle">Memo</MemoHead>
+            <Memo>{memo}</Memo>
+          </MemoArea>
+          : null
+        }
       </Contents>
       <Actions>
+        { mode === "plan" ?
+          <UpdateMemoButton>
+            <SecondaryButton prefix={<FaPencilAltIcon size="12"/>} size="s"
+                             onClick={() => setIsMemoEditing(true)}>{i18n.editMemo}</SecondaryButton>
+            <UpdateDialog isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
+                          handleAction={handleUpdateMemo} value={memo} i18n={i18n}/>
+          </UpdateMemoButton>
+          : null
+        }
         <MarginWrapper>{ form ? <SubmitForm {...form} /> : null }</MarginWrapper>
         <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}>{i18n.showDetail}</TextButton></MarginWrapper>
       </Actions>
@@ -173,6 +214,24 @@ const Actions = styled.div`
 const AddedText = styled.div`
   display: flex;
   align-items: center;
+  padding: 4px;
+`
+
+const MemoArea = styled.div`
+  margin: 16px 0;
+`
+
+const MemoHead = styled(Heading)`
+  margin-bottom: 8px;
+`
+
+const Memo = styled.div`
+  padding: 16px;
+  background: #F8F7F6;
+`
+
+const UpdateMemoButton = styled.div`
+  margin-right: auto;
 `
 
 export default ScheduleCard

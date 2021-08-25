@@ -34,9 +34,8 @@ export const UpdateDialog: React.VFC<Props> = (props) => {
         <Textarea
           width="100%"
           onChange={e => setCurrent(e.target.value)}
-        >
-          {value}
-        </Textarea>
+          defaultValue={value}
+        />
       </DialogBody>
     </ActionDialog>
   )

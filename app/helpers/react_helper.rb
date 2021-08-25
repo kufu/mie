@@ -3,18 +3,25 @@
 module ReactHelper
   include HelperConcern
 
-  def schedule_to_card_props(schedule, plan, user)
+  def schedule_to_card_props(schedule, plan, user, mode = 'list')
     props = {
       title: schedule.title,
+      mode: mode,
       description: schedule.description,
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
       language: schedule.language,
       details: create_schedule_detail_props(schedule),
       i18n: {
-        showDetail: I18n.t('card.show_detail')
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: schedule.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
       }
     }
+
+    props[:memo] = plan.plan_schedules.find_by(schedule: schedule).memo || '' if plan&.schedules&.include?(schedule)
 
     if plan && plan.user == user
       include_plan = plan.schedules.include?(schedule)
@@ -202,7 +209,7 @@ module ReactHelper
       rows = group_schedules_by_time(v).map do |time, schedules|
         {
           time: time,
-          schedule: schedule_to_card_props(schedules.first, plan, user),
+          schedule: schedule_to_card_props(schedules.first, plan, user, 'plan'),
           memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
         }
       end
