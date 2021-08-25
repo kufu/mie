@@ -2,6 +2,6 @@
 
 class StaticController < ApplicationController
   def index
-    redirect_to '/schedules'
+    redirect_to '/2021'
   end
 end
