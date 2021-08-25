@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import {
@@ -12,9 +12,11 @@ import {
   FaCheckCircleIcon
 } from 'smarthr-ui'
 import {palette} from "./Constants";
-const { BRAND, WHITE, LIGHT_GREEN, DARK_GREEN } = palette
+import ScheduleDetail from "./ScheduleDetail";
+import { Props as DetailProps } from './ScheduleDetail'
 
 type Language = "en" | "ja"
+type Details = Omit<DetailProps, "isOpen" | "handleOnClickClose">
 
 export interface Props {
   title: string
@@ -22,6 +24,7 @@ export interface Props {
   speakerName: string
   thumbnailUrl: string
   language: Language
+  details: Details
   form?: SubmitFormProps
   i18n: {
     showDetail: string
@@ -41,7 +44,19 @@ export interface SubmitFormProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, description, speakerName, thumbnailUrl, language, form, i18n } = props
+  const { title, description, speakerName, thumbnailUrl, language, form, i18n, details } = props
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
+
+  const handleCloseClick = () => {
+    setIsDetailOpen(false)
+  }
+
+  const detailProps: DetailProps = {
+    ...details,
+    isOpen: isDetailOpen,
+    handleOnClickClose: handleCloseClick,
+  }
+
   return (
     <Card>
       <Speaker>
@@ -58,8 +73,9 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       </Contents>
       <Actions>
         <MarginWrapper>{ form ? <SubmitForm {...form} /> : null }</MarginWrapper>
-        <MarginWrapper><TextButton size="s">{i18n.showDetail}</TextButton></MarginWrapper>
+        <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}>{i18n.showDetail}</TextButton></MarginWrapper>
       </Actions>
+      <ScheduleDetail {...detailProps} />
     </Card>
   )
 }

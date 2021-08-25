@@ -9,22 +9,25 @@
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 25
+  Max: 30
 
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 200
+  Max: 300
 
 # Offense count: 6
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
-  Max: 27
+  Max: 30
+
+Metrics/BlockLength:
+  Max: 60
 
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ModuleLength:
-  Max: 200
+  Max: 250
 
 # Offense count: 15
 # Configuration parameters: AllowedConstants.

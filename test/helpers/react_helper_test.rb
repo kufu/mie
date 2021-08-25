@@ -12,12 +12,41 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:one)
     sch = schedules(:one)
     plan = plans(:one)
+    speaker = sch.speaker
+
     expect = {
       title: sch.title,
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
+      details: {
+        body: {
+          thumbnailUrl: speaker.thumbnail,
+          speaker: speaker.name,
+          username: speaker.handle,
+          aboutSpeaker: speaker.profile,
+          github: speaker.github,
+          twitter: speaker.twitter,
+          startTime: I18n.l(sch.start_at, format: :timetable),
+          endTime: I18n.l(sch.end_at, format: :timetable),
+          language: sch.language,
+          description: sch.description,
+          i18n: {
+            speaker: I18n.t('card.detail.speaker'),
+            username: I18n.t('card.detail.username'),
+            aboutSpeaker: I18n.t('card.detail.about_speaker'),
+            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
+            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            language: I18n.t('card.detail.language'),
+            description: I18n.t('card.detail.description')
+          }
+        },
+        i18n: {
+          title: I18n.t('card.detail.title'),
+          close: I18n.t('button.close')
+        }
+      },
       form: {
         action: plan_path(plan),
         method: 'patch',
@@ -40,12 +69,41 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:one)
     sch = schedules(:four)
     plan = plans(:one)
+    speaker = sch.speaker
+
     expect = {
       title: sch.title,
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
+      details: {
+        body: {
+          thumbnailUrl: speaker.thumbnail,
+          speaker: speaker.name,
+          username: speaker.handle,
+          aboutSpeaker: speaker.profile,
+          github: speaker.github,
+          twitter: speaker.twitter,
+          startTime: I18n.l(sch.start_at, format: :timetable),
+          endTime: I18n.l(sch.end_at, format: :timetable),
+          language: sch.language,
+          description: sch.description,
+          i18n: {
+            speaker: I18n.t('card.detail.speaker'),
+            username: I18n.t('card.detail.username'),
+            aboutSpeaker: I18n.t('card.detail.about_speaker'),
+            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
+            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            language: I18n.t('card.detail.language'),
+            description: I18n.t('card.detail.description')
+          }
+        },
+        i18n: {
+          title: I18n.t('card.detail.title'),
+          close: I18n.t('button.close')
+        }
+      },
       form: {
         action: plan_path(plan),
         method: 'patch',
@@ -67,12 +125,41 @@ class ReactHelperTest < ActionView::TestCase
   test 'schedule_to_card_props_with_no_plan_args' do
     user = users(:one)
     sch = schedules(:one)
+    speaker = sch.speaker
+
     expect = {
       title: sch.title,
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
+      details: {
+        body: {
+          thumbnailUrl: speaker.thumbnail,
+          speaker: speaker.name,
+          username: speaker.handle,
+          aboutSpeaker: speaker.profile,
+          github: speaker.github,
+          twitter: speaker.twitter,
+          startTime: I18n.l(sch.start_at, format: :timetable),
+          endTime: I18n.l(sch.end_at, format: :timetable),
+          language: sch.language,
+          description: sch.description,
+          i18n: {
+            speaker: I18n.t('card.detail.speaker'),
+            username: I18n.t('card.detail.username'),
+            aboutSpeaker: I18n.t('card.detail.about_speaker'),
+            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
+            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            language: I18n.t('card.detail.language'),
+            description: I18n.t('card.detail.description')
+          }
+        },
+        i18n: {
+          title: I18n.t('card.detail.title'),
+          close: I18n.t('button.close')
+        }
+      },
       i18n: {
         showDetail: I18n.t('card.show_detail')
       }
@@ -84,12 +171,41 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:two)
     sch = schedules(:one)
     plan = plans(:one)
+    speaker = sch.speaker
+
     expect = {
       title: sch.title,
       description: sch.description,
       speakerName: sch.speaker.name,
       thumbnailUrl: sch.speaker.thumbnail,
       language: sch.language,
+      details: {
+        body: {
+          thumbnailUrl: speaker.thumbnail,
+          speaker: speaker.name,
+          username: speaker.handle,
+          aboutSpeaker: speaker.profile,
+          github: speaker.github,
+          twitter: speaker.twitter,
+          startTime: I18n.l(sch.start_at, format: :timetable),
+          endTime: I18n.l(sch.end_at, format: :timetable),
+          language: sch.language,
+          description: sch.description,
+          i18n: {
+            speaker: I18n.t('card.detail.speaker'),
+            username: I18n.t('card.detail.username'),
+            aboutSpeaker: I18n.t('card.detail.about_speaker'),
+            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
+            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            language: I18n.t('card.detail.language'),
+            description: I18n.t('card.detail.description')
+          }
+        },
+        i18n: {
+          title: I18n.t('card.detail.title'),
+          close: I18n.t('button.close')
+        }
+      },
       i18n: {
         showDetail: I18n.t('card.show_detail')
       }

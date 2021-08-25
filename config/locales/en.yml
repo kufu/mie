@@ -49,6 +49,15 @@ en:
     add: "Add to my schedule"
     added: "Added to my schedule"
     show_detail: "Show detail"
+    detail:
+      title: "The details"
+      speaker: "Speaker"
+      username: "UserName"
+      about_speaker: "Description about the speaker"
+      start_time: "Start time (%{zone})"
+      end_time: "End time (%{zone})"
+      language: "Language"
+      description: "Description about the talk"
   description:
     title: "Note for the schedule"
     notice: "This memo will be placed into OGP image when share on SNS."

@@ -10,6 +10,7 @@ module ReactHelper
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
       language: schedule.language,
+      details: create_schedule_detail_props(schedule),
       i18n: {
         showDetail: I18n.t('card.show_detail')
       }
@@ -34,6 +35,37 @@ module ReactHelper
     end
 
     props
+  end
+
+  def create_schedule_detail_props(schedule)
+    speaker = schedule.speaker
+    {
+      body: {
+        thumbnailUrl: speaker.thumbnail,
+        speaker: speaker.name,
+        username: speaker.handle,
+        aboutSpeaker: speaker.profile,
+        github: speaker.github,
+        twitter: speaker.twitter,
+        startTime: I18n.l(schedule.start_at, format: :timetable),
+        endTime: I18n.l(schedule.end_at, format: :timetable),
+        language: schedule.language,
+        description: schedule.description,
+        i18n: {
+          speaker: I18n.t('card.detail.speaker'),
+          username: I18n.t('card.detail.username'),
+          aboutSpeaker: I18n.t('card.detail.about_speaker'),
+          startTime: I18n.t('card.detail.start_time', zone: schedule.start_at.zone),
+          endTime: I18n.t('card.detail.end_time', zone: schedule.start_at.zone),
+          language: I18n.t('card.detail.language'),
+          description: I18n.t('card.detail.description')
+        }
+      },
+      i18n: {
+        title: I18n.t('card.detail.title'),
+        close: I18n.t('button.close')
+      }
+    }
   end
 
   def create_schedule_table_props(table_array, plan, user)

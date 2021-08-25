@@ -18,6 +18,15 @@ ja:
     add: "スケジュールに追加する"
     added: "スケジュールに追加されています"
     show_detail: "詳細を表示"
+    detail:
+      title: "トークの詳細"
+      speaker: "スピーカー"
+      username: "ソーシャルID"
+      about_speaker: "プロフィール"
+      start_time: "開始時間 (%{zone})"
+      end_time: "終了時間 (%{zone})"
+      language: "言語"
+      description: "トークの詳細"
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
