@@ -71,6 +71,8 @@ en:
     visible_description: "This schedule will be visible for anyone"
     invisible_text: "Make private"
     invisible_description: "This schedule will NOT be visible to anyone"
+  dialog:
+    edit_title: "Edit the title"
   button:
     settings: "Settings"
     update_memo: "Update memo"

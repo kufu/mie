@@ -40,6 +40,8 @@ ja:
     visible_description: "公開されるよ"
     invisible_text: "非公開"
     invisible_description: "公開されないよ"
+  dialog:
+    edit_title: "タイトルを編集"
   button:
     settings: "設定"
     update_memo: "メモを更新"

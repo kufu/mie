@@ -127,6 +127,30 @@ module ReactHelper
     }
   end
 
+  def create_plan_title_props(plan)
+    props = {
+      title: plan.title,
+      visible: plan.public?,
+      i18n: {
+        edit: I18n.t('button.edit')
+      }
+    }
+
+    method = 'patch'
+    action = plan_path(plan)
+    props[:form] = {
+      action: action,
+      method: method,
+      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      i18n: {
+        title: I18n.t('dialog.edit_title'),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
+      }
+    }
+    props
+  end
+
   def create_info_panel_props
     action = plans_path
     {

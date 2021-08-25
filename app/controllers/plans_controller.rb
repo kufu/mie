@@ -17,6 +17,8 @@ class PlansController < ApplicationController
                edit_description
              elsif params[:visibility]
                edit_password_and_visibility
+             elsif params[:title]
+               edit_title
              else
                head :bad_request
              end
@@ -86,6 +88,11 @@ class PlansController < ApplicationController
     @plan.password = params[:password] if params[:password] != ''
     @plan.public = params[:visibility] == 'true'
     @plan.save!
+    nil
+  end
+
+  def edit_title
+    @plan.update(title: params[:title])
     nil
   end
 end
