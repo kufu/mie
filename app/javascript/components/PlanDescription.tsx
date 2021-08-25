@@ -94,7 +94,8 @@ export const PlanDescription: React.VFC<Props> = (props) => {
 }
 
 const Container = styled.div`
-  margin: 8px;
+  margin: 8px auto 0;
+  max-width: 1120px;
 `
 
 const TextContainer = styled.div`
@@ -107,7 +108,6 @@ const DialogBody = styled(DialogBase)`
 `
 
 const DescriptionBase = styled(Base)`
-  width: 1220px;
   padding: 16px;
 `
 
