@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'static#index'
 
   scope '2021' do
-    get '/', to: 'schedules#index', as: 'root_2021'
+    get '/', to: 'static#top'
 
     resources :schedules, only: %i[index show]
     resources :plans, only: %i[show update create] do

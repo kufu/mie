@@ -50,7 +50,7 @@ const generateNaviButton = (props: Props, current: string) => {
 
   buttons.push({
     children: props.i18n.rootButton,
-    current: current === "",
+    current: current === null,
     href: props.rootLink,
   })
 
