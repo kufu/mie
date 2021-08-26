@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   around_action :with_time_zone
 
+  rescue_from Exception, with: :server_error
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActionController::RoutingError, with: :not_found
+
   def set_user
     if session[:user_id]
       @user = User.find(session[:user_id])
@@ -20,6 +24,14 @@ class ApplicationController < ActionController::Base
   def set_plan
     @user.plans.create!(title: 'My plan', description: 'ogehoge') if @user.plans.blank?
     @plan = @user.plans.recent.first
+  end
+
+  def not_found
+    render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
+  end
+
+  def server_error
+    render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
   end
 
   private

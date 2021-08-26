@@ -133,7 +133,7 @@ module ReactHelper
       current: request.path.split('/')[2],
       rootLink: '/2021',
       schedulesLink: schedules_path,
-      plansLink: plan_path(@plan),
+      plansLink: @plan ? plan_path(@plan) : nil,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }
@@ -210,6 +210,20 @@ module ReactHelper
       i18n: make_editable_button_form_i18n
     }
     props
+  end
+
+  def create_not_found_props
+    {
+      title: I18n.t('errors.not_found'),
+      description: I18n.t('errors.not_found_desc')
+    }
+  end
+
+  def create_server_error_props
+    {
+      title: 'inter ser err', # I18n.t('errors.not_found'),
+      description: I18n.t('errors.not_found_desc')
+    }
   end
 
   private

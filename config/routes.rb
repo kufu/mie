@@ -15,4 +15,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '*path', controller: 'application', action: 'not_found'
 end
