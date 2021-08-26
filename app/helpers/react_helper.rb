@@ -89,6 +89,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
+    props[:uri] = url_for([plan, only_path: false])
     props[:i18n] = plans_table_i18n
     props
   end
