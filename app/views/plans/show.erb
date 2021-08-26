@@ -2,7 +2,7 @@
 <% content_for :head do %>
   <meta property="og:title" content="<%= @plan.title %>">
   <meta property="og:site_name" content="RubyKaigi Takeout 2021 Schedule.select powerd by SmartHR">
-  <meta property="og:description" content="RubyKaigiTakeoutで僕と握手">
+  <meta property="og:description" content="<%= @plan.description %>">
   <meta property="og:url" content="<%= plan_url %>">
   <meta property="og:image" content="<%= plan_ogp_url(@plan) %>" />
   <meta property="og:type" content="website">
