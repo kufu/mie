@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Base, TabBar, TabItem, Textarea, PrimaryButton } from 'smarthr-ui'
+import { Base, TabBar, TabItem, Text, PrimaryButton } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, SubmitFormProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
 import {ScheduleTime} from "./Shared/ScheduleTime";
+import { Oops } from './Oops'
 
 type GroupedPlans = { [key: string]: Row[]}
 type Row = { time: string, schedule: CardProps, memo: string }
@@ -16,6 +17,8 @@ interface Props {
     track: string
     memo: string
     updateMemo: string
+    noPlans: string
+    noPlansDesc: string
   }
 }
 
@@ -46,16 +49,26 @@ export const PlanTable: React.VFC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {groupedPlans[currentKey].map((row, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableBodyCell noSidePadding>
-                    <ScheduleTime time={row.time}/>
+            {
+              groupedPlans[currentKey] ?
+              groupedPlans[currentKey].map((row, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableBodyCell noSidePadding>
+                      <ScheduleTime time={row.time}/>
+                    </TableBodyCell>
+                    <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
+                  </TableRow>
+                )
+              })
+                : <TableRow >
+                  <TableBodyCell colSpan={2} noSidePadding>
+                    <Oops title={i18n.noPlans} >
+                      <Text color="TEXT_GREY">{i18n.noPlansDesc}</Text>
+                    </Oops>
                   </TableBodyCell>
-                  <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
                 </TableRow>
-              )
-            })}
+            }
           </TableBody>
         </Table>
       </TableWrapper>

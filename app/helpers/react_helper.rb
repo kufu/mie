@@ -250,7 +250,9 @@ module ReactHelper
       startEnd: I18n.t('table.start_end'),
       track: I18n.t('table.track'),
       memo: I18n.t('table.memo'),
-      updateMemo: I18n.t('button.update_memo')
+      updateMemo: I18n.t('button.update_memo'),
+      noPlans: I18n.t('table.no_plans'),
+      noPlansDesc: I18n.t('table.no_plans_description')
     }
   end
 

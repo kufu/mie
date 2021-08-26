@@ -45,6 +45,8 @@ en:
     start_end: "Start...End time"
     track: "Track name"
     memo: "Memo"
+    no_plans: "Oops! Talks have not been added yet."
+    no_plans_description: "Go to Talks and add your favorite talks here!"
   card:
     add: "Add to my schedule"
     added: "Added to my schedule"
