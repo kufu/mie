@@ -132,7 +132,7 @@ module ReactHelper
       current: request.path.split('/')[2],
       rootLink: '/2021',
       schedulesLink: schedules_path,
-      plansLink: @user.plans&.first ? plan_path(@user.plans&.first) : nil,
+      plansLink: plan_path(@plan),
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }

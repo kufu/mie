@@ -48,6 +48,10 @@ class Plan < ApplicationRecord
   validates :public, inclusion: { in: [true, false] }
   validates_with PlanDatetimeOverlapValidator
 
+  scope :recent, lambda {
+    order(updated_at: :desc)
+  }
+
   def password
     @password ||= Password.new(password_hash)
   end

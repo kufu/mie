@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def set_plan
     @user.plans.create!(title: 'My plan', description: 'ogehoge') if @user.plans.blank?
-    @plan = @user.plans.first
+    @plan = @user.plans.recent.first
   end
 
   private
