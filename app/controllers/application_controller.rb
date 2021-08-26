@@ -2,9 +2,14 @@
 
 class ApplicationController < ActionController::Base
   before_action :set_user
+  before_action :set_plan
   before_action :set_locale
 
   around_action :with_time_zone
+
+  rescue_from Exception, with: :server_error
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActionController::RoutingError, with: :not_found
 
   def set_user
     if session[:user_id]
@@ -16,16 +21,25 @@ class ApplicationController < ActionController::Base
     create_and_set_user
   end
 
+  def set_plan
+    @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list', description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true) if @user.plans.blank?
+    @plan = @user.plans.recent.first
+  end
+
+  def not_found
+    render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
+  end
+
+  def server_error
+    render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
+  end
+
   private
 
   def create_and_set_user
     @user = User.create!
     session[:user_id] = @user.id
     @user
-  end
-
-  def create_default_plan(user)
-    user.plans.create!(title: 'My plans')
   end
 
   def set_locale

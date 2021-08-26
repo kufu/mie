@@ -1,9 +1,3 @@
 <% @table_array = create_table_array(@schedules) %>
 
-<% if @user.plans.blank? %>
-  <div class="info-container">
-    <%= react_component("CreatePlanPanel", create_info_panel_props) %>
-  </div>
-<% end %>
-
-<%= react_component("ScheduleTable", create_schedule_table_props(@table_array, @user.plans.first, @user)) %>
+<%= react_component("ScheduleTable", create_schedule_table_props(@table_array, @plan, @user)) %>

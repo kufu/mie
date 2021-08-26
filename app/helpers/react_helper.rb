@@ -3,14 +3,25 @@
 module ReactHelper
   include HelperConcern
 
-  def schedule_to_card_props(schedule, plan, user)
+  def schedule_to_card_props(schedule, plan, user, mode = 'list')
     props = {
       title: schedule.title,
+      mode: mode,
       description: schedule.description,
       speakerName: schedule.speaker.name,
       thumbnailUrl: schedule.speaker.thumbnail,
-      language: schedule.language
+      language: schedule.language,
+      details: create_schedule_detail_props(schedule),
+      i18n: {
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: schedule.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
+      }
     }
+
+    props[:memo] = plan.plan_schedules.find_by(schedule: schedule).memo || '' if plan&.schedules&.include?(schedule)
 
     if plan && plan.user == user
       include_plan = plan.schedules.include?(schedule)
@@ -23,11 +34,48 @@ module ReactHelper
         authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
         targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
         targetKey: schedule.id,
-        buttonText: include_plan ? 'remove' : 'add'
+        buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
+        mode: mode,
+        i18n: {
+          added: plan.schedules.include?(schedule) ? I18n.t('card.added') : nil
+        }
       }
+
+      props[:form][:initial] = terms_of_service_props if plan.initial?
     end
 
     props
+  end
+
+  def create_schedule_detail_props(schedule)
+    speaker = schedule.speaker
+    {
+      body: {
+        thumbnailUrl: speaker.thumbnail,
+        speaker: speaker.name,
+        username: speaker.handle,
+        aboutSpeaker: speaker.profile,
+        github: speaker.github,
+        twitter: speaker.twitter,
+        startTime: I18n.l(schedule.start_at, format: :timetable),
+        endTime: I18n.l(schedule.end_at, format: :timetable),
+        language: schedule.language,
+        description: schedule.description,
+        i18n: {
+          speaker: I18n.t('card.detail.speaker'),
+          username: I18n.t('card.detail.username'),
+          aboutSpeaker: I18n.t('card.detail.about_speaker'),
+          startTime: I18n.t('card.detail.start_time', zone: schedule.start_at.zone),
+          endTime: I18n.t('card.detail.end_time', zone: schedule.start_at.zone),
+          language: I18n.t('card.detail.language'),
+          description: I18n.t('card.detail.description')
+        }
+      },
+      i18n: {
+        title: I18n.t('card.detail.title'),
+        close: I18n.t('button.close')
+      }
+    }
   end
 
   def create_schedule_table_props(table_array, plan, user)
@@ -41,23 +89,26 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
+    props[:uri] = url_for([plan, only_path: false])
     props[:i18n] = plans_table_i18n
     props
   end
 
-  def create_plan_description_props(plan)
+  def create_plan_description_props(plan, user)
     props = {}
     props[:description] = plan.description
     props[:i18n] = plan_description_i18n
 
-    method = 'patch'
-    action = plan_path(plan)
-    props[:form] = {
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
-      i18n: plan_description_form_i18n
-    }
+    if user.plans.include?(plan)
+      method = 'patch'
+      action = plan_path(plan)
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        i18n: plan_description_form_i18n
+      }
+    end
 
     props
   end
@@ -80,12 +131,40 @@ module ReactHelper
 
   def create_navigation_props
     {
-      current: request.path.split('/')[1],
+      current: request.path.split('/')[2],
+      rootLink: '/2021',
       schedulesLink: schedules_path,
-      plansLink: @user.plans&.first ? plan_path(@user.plans&.first) : nil,
+      plansLink: @plan ? plan_path(@plan) : nil,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }
+  end
+
+  def create_plan_title_props(plan, user)
+    props = {
+      title: plan.title,
+      visible: plan.public?,
+      i18n: {
+        edit: I18n.t('button.edit')
+      }
+    }
+
+    if user.plans.include?(plan)
+      method = 'patch'
+      action = plan_path(plan)
+      props[:form] = {
+        action: action,
+        method: method,
+        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        i18n: {
+          title: I18n.t('dialog.edit_title'),
+          save: I18n.t('button.save'),
+          close: I18n.t('button.close')
+        }
+      }
+    end
+
+    props
   end
 
   def create_info_panel_props
@@ -116,6 +195,38 @@ module ReactHelper
     props
   end
 
+  def create_make_editable_button_props(plan)
+    props = {}
+    props[:i18n] = {
+      makeEditable: I18n.t('button.make_editable')
+    }
+
+    method = 'patch'
+    action = plan_own_path(plan)
+
+    props[:form] = {
+      action: action,
+      method: method,
+      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      i18n: make_editable_button_form_i18n
+    }
+    props
+  end
+
+  def create_not_found_props
+    {
+      title: I18n.t('errors.not_found'),
+      description: I18n.t('errors.not_found_desc')
+    }
+  end
+
+  def create_server_error_props
+    {
+      title: 'inter ser err', # I18n.t('errors.not_found'),
+      description: I18n.t('errors.not_found_desc')
+    }
+  end
+
   private
 
   def schedule_table_props(table_array, plan, user)
@@ -139,7 +250,7 @@ module ReactHelper
       rows = group_schedules_by_time(v).map do |time, schedules|
         {
           time: time,
-          schedule: schedule_to_card_props(schedules.first, plan, user),
+          schedule: schedule_to_card_props(schedules.first, plan, user, 'plan'),
           memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
         }
       end
@@ -154,7 +265,9 @@ module ReactHelper
       startEnd: I18n.t('table.start_end'),
       track: I18n.t('table.track'),
       memo: I18n.t('table.memo'),
-      updateMemo: I18n.t('button.update_memo')
+      updateMemo: I18n.t('button.update_memo'),
+      noPlans: I18n.t('table.no_plans'),
+      noPlansDesc: I18n.t('table.no_plans_description')
     }
   end
 
@@ -176,7 +289,7 @@ module ReactHelper
 
   def navigation_i18n
     {
-      label: I18n.t('nav.label'),
+      rootButton: I18n.t('nav.root'),
       scheduleButton: I18n.t('nav.schedule'),
       plansButton: I18n.t('nav.plan'),
       help: I18n.t('nav.help')
@@ -191,6 +304,16 @@ module ReactHelper
       information: I18n.t('info.create_plan_text'),
       termsOfService: I18n.t('info.terms_of_service'),
       buttonText: I18n.t('button.plan_create_button')
+    }
+  end
+
+  def terms_of_service_props
+    {
+      title: I18n.t('dialog.terms_of_service'),
+      description: I18n.t('terms_of_service.description'),
+      termsOfService: I18n.t('terms_of_service.terms_of_service'),
+      close: I18n.t('button.close'),
+      accept: I18n.t('button.accept_to_add')
     }
   end
 
@@ -212,6 +335,15 @@ module ReactHelper
       title: I18n.t('settings.title'),
       save: I18n.t('button.save'),
       close: I18n.t('button.close')
+    }
+  end
+
+  def make_editable_button_form_i18n
+    {
+      title: I18n.t('button.make_editable'),
+      takeOwn: I18n.t('button.check_password'),
+      close: I18n.t('button.close'),
+      inputPassword: I18n.t('dialog.input_password')
     }
   end
 end

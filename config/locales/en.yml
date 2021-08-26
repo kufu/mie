@@ -34,6 +34,7 @@ en:
     label: "RubyKaigi mie planning"
     help: "Help"
     select_locale: "Select your timezone"
+    root: "Top"
     schedule: "Schedule"
     plan: "My Plans"
   info:
@@ -44,6 +45,22 @@ en:
     start_end: "Start...End time"
     track: "Track name"
     memo: "Memo"
+    no_plans: "Oops! Talks have not been added yet."
+    no_plans_description: "Go to Talks and add your favorite talks here!"
+  card:
+    add: "Add to my schedule"
+    added: "Added to my schedule"
+    remove: "Remove from my schedule"
+    show_detail: "Show detail"
+    detail:
+      title: "The details"
+      speaker: "Speaker"
+      username: "UserName"
+      about_speaker: "Description about the speaker"
+      start_time: "Start time (%{zone})"
+      end_time: "End time (%{zone})"
+      language: "Language"
+      description: "Description about the talk"
   description:
     title: "Note for the schedule"
     notice: "This memo will be placed into OGP image when share on SNS."
@@ -57,6 +74,13 @@ en:
     visible_description: "This schedule will be visible for anyone"
     invisible_text: "Make private"
     invisible_description: "This schedule will NOT be visible to anyone"
+  terms_of_service:
+    description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
+  dialog:
+    edit_title: "Edit the title"
+    edit_memo: "Edit a note for \"%{title}\""
+    terms_of_service: "Terms of service"
+    input_password: "Input password"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -64,11 +88,17 @@ en:
     edit: "Edit"
     save: "Save"
     close: "Close"
+    accept_to_add: "Accept and add to Plans"
+    make_editable: "Make editable"
+    check_password: "Take edit permission"
   default_vales:
     plan_title: "My plans"
 
   errors:
     time_overlap_error: "Can't select [%{left}] and [%{right}] at the same time, they are overlapping time schedule."
+    password_incorrect: "Password incorrect"
+    not_found: "404! The contents you are looking for is not found."
+    not_found_desc: "Why don’t you go to Talks and make your own schedule?"
 
   time:
     formats:

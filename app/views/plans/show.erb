@@ -9,40 +9,16 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <% end %>
 
-<div style="display: flex; align-items: center; padding: 16px;">
+<div style="display: flex; align-items: center; margin: 16px auto 24px; max-width: 1120px;">
   <div style="margin-right: auto;">
-  <h1><%= @plan.title %></h1>
+  <%= react_component("PlanTitle",create_plan_title_props(@plan, @user)) %>
   </div>
   <% if @plan.user == @user %>
     <%= react_component("SettingButton", create_setting_button_props(@plan)) %>
+  <% else %>
+    <%= react_component("MakeEditableButton", create_make_editable_button_props(@plan)) %>
   <% end %>
 </div>
 
-<%= react_component("PlanDescription", create_plan_description_props(@plan)) %>
-
-<a class="twitter-share-button"
-   href="https://twitter.com/intent/tweet?text=RubyKaigiTakeoutで僕と握手"
-   data-size="large">
-  Tweet</a>
-
-
+<%= react_component("PlanDescription", create_plan_description_props(@plan, @user)) %>
 <%= react_component("PlanTable",create_plan_table_props(@plan, @user))  %>
-
-<% @table_array = create_table_array(@schedules) %>
-
-<script>window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-
-    t._e = [];
-    t.ready = function(f) {
-        t._e.push(f);
-    };
-
-    return t;
-}(document, "script", "twitter-wjs"));</script>

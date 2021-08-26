@@ -3,6 +3,7 @@ ja:
     label: "RubyKaigi mie ru 君"
     help: "ヘルプ"
     select_locale: "タイムゾーンを選択してください"
+    root: "top"
     schedule: "スケジュール"
     plan: "視聴予定"
   info:
@@ -13,6 +14,22 @@ ja:
     start_end: "開始/終了 時間"
     track: "トラック名"
     memo: "メモ"
+    no_plans: "視聴予定のトークを登録しましょう！"
+    no_plans_description: "トーク一覧から予定を追加しよう"
+  card:
+    add: "スケジュールに追加する"
+    added: "スケジュールに追加されています"
+    remove: "スケジュールから削除します"
+    show_detail: "詳細を表示"
+    detail:
+      title: "トークの詳細"
+      speaker: "スピーカー"
+      username: "ソーシャルID"
+      about_speaker: "プロフィール"
+      start_time: "開始時間 (%{zone})"
+      end_time: "終了時間 (%{zone})"
+      language: "言語"
+      description: "トークの詳細"
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
@@ -26,6 +43,13 @@ ja:
     visible_description: "公開されるよ"
     invisible_text: "非公開"
     invisible_description: "公開されないよ"
+  terms_of_service:
+    description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR を利用するためには、下記の利用規約に同意する必要があります。予定を追加すると、規約に同意したとみなされます。"
+  dialog:
+    edit_title: "タイトルを編集"
+    edit_memo: "「%{title}」のメモを更新"
+    terms_of_service: "サービスの利用規約"
+    input_password: "パスワードを入力"
   button:
     settings: "設定"
     update_memo: "メモを更新"
@@ -33,11 +57,17 @@ ja:
     edit: "編集"
     save: "保存"
     close: "閉じる"
+    accept_to_add: "同意して追加する"
+    make_editable: "パスワードを入力して編集"
+    check_password: "編集可能にする"
   default_vales:
     plan_title: "視聴予定"
 
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
+    password_incorrect: "パスワードが違います"
+    not_found: "404! The contents you are looking for is not found."
+    not_found_desc: "Why don’t you go to Talks and make your own schedule?"
 
   time:
     formats:

@@ -17,11 +17,23 @@ class PlansController < ApplicationController
                edit_description
              elsif params[:visibility]
                edit_password_and_visibility
+             elsif params[:title]
+               edit_title
              else
                head :bad_request
              end
 
     redirect_to redirect_path_with_identifier(target)
+  end
+
+  def editable
+    if @plan.password == params[:password]
+      @plan.update!(user: @user)
+      redirect_to plan_path(@plan)
+    else
+      flash[:error] = I18n.t('errors.password_incorrect')
+      head :unauthorized
+    end
   end
 
   def create
@@ -37,7 +49,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = params[:id] ? Plan.find(params[:id]) : nil
+    @plan = params[:id] ? Plan.find(params[:id]) : Plan.find(params[:plan_id])
   end
 
   def add_and_remove_plans
@@ -56,12 +68,14 @@ class PlansController < ApplicationController
     else
       flash[:error] = @plan.errors.messages[:schedules]
     end
+    @plan.update!(initial: false)
     ps.schedule
   end
 
   def remove_plan
     schedule = Schedule.find(params[:remove_schedule_id])
     @plan.plan_schedules.find_by(schedule: schedule).destroy!
+    @plan.update!(initial: false)
     schedule
   end
 
@@ -86,6 +100,11 @@ class PlansController < ApplicationController
     @plan.password = params[:password] if params[:password] != ''
     @plan.public = params[:visibility] == 'true'
     @plan.save!
+    nil
+  end
+
+  def edit_title
+    @plan.update(title: params[:title])
     nil
   end
 end

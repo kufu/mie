@@ -25,7 +25,7 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
   return (
     <Container>
       {props.i18n.label}
-      <Select
+      <ResizedSelect
         value={current}
         options={props.options}
         onChange={changeLocaleHandler}
@@ -38,6 +38,13 @@ const Container = styled.div`
   margin: 4px;
   display: flex;
   align-items: center;
+`
+
+const ResizedSelect = styled(Select)`
+  height: 30px !important;
+  select {
+    padding: 3px 8px;
+  }
 `
 
 export default LocaleSelector
