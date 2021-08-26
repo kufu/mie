@@ -78,6 +78,7 @@ en:
     edit_title: "Edit the title"
     edit_memo: "Edit a note for \"%{title}\""
     terms_of_service: "Terms of service"
+    input_password: "Input password"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -86,11 +87,14 @@ en:
     save: "Save"
     close: "Close"
     accept_to_add: "Accept and add to Plans"
+    make_editable: "Make editable"
+    check_password: "Take edit permission"
   default_vales:
     plan_title: "My plans"
 
   errors:
     time_overlap_error: "Can't select [%{left}] and [%{right}] at the same time, they are overlapping time schedule."
+    password_incorrect: "Password incorrect"
 
   time:
     formats:

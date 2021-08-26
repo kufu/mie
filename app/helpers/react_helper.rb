@@ -193,6 +193,24 @@ module ReactHelper
     props
   end
 
+  def create_make_editable_button_props(plan)
+    props = {}
+    props[:i18n] = {
+      makeEditable: I18n.t('button.make_editable')
+    }
+
+    method = 'patch'
+    action = plan_own_path(plan)
+
+    props[:form] = {
+      action: action,
+      method: method,
+      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      i18n: make_editable_button_form_i18n
+    }
+    props
+  end
+
   private
 
   def schedule_table_props(table_array, plan, user)
@@ -299,6 +317,15 @@ module ReactHelper
       title: I18n.t('settings.title'),
       save: I18n.t('button.save'),
       close: I18n.t('button.close')
+    }
+  end
+
+  def make_editable_button_form_i18n
+    {
+      title: I18n.t('button.make_editable'),
+      takeOwn: I18n.t('button.check_password'),
+      close: I18n.t('button.close'),
+      inputPassword: I18n.t('dialog.input_password')
     }
   end
 end
