@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_plan
-    @user.plans.create!(title: 'My plan', description: 'ogehoge') if @user.plans.blank?
+    @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list', description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true) if @user.plans.blank?
     @plan = @user.plans.recent.first
   end
 
@@ -40,10 +40,6 @@ class ApplicationController < ActionController::Base
     @user = User.create!
     session[:user_id] = @user.id
     @user
-  end
-
-  def create_default_plan(user)
-    user.plans.create!(title: 'My plans')
   end
 
   def set_locale
