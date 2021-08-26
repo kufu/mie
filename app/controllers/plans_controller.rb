@@ -26,6 +26,16 @@ class PlansController < ApplicationController
     redirect_to redirect_path_with_identifier(target)
   end
 
+  def editable
+    if @plan.password == params[:password]
+      @plan.update!(user: @user)
+      redirect_to plan_path(@plan)
+    else
+      flash[:error] = I18n.t('errors.password_incorrect')
+      head :unauthorized
+    end
+  end
+
   def create
     @plan = @user.plans.create!(title: 'My Plans')
     redirect_to plan_path @plan
@@ -39,7 +49,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = params[:id] ? Plan.find(params[:id]) : nil
+    @plan = params[:id] ? Plan.find(params[:id]) : Plan.find(params[:plan_id])
   end
 
   def add_and_remove_plans

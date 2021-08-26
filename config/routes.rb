@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
     resources :schedules, only: %i[index show]
     resources :plans, only: %i[show update create] do
+      patch '/own', to: 'plans#editable'
+
       scope module: :plans do
         resource :ogp, only: %i[show]
       end
