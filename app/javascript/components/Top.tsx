@@ -36,7 +36,6 @@ const Container = styled.div`
 
 const TitleBox = styled.div`
   color: #0B374D;
-  font-family: Hiragino Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 19.2px;

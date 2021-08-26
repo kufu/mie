@@ -241,7 +241,6 @@ const Lng = styled.div`
   border: 1px solid #D6D3D0;
   box-sizing: border-box;
   border-radius: 100px;
-  font-family: Hiragino Sans;
   
   font-style: normal;
   font-weight: bold;
@@ -251,7 +250,6 @@ const Lng = styled.div`
 `
 
 const Description = styled(LineClamp)`
-  font-family: Hiragino Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 13.71px;
