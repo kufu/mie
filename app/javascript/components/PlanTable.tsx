@@ -55,7 +55,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
               groupedPlans[currentKey].map((row, index) => {
                 return (
                   <TableRow key={index}>
-                    <TableBodyCell noSidePadding>
+                    <TableBodyCell noSidePadding as="th">
                       <ScheduleTime time={row.time}/>
                     </TableBodyCell>
                     <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
