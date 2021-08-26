@@ -34,7 +34,8 @@ module ReactHelper
         authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
         targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
         targetKey: schedule.id,
-        buttonText: I18n.t('card.add'),
+        buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
+        mode: mode,
         i18n: {
           added: plan.schedules.include?(schedule) ? I18n.t('card.added') : nil
         }

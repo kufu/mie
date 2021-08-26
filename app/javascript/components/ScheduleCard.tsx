@@ -9,7 +9,7 @@ import {
   FaPlusCircleIcon,
   Text,
   Heading,
-  FaCheckCircleIcon, FaPencilAltIcon
+  FaCheckCircleIcon, FaPencilAltIcon, FaTrashIcon
 } from 'smarthr-ui'
 import ScheduleDetail from "./ScheduleDetail";
 import { Props as DetailProps } from './ScheduleDetail'
@@ -53,6 +53,7 @@ export interface SubmitFormProps {
     close: string
     accept: string
   }
+  mode: Mode
   i18n: {
     added: string | null
   }
@@ -130,7 +131,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, i18n } = props
+  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, i18n } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const acceptHandler = () => {
@@ -151,7 +152,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
     })
   }
 
-  if(initial) {
+  if (initial) {
     return (
       <>
         <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
@@ -161,21 +162,33 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       </>
     )
   } else {
-    return (
-      i18n.added ?
-        <AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold"
-                                                                      size="S">{i18n.added}</Text></MarginWrapper></AddedText>
-        : (
+    if (i18n.added) {
+      if (mode == "list") {
+        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S">{i18n.added}</Text></MarginWrapper></AddedText>)
+      } else {
+        return (
           <form action={action} acceptCharset="UTF-8" method="post">
             <input type="hidden" name="_method" value="patch"/>
             <input type="hidden" name="authenticity_token" value={authenticityToken}/>
             <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
-            <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s">
+            <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s">
               {buttonText}
             </SecondaryButton>
           </form>
         )
-    )
+      }
+    } else {
+      return (
+        <form action={action} acceptCharset="UTF-8" method="post">
+          <input type="hidden" name="_method" value="patch"/>
+          <input type="hidden" name="authenticity_token" value={authenticityToken}/>
+          <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
+          <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s">
+            {buttonText}
+          </SecondaryButton>
+        </form>
+      )
+    }
   }
 }
 

@@ -48,6 +48,7 @@ en:
   card:
     add: "Add to my schedule"
     added: "Added to my schedule"
+    remove: "Remove from my schedule"
     show_detail: "Show detail"
     detail:
       title: "The details"

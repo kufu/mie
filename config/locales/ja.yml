@@ -17,6 +17,7 @@ ja:
   card:
     add: "スケジュールに追加する"
     added: "スケジュールに追加されています"
+    remove: "スケジュールから削除します"
     show_detail: "詳細を表示"
     detail:
       title: "トークの詳細"
