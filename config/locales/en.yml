@@ -73,8 +73,7 @@ en:
     invisible_text: "Make private"
     invisible_description: "This schedule will NOT be visible to anyone"
   terms_of_service:
-    description: ""
-    terms_of_service: ""
+    description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
   dialog:
     edit_title: "Edit the title"
     edit_memo: "Edit a note for \"%{title}\""

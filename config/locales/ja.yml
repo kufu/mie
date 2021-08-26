@@ -42,8 +42,7 @@ ja:
     invisible_text: "非公開"
     invisible_description: "公開されないよ"
   terms_of_service:
-    description: ""
-    terms_of_service: ""
+    description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR を利用するためには、下記の利用規約に同意する必要があります。予定を追加すると、規約に同意したとみなされます。"
   dialog:
     edit_title: "タイトルを編集"
     edit_memo: "「%{title}」のメモを更新"
