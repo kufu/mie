@@ -20,16 +20,24 @@ export const ScheduleTime: React.VFC<Props> = ({ time }) => {
   )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`
+
 const TimeRow = styled.div`
   display: flex;
   align-items: center;
 `
+
 const TimeText = styled.p`
-  font-size: 18px;
+  font-size: 19.2px;
   flex-shrink: 0;
   margin-right: 16px;
+  font-weight: 400;
 `
+
 const Hr = styled.hr`
   width: 100%;
   height: 1px;
@@ -41,4 +49,5 @@ const TimeZone = styled.p`
   font-size: 14px;
   font-weight: bold;
   color: #706D65;
+  text-align: left;
 `
