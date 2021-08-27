@@ -12,22 +12,29 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:one)
     sch = schedules(:one)
     plan = plans(:one)
-    speaker = sch.speaker
 
     expect = {
       title: sch.title,
       description: sch.description,
-      speakerName: sch.speaker.name,
-      thumbnailUrl: sch.speaker.thumbnail,
+      speakers: sch.speakers.map do |speaker|
+        {
+          speakerName: speaker.name,
+          thumbnailUrl: speaker.thumbnail
+        }
+      end,
       language: sch.language,
       details: {
         body: {
-          thumbnailUrl: speaker.thumbnail,
-          speaker: speaker.name,
-          username: speaker.handle,
-          aboutSpeaker: speaker.profile,
-          github: speaker.github,
-          twitter: speaker.twitter,
+          speakers: sch.speakers.map do |speaker|
+            {
+              thumbnailUrl: speaker.thumbnail,
+              speaker: speaker.name,
+              username: speaker.handle,
+              aboutSpeaker: speaker.profile,
+              github: speaker.github,
+              twitter: speaker.twitter
+            }
+          end,
           startTime: I18n.l(sch.start_at, format: :timetable),
           endTime: I18n.l(sch.end_at, format: :timetable),
           language: sch.language,
@@ -69,22 +76,29 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:one)
     sch = schedules(:four)
     plan = plans(:one)
-    speaker = sch.speaker
 
     expect = {
       title: sch.title,
       description: sch.description,
-      speakerName: sch.speaker.name,
-      thumbnailUrl: sch.speaker.thumbnail,
+      speakers: sch.speakers.map do |speaker|
+        {
+          speakerName: speaker.name,
+          thumbnailUrl: speaker.thumbnail
+        }
+      end,
       language: sch.language,
       details: {
         body: {
-          thumbnailUrl: speaker.thumbnail,
-          speaker: speaker.name,
-          username: speaker.handle,
-          aboutSpeaker: speaker.profile,
-          github: speaker.github,
-          twitter: speaker.twitter,
+          speakers: sch.speakers.map do |speaker|
+            {
+              thumbnailUrl: speaker.thumbnail,
+              speaker: speaker.name,
+              username: speaker.handle,
+              aboutSpeaker: speaker.profile,
+              github: speaker.github,
+              twitter: speaker.twitter
+            }
+          end,
           startTime: I18n.l(sch.start_at, format: :timetable),
           endTime: I18n.l(sch.end_at, format: :timetable),
           language: sch.language,
@@ -125,22 +139,29 @@ class ReactHelperTest < ActionView::TestCase
   test 'schedule_to_card_props_with_no_plan_args' do
     user = users(:one)
     sch = schedules(:one)
-    speaker = sch.speaker
 
     expect = {
       title: sch.title,
       description: sch.description,
-      speakerName: sch.speaker.name,
-      thumbnailUrl: sch.speaker.thumbnail,
+      speakers: sch.speakers.map do |speaker|
+        {
+          speakerName: speaker.name,
+          thumbnailUrl: speaker.thumbnail
+        }
+      end,
       language: sch.language,
       details: {
         body: {
-          thumbnailUrl: speaker.thumbnail,
-          speaker: speaker.name,
-          username: speaker.handle,
-          aboutSpeaker: speaker.profile,
-          github: speaker.github,
-          twitter: speaker.twitter,
+          speakers: sch.speakers.map do |speaker|
+            {
+              thumbnailUrl: speaker.thumbnail,
+              speaker: speaker.name,
+              username: speaker.handle,
+              aboutSpeaker: speaker.profile,
+              github: speaker.github,
+              twitter: speaker.twitter
+            }
+          end,
           startTime: I18n.l(sch.start_at, format: :timetable),
           endTime: I18n.l(sch.end_at, format: :timetable),
           language: sch.language,
@@ -171,22 +192,29 @@ class ReactHelperTest < ActionView::TestCase
     user = users(:two)
     sch = schedules(:one)
     plan = plans(:one)
-    speaker = sch.speaker
 
     expect = {
       title: sch.title,
       description: sch.description,
-      speakerName: sch.speaker.name,
-      thumbnailUrl: sch.speaker.thumbnail,
+      speakers: sch.speakers.map do |speaker|
+        {
+          speakerName: speaker.name,
+          thumbnailUrl: speaker.thumbnail
+        }
+      end,
       language: sch.language,
       details: {
         body: {
-          thumbnailUrl: speaker.thumbnail,
-          speaker: speaker.name,
-          username: speaker.handle,
-          aboutSpeaker: speaker.profile,
-          github: speaker.github,
-          twitter: speaker.twitter,
+          speakers: sch.speakers.map do |speaker|
+            {
+              thumbnailUrl: speaker.thumbnail,
+              speaker: speaker.name,
+              username: speaker.handle,
+              aboutSpeaker: speaker.profile,
+              github: speaker.github,
+              twitter: speaker.twitter
+            }
+          end,
           startTime: I18n.l(sch.start_at, format: :timetable),
           endTime: I18n.l(sch.end_at, format: :timetable),
           language: sch.language,

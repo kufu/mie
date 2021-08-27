@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule: one
+  speaker: johnny
+
+two:
+  schedule: two
+  speaker: kerry
+
+three:
+  schedule: three
+  speaker: nancy
+
+four:
+  schedule: four
+  speaker: henry
+
+five:
+  schedule: five
+  speaker: denny
+
+fix:
+  schedule: five
+  speaker: johnny

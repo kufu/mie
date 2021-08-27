@@ -24,8 +24,10 @@ export interface Props {
   title: string
   mode: Mode
   description: string
-  speakerName: string
-  thumbnailUrl: string
+  speakers: {
+    speakerName: string
+    thumbnailUrl: string
+  }[]
   language: Language
   details: Details
   form?: SubmitFormProps
@@ -60,7 +62,7 @@ export interface SubmitFormProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, speakerName, thumbnailUrl, language, memo, form, i18n, details } = props
+  const { title, mode, description, speakers, language, memo, form, i18n, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
 
@@ -94,10 +96,12 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
   return (
     <Card>
       <Speaker>
-        <Profile>
-          <SpeakerImage thumbnailUrl={thumbnailUrl} />
-          <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speakerName}</Text></MarginWrapper>
-        </Profile>
+        {speakers.map((speaker, index) =>
+          <Profile key={index}>
+            <SpeakerImage thumbnailUrl={speaker.thumbnailUrl} />
+            <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speakerName}</Text></MarginWrapper>
+          </Profile>
+        )}
         <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{language}</Text></MarginWrapper></Lng>
       </Speaker>
 

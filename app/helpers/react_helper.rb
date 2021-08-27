@@ -8,8 +8,12 @@ module ReactHelper
       title: schedule.title,
       mode: mode,
       description: schedule.description,
-      speakerName: schedule.speaker.name,
-      thumbnailUrl: schedule.speaker.thumbnail,
+      speakers: schedule.speakers.map do |speaker|
+        {
+          speakerName: speaker.name,
+          thumbnailUrl: speaker.thumbnail
+        }
+      end,
       language: schedule.language,
       details: create_schedule_detail_props(schedule),
       i18n: {
@@ -47,15 +51,18 @@ module ReactHelper
   end
 
   def create_schedule_detail_props(schedule)
-    speaker = schedule.speaker
     {
       body: {
-        thumbnailUrl: speaker.thumbnail,
-        speaker: speaker.name,
-        username: speaker.handle,
-        aboutSpeaker: speaker.profile,
-        github: speaker.github,
-        twitter: speaker.twitter,
+        speakers: schedule.speakers.map do |speaker|
+          {
+            thumbnailUrl: speaker.thumbnail,
+            speaker: speaker.name,
+            username: speaker.handle,
+            aboutSpeaker: speaker.profile,
+            github: speaker.github,
+            twitter: speaker.twitter
+          }
+        end,
         startTime: I18n.l(schedule.start_at, format: :timetable),
         endTime: I18n.l(schedule.end_at, format: :timetable),
         language: schedule.language,
@@ -88,7 +95,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
-    props[:uri] = url_for([plan, only_path: false])
+    props[:uri] = url_for([plan, { only_path: false }])
     props[:i18n] = plans_table_i18n
     props
   end

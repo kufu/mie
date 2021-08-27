@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Speaker < ApplicationRecord
-  has_many :schedules
+  has_many :schedule_speakers
+  has_many :schedules, through: :schedule_speakers
 
   validates :name, presence: true, length: { in: 1..100 }
   validates :handle, length: { in: 0..100 }

@@ -32,7 +32,6 @@ ActiveRecord::Base.transaction do
 
       event['talks'].each do |track_name, id|
         hash[id] = Schedule.new(
-          speaker: speakers_by_id[id],
           track_name: "Track#{track_name}",
           start_at: start_at,
           end_at: end_at
@@ -44,12 +43,14 @@ ActiveRecord::Base.transaction do
   YAML.load_file('db/seeds/presentations.yml').each do |id, presentation|
     schedule = schedules_by_id[id]
 
-    schedule.attributes = {
+    schedule.update!(
       title: presentation['title'],
       description: presentation['description'],
       language: presentation['language'].downcase
-    }
+    )
 
-    schedule.save!
+    presentation['speakers'].each do |speakers|
+      ScheduleSpeaker.create!(schedule: schedule, speaker: speakers_by_id[speakers['id']])
+    end
   end
 end
