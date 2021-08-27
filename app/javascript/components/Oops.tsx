@@ -6,6 +6,7 @@ interface Props {
   title: string
   description?: string
   noBorder?: boolean
+  children: React.ReactNode
 }
 
 export const Oops: React.VFC<Props> = (props) => {

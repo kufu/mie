@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Select } from 'smarthr-ui'
+import { LineUp, Select } from 'smarthr-ui'
 
 
 export interface Props {
@@ -23,22 +23,16 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
   }
 
   return (
-    <Container>
-      {props.i18n.label}
+    <LineUp as="label" gap="X3S" vAlign="center">
+      <span>{props.i18n.label}</span>
       <ResizedSelect
         value={current}
         options={props.options}
         onChange={changeLocaleHandler}
       />
-    </Container>
-  )
-}
-
-const Container = styled.div`
-  margin: 4px;
-  display: flex;
-  align-items: center;
-`
+    </LineUp>
+  );
+};
 
 const ResizedSelect = styled(Select)`
   height: 30px !important;

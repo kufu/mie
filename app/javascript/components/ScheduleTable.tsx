@@ -49,7 +49,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
             {groupedSchedules[currentKey].rows.map((row, index) => {
               return (
                 <TableRow key={index}>
-                  <TableBodyCell noSidePadding>
+                  <TableBodyCell noSidePadding as="th">
                     <ScheduleTime time={row.time}/>
                   </TableBodyCell>
                   {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
