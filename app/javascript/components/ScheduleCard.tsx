@@ -96,9 +96,9 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       <Speaker>
         <Profile>
           <SpeakerImage thumbnailUrl={thumbnailUrl} />
-          <MarginWrapper><Text weight="bold" color="TEXT_GREY" >{speakerName}</Text></MarginWrapper>
+          <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speakerName}</Text></MarginWrapper>
         </Profile>
-        <Lng><Text color="TEXT_GREY">Lang:</Text><MarginWrapper>{language}</MarginWrapper></Lng>
+        <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{language}</Text></MarginWrapper></Lng>
       </Speaker>
 
       <Contents>
@@ -115,7 +115,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       <Actions>
         { form && mode === "plan" ?
           <UpdateMemoButton>
-            <SecondaryButton prefix={<FaPencilAltIcon size="12"/>} size="s"
+            <SecondaryButton prefix={<FaPencilAltIcon size={12}/>} size="s"
                              onClick={() => setIsMemoEditing(true)}>{i18n.editMemo}</SecondaryButton>
             <UpdateDialog isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
                           handleAction={handleUpdateMemo} value={memo} i18n={i18n}/>
@@ -194,15 +194,18 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 
 const Card = styled(Base)`
   padding: 16px;
+  height: fit-content;
 `
 
 const Speaker = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 const Profile = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const MarginWrapper = styled.div`
@@ -223,6 +226,7 @@ const Contents = styled.div`
 
 const Title = styled(Heading)`
   margin: 8px 0;
+  line-height: 125%;
 `
 
 const Lng = styled.div`
