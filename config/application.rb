@@ -27,6 +27,11 @@ module Mie
     config.load_defaults 6.1
     config.middleware.use Rack::Locale
 
+    require 'i18n/backend/fallbacks'
+    I18n::Backend::Simple.include I18n::Backend::Fallbacks
+    I18n.available_locales = %i[en ja ja-jp]
+    I18n.fallbacks.map('ja-jp': :ja)
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
