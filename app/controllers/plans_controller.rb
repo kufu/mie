@@ -50,6 +50,7 @@ class PlansController < ApplicationController
 
   def set_plan
     @plan = params[:id] ? Plan.find(params[:id]) : Plan.find(params[:plan_id])
+    raise ActiveRecord::RecordNotFound if @plan.user != @user && !@plan.public?
   end
 
   def add_and_remove_plans
