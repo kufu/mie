@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Base, TabBar, TabItem, Text, PrimaryButton } from 'smarthr-ui'
+import { TabBar, TabItem, Text, ThemeProvider } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, SubmitFormProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
 import {ScheduleTime} from "./Shared/ScheduleTime";
 import { Oops } from './Oops'
+import createdTheme from "./Constants";
 
 type GroupedPlans = { [key: string]: Row[]}
 type Row = { time: string, schedule: CardProps, memo: string }
@@ -35,50 +36,52 @@ export const PlanTable: React.VFC<Props> = (props) => {
   }
 
   return (
-    <Wrapper>
-      <TabBar>
-        {Object.keys(groupedPlans).sort().map((date, index) => {
-          return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
-        })}
-      </TabBar>
-      <TableWrapper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
-              <TableHeadCell textCenter>{i18n.track}</TableHeadCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              groupedPlans[currentKey] ?
-              groupedPlans[currentKey].map((row, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableBodyCell noSidePadding as="th">
-                      <ScheduleTime time={row.time}/>
+    <ThemeProvider theme={createdTheme}>
+      <Wrapper>
+        <TabBar>
+          {Object.keys(groupedPlans).sort().map((date, index) => {
+            return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
+          })}
+        </TabBar>
+        <TableWrapper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
+                <TableHeadCell textCenter>{i18n.track}</TableHeadCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                groupedPlans[currentKey] ?
+                  groupedPlans[currentKey].map((row, index) => {
+                    return (
+                      <TableRow key={index}>
+                        <TableBodyCell noSidePadding as="th">
+                          <ScheduleTime time={row.time}/>
+                        </TableBodyCell>
+                        <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
+                      </TableRow>
+                    )
+                  })
+                  : <TableRow >
+                    <TableBodyCell colSpan={2} noSidePadding>
+                      <Oops title={i18n.noPlans} >
+                        <Text color="TEXT_GREY">{i18n.noPlansDesc}</Text>
+                      </Oops>
                     </TableBodyCell>
-                    <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
                   </TableRow>
-                )
-              })
-                : <TableRow >
-                  <TableBodyCell colSpan={2} noSidePadding>
-                    <Oops title={i18n.noPlans} >
-                      <Text color="TEXT_GREY">{i18n.noPlansDesc}</Text>
-                    </Oops>
-                  </TableBodyCell>
-                </TableRow>
-            }
-          </TableBody>
-        </Table>
-      </TableWrapper>
-      <SocialIcons>
-        <a href={"https://twitter.com/intent/tweet?text=&url=" + uri + "&hashtags=rubykaigi"} rel="nofollow" target="_blank">
-        <TwitterIcon />
-        </a>
-      </SocialIcons>
-    </Wrapper>
+              }
+            </TableBody>
+          </Table>
+        </TableWrapper>
+        <SocialIcons>
+          <a href={"https://twitter.com/intent/tweet?text=&url=" + uri + "&hashtags=rubykaigi"} rel="nofollow" target="_blank">
+            <TwitterIcon />
+          </a>
+        </SocialIcons>
+      </Wrapper>
+    </ThemeProvider>
   )
 }
 
@@ -94,7 +97,7 @@ const TableWrapper = styled.div`
 const SocialIcons = styled.div`
   position: fixed;
   width: 72px;
-  left: 1312px;
+  right: 16px;
   bottom: 16px;
 `
 

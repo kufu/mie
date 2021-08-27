@@ -22,16 +22,14 @@ interface BodyProps {
     github: string | null
     twitter: string | null
   }[]
-  startTime: string
-  endTime: string
+  startEndTime: string
   language: string
   description: string
   i18n: {
     speaker: string
     username: string
     aboutSpeaker: string
-    startTime: string
-    endTime: string
+    startEndTime: string
     language: string
     description: string
   }
@@ -53,7 +51,7 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
 }
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
-  const { speakers, startTime, endTime, language, description, i18n } = props
+  const { speakers, startEndTime, language, description, i18n } = props
 
   return (
     <Body>
@@ -91,14 +89,10 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
         </React.Fragment>
       )}
       <Row>
-        <DefinitionList layout="triple" items={[
+        <DefinitionList layout="double" items={[
           {
-            term: i18n.startTime,
-            description: startTime
-          },
-          {
-            term: i18n.endTime,
-            description: endTime
+            term: i18n.startEndTime,
+            description: startEndTime
           },
           {
             term: i18n.language,

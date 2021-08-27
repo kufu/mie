@@ -57,8 +57,7 @@ en:
       speaker: "Speaker"
       username: "UserName"
       about_speaker: "Description about the speaker"
-      start_time: "Start time (%{zone})"
-      end_time: "End time (%{zone})"
+      start_end_time: "Start...End time (%{zone})"
       language: "Language"
       description: "Description about the talk"
   description:
@@ -102,5 +101,5 @@ en:
 
   time:
     formats:
-      default: "%Y-%m-%d %H:%M:%S"
+      default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"

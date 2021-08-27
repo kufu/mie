@@ -26,8 +26,7 @@ ja:
       speaker: "スピーカー"
       username: "ソーシャルID"
       about_speaker: "プロフィール"
-      start_time: "開始時間 (%{zone})"
-      end_time: "終了時間 (%{zone})"
+      start_end_time: "開始/終了 (%{zone})"
       language: "言語"
       description: "トークの詳細"
   description:
@@ -71,5 +70,5 @@ ja:
 
   time:
     formats:
-      default: "%Y-%m-%d %H:%M:%S"
+      default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"

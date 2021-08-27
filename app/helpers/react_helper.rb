@@ -63,16 +63,14 @@ module ReactHelper
             twitter: speaker.twitter
           }
         end,
-        startTime: I18n.l(schedule.start_at, format: :timetable),
-        endTime: I18n.l(schedule.end_at, format: :timetable),
+        startEndTime: "#{I18n.l(schedule.start_at, format: :default)} - #{I18n.l(schedule.end_at, format: :timetable)}",
         language: schedule.language,
         description: schedule.description,
         i18n: {
           speaker: I18n.t('card.detail.speaker'),
           username: I18n.t('card.detail.username'),
           aboutSpeaker: I18n.t('card.detail.about_speaker'),
-          startTime: I18n.t('card.detail.start_time', zone: schedule.start_at.zone),
-          endTime: I18n.t('card.detail.end_time', zone: schedule.start_at.zone),
+          startEndTime: I18n.t('card.detail.start_end_time', zone: schedule.start_at.zone),
           language: I18n.t('card.detail.language'),
           description: I18n.t('card.detail.description')
         }

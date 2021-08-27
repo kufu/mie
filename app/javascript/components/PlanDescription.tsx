@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import {Base, Heading, TextButton, FaPencilAltIcon, DialogBase, ActionDialog, Textarea, HeadlineArea} from 'smarthr-ui'
+import {Base, Heading, TextButton, FaPencilAltIcon, DialogBase, ActionDialog, Textarea, Text} from 'smarthr-ui'
 
 interface Props {
   description: string
@@ -59,10 +59,8 @@ export const PlanDescription: React.VFC<Props> = (props) => {
   return (
     <Container>
       <DescriptionBase>
-        <HeadlineArea
-          heading={{ children: i18n.title, tag: "h1"}}
-          description={i18n.notice}
-        />
+        <Heading type="subBlockTitle" tag="h1">{i18n.title}</Heading>
+        <Text size="XS" color="TEXT_GREY">{i18n.notice}</Text>
         <TextContainer>
           {description}
           {form ?
@@ -105,7 +103,7 @@ const Container = styled.div`
 `
 
 const TextContainer = styled.div`
-  margin: 8px;
+  margin: 8px 0;
 `
 
 const DialogBody = styled(DialogBase)`
