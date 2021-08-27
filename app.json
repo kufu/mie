@@ -1,0 +1,47 @@
+{
+  "name": "mie",
+  "description": "mieだよ〜",
+  "website": "https://rubykaigi.smarthr.co.jp/2021/",
+  "repository": "https://github.com/kufu/mie",
+  "success_url": "/2021",
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "5"
+    },
+    "WKHTMLTOPDF_DOWNLOAD_URL": {
+      "description": "font",
+      "value": "https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.focal_amd64.deb"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "image": "heroku/ruby",
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    },
+    {
+      "plan": "heroku-redis"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/chap/wkhtmltopdf-heroku-18-buildpack"
+    }
+  ]
+}
