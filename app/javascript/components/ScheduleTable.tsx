@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { TabBar, TabItem } from 'smarthr-ui'
+import { TabBar, TabItem, ThemeProvider } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
 import { ScheduleTime } from './Shared/ScheduleTime';
+import createdTheme from "./Constants";
 
 type GroupedSchedules = { [key: string]: ScheduleTable}
 type ScheduleTable = {trackList: TrackList, rows: Row[]}
@@ -31,35 +32,37 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
   }
 
   return (
-    <Wrapper>
-      <TabBar>
-        {Object.keys(groupedSchedules).sort().map((date, index) => {
-          return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
-        })}
-      </TabBar>
-      <TableWrapper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
-              {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {groupedSchedules[currentKey].rows.map((row, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableBodyCell noSidePadding as="th">
-                    <ScheduleTime time={row.time}/>
-                  </TableBodyCell>
-                  {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableWrapper>
-    </Wrapper>
+    <ThemeProvider theme={createdTheme}>
+      <Wrapper>
+        <TabBar>
+          {Object.keys(groupedSchedules).sort().map((date, index) => {
+            return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
+          })}
+        </TabBar>
+        <TableWrapper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
+                {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {groupedSchedules[currentKey].rows.map((row, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableBodyCell noSidePadding as="th">
+                      <ScheduleTime time={row.time}/>
+                    </TableBodyCell>
+                    {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableWrapper>
+      </Wrapper>
+    </ThemeProvider>
   )
 }
 

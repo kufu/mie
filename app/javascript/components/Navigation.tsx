@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {AppNavi, Text, SmartHRLogo, FaBullhornIcon, FaCalendarAltIcon} from 'smarthr-ui'
+import {AppNavi, Text, SmartHRLogo, FaBullhornIcon, FaCalendarAltIcon, ThemeProvider} from 'smarthr-ui'
 
 import LocaleSelector, { Props as LocaleSelectorProps } from './LocaleSelector'
+import createdTheme from './Constants'
 
 interface Props {
   current: string
@@ -22,8 +23,9 @@ interface Props {
 
 export const Navigation: React.FC<Props> = (props) => {
   const { current, locales, i18n } = props
+
   return (
-    <>
+    <ThemeProvider theme={createdTheme}>
       <Nav>
         <Container>
           <Text weight="bold" size="L">RubyKaigi Takeout 2021</Text>
@@ -43,7 +45,7 @@ export const Navigation: React.FC<Props> = (props) => {
       >
         <Child><LocaleSelector {...locales} /></Child>
       </AppNavi>
-    </>
+    </ThemeProvider>
   )
 }
 
