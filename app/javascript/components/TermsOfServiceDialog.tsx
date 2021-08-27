@@ -35,7 +35,7 @@ export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
       <DialogBody>
         <Text>{i18n.description}</Text>
         <ServiceOfTerms>
-          <span dangerouslySetInnerHTML={{__html: i18n.termsOfService}}></span>
+          <Text size="S" leading="RELAXED"><span dangerouslySetInnerHTML={{__html: i18n.termsOfService}}></span></Text>
         </ServiceOfTerms>
       </DialogBody>
     </ActionDialog>
@@ -45,9 +45,14 @@ export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
 const DialogBody = styled(DialogBase)`
   width: 656px;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `
 
-const ServiceOfTerms = styled.div`
+const ServiceOfTerms = styled.div`    
+  background-color: #F8F7F6;
+  padding: 24px;
   height: 400px;
   width: 100%;
   overflow: auto;

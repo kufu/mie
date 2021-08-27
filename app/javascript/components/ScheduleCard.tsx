@@ -107,7 +107,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         { mode === "plan" ?
           <MemoArea>
             <MemoHead type="subSubBlockTitle">Memo</MemoHead>
-            <Memo>{memo}</Memo>
+            <Memo><Text size="S">{memo}</Text></Memo>
           </MemoArea>
           : null
         }
