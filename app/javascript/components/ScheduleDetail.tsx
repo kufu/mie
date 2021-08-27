@@ -14,12 +14,14 @@ export interface Props {
 }
 
 interface BodyProps {
-  thumbnailUrl: string
-  speaker: string
-  username: string
-  aboutSpeaker: string
-  github: string | null
-  twitter: string | null
+  speakers: {
+    thumbnailUrl: string
+    speaker: string
+    username: string
+    aboutSpeaker: string
+    github: string | null
+    twitter: string | null
+  }[]
   startTime: string
   endTime: string
   language: string
@@ -51,39 +53,43 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
 }
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
-  const { thumbnailUrl, speaker, username, aboutSpeaker, github, twitter, startTime, endTime, language, description, i18n } = props
+  const { speakers, startTime, endTime, language, description, i18n } = props
 
   return (
     <Body>
-      <Row>
-        <FlexBox>
-          <ImageBox thumbnailUrl={thumbnailUrl} />
-          <Profile>
-            <DefinitionList layout="double" items={[
+      {speakers.map((speaker, index) =>
+        <React.Fragment key={index}>
+          <Row>
+            <FlexBox>
+              <ImageBox thumbnailUrl={speaker.thumbnailUrl} />
+              <Profile>
+                <DefinitionList layout="double" items={[
+                  {
+                    term: i18n.speaker,
+                    description: speaker.speaker
+                  },
+                  {
+                    term: i18n.username,
+                    description: speaker.username
+                  }
+                  ]} />
+              </Profile>
+              <Icons>
+                { speaker.github ? <IconBox><a href={"https://github.com/" + speaker.github} target="_blank"><GitHubIcon /></a></IconBox> : null }
+                { speaker.twitter ? <IconBox><a href={"https://twitter.com/" + speaker.twitter} target="_blank"><TwitterIcon /></a></IconBox> : null }
+              </Icons>
+            </FlexBox>
+          </Row>
+          <Row>
+            <DefinitionList layout="single" items={[
               {
-                term: i18n.speaker,
-                description: speaker
-              },
-              {
-                term: i18n.username,
-                description: username
+                term: i18n.aboutSpeaker,
+                description: speaker.aboutSpeaker
               }
             ]} />
-          </Profile>
-          <Icons>
-            { github ? <IconBox><a href={"https://github.com/" + github} target="_blank"><GitHubIcon /></a></IconBox> : null }
-            { twitter ? <IconBox><a href={"https://twitter.com/" + twitter} target="_blank"><TwitterIcon /></a></IconBox> : null }
-          </Icons>
-        </FlexBox>
-      </Row>
-      <Row>
-        <DefinitionList layout="single" items={[
-          {
-            term: i18n.aboutSpeaker,
-            description: aboutSpeaker
-          }
-        ]} />
-      </Row>
+          </Row>
+        </React.Fragment>
+      )}
       <Row>
         <DefinitionList layout="triple" items={[
           {

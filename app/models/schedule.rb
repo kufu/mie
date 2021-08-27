@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Schedule < ApplicationRecord
-  belongs_to :speaker
+  has_many :schedule_speakers
+  has_many :speakers, through: :schedule_speakers
   has_many :plan_schedules
 
   enum language: { en: 0, ja: 1 }
