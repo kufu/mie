@@ -97,7 +97,7 @@ const TableWrapper = styled.div`
 const SocialIcons = styled.div`
   position: fixed;
   width: 72px;
-  left: 1312px;
+  right: 16px;
   bottom: 16px;
 `
 
