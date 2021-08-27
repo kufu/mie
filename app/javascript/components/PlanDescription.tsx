@@ -103,7 +103,7 @@ const Container = styled.div`
 `
 
 const TextContainer = styled.div`
-  margin: 8px;
+  margin: 8px 0;
 `
 
 const DialogBody = styled(DialogBase)`
