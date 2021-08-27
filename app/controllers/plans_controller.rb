@@ -67,6 +67,7 @@ class PlansController < ApplicationController
       ps.save!
     else
       flash[:error] = @plan.errors.messages[:schedules]
+      redirect_to schedules_path && return
     end
     @plan.update!(initial: false)
     ps.schedule
