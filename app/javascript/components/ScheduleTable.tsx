@@ -33,7 +33,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
   return (
     <Wrapper>
       <TabBar>
-        {Object.keys(groupedSchedules).map((date, index) => {
+        {Object.keys(groupedSchedules).sort().map((date, index) => {
           return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
