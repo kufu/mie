@@ -20,11 +20,10 @@ module ReactHelper
         close: I18n.t('button.close')
       }
     }
-
-    props[:memo] = plan.plan_schedules.find_by(schedule: schedule).memo || '' if plan&.schedules&.include?(schedule)
+    include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
+    props[:memo] = include_plan&.memo || ''
 
     if plan && plan.user == user
-      include_plan = plan.schedules.include?(schedule)
       method = 'patch'
       action = plan_path(plan)
 
@@ -37,7 +36,7 @@ module ReactHelper
         buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
         mode: mode,
         i18n: {
-          added: plan.schedules.include?(schedule) ? I18n.t('card.added') : nil
+          added: include_plan ? I18n.t('card.added') : nil
         }
       }
 
