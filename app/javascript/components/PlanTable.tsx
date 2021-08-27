@@ -37,7 +37,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
   return (
     <Wrapper>
       <TabBar>
-        {Object.keys(groupedPlans).map((date, index) => {
+        {Object.keys(groupedPlans).sort().map((date, index) => {
           return <TabItem key={index} id={date} onClick={() => {handleTabClick(date)}} selected={date === currentKey}>{date}</TabItem>
         })}
       </TabBar>
