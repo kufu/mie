@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { LineUp, Select } from 'smarthr-ui'
+import { LineUp, Select, Heading } from 'smarthr-ui'
 
 
 export interface Props {
@@ -24,7 +24,7 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
 
   return (
     <LineUp as="label" gap="X3S" vAlign="center">
-      <span>{props.i18n.label}</span>
+      <Heading type="subBlockTitle">{props.i18n.label}</Heading>
       <ResizedSelect
         value={current}
         options={props.options}
