@@ -42,7 +42,7 @@ class SpeakerTest < ActiveSupport::TestCase
     s = speakers(:johnny)
 
     s.profile = ''
-    assert_not s.valid?
+    assert s.valid?
 
     s.profile = 'Rocker boy'
     assert s.valid?
