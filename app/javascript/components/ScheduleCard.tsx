@@ -168,7 +168,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   } else {
     if (i18n.added) {
       if (mode == "list") {
-        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S">{i18n.added}</Text></MarginWrapper></AddedText>)
+        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{i18n.added}</Text></MarginWrapper></AddedText>)
       } else {
         return (
           <form action={action} acceptCharset="UTF-8" method="post">
