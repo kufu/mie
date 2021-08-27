@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {SmartHRLogo, Text, TextLink} from 'smarthr-ui'
+import {SmartHRLogo as shrSmartHRLogo, Text, TextLink} from 'smarthr-ui'
 
 export const Top: React.VFC<{}> = () => {
   return (
@@ -15,16 +15,17 @@ export const Top: React.VFC<{}> = () => {
         <ColorLine color="#EBE0CE" />
         <ColorLine color="#D7D165" />
       </ColorLines>
-      <PowerdBy>
-        <Text>powerd by <SmartHRLogo width="95" height="16" fill="#00C4CC" /></Text>
-      </PowerdBy>
+      <PoweredBy>
+        <Text>powered by</Text>
+        <SmartHRLogo width={95} height={16} fill="#00C4CC" />
+      </PoweredBy>
       <LinkArea>
         <p><TextLink href={"https://rubykaigi.org/2021-takeout"} target="_blank">The official website of RubyKaigi 2021</TextLink></p>
         <p><TextLink href={"https://twitter.com/rubykaigi"} target="_blank"><TwitterLogo /> Twitter</TextLink></p>
         <p><TextLink href={"https://smarthr.co.jp/"} target="_blank">SmartHR</TextLink></p>
       </LinkArea>
       <SmartHRUIArea>
-        <Text>This web site is </Text><SmartHRUIButton>(almost) Made with <TextLink href={"https://www.figma.com/community/file/978607227374353992"} target="_blank">SmartHR UI</TextLink>♥</SmartHRUIButton>
+        <Text>This website is </Text><SmartHRUIButton>(almost) Made with <TextLink href={"https://www.figma.com/community/file/978607227374353992"} target="_blank">SmartHR UI</TextLink></SmartHRUIButton>
       </SmartHRUIArea>
     </Container>
   )
@@ -53,8 +54,16 @@ const ColorLine = styled.div`
   height: 4px;
 `
 
-const PowerdBy = styled.div`
+const PoweredBy = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
   margin 32px 0;
+`
+
+const SmartHRLogo = styled(shrSmartHRLogo)`
+  margin-bottom: 2px;
 `
 
 const LinkArea = styled.div`
@@ -69,7 +78,7 @@ const SmartHRUIArea = styled.div`
 
 const SmartHRUIButton = styled.div`
   margin-left: 8px;
-  padding: 8px;
+  padding: 12px;
   background: #FFFFFF;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 6px;

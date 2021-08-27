@@ -27,12 +27,14 @@ export const Navigation: React.FC<Props> = (props) => {
       <Nav>
         <Container>
           <Text weight="bold" size="L">RubyKaigi Takeout 2021</Text>
-          <MarginWrapper>
-            <Text>Schedule.select powerd by</Text>
-          </MarginWrapper>
-          <MarginWrapper>
-            <SmartHRLogo width="95" height="16" fill="#00C4CC" />
-          </MarginWrapper>
+          <CenteredWrapper>
+            <MarginWrapper>
+              <Text>Schedule.select powered by</Text>
+            </MarginWrapper>
+            <MarginWrapper>
+              <SmartHRLogo width="95" height="16" fill="#00C4CC" />
+            </MarginWrapper>
+          </CenteredWrapper>
         </Container>
       </Nav>
       <AppNavi
@@ -91,6 +93,11 @@ const Container = styled.div`
   flex-direction: row;
   margin: 0 16px;
   color: #FFF;
+`
+
+const CenteredWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const MarginWrapper = styled.div`

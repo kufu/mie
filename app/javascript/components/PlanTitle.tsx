@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-import { FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
+import { Button, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
 import UpdateDialog from "./Shared/UpdateDialog";
 
 interface Props {
@@ -51,7 +51,7 @@ export const PlanTitle: React.VFC<Props> = (props) => {
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
       {form ?
         <MarginWrapper>
-          <SecondaryButton prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
+          <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
           <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
                         value={title} i18n={form.i18n}/>
         </MarginWrapper>
@@ -64,6 +64,7 @@ export const PlanTitle: React.VFC<Props> = (props) => {
 const Container = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
 `
 
 const MarginWrapper = styled.div`
