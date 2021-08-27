@@ -99,7 +99,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         {speakers.map((speaker, index) =>
           <Profile key={index}>
             <SpeakerImage thumbnailUrl={speaker.thumbnailUrl} />
-            <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speakerName}</Text></MarginWrapper>
+            <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speaker.speakerName}</Text></MarginWrapper>
           </Profile>
         )}
         <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{language}</Text></MarginWrapper></Lng>
