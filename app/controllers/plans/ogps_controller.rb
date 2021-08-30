@@ -2,7 +2,7 @@ class Plans::OgpsController < ApplicationController
   before_action :set_plan
 
   def show
-    send_data IMGKit.new(get_html(@plan.description), quality: 20, width: 800).to_img(:png), type: 'image/jpeg', disposition: 'inline'
+    send_data IMGKit.new(get_html(@plan.description), quality: 20, width: 800).to_img(:png), type: 'image/png', disposition: 'inline'
   end
 
   private
