@@ -149,6 +149,7 @@ module ReactHelper
       title: plan.title,
       visible: plan.public?,
       i18n: {
+        label: I18n.t(plan.public? ? "settings.visible" : "settings.invisible"),
         edit: I18n.t('button.edit')
       }
     }
@@ -185,7 +186,7 @@ module ReactHelper
   def create_setting_button_props(plan)
     props = {}
     props[:visible] = plan.public
-    props[:i18n] = setting_button_i18n
+    props[:i18n] = setting_button_i18n(plan.public)
 
     method = 'patch'
     action = plan_path(plan)
@@ -237,9 +238,12 @@ module ReactHelper
     props = table_array.map do |k, v|
       track_list = v.first.compact
       rows = v[1..].map do |s|
-        { time: s.first, schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) } }
+        { time: s.first,
+          schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) },
+          sortKey: s.second.start_at.to_i
+        }
       end
-      [k, { trackList: track_list, rows: rows }]
+      [k, { trackList: track_list, rows: rows.sort_by { |r| r[:sortKey] } }]
     end
 
     props.to_h
@@ -255,10 +259,11 @@ module ReactHelper
         {
           time: time,
           schedule: schedule_to_card_props(schedules.first, plan, user, 'plan'),
-          memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
+          memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo,
+          sortKey: schedules.first.start_at.to_i
         }
       end
-      [k, rows]
+      [k, rows.sort_by { |r| r[:sortKey] }]
     end
 
     props.to_h
@@ -321,11 +326,11 @@ module ReactHelper
     }
   end
 
-  def setting_button_i18n
+  def setting_button_i18n(visibility)
     {
       settings: I18n.t('button.settings'),
       changeVisibility: I18n.t('settings.change_visibility'),
-      visibilityDesc: I18n.t('settings.visibility_description'),
+      visibilityDesc: I18n.t('settings.visibility_description', current:  I18n.t(visibility ? "settings.visible" : "settings.invisible")),
       setPassword: I18n.t('settings.set_password'),
       visibleText: I18n.t('settings.visible_text'),
       visibleDesc: I18n.t('settings.visible_description'),

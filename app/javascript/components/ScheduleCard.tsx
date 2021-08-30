@@ -137,6 +137,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, i18n } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
 
   const acceptHandler = () => {
     const body = {
@@ -156,6 +157,10 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
     })
   }
 
+  const handleButtonClick = () => {
+    setIsClicked(true)
+  }
+
   if (initial) {
     return (
       <>
@@ -171,11 +176,11 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{i18n.added}</Text></MarginWrapper></AddedText>)
       } else {
         return (
-          <form action={action} acceptCharset="UTF-8" method="post">
+          <form action={action} acceptCharset="UTF-8" method="post" onSubmit={handleButtonClick}>
             <input type="hidden" name="_method" value="patch"/>
             <input type="hidden" name="authenticity_token" value={authenticityToken}/>
             <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
-            <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s">
+            <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked}>
               <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
             </SecondaryButton>
           </form>
@@ -183,11 +188,11 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       }
     } else {
       return (
-        <form action={action} acceptCharset="UTF-8" method="post">
+        <form action={action} acceptCharset="UTF-8" method="post" onSubmit={handleButtonClick}>
           <input type="hidden" name="_method" value="patch"/>
           <input type="hidden" name="authenticity_token" value={authenticityToken}/>
           <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
-          <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s">
+          <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked}>
             <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
           </SecondaryButton>
         </form>
