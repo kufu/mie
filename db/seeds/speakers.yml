@@ -234,15 +234,15 @@ speakers:
     github_id: shioimm
     twitter_id: coe401_
     gravatar_hash: 5b3338b3676d4f7091a575e584f3a4f4
-  Schwad:
-    id: Schwad
+  schwad4hd14:
+    id: schwad4hd14
     name: Nick Schwaderer
     bio: Nick is a Senior Production Engineer at Shopify. He digs into Ruby lore frequently
       with the PastRubies newsletter. Nick has worked on projects with Ruby to help
       forecast pain for individuals with chronic illness and assist in communications
       during a natural disaster.
-    github_id: Schwad
-    twitter_id: 
+    github_id: schwad
+    twitter_id: schwad4hd14
     gravatar_hash: e359851f039290677597df1f7d88525c
   pink_bangbi:
     id: pink_bangbi
@@ -317,7 +317,7 @@ speakers:
     id: udzura
     name: Uchio KONDO
     bio: |-
-      A Plain-Old Rubyist. ex-local organizer of RubyKaigi 2019. Creator of yao(yet Another OpenStack client for Ruby), Haconiwa(mruby-made container), RbBCC(BPF SDK for Ruby) and Purua(Pure Rust implementation-to-be of Lua).
+      A Plain-Old Rubyist, ex-local organizer of RubyKaigi 2019. Creator of Haconiwa, RbBCC and Purua.
       Lives in Fukuoka - the "coast" city of "west" Japan, works at GMO Pepabo, Inc. as a DataOps/Dev Productivity Engineer.
       Interests: Systems Programming, Linux Kernel, Containers, Rust and mruby.
       Big fan of Duolingo (:es: :fi: :ko: :zh: learner, diamond leaguer), Zumba freak.

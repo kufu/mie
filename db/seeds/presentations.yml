@@ -16,7 +16,7 @@ mametter:
 k0kubun:
   title: Why Ruby's JIT was slow
   type: presentation
-  language: EN
+  language: EN & JA
   description: |-
     In Ruby 2.6, we started to use a JIT compiler architecture called "MJIT", which uses a C compiler to generate native code. While it achieved Ruby 3x3 in one benchmark, we had struggled to optimize web application workloads like Rails with MJIT. The good news is we recently figured out why.
 
@@ -50,7 +50,7 @@ koic:
     Through this talk, you will know about benefits and considerations for upgrading RuboCop.
   speakers:
   - id: koic
-Schwad:
+schwad4hd14:
   title: Ruby Archaeology
   type: presentation
   language: EN
@@ -63,7 +63,7 @@ Schwad:
     \n* _And for the brave_: how can you set up an environment to run Ruby 1.8 code
     from ~2008 on a modern machine?"
   speakers:
-  - id: Schwad
+  - id: schwad4hd14
 ko1:
   title: The Art of Execution Control for Ruby's Debugger
   type: presentation
