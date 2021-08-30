@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
   def create_and_set_user
     @user = User.create!
     session[:user_id] = @user.id
+    session[:locale] = 'Etc/UTC'
     @user
   end
 
