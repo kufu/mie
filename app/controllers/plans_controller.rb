@@ -34,6 +34,9 @@ class PlansController < ApplicationController
       flash[:error] = I18n.t('errors.password_incorrect')
       head :unauthorized
     end
+  rescue
+    flash[:error] = I18n.t('errors.password_incorrect')
+    head :unauthorized
   end
 
   def create
