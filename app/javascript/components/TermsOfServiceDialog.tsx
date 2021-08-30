@@ -22,15 +22,25 @@ interface Props {
 
 export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
   const { actionHandler, closeHandler, isOpen, i18n } = props
+  const [isActiveClicked, setIsActiveClicked] = useState(false)
+  const [responseMessage, setResponseMessage] = useState<string | null>(null)
+
+  const handleActiveClick = () => {
+    setIsActiveClicked(true)
+    setResponseMessage("processing")
+    actionHandler()
+  }
 
   return (
     <ActionDialog
       title={i18n.title}
       closeText={i18n.close}
       actionText={i18n.accept}
-      onClickAction={actionHandler}
+      onClickAction={handleActiveClick}
       onClickClose={closeHandler}
       isOpen={isOpen}
+      actionDisabled={isActiveClicked}
+      responseMessage={responseMessage}
     >
       <DialogBody>
         <Text>{i18n.description}</Text>
