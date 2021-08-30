@@ -26,6 +26,7 @@ module ReactHelper
     }
     include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
     props[:memo] = include_plan&.memo || ''
+    props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
 
     if plan && plan.user == user
       method = 'patch'
@@ -101,6 +102,7 @@ module ReactHelper
   def create_plan_description_props(plan, user)
     props = {}
     props[:description] = plan.description
+    props[:maxLength] = Plan.validators_on(:description).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
     props[:i18n] = plan_description_i18n
 
     if user.plans.include?(plan)
@@ -147,6 +149,7 @@ module ReactHelper
   def create_plan_title_props(plan, user)
     props = {
       title: plan.title,
+      maxLength: Plan.validators_on(:title).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum],
       visible: plan.public?,
       i18n: {
         label: I18n.t(plan.public? ? "settings.visible" : "settings.invisible"),

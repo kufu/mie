@@ -39,9 +39,9 @@ ja:
     change_visibility: "公開設定"
     visibility_description: "現在の公開設定は %{current} です"
     visible_text: "公開"
-    visible_description: "この予定は、リンクを知っているすべての人が見ることが出来ます"
+    visible_description: "この予定は、リンクを知っているすべての人が閲覧できます"
     invisible_text: "非公開"
-    invisible_description: "この予定を見ることができるのはあなただけです"
+    invisible_description: "この予定を閲覧できるのはあなただけです"
     visible: "公開"
     invisible: "非公開"
   terms_of_service:

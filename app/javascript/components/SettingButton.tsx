@@ -9,8 +9,10 @@ import {
   Input,
   RadioButtonNew,
   FormGroup,
-  Text
+  Text,
+  ThemeProvider
 } from 'smarthr-ui'
+import createdTheme from "./Constants";
 
 interface Props {
   visible: boolean
@@ -71,7 +73,7 @@ export const SettingButton: React.VFC<Props> = (props) => {
   }
 
   return (
-    <>
+    <ThemeProvider theme={createdTheme}>
       <SecondaryButton size="s" prefix={<FaCogIcon size={11} />} onClick={() => setIsDialogOpen(true)}>
         {i18n.settings}
       </SecondaryButton>
@@ -121,7 +123,7 @@ export const SettingButton: React.VFC<Props> = (props) => {
           </Forms>
         </DialogBody>
       </ActionDialog>
-    </>
+    </ThemeProvider>
   )
 }
 

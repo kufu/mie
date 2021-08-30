@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import {Base, Heading, TextButton, FaPencilAltIcon, DialogBase, ActionDialog, Textarea, Text} from 'smarthr-ui'
+import {Base, Heading, TextButton, FaPencilAltIcon, Text} from 'smarthr-ui'
+import UpdateDialog from "./Shared/UpdateDialog";
 
 interface Props {
   description: string
+  maxLength?: number
   form?: SubmitForm
   i18n: {
     title: string
@@ -26,16 +28,10 @@ interface SubmitForm {
 
 
 export const PlanDescription: React.VFC<Props> = (props) => {
-  const { description, form, i18n } = props
-
+  const { description, maxLength, form, i18n } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [desc, setDesc] = useState(description)
 
-  const handleTextChange = (text) => {
-    setDesc(text)
-  }
-
-  const handleAction = () => {
+  const handleAction = (desc) => {
     const body = {
       _method: form.method,
       authenticity_token: form.authenticityToken,
@@ -49,11 +45,6 @@ export const PlanDescription: React.VFC<Props> = (props) => {
     }).then(r => {
       document.location.reload()
     })
-  }
-
-  const handleClose = () => {
-    setDesc(description)
-    setIsDialogOpen(false)
   }
 
   return (
@@ -72,25 +63,8 @@ export const PlanDescription: React.VFC<Props> = (props) => {
         </TextContainer>
       </DescriptionBase>
       {form ?
-        <ActionDialog
-          title={form.i18n.title}
-          actionText={form.i18n.save}
-          closeText={form.i18n.close}
-          isOpen={isDialogOpen}
-          onClickOverlay={() => setIsDialogOpen(false)}
-          onPressEscape={() => setIsDialogOpen(false)}
-          onClickAction={() => handleAction()}
-          onClickClose={() => handleClose()}
-        >
-          <DialogBody>
-            <Textarea
-              width="100%"
-              onChange={(e) => handleTextChange(e.target.value)}
-            >
-              {desc}
-            </Textarea>
-          </DialogBody>
-        </ActionDialog>
+        <UpdateDialog isOpen={isDialogOpen} handleClose={() => setIsDialogOpen(false)} handleAction={handleAction}
+                      maxLength={maxLength} value={description} i18n={form.i18n}/>
         : null
       }
     </Container>
@@ -104,11 +78,6 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   margin: 8px 0;
-`
-
-const DialogBody = styled(DialogBase)`
-  width: 656px;
-  padding: 24px;
 `
 
 const DescriptionBase = styled(Base)`

@@ -32,6 +32,7 @@ export interface Props {
   details: Details
   form?: SubmitFormProps
   memo?: string
+  memoMaxLength: number
   i18n: {
     showDetail: string
     editMemo: string
@@ -62,7 +63,7 @@ export interface SubmitFormProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, speakers, language, memo, form, i18n, details } = props
+  const { title, mode, description, speakers, language, memo, memoMaxLength, form, i18n, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
 
@@ -122,7 +123,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
             <SecondaryButton prefix={<FaPencilAltIcon size={12}/>} size="s"
                              onClick={() => setIsMemoEditing(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.editMemo}</Text></SecondaryButton>
             <UpdateDialog isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
-                          handleAction={handleUpdateMemo} value={memo} i18n={i18n}/>
+                          handleAction={handleUpdateMemo} maxLength={memoMaxLength} value={memo} i18n={i18n}/>
           </UpdateMemoButton>
           : null
         }

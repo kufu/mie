@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-import { Button, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
+import { Text, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
 import UpdateDialog from "./Shared/UpdateDialog";
 
 interface Props {
   title: string
+  maxLength: number
   visible: boolean
   form?: SubmitForm
   i18n: {
@@ -26,7 +27,7 @@ interface SubmitForm {
 }
 
 export const PlanTitle: React.VFC<Props> = (props) => {
-  const { title, visible, form, i18n } = props
+  const { title, maxLength, visible, form, i18n } = props
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -52,9 +53,11 @@ export const PlanTitle: React.VFC<Props> = (props) => {
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
       {form ?
         <MarginWrapper>
-          <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
+          <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>
+            <Text size="S" weight="bold" color="TEXT_BLACK">{i18n.edit}</Text>
+          </SecondaryButton>
           <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
-                        value={title} i18n={form.i18n}/>
+                        maxLength={maxLength} value={title} i18n={form.i18n}/>
         </MarginWrapper>
         : null
       }
