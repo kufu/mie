@@ -55,9 +55,12 @@ export const PlanDescription: React.VFC<Props> = (props) => {
               <Text size="S" color="TEXT_GREY">{i18n.notice}</Text>
             </Stack>
 
-            <SecondaryButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
-              <Text size="S" weight="bold">{i18n.button}</Text>
-            </SecondaryButton>
+            {form ?
+              <SecondaryButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
+                <Text size="S" weight="bold">{i18n.button}</Text>
+              </SecondaryButton>
+              : null
+            }
            </LineUp>
          <DescriptionBase>
           <Text>{description}</Text>
