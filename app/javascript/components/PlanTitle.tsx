@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-import { Button, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
+import { Text, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
 import UpdateDialog from "./Shared/UpdateDialog";
 
 interface Props {
@@ -53,7 +53,9 @@ export const PlanTitle: React.VFC<Props> = (props) => {
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
       {form ?
         <MarginWrapper>
-          <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>Edit</SecondaryButton>
+          <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>
+            <Text size="S" weight="bold" color="TEXT_BLACK">{i18n.edit}</Text>
+          </SecondaryButton>
           <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
                         maxLength={maxLength} value={title} i18n={form.i18n}/>
         </MarginWrapper>
