@@ -238,9 +238,12 @@ module ReactHelper
     props = table_array.map do |k, v|
       track_list = v.first.compact
       rows = v[1..].map do |s|
-        { time: s.first, schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) } }
+        { time: s.first,
+          schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) },
+          sortKey: s.second.start_at.to_i
+        }
       end
-      [k, { trackList: track_list, rows: rows }]
+      [k, { trackList: track_list, rows: rows.sort_by { |r| r[:sortKey] } }]
     end
 
     props.to_h
@@ -256,10 +259,11 @@ module ReactHelper
         {
           time: time,
           schedule: schedule_to_card_props(schedules.first, plan, user, 'plan'),
-          memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo
+          memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo,
+          sortKey: schedules.first.start_at.to_i
         }
       end
-      [k, rows]
+      [k, rows.sort_by { |r| r[:sortKey] }]
     end
 
     props.to_h
