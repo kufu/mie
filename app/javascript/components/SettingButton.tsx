@@ -126,7 +126,7 @@ export const SettingButton: React.VFC<Props> = (props) => {
 }
 
 const Forms = styled(FormGroup)`
-  margin: 8px;
+  margin: 8px 0;
   width: 100%;
 `
 

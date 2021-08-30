@@ -120,14 +120,14 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         { form && mode === "plan" ?
           <UpdateMemoButton>
             <SecondaryButton prefix={<FaPencilAltIcon size={12}/>} size="s"
-                             onClick={() => setIsMemoEditing(true)}>{i18n.editMemo}</SecondaryButton>
+                             onClick={() => setIsMemoEditing(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.editMemo}</Text></SecondaryButton>
             <UpdateDialog isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
                           handleAction={handleUpdateMemo} value={memo} i18n={i18n}/>
           </UpdateMemoButton>
           : null
         }
         <MarginWrapper>{ form ? <SubmitForm {...form} /> : null }</MarginWrapper>
-        <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}>{i18n.showDetail}</TextButton></MarginWrapper>
+        <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.showDetail}</Text></TextButton></MarginWrapper>
       </Actions>
       <ScheduleDetail {...detailProps} />
     </Card>
@@ -160,7 +160,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
     return (
       <>
         <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
-          {buttonText}
+          <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
         </SecondaryButton>
         <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} i18n={initial} />
       </>
@@ -176,7 +176,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
             <input type="hidden" name="authenticity_token" value={authenticityToken}/>
             <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
             <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s">
-              {buttonText}
+              <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
             </SecondaryButton>
           </form>
         )
@@ -188,7 +188,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           <input type="hidden" name="authenticity_token" value={authenticityToken}/>
           <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
           <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s">
-            {buttonText}
+            <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
           </SecondaryButton>
         </form>
       )

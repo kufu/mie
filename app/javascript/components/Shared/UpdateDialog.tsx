@@ -41,8 +41,7 @@ export const UpdateDialog: React.VFC<Props> = (props) => {
   )
 }
 
-const DialogBody = styled(DialogBase)`
-  width: 656px;
+const DialogBody = styled.div`
   padding: 24px;
 `
 export default UpdateDialog
