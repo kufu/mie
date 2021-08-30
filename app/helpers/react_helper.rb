@@ -102,6 +102,7 @@ module ReactHelper
   def create_plan_description_props(plan, user)
     props = {}
     props[:description] = plan.description
+    props[:maxLength] = Plan.validators_on(:description).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
     props[:i18n] = plan_description_i18n
 
     if user.plans.include?(plan)
