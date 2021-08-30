@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import {Base, Heading, TextButton, FaPencilAltIcon, Text} from 'smarthr-ui'
+import {Base, Heading, SecondaryButton, FaPencilAltIcon, Text} from 'smarthr-ui'
 import UpdateDialog from "./Shared/UpdateDialog";
 
 interface Props {
@@ -49,19 +49,19 @@ export const PlanDescription: React.VFC<Props> = (props) => {
 
   return (
     <Container>
-      <DescriptionBase>
-        <Heading type="subBlockTitle" tag="h1">{i18n.title}</Heading>
-        <Text size="XS" color="TEXT_GREY">{i18n.notice}</Text>
-        <TextContainer>
-          {description}
-          {form ?
-            <TextButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
-              {i18n.button}
-            </TextButton>
-            : null
-          }
-        </TextContainer>
-      </DescriptionBase>
+          <LineUp>
+            <Stack>
+              <Heading type="blockTitle" tag="h1">{i18n.title}</Heading>
+              <Text size="S" color="TEXT_GREY">{i18n.notice}</Text>
+            </Stack>
+
+            <SecondaryButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
+              <Text size="S" weight="bold">{i18n.button}</Text>
+            </SecondaryButton>
+           </LineUp>
+         <DescriptionBase>
+          <Text>{description}</Text>
+        </DescriptionBase>
       {form ?
         <UpdateDialog isOpen={isDialogOpen} handleClose={() => setIsDialogOpen(false)} handleAction={handleAction}
                       maxLength={maxLength} value={description} i18n={form.i18n}/>
@@ -74,10 +74,22 @@ export const PlanDescription: React.VFC<Props> = (props) => {
 const Container = styled.div`
   margin: 8px auto 0;
   max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
 `
 
-const TextContainer = styled.div`
-  margin: 8px 0;
+const Stack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`
+
+const LineUp = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 `
 
 const DescriptionBase = styled(Base)`

@@ -68,7 +68,7 @@ export const PlanTitle: React.VFC<Props> = (props) => {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 `
 
 const MarginWrapper = styled.div`
