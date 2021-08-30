@@ -68,11 +68,13 @@ en:
     title: "Settings"
     set_password: "Set password"
     change_visibility: "Change visibility"
-    visibility_description: "The currenty visibility is hoge"
+    visibility_description: "The currently visibility is %{current}"
     visible_text: "Make public"
     visible_description: "This schedule will be visible for anyone"
     invisible_text: "Make private"
     invisible_description: "This schedule will NOT be visible to anyone"
+    visible: "Public"
+    invisible: "Private"
   terms_of_service:
     description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
   dialog:

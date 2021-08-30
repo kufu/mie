@@ -9,6 +9,7 @@ interface Props {
   visible: boolean
   form?: SubmitForm
   i18n: {
+    label: string
     edit: string
   }
 }
@@ -47,7 +48,7 @@ export const PlanTitle: React.VFC<Props> = (props) => {
 
   return (
     <Container>
-      <StatusLabel skeleton={true} type={visible ? "success" : "required"}>{visible ? "public" : "private"}</StatusLabel>
+      <StatusLabel skeleton={true} type={visible ? "success" : "required"}>{i18n.label}</StatusLabel>
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
       {form ?
         <MarginWrapper>

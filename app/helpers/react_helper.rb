@@ -149,6 +149,7 @@ module ReactHelper
       title: plan.title,
       visible: plan.public?,
       i18n: {
+        label: I18n.t(plan.public? ? "settings.visible" : "settings.invisible"),
         edit: I18n.t('button.edit')
       }
     }
@@ -185,7 +186,7 @@ module ReactHelper
   def create_setting_button_props(plan)
     props = {}
     props[:visible] = plan.public
-    props[:i18n] = setting_button_i18n
+    props[:i18n] = setting_button_i18n(plan.public)
 
     method = 'patch'
     action = plan_path(plan)
@@ -321,11 +322,11 @@ module ReactHelper
     }
   end
 
-  def setting_button_i18n
+  def setting_button_i18n(visibility)
     {
       settings: I18n.t('button.settings'),
       changeVisibility: I18n.t('settings.change_visibility'),
-      visibilityDesc: I18n.t('settings.visibility_description'),
+      visibilityDesc: I18n.t('settings.visibility_description', current:  I18n.t(visibility ? "settings.visible" : "settings.invisible")),
       setPassword: I18n.t('settings.set_password'),
       visibleText: I18n.t('settings.visible_text'),
       visibleDesc: I18n.t('settings.visible_description'),
