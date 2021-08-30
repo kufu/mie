@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import styled from 'styled-components'
-import {ActionDialog, DialogBase, Textarea} from "smarthr-ui";
+import {ActionDialog, Textarea} from "smarthr-ui";
 
 interface Props {
   isOpen: boolean
   handleClose: () => void
   handleAction: (string) => void
+  maxLength?: number
   value: string
   limit?: number
   i18n: {
@@ -16,8 +17,14 @@ interface Props {
 }
 
 export const UpdateDialog: React.VFC<Props> = (props) => {
-  const { isOpen, handleClose, handleAction, value, i18n } = props
+  const { isOpen, handleClose, handleAction, maxLength, value, i18n } = props
   const [current, setCurrent] = useState(value)
+  const [isActive, setIsActive] = useState(value.length <= maxLength)
+
+  const handleOnChange = (e) => {
+    setCurrent(e.target.value)
+    setIsActive(e.target.value.length <= maxLength)
+  }
 
   return (
     <ActionDialog
@@ -29,12 +36,14 @@ export const UpdateDialog: React.VFC<Props> = (props) => {
       onPressEscape={handleClose}
       onClickAction={() => handleAction(current)}
       onClickClose={handleClose}
+      actionDisabled={!isActive}
     >
       <DialogBody>
         <Textarea
           width="100%"
-          onChange={e => setCurrent(e.target.value)}
+          onChange={e => handleOnChange(e)}
           defaultValue={value}
+          maxLength={maxLength}
         />
       </DialogBody>
     </ActionDialog>
