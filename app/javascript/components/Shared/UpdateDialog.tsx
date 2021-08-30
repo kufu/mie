@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from 'styled-components'
-import {ActionDialog, Textarea} from "smarthr-ui";
+import {ActionDialog, Textarea, ThemeProvider} from "smarthr-ui";
+import createdTheme from "../Constants";
 
 interface Props {
   isOpen: boolean
@@ -27,26 +28,28 @@ export const UpdateDialog: React.VFC<Props> = (props) => {
   }
 
   return (
-    <ActionDialog
-      title={i18n.title}
-      actionText={i18n.save}
-      closeText={i18n.close}
-      isOpen={isOpen}
-      onClickOverlay={handleClose}
-      onPressEscape={handleClose}
-      onClickAction={() => handleAction(current)}
-      onClickClose={handleClose}
-      actionDisabled={!isActive}
-    >
-      <DialogBody>
-        <Textarea
-          width="100%"
-          onChange={e => handleOnChange(e)}
-          defaultValue={value}
-          maxLength={maxLength}
-        />
-      </DialogBody>
-    </ActionDialog>
+    <ThemeProvider theme={createdTheme}>
+      <ActionDialog
+        title={i18n.title}
+        actionText={i18n.save}
+        closeText={i18n.close}
+        isOpen={isOpen}
+        onClickOverlay={handleClose}
+        onPressEscape={handleClose}
+        onClickAction={() => handleAction(current)}
+        onClickClose={handleClose}
+        actionDisabled={!isActive}
+      >
+        <DialogBody>
+          <Textarea
+            width="100%"
+            onChange={e => handleOnChange(e)}
+            defaultValue={value}
+            maxLength={maxLength}
+          />
+        </DialogBody>
+      </ActionDialog>
+    </ThemeProvider>
   )
 }
 
