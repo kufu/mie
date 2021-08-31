@@ -23,7 +23,7 @@ ActiveRecord::Base.transaction do
     speaker
   end
 
-  Speaker.where.not(handle: speakers_yaml.map { |_, val| "@#{val['id']}" }).destroy_all
+  Speaker.where.not(id: speakers_by_id.values).destroy_all
 
   schedule_yaml = YAML.load_file('db/seeds/schedule.yml')
   schedules_by_id = schedule_yaml.each_with_object({}) do |(date, schedules), hash|
