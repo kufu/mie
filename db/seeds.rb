@@ -13,7 +13,7 @@ ActiveRecord::Base.transaction do
 
   speakers_by_id = speakers_yaml.transform_values do |val|
     speaker = Speaker.find_or_initialize_by(handle: "@#{val['id']}")
-    speaker.save!(
+    speaker.update!(
       name: val['name'],
       thumbnail: "https://www.gravatar.com/avatar/#{val['gravatar_hash']}/?s=268&d=https%3A%2F%2Frubykaigi.org%2F2020%2Fimages%2Fspeakers%2Fdummy-avatar.png",
       profile: val['bio'],
@@ -48,7 +48,7 @@ ActiveRecord::Base.transaction do
   YAML.load_file('db/seeds/presentations.yml').each do |id, presentation|
     schedule = schedules_by_id[id]
 
-    schedule.save!(
+    schedule.update!(
       title: presentation['title'],
       description: presentation['description'],
       language: presentation['language'].downcase
