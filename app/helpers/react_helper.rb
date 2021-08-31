@@ -235,6 +235,12 @@ module ReactHelper
     }
   end
 
+  def create_top_props
+    {
+      intro: I18n.t("application.intro")
+    }
+  end
+
   private
 
   def schedule_table_props(table_array, plan, user)
