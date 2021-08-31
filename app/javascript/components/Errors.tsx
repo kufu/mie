@@ -5,12 +5,13 @@ import Oops from "./Oops";
 interface Props {
   title: string
   description: string
+  imagePath: string
 }
 
 export const Errors: React.VFC<Props> = (props) => {
   return (
     <Container>
-      <Oops title={props.title} description={props.description} noBorder={true} />
+      <Oops {...props} noBorder={true} />
     </Container>
   )
 }

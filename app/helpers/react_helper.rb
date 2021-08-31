@@ -94,6 +94,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
+    props[:oopsImagePath] = asset_path("2021/rubykaigi.png")
     props[:uri] = url_for([plan, { only_path: false }])
     props[:i18n] = plans_table_i18n
     props
@@ -224,7 +225,8 @@ module ReactHelper
   def create_not_found_props
     {
       title: I18n.t('errors.not_found'),
-      description: I18n.t('errors.not_found_desc')
+      description: I18n.t('errors.not_found_desc'),
+      imagePath: asset_path("2021/rubykaigi.png")
     }
   end
 

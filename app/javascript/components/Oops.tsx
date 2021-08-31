@@ -6,14 +6,15 @@ interface Props {
   title: string
   description?: string
   noBorder?: boolean
+  imagePath: string
   children: React.ReactNode
 }
 
 export const Oops: React.VFC<Props> = (props) => {
-  const { title, description, children, noBorder } = props
+  const { title, description, children, imagePath, noBorder } = props
   return (
     <Container noBorder={noBorder}>
-      <Image />
+      <Image imagePath={imagePath} />
       <TextArea>
         <MarginWrapper>
           <Heading type="screenTitle">{title}</Heading>
@@ -47,10 +48,10 @@ const Container = styled.div<{noBorder: boolean}>`
   `}
 `
 
-const Image = styled.div`
+const Image = styled.div<{imagePath: string}>`
   height: 104px;
   width: 102px;
-  background-image: url('/assets/2021/rubykaigi.png');
+  background-image: url('${props => props.imagePath}');
   background-size: cover;
 `
 
