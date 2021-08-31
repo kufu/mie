@@ -1,24 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {SmartHRLogo as shrSmartHRLogo, Text, TextLink} from 'smarthr-ui'
+import {SmartHRLogo as shrSmartHRLogo, Text, TextLink, Heading, LineUp} from 'smarthr-ui'
 
 export const Top: React.VFC<{}> = () => {
   return (
     <Container>
       <TitleBox>
         <div><Title /></div>
-        <Text>Schedule.select</Text>
+        <LineUp gap={1}>
+          Schedule.select
+          <PoweredBy>
+            <Text>powered by</Text>
+            <SmartHRLogo width={95} height={16} fill="#00C4CC" />
+          </PoweredBy>
+        </LineUp>
       </TitleBox>
       <ColorLines>
         <ColorLine color="#0B374C" />
         <ColorLine color="#EBE0CE" />
         <ColorLine color="#D7D165" />
       </ColorLines>
-      <PoweredBy>
-        <Text>powered by</Text>
-        <SmartHRLogo width={95} height={16} fill="#00C4CC" />
-      </PoweredBy>
       <LinkArea>
         <p><TextLink href={"https://rubykaigi.org/2021-takeout"} target="_blank">The official website of RubyKaigi 2021</TextLink></p>
         <p><TextLink href={"https://twitter.com/rubykaigi"} target="_blank"><TwitterLogo /> Twitter</TextLink></p>
@@ -33,14 +35,20 @@ export const Top: React.VFC<{}> = () => {
 
 const Container = styled.div`
   margin 80px 0 0 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
 const TitleBox = styled.div`
   color: #0B374D;
   font-style: normal;
   font-weight: normal;
-  font-size: 19.2px;
+  font-size: 24px;
   line-height: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `
 
 const ColorLines = styled.div`
@@ -50,7 +58,7 @@ const ColorLines = styled.div`
 
 const ColorLine = styled.div`
   background-color: ${props => props.color};
-  width: 135.33px;
+  width: 100px;
   height: 4px;
 `
 
@@ -58,16 +66,15 @@ const PoweredBy = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
-  margin 32px 0;
+  gap: 2px;
 `
 
 const SmartHRLogo = styled(shrSmartHRLogo)`
-  margin-bottom: 2px;
+  margin-bottom: 10px;
 `
 
 const LinkArea = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   line-height: 200%;
 `
 

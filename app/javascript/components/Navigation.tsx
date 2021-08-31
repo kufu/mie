@@ -31,11 +31,12 @@ export const Navigation: React.FC<Props> = (props) => {
           <RubyKaigiLogo />
           <CenteredWrapper>
             <MarginWrapper>
-              <Text>Schedule.select powered by</Text>
+              <Text>Schedule.select</Text>
             </MarginWrapper>
-            <MarginWrapper>
+            <PoweredByWrapper>
+              <Text size="S">powered by</Text>
               <SmartHRLogo width="95" height="16" fill="#00C4CC" />
-            </MarginWrapper>
+            </PoweredByWrapper>
           </CenteredWrapper>
         </Container>
       </Nav>
@@ -103,7 +104,18 @@ const CenteredWrapper = styled.div`
 `
 
 const MarginWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
   margin-left: 8px;
+`
+
+const PoweredByWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 12px;
+  margin-bottom: 2px;
 `
 
 const Child = styled.div`

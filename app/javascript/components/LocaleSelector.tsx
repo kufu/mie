@@ -23,8 +23,8 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
   }
 
   return (
-    <LineUp as="label" gap="X3S" vAlign="center">
-      <Heading type="subBlockTitle">{props.i18n.label}</Heading>
+    <LineUp as="label" gap={0.5} vAlign="center">
+      <Heading type="subSubBlockTitle">{props.i18n.label}</Heading>
       <ResizedSelect
         value={current}
         options={props.options}
