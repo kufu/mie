@@ -67,6 +67,7 @@ ja:
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
     password_incorrect: "パスワードが違います"
+    internal_server_error: "Internal server error"
     not_found: "404! The contents you are looking for is not found."
     not_found_desc: "Why don’t you go to Talks and make your own schedule?"
 
@@ -74,3 +75,10 @@ ja:
     formats:
       default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"
+
+  application:
+    intro: |-
+      『RubyKaigi Takeout 2021 Schedule.select』は、RubyKaigi初の公式スケジュール作成・共有アプリケーションです。気になるセッションをリスト化し、自分だけの視聴スケジュールを作成できます！
+      あなたはカンファレンス参加前「どのセッションを見よう…」と迷ったことはありませんか？
+      わたしたちは、開催前に参加者同士で "視聴スケジュール" や "興味をもつ理由" が共有できれば、セッション選びの参考にでき、カンファレンスをより楽しめるのではと考えこのアプリを開発しました。
+      あなたがそのセッションを見たい理由はなんですか？ 開催前に共有し、一緒に RubyKaigi Takeout 2021 を盛り上げましょう！

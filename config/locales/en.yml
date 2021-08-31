@@ -98,6 +98,7 @@ en:
   errors:
     time_overlap_error: "Can't select [%{left}] and [%{right}] at the same time, they are overlapping time schedule."
     password_incorrect: "Password incorrect"
+    internal_server_error: "Internal server error"
     not_found: "404! The contents you are looking for is not found."
     not_found_desc: "Why don’t you go to Talks and make your own schedule?"
 
@@ -105,3 +106,10 @@ en:
     formats:
       default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"
+
+  application:
+    intro: |-
+      RubyKaigi Takeout 2021 Schedule.select" is RubyKaigi's first official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!
+      If you have ever wondered, "Which session should I watch…" before attending a conference, then this is the app for you.
+      We developed this app so participants could share their "viewing schedules" and "reasons for interest" before the event, which they could use as a reference for session selection and to enjoy the conference even more.
+      Why do you want to see the session? Share it before the event and let's enjoy RubyKaigi Takeout 2021 together!

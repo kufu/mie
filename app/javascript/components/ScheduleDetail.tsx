@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { MessageDialog, DefinitionList } from 'smarthr-ui'
+import { LanguageMap } from "./Shared"
 
 export interface Props {
   isOpen: boolean
@@ -96,7 +97,7 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
           },
           {
             term: i18n.language,
-            description: language
+            description: LanguageMap[language]
           },
         ]} />
       </Row>

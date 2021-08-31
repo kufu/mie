@@ -15,6 +15,7 @@ import ScheduleDetail from "./ScheduleDetail";
 import { Props as DetailProps } from './ScheduleDetail'
 import UpdateDialog from "./Shared/UpdateDialog";
 import TermsOfServiceDialog from "./TermsOfServiceDialog";
+import { LanguageMap } from "./Shared"
 
 type Language = "en" | "ja"
 type Mode = "list" | "plan"
@@ -103,7 +104,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
             <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speaker.speakerName}</Text></MarginWrapper>
           </Profile>
         )}
-        <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{language}</Text></MarginWrapper></Lng>
+        <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{LanguageMap[language] || "?"}</Text></MarginWrapper></Lng>
       </Speaker>
 
       <Contents>
@@ -246,7 +247,6 @@ const Lng = styled.div`
   align-items: center;
   padding: 0px 12px;
 
-  width: 84px;
   height: 24px;
   left: 330.5px;
   top: 0px;

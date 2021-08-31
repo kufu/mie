@@ -3,7 +3,12 @@ import styled from 'styled-components'
 
 import {SmartHRLogo as shrSmartHRLogo, Text, TextLink, Heading, LineUp} from 'smarthr-ui'
 
-export const Top: React.VFC<{}> = () => {
+interface Props {
+  intro: string
+}
+
+export const Top: React.VFC<Props> = (props) => {
+  const { intro } = props
   return (
     <Container>
       <TitleBox>
@@ -21,6 +26,9 @@ export const Top: React.VFC<{}> = () => {
         <ColorLine color="#EBE0CE" />
         <ColorLine color="#D7D165" />
       </ColorLines>
+      <IntroArea>
+        { intro.split("\n").map(line => <Text as="p">{line}</Text> )}
+      </IntroArea>
       <LinkArea>
         <p><TextLink href={"https://rubykaigi.org/2021-takeout"} target="_blank">The official website of RubyKaigi 2021</TextLink></p>
         <p><TextLink href={"https://twitter.com/rubykaigi"} target="_blank"><TwitterLogo /> Twitter</TextLink></p>
@@ -71,6 +79,17 @@ const PoweredBy = styled.div`
 
 const SmartHRLogo = styled(shrSmartHRLogo)`
   margin-bottom: 10px;
+`
+
+const IntroArea = styled.div`
+  width: 600px;
+  word-break: keep-all;
+  line-break: strict;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+`
+
+const Intro = styled(Text)`
 `
 
 const LinkArea = styled.div`

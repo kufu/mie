@@ -13,6 +13,7 @@ type Row = { time: string, schedule: CardProps, memo: string }
 
 interface Props {
   groupedPlans: GroupedPlans
+  oopsImagePath: string
   uri: string
   i18n: {
     startEnd: string
@@ -25,7 +26,7 @@ interface Props {
 }
 
 export const PlanTable: React.VFC<Props> = (props) => {
-  const { groupedPlans, uri, i18n } = props
+  const { groupedPlans, oopsImagePath, uri, i18n } = props
   const current = window.location.hash === "" ? Object.keys(groupedPlans)[0] : window.location.hash.replace('#', '')
 
   const [currentKey, setCurrentDate] = useState(current)
@@ -66,7 +67,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
                   })
                   : <TableRow >
                     <TableBodyCell colSpan={2} noSidePadding>
-                      <Oops title={i18n.noPlans} >
+                      <Oops title={i18n.noPlans} imagePath={oopsImagePath}>
                         <Text color="TEXT_GREY">{i18n.noPlansDesc}</Text>
                       </Oops>
                     </TableBodyCell>
