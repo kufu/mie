@@ -25,7 +25,7 @@ sep09:
     begin: '13:00'
     end: '13:25'
     talks:
-      A: Schwad
+      A: schwad4hd14
       B: ko1
   - type: talk
     begin: '13:30'
