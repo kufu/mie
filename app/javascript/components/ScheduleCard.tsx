@@ -34,6 +34,7 @@ export interface Props {
   form?: SubmitFormProps
   memo?: string
   memoMaxLength: number
+  initial?: InitialProps
   i18n: {
     showDetail: string
     editMemo: string
@@ -50,21 +51,22 @@ export interface SubmitFormProps {
   targetKeyName: string
   targetKey: string
   buttonText: string
-  initial?: {
-    title: string
-    description: string
-    termsOfService: string
-    close: string
-    accept: string
-  }
   mode: Mode
   i18n: {
     added: string | null
   }
 }
 
+export interface InitialProps {
+  title: string
+  description: string
+  termsOfService: string
+  close: string
+  accept: string
+}
+
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, speakers, language, memo, memoMaxLength, form, i18n, details } = props
+  const { title, mode, description, speakers, language, memo, memoMaxLength, form, initial, i18n, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
 
@@ -128,7 +130,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
           </UpdateMemoButton>
           : null
         }
-        <MarginWrapper>{ form ? <SubmitForm {...form} /> : null }</MarginWrapper>
+        <MarginWrapper>{ form ? <SubmitForm {...form} initial={initial} /> : null }</MarginWrapper>
         <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.showDetail}</Text></TextButton></MarginWrapper>
       </Actions>
       <ScheduleDetail {...detailProps} />

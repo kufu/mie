@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { TabBar, TabItem, ThemeProvider } from 'smarthr-ui'
-import { ScheduleCard, Props as CardProps } from './ScheduleCard'
+import { ScheduleCard, Props as CardProps, InitialProps } from './ScheduleCard'
 import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell } from './Shared/Table'
 import { ScheduleTime } from './Shared/ScheduleTime';
 import createdTheme from "./Constants";
@@ -14,13 +14,14 @@ type Row = { time: string, schedules: Array<CardProps | null> }
 
 interface Props {
   groupedSchedules: GroupedSchedules
+  initial?: InitialProps
   i18n: {
     startEnd: string
   }
 }
 
 export const ScheduleTable: React.VFC<Props> = (props) => {
-  const { groupedSchedules, i18n } = props
+  const { groupedSchedules, initial, i18n } = props
   const current = window.location.hash === "" ? Object.keys(groupedSchedules)[0] : window.location.hash.replace('#', '')
 
 
@@ -54,7 +55,15 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
                     <TableBodyCell noSidePadding as="th">
                       <ScheduleTime time={row.time}/>
                     </TableBodyCell>
-                    {row.schedules.map((schedule, index) => schedule === null ? <TableBodyCell key={index} /> : <TableBodyCell key={index}><CellItemStretcher><ScheduleCard {...schedule} /></CellItemStretcher></TableBodyCell>)}
+                    {row.schedules.map((schedule, index) =>
+                      schedule === null ?
+                        <TableBodyCell key={index} />
+                        : <TableBodyCell key={index}>
+                          <CellItemStretcher>
+                            <ScheduleCard {...schedule} initial={initial} />
+                          </CellItemStretcher>
+                        </TableBodyCell>
+                    )}
                   </TableRow>
                 )
               })}

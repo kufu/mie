@@ -44,8 +44,6 @@ module ReactHelper
           added: include_plan ? I18n.t('card.added') : nil
         }
       }
-
-      props[:form][:initial] = terms_of_service_props if plan.initial?
     end
 
     props
@@ -86,6 +84,7 @@ module ReactHelper
   def create_schedule_table_props(table_array, plan, user)
     props = {}
     props[:groupedSchedules] = schedule_table_props(table_array, plan, user)
+    props[:initial] = terms_of_service_props if plan.initial?
     props[:i18n] = schedule_table_i18n
     props
   end
