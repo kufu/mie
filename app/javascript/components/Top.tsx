@@ -27,7 +27,7 @@ export const Top: React.VFC<Props> = (props) => {
         <ColorLine color="#D7D165" />
       </ColorLines>
       <IntroArea>
-        { intro.split("\n").map(line => <Text as="p">{line}</Text> )}
+        { intro.split("\n").map(line => <TopText>{line}</TopText> )}
       </IntroArea>
       <LinkArea>
         <p><TextLink href={"https://rubykaigi.org/2021-takeout"} target="_blank">The official website of RubyKaigi 2021</TextLink></p>
@@ -87,6 +87,8 @@ const IntroArea = styled.div`
   line-break: strict;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  margin-top: 24px;
+  margin-bottom: 24px;
 `
 
 const Intro = styled(Text)`
@@ -145,4 +147,9 @@ const TwitterLogo: React.VFC<{}> = () => {
     </svg>
   )
 }
+
+const TopText = styled(Text)`
+  color: #0B374D;
+  line-height: 200%;
+`
 export default Top
