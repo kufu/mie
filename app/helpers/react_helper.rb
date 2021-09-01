@@ -342,6 +342,7 @@ module ReactHelper
       changeVisibility: I18n.t('settings.change_visibility'),
       visibilityDesc: I18n.t('settings.visibility_description', current:  I18n.t(visibility ? "settings.visible" : "settings.invisible")),
       setPassword: I18n.t('settings.set_password'),
+      passwordExpression: I18n.t("settings.password_expression"),
       visibleText: I18n.t('settings.visible_text'),
       visibleDesc: I18n.t('settings.visible_description'),
       invisibleText: I18n.t('settings.invisible_text'),
