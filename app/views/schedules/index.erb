@@ -1,3 +1,11 @@
-<% @table_array = create_table_array(@schedules) %>
+<% content_for :head do %>
+  <meta property="og:title" content="RubyKaigi 2021 Takeout Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Takeout 2021 Schedule.select powerd by SmartHR">
+  <meta property="og:url" content="<%= schedules_url %>">
+  <meta property="og:image" content="<%= asset_path("2021/takeout.png") %>" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
 
+<% @table_array = create_table_array(@schedules) %>
 <%= react_component("ScheduleTable", create_schedule_table_props(@table_array, @plan, @user)) %>
