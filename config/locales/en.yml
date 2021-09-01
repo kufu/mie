@@ -67,6 +67,7 @@ en:
   settings:
     title: "Settings"
     set_password: "Set password"
+    password_expression: "Setting a password will allow you to edit your schedule from other devices and browser sessions."
     change_visibility: "Change visibility"
     visibility_description: "The currently visibility is %{current}"
     visible_text: "Make public"

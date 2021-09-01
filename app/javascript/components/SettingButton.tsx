@@ -20,6 +20,7 @@ interface Props {
   i18n: {
     settings: string
     setPassword: string
+    passwordExpression: string
     changeVisibility: string
     visibilityDesc: string
     visibleText: string
@@ -92,6 +93,7 @@ export const SettingButton: React.VFC<Props> = (props) => {
           <Forms
             title={i18n.setPassword}
             titleType="subBlockTitle"
+            helpMessage={i18n.passwordExpression}
             labelId="password"
             innerMargin="XS"
           >

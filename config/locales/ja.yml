@@ -36,6 +36,7 @@ ja:
   settings:
     title: "設定"
     set_password: "パスワードを設定"
+    password_expression: "パスワードを設定することで、異なるブラウザから予定を編集できます。"
     change_visibility: "公開設定"
     visibility_description: "現在の公開設定は %{current} です"
     visible_text: "公開"
