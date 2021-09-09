@@ -11,12 +11,6 @@ sep09:
     end: '11:25'
     talks:
       A: k0kubun
-  - type: talk
-    begin: '11:30'
-    end: '11:55'
-    talks:
-      A: jeremyevans0
-      B: koic
   - type: break
     begin: '11:55'
     end: '13:00'
@@ -25,29 +19,35 @@ sep09:
     begin: '13:00'
     end: '13:25'
     talks:
-      A: schwad4hd14
-      B: ko1
+      A: jeremyevans0
+      B: koic
   - type: talk
     begin: '13:30'
     end: '13:55'
     talks:
-      A: peterzhu2118
-      B: coe401_
+      A: schwad4hd14
+      B: ko1
   - type: talk
     begin: '14:00'
     end: '14:25'
     talks:
-      A: vinistock
-      B: m_seki
+      A: peterzhu2118
+      B: coe401_
   - type: talk
     begin: '14:30'
     end: '14:55'
     talks:
-      A: duerst
-      B: udzura
+      A: vinistock
+      B: m_seki
   - type: talk
     begin: '15:00'
     end: '15:25'
+    talks:
+      A: duerst
+      B: udzura
+  - type: talk
+    begin: '15:30'
+    end: '15:55'
     talks:
       A: paracycle
       B: yamori813
