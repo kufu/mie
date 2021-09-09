@@ -26,36 +26,71 @@ ActiveRecord::Base.transaction do
   Speaker.where.not(id: speakers_by_id.values).destroy_all
 
   schedule_yaml = YAML.load_file('db/seeds/schedule.yml')
-  schedules_by_id = schedule_yaml.each_with_object({}) do |(date, schedules), hash|
-    schedules['events'].each do |event|
-      next if event['type'] == 'break'
+  presentation_yaml = YAML.load_file('db/seeds/presentations.yml')
 
-      start_at = Time.zone.parse("#{date} #{event['begin']} JST")
-      end_at = Time.zone.parse("#{date} #{event['end']} JST")
+  if ENV['SCHEDULE_FIND_BY'] == 'title'
+    schedules_by_id = presentation_yaml.transform_values do |val|
+      schedule = Schedule.find_or_initialize_by(title: val['title'])
+      schedule.attributes = {
+        description: val['description'],
+        language: val['language'].downcase
+      }
+      schedule
+    end
 
-      event['talks'].each do |track_name, id|
-        hash[id] = Schedule.find_or_initialize_by(
-          track_name: "Track#{track_name}",
-          start_at: start_at,
-          end_at: end_at
-        )
+    schedule_yaml.each do |date, schedules|
+      schedules['events'].each do |event|
+        next if event['type'] == 'break'
+
+        start_at = Time.zone.parse("#{date} #{event['begin']} JST")
+        end_at = Time.zone.parse("#{date} #{event['end']} JST")
+
+        event['talks'].each do |track_name, id|
+          schedule = schedules_by_id[id]
+
+          schedule.update!(
+            track_name: "Track#{track_name}",
+            start_at: start_at,
+            end_at: end_at
+          )
+        end
       end
+    end
+  else
+    schedules_by_id = schedule_yaml.each_with_object({}) do |(date, schedules), hash|
+      schedules['events'].each do |event|
+        next if event['type'] == 'break'
+
+        start_at = Time.zone.parse("#{date} #{event['begin']} JST")
+        end_at = Time.zone.parse("#{date} #{event['end']} JST")
+
+        event['talks'].each do |track_name, id|
+          hash[id] = Schedule.find_or_initialize_by(
+            track_name: "Track#{track_name}",
+            start_at: start_at,
+            end_at: end_at
+          )
+        end
+      end
+    end
+
+    presentation_yaml.each do |id, presentation|
+      schedule = schedules_by_id[id]
+
+      schedule.update!(
+        title: presentation['title'],
+        description: presentation['description'],
+        language: presentation['language'].downcase
+      )
     end
   end
 
   # NOTE: ScheduleSpeakerは一度破棄して作り直す
   ScheduleSpeaker.delete_all
-  YAML.load_file('db/seeds/presentations.yml').each do |id, presentation|
-    schedule = schedules_by_id[id]
 
-    schedule.update!(
-      title: presentation['title'],
-      description: presentation['description'],
-      language: presentation['language'].downcase
-    )
-
+  presentation_yaml.each do |id, presentation|
     presentation['speakers'].each do |speakers|
-      ScheduleSpeaker.create!(schedule: schedule, speaker: speakers_by_id[speakers['id']])
+      ScheduleSpeaker.create!(schedule: schedules_by_id[id], speaker: speakers_by_id[speakers['id']])
     end
   end
 end
