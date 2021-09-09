@@ -8,6 +8,7 @@ module ReactHelper
       title: schedule.title,
       mode: mode,
       description: schedule.description,
+      trackName: schedule.track_name,
       speakers: schedule.speakers.map do |speaker|
         {
           speakerName: speaker.name,

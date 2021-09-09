@@ -25,6 +25,7 @@ export interface Props {
   title: string
   mode: Mode
   description: string
+  trackName: string
   speakers: {
     speakerName: string
     thumbnailUrl: string
@@ -66,7 +67,7 @@ export interface InitialProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, speakers, language, memo, memoMaxLength, form, initial, i18n, details } = props
+  const { title, mode, description, trackName, speakers, language, memo, memoMaxLength, form, initial, i18n, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
 
@@ -106,7 +107,10 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
             <MarginWrapper><Text size="S" weight="bold" color="TEXT_GREY" >{speaker.speakerName}</Text></MarginWrapper>
           </Profile>
         )}
-        <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{LanguageMap[language] || "?"}</Text></MarginWrapper></Lng>
+        <TipList>
+          <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{LanguageMap[language] || "?"}</Text></MarginWrapper></Lng>
+          <Lng><Text size="S" color="TEXT_GREY">Track:</Text><MarginWrapper><Text size="S">{trackName}</Text></MarginWrapper></Lng>
+        </TipList>
       </Speaker>
 
       <Contents>
@@ -242,12 +246,17 @@ const Title = styled(Heading)`
   line-height: 125%;
 `
 
+const TipList = styled.div`
+  display: flex;
+`
+
 const Lng = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0px 12px;
+  margin-left: 8px;
 
   height: 24px;
   left: 330.5px;
