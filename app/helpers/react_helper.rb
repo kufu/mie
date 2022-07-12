@@ -26,29 +26,7 @@ module ReactHelper
       }
     }
 
-    if plan && plan.user == user
-      method = 'patch'
-      action = plan_path(plan)
-
-      include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
-      props[:memo] = include_plan&.memo || ''
-      props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect do |v|
-                                v.is_a?(ActiveModel::Validations::LengthValidator)
-                              end.options[:maximum]
-
-      props[:form] = {
-        action:,
-        method:,
-        authenticityToken: form_authenticity_token(form_options: { action:, method: }),
-        targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
-        targetKey: schedule.id,
-        buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
-        mode:,
-        i18n: {
-          added: include_plan ? I18n.t('card.added') : nil
-        }
-      }
-    end
+    props.merge!(plan_edit_props(plan, schedule, mode)) if plan && plan.user == user
 
     props
   end
@@ -285,6 +263,35 @@ module ReactHelper
     end
 
     props.to_h
+  end
+
+  def plan_edit_props(plan, schedule, mode)
+    props = {}
+    method = 'patch'
+    action = plan_path(plan)
+
+    include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
+    props[:memo] = include_plan&.memo || ''
+    props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect do |v|
+      v.is_a?(ActiveModel::Validations::LengthValidator)
+    end.options[:maximum]
+
+    i18n = {
+      added: include_plan ? I18n.t('card.added') : nil
+    }
+
+    props[:form] = {
+      method:,
+      action:,
+      authenticityToken: form_authenticity_token(form_options: { action:, method: }),
+      targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
+      targetKey: schedule.id,
+      buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
+      mode:,
+      i18n:
+    }
+
+    props
   end
 
   def plans_table_i18n
