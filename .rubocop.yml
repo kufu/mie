@@ -6,3 +6,11 @@ AllCops:
   Exclude:
     - ./db/**/*
     - ./bin/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - ./test/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - ./test/**/*
