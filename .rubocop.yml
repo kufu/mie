@@ -5,3 +5,4 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - ./db/**/*
+    - ./bin/**/*
