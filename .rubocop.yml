@@ -5,3 +5,12 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - ./db/**/*
+    - ./bin/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - ./test/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - ./test/**/*

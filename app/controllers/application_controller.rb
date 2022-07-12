@@ -22,7 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_plan
-    @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list', description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true) if @user.plans.blank?
+    if @user.plans.blank?
+      @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list',
+                          description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true)
+    end
     @plan = @user.plans.recent.first
   end
 
@@ -51,9 +54,9 @@ class ApplicationController < ActionController::Base
     redirect_to request.path
   end
 
-  def with_time_zone(&block)
+  def with_time_zone(&)
     if session[:locale]
-      Time.use_zone(session[:locale], &block)
+      Time.use_zone(session[:locale], &)
     else
       yield
     end
