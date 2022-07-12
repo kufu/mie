@@ -6,7 +6,7 @@ module ReactHelper
   def schedule_to_card_props(schedule, plan, user, mode = 'list')
     props = {
       title: schedule.title,
-      mode: mode,
+      mode:,
       description: schedule.description,
       trackName: schedule.track_name,
       speakers: schedule.speakers.map do |speaker|
@@ -32,16 +32,18 @@ module ReactHelper
 
       include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
       props[:memo] = include_plan&.memo || ''
-      props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
+      props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect do |v|
+                                v.is_a?(ActiveModel::Validations::LengthValidator)
+                              end.options[:maximum]
 
       props[:form] = {
-        action: action,
-        method: method,
-        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        action:,
+        method:,
+        authenticityToken: form_authenticity_token(form_options: { action:, method: }),
         targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
         targetKey: schedule.id,
         buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
-        mode: mode,
+        mode:,
         i18n: {
           added: include_plan ? I18n.t('card.added') : nil
         }
@@ -95,7 +97,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
-    props[:oopsImagePath] = asset_path("2021/rubykaigi.png")
+    props[:oopsImagePath] = asset_path('2021/rubykaigi.png')
     props[:uri] = url_for([plan, { only_path: false }])
     props[:i18n] = plans_table_i18n
     props
@@ -104,16 +106,18 @@ module ReactHelper
   def create_plan_description_props(plan, user)
     props = {}
     props[:description] = plan.description
-    props[:maxLength] = Plan.validators_on(:description).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
+    props[:maxLength] = Plan.validators_on(:description).detect do |v|
+                          v.is_a?(ActiveModel::Validations::LengthValidator)
+                        end.options[:maximum]
     props[:i18n] = plan_description_i18n
 
     if user.plans.include?(plan)
       method = 'patch'
       action = plan_path(plan)
       props[:form] = {
-        action: action,
-        method: method,
-        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        action:,
+        method:,
+        authenticityToken: form_authenticity_token(form_options: { action:, method: }),
         i18n: plan_description_form_i18n
       }
     end
@@ -151,10 +155,12 @@ module ReactHelper
   def create_plan_title_props(plan, user)
     props = {
       title: plan.title,
-      maxLength: Plan.validators_on(:title).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum],
+      maxLength: Plan.validators_on(:title).detect do |v|
+                   v.is_a?(ActiveModel::Validations::LengthValidator)
+                 end.options[:maximum],
       visible: plan.public?,
       i18n: {
-        label: I18n.t(plan.public? ? "settings.visible" : "settings.invisible"),
+        label: I18n.t(plan.public? ? 'settings.visible' : 'settings.invisible'),
         edit: I18n.t('button.edit')
       }
     }
@@ -163,9 +169,9 @@ module ReactHelper
       method = 'patch'
       action = plan_path(plan)
       props[:form] = {
-        action: action,
-        method: method,
-        authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+        action:,
+        method:,
+        authenticityToken: form_authenticity_token(form_options: { action:, method: }),
         i18n: {
           title: I18n.t('dialog.edit_title'),
           save: I18n.t('button.save'),
@@ -181,8 +187,8 @@ module ReactHelper
     action = plans_path
     {
       form: {
-        action: action,
-        authenticityToken: form_authenticity_token(form_options: { action: action, method: 'post' })
+        action:,
+        authenticityToken: form_authenticity_token(form_options: { action:, method: 'post' })
       },
       i18n: info_panel_i18n
     }
@@ -197,9 +203,9 @@ module ReactHelper
     action = plan_path(plan)
 
     props[:form] = {
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      action:,
+      method:,
+      authenticityToken: form_authenticity_token(form_options: { action:, method: }),
       i18n: setting_button_form_i18n
     }
     props
@@ -215,9 +221,9 @@ module ReactHelper
     action = plan_own_path(plan)
 
     props[:form] = {
-      action: action,
-      method: method,
-      authenticityToken: form_authenticity_token(form_options: { action: action, method: method }),
+      action:,
+      method:,
+      authenticityToken: form_authenticity_token(form_options: { action:, method: }),
       i18n: make_editable_button_form_i18n
     }
     props
@@ -227,20 +233,20 @@ module ReactHelper
     {
       title: I18n.t('errors.not_found'),
       description: I18n.t('errors.not_found_desc'),
-      imagePath: asset_path("2021/rubykaigi.png")
+      imagePath: asset_path('2021/rubykaigi.png')
     }
   end
 
   def create_server_error_props
     {
       title: I18n.t('errors.internal_server_error'),
-      imagePath: asset_path("2021/rubykaigi.png")
+      imagePath: asset_path('2021/rubykaigi.png')
     }
   end
 
   def create_top_props
     {
-      intro: I18n.t("application.intro")
+      intro: I18n.t('application.intro')
     }
   end
 
@@ -253,8 +259,7 @@ module ReactHelper
         sortKeys = s[1..].compact.map(&:start_at).map(&:to_i).uniq
         { time: s.first,
           schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) },
-          sortKey: sortKeys[0]
-        }
+          sortKey: sortKeys[0] }
       end
       [k, { trackList: track_list, rows: rows.sort_by { |r| r[:sortKey] } }]
     end
@@ -270,7 +275,7 @@ module ReactHelper
     props = group_schedules_by_date(plan.schedules).map do |k, v|
       rows = group_schedules_by_time(v).map do |time, schedules|
         {
-          time: time,
+          time:,
           schedule: schedule_to_card_props(schedules.first, plan, user, 'plan'),
           memo: plan.plan_schedules.find_by(schedule: schedules.first)&.memo,
           sortKey: schedules.first.start_at.to_i
@@ -343,9 +348,10 @@ module ReactHelper
     {
       settings: I18n.t('button.settings'),
       changeVisibility: I18n.t('settings.change_visibility'),
-      visibilityDesc: I18n.t('settings.visibility_description', current:  I18n.t(visibility ? "settings.visible" : "settings.invisible")),
+      visibilityDesc: I18n.t('settings.visibility_description',
+                             current: I18n.t(visibility ? 'settings.visible' : 'settings.invisible')),
       setPassword: I18n.t('settings.set_password'),
-      passwordExpression: I18n.t("settings.password_expression"),
+      passwordExpression: I18n.t('settings.password_expression'),
       visibleText: I18n.t('settings.visible_text'),
       visibleDesc: I18n.t('settings.visible_description'),
       invisibleText: I18n.t('settings.invisible_text'),

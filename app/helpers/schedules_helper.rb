@@ -4,12 +4,12 @@ module SchedulesHelper
   include HelperConcern
 
   def create_table_array(schedules)
-    group_schedules_by_date(schedules).map do |k, v|
+    group_schedules_by_date(schedules).to_h do |k, v|
       tracks = v.map(&:track_name).uniq.sort
       arrays = group_schedules_by_time(v).map { |time, s| [time] + track_mapping_schedules(tracks, s) }
       arrays.unshift([nil, tracks].flatten)
       [k, arrays]
-    end.to_h
+    end
   end
 
   def toggle_script(date, dates)

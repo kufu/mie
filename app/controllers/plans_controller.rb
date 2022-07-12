@@ -34,7 +34,7 @@ class PlansController < ApplicationController
       flash[:error] = I18n.t('errors.password_incorrect')
       head :unauthorized
     end
-  rescue
+  rescue StandardError
     flash[:error] = I18n.t('errors.password_incorrect')
     head :unauthorized
   end
@@ -52,7 +52,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = params[:id] ? Plan.find(params[:id]) : Plan.find(params[:plan_id])
+    @plan = Plan.find(params[:id] || params[:plan_id])
     raise ActiveRecord::RecordNotFound if @plan.user != @user && !@plan.public?
   end
 
@@ -79,14 +79,14 @@ class PlansController < ApplicationController
 
   def remove_plan
     schedule = Schedule.find(params[:remove_schedule_id])
-    @plan.plan_schedules.find_by(schedule: schedule).destroy!
+    @plan.plan_schedules.find_by(schedule:).destroy!
     @plan.update!(initial: false)
     schedule
   end
 
   def edit_memo
     schedule = Schedule.find(params[:edit_memo_schedule_id])
-    plan_schedule = @plan.plan_schedules.find_by(schedule: schedule)
+    plan_schedule = @plan.plan_schedules.find_by(schedule:)
     plan_schedule.update!(memo: params[:memo])
     schedule
   end
