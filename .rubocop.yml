@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - ./db/**/*
     - ./bin/**/*
+    - ./vendor/**/*
 
 Metrics/BlockLength:
   Exclude:
