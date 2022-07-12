@@ -25,13 +25,14 @@ module ReactHelper
         close: I18n.t('button.close')
       }
     }
-    include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
-    props[:memo] = include_plan&.memo || ''
-    props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
 
     if plan && plan.user == user
       method = 'patch'
       action = plan_path(plan)
+
+      include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
+      props[:memo] = include_plan&.memo || ''
+      props[:memoMaxLength] = PlanSchedule.validators_on(:memo).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }.options[:maximum]
 
       props[:form] = {
         action: action,
@@ -249,9 +250,10 @@ module ReactHelper
     props = table_array.map do |k, v|
       track_list = v.first.compact
       rows = v[1..].map do |s|
+        sortKeys = s[1..].compact.map(&:start_at).map(&:to_i).uniq
         { time: s.first,
           schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) },
-          sortKey: s.second.start_at.to_i
+          sortKey: sortKeys[0]
         }
       end
       [k, { trackList: track_list, rows: rows.sort_by { |r| r[:sortKey] } }]

@@ -15,7 +15,9 @@ class ReactHelperTest < ActionView::TestCase
 
     expect = {
       title: sch.title,
+      mode: 'list',
       description: sch.description,
+      trackName: sch.track_name,
       speakers: sch.speakers.map do |speaker|
         {
           speakerName: speaker.name,
@@ -35,16 +37,14 @@ class ReactHelperTest < ActionView::TestCase
               twitter: speaker.twitter
             }
           end,
-          startTime: I18n.l(sch.start_at, format: :timetable),
-          endTime: I18n.l(sch.end_at, format: :timetable),
+          startEndTime: "#{I18n.l(sch.start_at, format: :default)} - #{I18n.l(sch.end_at, format: :timetable)}",
           language: sch.language,
           description: sch.description,
           i18n: {
             speaker: I18n.t('card.detail.speaker'),
             username: I18n.t('card.detail.username'),
             aboutSpeaker: I18n.t('card.detail.about_speaker'),
-            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
-            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            startEndTime: I18n.t('card.detail.start_end_time', zone: sch.start_at.zone),
             language: I18n.t('card.detail.language'),
             description: I18n.t('card.detail.description')
           }
@@ -54,19 +54,26 @@ class ReactHelperTest < ActionView::TestCase
           close: I18n.t('button.close')
         }
       },
+      memo: '',
+      memoMaxLength: 1024,
       form: {
         action: plan_path(plan),
         method: 'patch',
         authenticityToken: form_authenticity_token(''),
         targetKeyName: 'remove_schedule_id',
         targetKey: sch.id,
-        buttonText: I18n.t('card.add'),
+        buttonText: I18n.t('card.remove'),
+        mode: 'list',
         i18n: {
           added: I18n.t('card.added')
         }
       },
       i18n: {
-        showDetail: I18n.t('card.show_detail')
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: sch.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
@@ -79,7 +86,9 @@ class ReactHelperTest < ActionView::TestCase
 
     expect = {
       title: sch.title,
+      mode: 'list',
       description: sch.description,
+      trackName: sch.track_name,
       speakers: sch.speakers.map do |speaker|
         {
           speakerName: speaker.name,
@@ -99,16 +108,14 @@ class ReactHelperTest < ActionView::TestCase
               twitter: speaker.twitter
             }
           end,
-          startTime: I18n.l(sch.start_at, format: :timetable),
-          endTime: I18n.l(sch.end_at, format: :timetable),
+          startEndTime: "#{I18n.l(sch.start_at, format: :default)} - #{I18n.l(sch.end_at, format: :timetable)}",
           language: sch.language,
           description: sch.description,
           i18n: {
             speaker: I18n.t('card.detail.speaker'),
             username: I18n.t('card.detail.username'),
             aboutSpeaker: I18n.t('card.detail.about_speaker'),
-            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
-            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            startEndTime: I18n.t('card.detail.start_end_time', zone: sch.start_at.zone),
             language: I18n.t('card.detail.language'),
             description: I18n.t('card.detail.description')
           }
@@ -118,6 +125,8 @@ class ReactHelperTest < ActionView::TestCase
           close: I18n.t('button.close')
         }
       },
+      memo: '',
+      memoMaxLength: 1024,
       form: {
         action: plan_path(plan),
         method: 'patch',
@@ -125,12 +134,17 @@ class ReactHelperTest < ActionView::TestCase
         targetKeyName: 'add_schedule_id',
         targetKey: sch.id,
         buttonText: I18n.t('card.add'),
+        mode: 'list',
         i18n: {
           added: nil
         }
       },
       i18n: {
-        showDetail: I18n.t('card.show_detail')
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: sch.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
@@ -142,7 +156,9 @@ class ReactHelperTest < ActionView::TestCase
 
     expect = {
       title: sch.title,
+      mode: 'list',
       description: sch.description,
+      trackName: sch.track_name,
       speakers: sch.speakers.map do |speaker|
         {
           speakerName: speaker.name,
@@ -162,16 +178,14 @@ class ReactHelperTest < ActionView::TestCase
               twitter: speaker.twitter
             }
           end,
-          startTime: I18n.l(sch.start_at, format: :timetable),
-          endTime: I18n.l(sch.end_at, format: :timetable),
+          startEndTime: "#{I18n.l(sch.start_at, format: :default)} - #{I18n.l(sch.end_at, format: :timetable)}",
           language: sch.language,
           description: sch.description,
           i18n: {
             speaker: I18n.t('card.detail.speaker'),
             username: I18n.t('card.detail.username'),
             aboutSpeaker: I18n.t('card.detail.about_speaker'),
-            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
-            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            startEndTime: I18n.t('card.detail.start_end_time', zone: sch.start_at.zone),
             language: I18n.t('card.detail.language'),
             description: I18n.t('card.detail.description')
           }
@@ -182,7 +196,11 @@ class ReactHelperTest < ActionView::TestCase
         }
       },
       i18n: {
-        showDetail: I18n.t('card.show_detail')
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: sch.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, nil, user)
@@ -195,7 +213,9 @@ class ReactHelperTest < ActionView::TestCase
 
     expect = {
       title: sch.title,
+      mode: 'list',
       description: sch.description,
+      trackName: sch.track_name,
       speakers: sch.speakers.map do |speaker|
         {
           speakerName: speaker.name,
@@ -215,16 +235,14 @@ class ReactHelperTest < ActionView::TestCase
               twitter: speaker.twitter
             }
           end,
-          startTime: I18n.l(sch.start_at, format: :timetable),
-          endTime: I18n.l(sch.end_at, format: :timetable),
+          startEndTime: "#{I18n.l(sch.start_at, format: :default)} - #{I18n.l(sch.end_at, format: :timetable)}",
           language: sch.language,
           description: sch.description,
           i18n: {
             speaker: I18n.t('card.detail.speaker'),
             username: I18n.t('card.detail.username'),
             aboutSpeaker: I18n.t('card.detail.about_speaker'),
-            startTime: I18n.t('card.detail.start_time', zone: sch.start_at.zone),
-            endTime: I18n.t('card.detail.end_time', zone: sch.start_at.zone),
+            startEndTime: I18n.t('card.detail.start_end_time', zone: sch.start_at.zone),
             language: I18n.t('card.detail.language'),
             description: I18n.t('card.detail.description')
           }
@@ -235,7 +253,11 @@ class ReactHelperTest < ActionView::TestCase
         }
       },
       i18n: {
-        showDetail: I18n.t('card.show_detail')
+        showDetail: I18n.t('card.show_detail'),
+        editMemo: I18n.t('button.update_memo'),
+        title: I18n.t('dialog.edit_memo', title: sch.title),
+        save: I18n.t('button.save'),
+        close: I18n.t('button.close')
       }
     }
     assert_equal expect, schedule_to_card_props(sch, plan, user)
@@ -252,17 +274,28 @@ class ReactHelperTest < ActionView::TestCase
         '2021-07-20' => {
           trackList: %w[TrackA TrackB],
           rows: [
-            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[0], plan, usr), nil] },
-            { time: '11:00 - 11:40 (UTC)', schedules: [nil, schedule_to_card_props(schs[1], plan, usr)] }
+            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[0], plan, usr), nil],
+              sortKey: schs[0].start_at.to_i },
+            { time: '11:00 - 11:40 (UTC)', schedules: [nil, schedule_to_card_props(schs[1], plan, usr)],
+              sortKey: schs[1].start_at.to_i }
           ]
         },
         '2021-07-21' => {
           trackList: %w[TrackA TrackB TrackC],
           rows: [
-            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[2], plan, usr), nil, nil] },
-            { time: '11:00 - 11:40 (UTC)', schedules: [nil] + schs[3..4].map { schedule_to_card_props(_1, plan, usr) } }
+            { time: '10:00 - 10:40 (UTC)', schedules: [schedule_to_card_props(schs[2], plan, usr), nil, nil],
+              sortKey: schs[2].start_at.to_i },
+            { time: '11:00 - 11:40 (UTC)', schedules: [nil] + schs[3..4].map { schedule_to_card_props(_1, plan, usr) },
+              sortKey: schs[3].start_at.to_i }
           ]
         }
+      },
+      initial: {
+        title: I18n.t('dialog.terms_of_service'),
+        description: I18n.t('terms_of_service.description'),
+        termsOfService: I18n.t('terms_of_service.terms_of_service'),
+        close: I18n.t('button.close'),
+        accept: I18n.t('button.accept_to_add')
       },
       i18n: { startEnd: 'Start...End time' }
     }
@@ -277,19 +310,28 @@ class ReactHelperTest < ActionView::TestCase
     expect = {
       groupedPlans: {
         '2021-07-20' => [
-          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[0], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[0]).memo },
-          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[1], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[1]).memo }
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[0], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[0]).memo, sortKey: schs[0].start_at.to_i },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[1], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[1]).memo, sortKey: schs[1].start_at.to_i }
         ],
         '2021-07-21' => [
-          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[2], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[2]).memo },
-          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[3], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[2], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[2]).memo, sortKey: schs[2].start_at.to_i },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[3], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[3]).memo, sortKey: schs[3].start_at.to_i }
         ]
       },
-      i18n: { startEnd: 'Start...End time', track: 'Track name', memo: 'Memo', updateMemo: 'Update memo' }
+      oopsImagePath: '/2021/rubykaigi.png',
+      uri: 'http://test.host/2021/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
+      i18n: {
+        startEnd: I18n.t('table.start_end'),
+        track: I18n.t('table.track'),
+        memo: I18n.t('table.memo'),
+        updateMemo: I18n.t('button.update_memo.'),
+        noPlans: I18n.t('table.no_plans'),
+        noPlansDesc: I18n.t('table.no_plans_description')
+      }
     }
     assert_equal expect, create_plan_table_props(plan, user)
   end
@@ -302,19 +344,28 @@ class ReactHelperTest < ActionView::TestCase
     expect = {
       groupedPlans: {
         '2021-07-20' => [
-          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[0], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[0]).memo },
-          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[1], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[1]).memo }
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[0], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[0]).memo, sortKey: schs[0].start_at.to_i },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[1], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[1]).memo, sortKey: schs[1].start_at.to_i }
         ],
         '2021-07-21' => [
-          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[2], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[2]).memo },
-          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[3], plan, user),
-            memo: plan.plan_schedules.find_by(schedule: schs[3]).memo }
+          { time: '10:00 - 10:40 (UTC)', schedule: schedule_to_card_props(schs[2], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[2]).memo, sortKey: schs[2].start_at.to_i },
+          { time: '11:00 - 11:40 (UTC)', schedule: schedule_to_card_props(schs[3], plan, user, 'plan'),
+            memo: plan.plan_schedules.find_by(schedule: schs[3]).memo, sortKey: schs[3].start_at.to_i }
         ]
       },
-      i18n: { startEnd: 'Start...End time', track: 'Track name', memo: 'Memo', updateMemo: 'Update memo' }
+      oopsImagePath: '/2021/rubykaigi.png',
+      uri: 'http://test.host/2021/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
+      i18n: {
+        startEnd: I18n.t('table.start_end'),
+        track: I18n.t('table.track'),
+        memo: I18n.t('table.memo'),
+        updateMemo: I18n.t('button.update_memo.'),
+        noPlans: I18n.t('table.no_plans'),
+        noPlansDesc: I18n.t('table.no_plans_description')
+      }
     }
     assert_equal expect, create_plan_table_props(plan, user)
   end
@@ -322,7 +373,7 @@ class ReactHelperTest < ActionView::TestCase
   test 'create_info_panel_props' do
     expect = {
       form: {
-        action: '/plans',
+        action: '/2021/plans',
         authenticityToken: form_authenticity_token('/plans')
       },
       i18n: {
