@@ -3,14 +3,25 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es6", "dom"],
-    "module": "es6",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "jsx": "react",
+    "jsx": "preserve",
     "noEmit": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "exclude": [
     "**/*.spec.ts",
@@ -18,5 +29,10 @@
     "vendor",
     "public"
   ],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
