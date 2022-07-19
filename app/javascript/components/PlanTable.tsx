@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useRouter} from "next/router";
 import styled from 'styled-components'
 
 import { TabBar, TabItem, Text, ThemeProvider } from 'smarthr-ui'
@@ -27,7 +28,9 @@ interface Props {
 
 export const PlanTable: React.VFC<Props> = (props) => {
   const { groupedPlans, oopsImagePath, uri, i18n } = props
-  const current = window.location.hash === "" ? Object.keys(groupedPlans)[0] : window.location.hash.replace('#', '')
+  const router = useRouter()
+  const hash = router.asPath.split("#")[1] || ''
+  const current = hash === "" ? Object.keys(groupedPlans)[0] : ''
 
   const [currentKey, setCurrentDate] = useState(current)
 

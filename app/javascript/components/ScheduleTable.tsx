@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 import { TabBar, TabItem, ThemeProvider } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, InitialProps } from './ScheduleCard'
@@ -22,7 +23,9 @@ interface Props {
 
 export const ScheduleTable: React.VFC<Props> = (props) => {
   const { groupedSchedules, initial, i18n } = props
-  const current = window.location.hash === "" ? Object.keys(groupedSchedules)[0] : window.location.hash.replace('#', '')
+  const router = useRouter()
+  const hash = router.asPath.split("#")[1] || ''
+  const current = hash === "" ? Object.keys(groupedSchedules)[0] : ''
 
 
   const [currentKey, setCurrentDate] = useState(current)
