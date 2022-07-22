@@ -1,4 +1,5 @@
 import React from 'react'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import Navigation from '../app/javascript/components/Navigation'
 import ScheduleTable from '../app/javascript/components/ScheduleTable'
@@ -14,5 +15,11 @@ function IndexPage() {
     </div>
   )
 }
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...await serverSideTranslations(locale, ['common']),
+  },
+})
 
 export default IndexPage

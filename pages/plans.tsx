@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import Navigation from '../app/javascript/components/Navigation'
 import PlanTitle from '../app/javascript/components/PlanTitle'
@@ -30,6 +31,12 @@ function PlanPage() {
     </div>
   )
 }
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...await serverSideTranslations(locale, ['common']),
+  },
+})
 
 const Container = styled.div`
   display: flex;
