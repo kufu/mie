@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "label": "RubyKaigi mie planning",
+    "help": "Help",
+    "selectLocale": "Select your timezone",
+    "root": "Top",
+    "schedule": "Schedule",
+    "plan": "My Plans"
+  },
+  "info": {
+    "createPlanTitle": "Create your RubyKaigi 2021 Takeout Plans",
+    "createPlanText": "Create your RubyKaigi 2021 Takeout Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button.",
+    "termsOfService": "Terms of service"
+  },
+  "table": {
+    "startEnd": "Start...End time",
+    "track": "Track name",
+    "memo": "Memo",
+    "noPlans": "Oops! Talks have not been added yet.",
+    "noPlansDescription": "Go to Talks and add your favorite talks here!"
+  },
+  "card": {
+    "add": "Add to my schedule",
+    "added": "Added to my schedule",
+    "remove": "Remove from my schedule",
+    "showDetail": "Show detail",
+    "detail": {
+      "title": "The details",
+      "speaker": "Speaker",
+      "username": "UserName",
+      "aboutSpeaker": "Description about the speaker",
+      "startEndTime": "Start...End time ({{zone}})",
+      "language": "Language",
+      "description": "Description about the talk"
+    }
+  },
+  "description": {
+    "title": "Note for the schedule",
+    "notice": "This memo will be placed into OGP image when share on SNS.",
+    "formTitme": "Edit note for schedule"
+  },
+  "settings": {
+    "title": "Settings",
+    "setPassword": "Set password",
+    "passwordExpression": "Setting a password will allow you to edit your schedule from other devices and browser sessions.",
+    "changeVisibility": "Change visibility",
+    "visibilityDescription": "The currently visibility is {{current}}",
+    "visibleText": "Make public",
+    "visibleDescription": "This schedule will be visible for anyone",
+    "invisibleText": "Make private",
+    "invisibleDescription": "This schedule will NOT be visible to anyone",
+    "visible": "Public",
+    "invisible": "Private"
+  },
+  "termsOfService": {
+    "description": "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
+  },
+  "dialog": {
+    "editTitle": "Edit the title",
+    "editMemo": "Edit a note for \"{{title}}\"",
+    "termsOfService": "Terms of service",
+    "inputPassword": "Input password"
+  },
+  "button": {
+    "settings": "Settings",
+    "updateMemo": "Update memo",
+    "planCreateButton": "Create my plans",
+    "edit": "Edit",
+    "save": "Save",
+    "close": "Close",
+    "acceptToAdd": "Accept and add to Plans",
+    "makeEditable": "Make editable",
+    "checkPassword": "Take edit permission"
+  },
+  "defaultVales": {
+    "planTitle": "My plans"
+  },
+  "errors": {
+    "timeOverlapError": "Can't select [{{left}}] and [{{right}}] at the same time, they are overlapping time schedule.",
+    "passwordIncorrect": "Password incorrect",
+    "internalServerError": "Internal server error",
+    "notFound": "404! The contents you are looking for is not found.",
+    "notFoundDesc": "Why don’t you go to Talks and make your own schedule?"
+  },
+  "time": {
+    "formats": {
+      "default": "%Y-%m-%d %H:%M",
+      "timetable": "%H:%M"
+    }
+  },
+  "application": {
+    "intro": "\"RubyKaigi Takeout 2021 Schedule.select\" is RubyKaigi's first official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!\nIf you have ever wondered, \"Which session should I watch…\" before attending a conference, then this is the app for you.\nWe developed this app so participants could share their \"viewing schedules\" and \"reasons for interest\" before the event, which they could use as a reference for session selection and to enjoy the conference even more.\nWhy do you want to see the session? Share it before the event and let's enjoy RubyKaigi Takeout 2021 together!"
+  }
+}

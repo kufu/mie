@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "label": "RubyKaigi mie ru 君",
+    "help": "ヘルプ",
+    "selectLocale": "タイムゾーンを選択してください",
+    "root": "top",
+    "schedule": "スケジュール",
+    "plan": "視聴予定"
+  },
+  "info": {
+    "createPlanTitle": "セッションの視聴予定を作成しませんか？",
+    "createPlanText": "RubyKaigi mie.ru 君を使って、RubyKaigi2021 Takeoutのセッション視聴予定表を作成しましょう！ 利用規約に同意の上、予定の作成ボタンを押してください。",
+    "termsOfService": "利用規約"
+  },
+  "table": {
+    "startEnd": "開始/終了 時間",
+    "track": "トラック名",
+    "memo": "メモ",
+    "noPlans": "視聴予定のトークを登録しましょう！",
+    "noPlansDescription": "トーク一覧から予定を追加しよう"
+  },
+  "card": {
+    "add": "スケジュールに追加する",
+    "added": "スケジュールに追加されています",
+    "remove": "スケジュールから削除します",
+    "showDetail": "詳細を表示",
+    "detail": {
+      "title": "トークの詳細",
+      "speaker": "スピーカー",
+      "username": "ソーシャルID",
+      "aboutSpeaker": "プロフィール",
+      "startEndTime": "開始/終了 ({{zone}})",
+      "language": "言語",
+      "description": "トークの詳細"
+    }
+  },
+  "description": {
+    "title": "ノート",
+    "notice": "このノートは、SNSシェア時にOGP画像に埋め込まれます",
+    "formTitme": "ノートを編集"
+  },
+  "settings": {
+    "title": "設定",
+    "setPassword": "パスワードを設定",
+    "passwordExpression": "パスワードを設定することで、異なるブラウザから予定を編集できます。",
+    "changeVisibility": "公開設定",
+    "visibilityDescription": "現在の公開設定は {{current}} です",
+    "visibleText": "公開",
+    "visibleDescription": "この予定は、リンクを知っているすべての人が閲覧できます",
+    "invisibleText": "非公開",
+    "invisibleDescription": "この予定を閲覧できるのはあなただけです",
+    "visible": "公開",
+    "invisible": "非公開"
+  },
+  "termsOfService": {
+    "description": "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR を利用するためには、下記の利用規約に同意する必要があります。予定を追加すると、規約に同意したとみなされます。"
+  },
+  "dialog": {
+    "editTitle": "タイトルを編集",
+    "editMemo": "「{{title}}」のメモを更新",
+    "termsOfService": "サービスの利用規約",
+    "inputPassword": "パスワードを入力"
+  },
+  "button": {
+    "settings": "設定",
+    "updateMemo": "メモを更新",
+    "planCreateButton": "予定を作成",
+    "edit": "編集",
+    "save": "保存",
+    "close": "閉じる",
+    "acceptToAdd": "同意して追加する",
+    "makeEditable": "パスワードを入力して編集",
+    "checkPassword": "編集可能にする"
+  },
+  "defaultVales": {
+    "planTitle": "視聴予定"
+  },
+  "errors": {
+    "timeOverlapError": "「{{left}}」と「 {{right}}」は、時間が重複しているため同時に選択できません",
+    "passwordIncorrect": "パスワードが違います",
+    "internalServerError": "Internal server error",
+    "notFound": "404! The contents you are looking for is not found.",
+    "notFoundDesc": "Why don’t you go to Talks and make your own schedule?"
+  },
+  "time": {
+    "formats": {
+      "default": "%Y-%m-%d %H:%M",
+      "timetable": "%H:%M"
+    }
+  },
+  "application": {
+    "intro": "『RubyKaigi Takeout 2021 Schedule.select』は、RubyKaigi初の公式スケジュール作成・共有アプリケーションです。気になるセッションをリスト化し、自分だけの視聴スケジュールを作成できます！\nあなたはカンファレンス参加前「どのセッションを見よう…」と迷ったことはありませんか？\nわたしたちは、開催前に参加者同士で \"視聴スケジュール\" や \"興味をもつ理由\" が共有できれば、セッション選びの参考にでき、カンファレンスをより楽しめるのではと考えこのアプリを開発しました。\nあなたがそのセッションを見たい理由はなんですか？ 開催前に共有し、一緒に RubyKaigi Takeout 2021 を盛り上げましょう！"
+  }
+}
