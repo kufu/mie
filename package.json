@@ -14,6 +14,7 @@
     "@types/styled-components": "^5.1.12",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "next": "^12.2.2",
+    "next-i18next": "^11.2.2",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
