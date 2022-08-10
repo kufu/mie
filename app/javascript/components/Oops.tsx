@@ -7,7 +7,7 @@ interface Props {
   description?: string
   noBorder?: boolean
   imagePath: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const Oops: React.VFC<Props> = (props) => {

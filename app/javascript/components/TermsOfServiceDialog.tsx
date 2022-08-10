@@ -20,14 +20,19 @@ interface Props {
   }
 }
 
+type ResponseMessage = {
+  status: 'success' | 'error' | 'processing',
+  text: string
+}
+
 export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
   const { actionHandler, closeHandler, isOpen, i18n } = props
   const [isActiveClicked, setIsActiveClicked] = useState(false)
-  const [responseMessage, setResponseMessage] = useState<string | null>(null)
+  const [responseMessage, setResponseMessage] = useState<ResponseMessage | null>(null)
 
   const handleActiveClick = () => {
     setIsActiveClicked(true)
-    setResponseMessage("processing")
+    setResponseMessage({ status: "processing", text: "" })
     actionHandler()
   }
 

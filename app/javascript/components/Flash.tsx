@@ -3,7 +3,7 @@ import { FlashMessage } from 'smarthr-ui'
 
 interface Props {
   message: string
-  type: string
+  type: "success" | "info" | "warning" | "error"
 }
 
 export const Flash: React.VFC<Props> = (props) => {

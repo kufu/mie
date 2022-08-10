@@ -138,7 +138,7 @@ const Icons = styled.div`
   width: 246px;
 `
 
-const ImageBox = styled.div`
+const ImageBox = styled.div<{thumbnailUrl: string}>`
   width: 59px;
   height: 59px;
   background-image: url("${props => props.thumbnailUrl}");

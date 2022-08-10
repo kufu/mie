@@ -56,6 +56,7 @@ export interface SubmitFormProps {
   i18n: {
     added: string | null
   }
+  initial? :InitialProps
 }
 
 export interface InitialProps {
