@@ -1,26 +1,26 @@
 import React, {useState} from "react";
 import styled from 'styled-components'
+import { useTranslation } from "next-i18next";
+
 import {ActionDialog, Textarea, ThemeProvider} from "smarthr-ui";
 import createdTheme from "../Constants";
 
 interface Props {
+  title: string
   isOpen: boolean
   handleClose: () => void
   handleAction: (string) => void
   maxLength?: number
   value: string
   limit?: number
-  i18n: {
-    title: string
-    save: string
-    close: string
-  }
 }
 
 export const UpdateDialog: React.VFC<Props> = (props) => {
-  const { isOpen, handleClose, handleAction, maxLength, value, i18n } = props
+  const { title, isOpen, handleClose, handleAction, maxLength, value } = props
   const [current, setCurrent] = useState(value)
   const [isActive, setIsActive] = useState(value.length <= maxLength)
+
+  const { t } = useTranslation()
 
   const handleOnChange = (e) => {
     setCurrent(e.target.value)
@@ -30,9 +30,9 @@ export const UpdateDialog: React.VFC<Props> = (props) => {
   return (
     <ThemeProvider theme={createdTheme}>
       <ActionDialog
-        title={i18n.title}
-        actionText={i18n.save}
-        closeText={i18n.close}
+        title={title}
+        actionText={t("button.save")}
+        closeText={t("button.close")}
         isOpen={isOpen}
         onClickOverlay={handleClose}
         onPressEscape={handleClose}

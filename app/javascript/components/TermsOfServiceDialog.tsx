@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import {useTranslation} from "next-i18next";
 
 import {
   DialogBase,
@@ -11,13 +12,6 @@ interface Props {
   isOpen: boolean
   closeHandler: () => void
   actionHandler: () => void
-  i18n: {
-    title: string
-    description: string
-    termsOfService: string
-    close: string
-    accept: string
-  }
 }
 
 type ResponseMessage = {
@@ -26,9 +20,11 @@ type ResponseMessage = {
 }
 
 export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
-  const { actionHandler, closeHandler, isOpen, i18n } = props
+  const { actionHandler, closeHandler, isOpen } = props
   const [isActiveClicked, setIsActiveClicked] = useState(false)
   const [responseMessage, setResponseMessage] = useState<ResponseMessage | null>(null)
+
+  const { t } = useTranslation()
 
   const handleActiveClick = () => {
     setIsActiveClicked(true)
@@ -38,9 +34,9 @@ export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
 
   return (
     <ActionDialog
-      title={i18n.title}
-      closeText={i18n.close}
-      actionText={i18n.accept}
+      title={t("dialog.termsOfService")}
+      closeText={t("button.close")}
+      actionText={t("button.acceptToAdd")}
       onClickAction={handleActiveClick}
       onClickClose={closeHandler}
       isOpen={isOpen}
@@ -48,10 +44,10 @@ export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
       responseMessage={responseMessage}
     >
       <DialogBody>
-        <Text>{i18n.description}</Text>
+        <Text>{t("termsOfService.description")}</Text>
         <TermsOfService>
           <TermsOfServiceText>
-          <Text size="S" leading="RELAXED"><span dangerouslySetInnerHTML={{__html: i18n.termsOfService}}></span></Text>
+          <Text size="S" leading="RELAXED"><span dangerouslySetInnerHTML={{__html: t("termsOfService.termsOfService")}}></span></Text>
           </TermsOfServiceText>
         </TermsOfService>
       </DialogBody>

@@ -1,4 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react'
+import { useTranslation } from "next-i18next"
 import styled from 'styled-components'
 
 import {
@@ -36,13 +37,6 @@ export interface Props {
   memo?: string
   memoMaxLength: number
   initial?: InitialProps
-  i18n: {
-    showDetail: string
-    editMemo: string
-    title: string
-    save: string
-    close: string
-  }
 }
 
 export interface SubmitFormProps {
@@ -53,9 +47,6 @@ export interface SubmitFormProps {
   targetKey: string
   buttonText: string
   mode: Mode
-  i18n: {
-    added: string | null
-  }
   initial? :InitialProps
 }
 
@@ -68,9 +59,11 @@ export interface InitialProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, trackName, speakers, language, memo, memoMaxLength, form, initial, i18n, details } = props
+  const { title, mode, description, trackName, speakers, language, memo, memoMaxLength, form, initial, details } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
+
+  const { t } = useTranslation()
 
   const handleCloseClick = () => {
     setIsDetailOpen(false)
@@ -129,14 +122,14 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         { form && mode === "plan" ?
           <UpdateMemoButton>
             <SecondaryButton prefix={<FaPencilAltIcon size={12}/>} size="s"
-                             onClick={() => setIsMemoEditing(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.editMemo}</Text></SecondaryButton>
-            <UpdateDialog isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
-                          handleAction={handleUpdateMemo} maxLength={memoMaxLength} value={memo} i18n={i18n}/>
+                             onClick={() => setIsMemoEditing(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{t("button.updateMemo")}</Text></SecondaryButton>
+            <UpdateDialog title={t("dialog.editMemo", { title: title} )} isOpen={isMemoEditing} handleClose={() => setIsMemoEditing(false)}
+                          handleAction={handleUpdateMemo} maxLength={memoMaxLength} value={memo} />
           </UpdateMemoButton>
           : null
         }
         <MarginWrapper>{ form ? <SubmitForm {...form} initial={initial} /> : null }</MarginWrapper>
-        <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{i18n.showDetail}</Text></TextButton></MarginWrapper>
+        <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{t("card.showDetail")}</Text></TextButton></MarginWrapper>
       </Actions>
       <ScheduleDetail {...detailProps} />
     </Card>
@@ -144,9 +137,11 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, i18n } = props
+  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
+
+  const { t } = useTranslation()
 
   const acceptHandler = () => {
     const body = {
@@ -176,13 +171,13 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
           <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
         </SecondaryButton>
-        <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} i18n={initial} />
+        <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} />
       </>
     )
   } else {
-    if (i18n.added) {
+    if (targetKeyName === "remove_schedule_id") {
       if (mode == "list") {
-        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{i18n.added}</Text></MarginWrapper></AddedText>)
+        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
       } else {
         return (
           <form action={action} acceptCharset="UTF-8" method="post" onSubmit={handleButtonClick}>

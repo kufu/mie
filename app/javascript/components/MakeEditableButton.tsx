@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components'
 
 import {
@@ -12,25 +13,17 @@ import {
 
 interface Props {
   form: SubmitForm
-  i18n: {
-    makeEditable: string
-  }
 }
 
 interface SubmitForm {
   action: string
   method: string
   authenticityToken: string
-  i18n: {
-    title: string
-    takeOwn: string
-    close: string
-    inputPassword: string
-  }
 }
 
 export const MakeEditableButton: React.VFC<Props> = (props) => {
-  const { i18n, form } = props
+  const { form } = props
+  const { t } = useTranslation()
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [password, setPassword] = useState("")
@@ -58,13 +51,13 @@ export const MakeEditableButton: React.VFC<Props> = (props) => {
   return (
     <>
       <SecondaryButton size="s" prefix={<FaCogIcon size={11} />} onClick={() => setIsDialogOpen(true)}>
-        {i18n.makeEditable}
+        {t("button.makeEditable")}
       </SecondaryButton>
 
       <ActionDialog
-        title={form.i18n.title}
-        actionText={form.i18n.takeOwn}
-        closeText={form.i18n.close}
+        title={t("button.makeEditable")}
+        actionText={t("button.checkPassword")}
+        closeText={t("button.close")}
         isOpen={isDialogOpen}
         onClickOverlay={() => setIsDialogOpen(false)}
         onPressEscape={() => setIsDialogOpen(false)}
@@ -73,7 +66,7 @@ export const MakeEditableButton: React.VFC<Props> = (props) => {
       >
         <DialogBody>
           <Forms
-            title={form.i18n.inputPassword}
+            title={t("dialog.inputPassword")}
             titleType="subBlockTitle"
             labelId="password"
             innerMargin="XS"

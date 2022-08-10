@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import {useTranslation} from "next-i18next";
 
 import {
   DialogBase,
@@ -17,36 +18,22 @@ import createdTheme from "./Constants";
 interface Props {
   visible: boolean
   form: SubmitForm
-  i18n: {
-    settings: string
-    setPassword: string
-    passwordExpression: string
-    changeVisibility: string
-    visibilityDesc: string
-    visibleText: string
-    visibleDesc: string
-    invisibleText: string
-    invisibleDesc: string
-  }
 }
 
 interface SubmitForm {
   action: string
   method: string
   authenticityToken: string
-  i18n: {
-    title: string
-    save: string
-    close: string
-  }
 }
 
 export const SettingButton: React.VFC<Props> = (props) => {
-  const { visible, i18n, form } = props
+  const { visible, form } = props
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isVisibleSelected, setIsVisibleSelected] = useState(visible)
   const [password, setPassword] = useState("")
+
+  const { t } = useTranslation()
 
   const handleVisibilityChange = (visibility) => {
     setIsVisibleSelected(visibility == "visible")
@@ -76,13 +63,13 @@ export const SettingButton: React.VFC<Props> = (props) => {
   return (
     <ThemeProvider theme={createdTheme}>
       <SecondaryButton size="s" prefix={<FaCogIcon size={11} />} onClick={() => setIsDialogOpen(true)}>
-        {i18n.settings}
+        {t("button.settings")}
       </SecondaryButton>
 
       <ActionDialog
-        title={form.i18n.title}
-        actionText={form.i18n.save}
-        closeText={form.i18n.close}
+        title={t("settings.title")}
+        actionText={t("button.save")}
+        closeText={t("button.close")}
         isOpen={isDialogOpen}
         onClickOverlay={() => setIsDialogOpen(false)}
         onPressEscape={() => setIsDialogOpen(false)}
@@ -91,9 +78,9 @@ export const SettingButton: React.VFC<Props> = (props) => {
       >
         <DialogBody>
           <Forms
-            title={i18n.setPassword}
+            title={t("settings.setPassword")}
             titleType="subBlockTitle"
-            helpMessage={i18n.passwordExpression}
+            helpMessage={t("settings.passwordExpression")}
             labelId="password"
             innerMargin="XS"
           >
@@ -101,24 +88,24 @@ export const SettingButton: React.VFC<Props> = (props) => {
           </Forms>
 
           <Forms
-            title={i18n.changeVisibility}
+            title={t("settings.changeVisibility")}
             titleType="subBlockTitle"
-            helpMessage={i18n.visibilityDesc}
+            helpMessage={t("settings.visibilityDescription", {current: t(visible ? ".settings.visible" : "settings.invisible")})}
             labelId="visibility"
             innerMargin="XS"
           >
             <RadioButtons>
             <RadioBtn name="visibility" value="visible" onChange={(e) => handleVisibilityChange(e.target.value)} checked={isVisibleSelected}>
               <Text as="p">
-                <Text weight="bold">{i18n.visibleText}</Text><br />
-                {i18n.visibleDesc}
+                <Text weight="bold">{t("settings.visibleText")}</Text><br />
+                {t("settings.visibleDescription")}
               </Text>
             </RadioBtn>
 
               <RadioBtn name="visibility" value="invisible" onChange={(e) => handleVisibilityChange(e.target.value)} checked={!isVisibleSelected}>
                 <Text as="p">
-                  <Text weight="bold">{i18n.invisibleText}</Text><br />
-                  {i18n.invisibleDesc}
+                  <Text weight="bold">{t("settings.visibleText")}</Text><br />
+                  {t("settings.visibleDescription")}
                 </Text>
               </RadioBtn>
             </RadioButtons>

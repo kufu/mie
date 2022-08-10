@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslation } from "next-i18next"
 
 import {AppNavi, Text, SmartHRLogo, FaBullhornIcon, FaCalendarAltIcon, ThemeProvider} from 'smarthr-ui'
 
@@ -12,17 +13,11 @@ interface Props {
   schedulesLink: string
   plansLink?: string
   locales: LocaleSelectorProps
-  i18n: {
-    label: string
-    rootButton: string
-    scheduleButton: string
-    plansButton: string
-    help: string
-  }
 }
 
 export const Navigation: React.FC<Props> = (props) => {
-  const { current, locales, i18n } = props
+  const { t } =   useTranslation()
+  const { current, locales } = props
 
   return (
     <ThemeProvider theme={createdTheme}>
@@ -35,13 +30,12 @@ export const Navigation: React.FC<Props> = (props) => {
             </MarginWrapper>
             <PoweredByWrapper>
               <Text size="S">powered by</Text>
-              <SmartHRLogo width={95} height={16} fill="brand" />
             </PoweredByWrapper>
           </CenteredWrapper>
         </Container>
       </Nav>
       <AppNavi
-        label={i18n.label}
+        label={t("nav.label")}
         buttons={generateNaviButton(props, current)}
       >
         <Child><LocaleSelector {...locales} /></Child>
@@ -51,16 +45,18 @@ export const Navigation: React.FC<Props> = (props) => {
 }
 
 const generateNaviButton = (props: Props, current: string) => {
+  const { t } = useTranslation()
   const buttons = []
 
+  console.log(t("nav.schedule"))
   buttons.push({
-    children: props.i18n.rootButton,
+    children: t("nav.root"),
     current: current === null,
     href: props.rootLink,
   })
 
   buttons.push({
-    children: props.i18n.scheduleButton,
+    children: t("nav.schedule"),
     current: current === "schedules",
     icon: FaBullhornIcon,
     href: props.schedulesLink,
@@ -69,7 +65,7 @@ const generateNaviButton = (props: Props, current: string) => {
   if(!!props.plansLink) {
     buttons.push(
       {
-        children: props.i18n.plansButton,
+        children: t("nav.plan"),
         current: current === "plans",
         icon: FaCalendarAltIcon,
         href: props.plansLink

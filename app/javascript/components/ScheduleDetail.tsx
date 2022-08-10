@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslation } from "next-i18next";
 
 import { MessageDialog, DefinitionList } from 'smarthr-ui'
 import { LanguageMap } from "./Shared"
@@ -8,10 +9,6 @@ export interface Props {
   isOpen: boolean
   handleOnClickClose: () => void
   body: BodyProps
-  i18n: {
-    title: string
-    close: string
-  }
 }
 
 interface BodyProps {
@@ -26,22 +23,17 @@ interface BodyProps {
   startEndTime: string
   language: string
   description: string
-  i18n: {
-    speaker: string
-    username: string
-    aboutSpeaker: string
-    startEndTime: string
-    language: string
-    description: string
-  }
 }
 
 export const ScheduleDetail: React.VFC<Props> = (props) => {
-  const { isOpen, handleOnClickClose, body, i18n } = props
+  const { isOpen, handleOnClickClose, body } = props
+
+  const { t } = useTranslation()
+
   return (
     <MessageDialog
-      title={i18n.title}
-      closeText={i18n.close}
+      title={t("card.detail.title")}
+      closeText={t("button.close")}
       onPressEscape={handleOnClickClose}
       onClickOverlay={handleOnClickClose}
       onClickClose={handleOnClickClose}
@@ -52,7 +44,9 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
 }
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
-  const { speakers, startEndTime, language, description, i18n } = props
+  const { speakers, startEndTime, language, description } = props
+
+  const { t } = useTranslation()
 
   return (
     <Body>
@@ -64,11 +58,11 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
               <Profile>
                 <DefinitionList layout="double" items={[
                   {
-                    term: i18n.speaker,
+                    term: t("card.detail.speaker"),
                     description: speaker.speaker
                   },
                   {
-                    term: i18n.username,
+                    term: t("card.detail.username"),
                     description: speaker.username
                   }
                   ]} />
@@ -82,7 +76,7 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
           <Row>
             <DefinitionList layout="single" items={[
               {
-                term: i18n.aboutSpeaker,
+                term: t("card.detail.aboutSpeaker"),
                 description: speaker.aboutSpeaker
               }
             ]} />
@@ -92,11 +86,11 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
       <Row>
         <DefinitionList layout="double" items={[
           {
-            term: i18n.startEndTime,
+            term: t("card.detail.startEndTime"),
             description: startEndTime
           },
           {
-            term: i18n.language,
+            term: t("card.detail.language"),
             description: LanguageMap[language]
           },
         ]} />
@@ -104,7 +98,7 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
       <Row>
         <DefinitionList layout="single" items={[
           {
-            term: i18n.description,
+            term: t("card.detail.description"),
             description: description
           }
         ]} />

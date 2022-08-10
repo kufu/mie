@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from "next-i18next"
 import styled from 'styled-components'
 
 import {Base, Heading, SecondaryButton, FaPencilAltIcon, Text} from 'smarthr-ui'
@@ -8,28 +9,20 @@ interface Props {
   description: string
   maxLength?: number
   form?: SubmitForm
-  i18n: {
-    title: string
-    notice: string
-    button: string
-  }
 }
 
 interface SubmitForm {
   action: string
   method: string
   authenticityToken: string
-  i18n: {
-    title: string
-    save: string
-    close: string
-  }
 }
 
 
 export const PlanDescription: React.VFC<Props> = (props) => {
-  const { description, maxLength, form, i18n } = props
+  const { description, maxLength, form } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const { t } = useTranslation()
 
   const handleAction = (desc) => {
     const body = {
@@ -51,13 +44,13 @@ export const PlanDescription: React.VFC<Props> = (props) => {
     <Container>
           <LineUp>
             <Stack>
-              <Heading type="blockTitle" tag="h1">{i18n.title}</Heading>
-              <Text size="S" color="TEXT_GREY">{i18n.notice}</Text>
+              <Heading type="blockTitle" tag="h1">{t("description.title")}</Heading>
+              <Text size="S" color="TEXT_GREY">{t("description.notice")}</Text>
             </Stack>
 
             {form ?
               <SecondaryButton size="s" prefix={<FaPencilAltIcon size={11}/>} onClick={() => setIsDialogOpen(true)}>
-                <Text size="S" weight="bold">{i18n.button}</Text>
+                <Text size="S" weight="bold">{t("button.edit")}</Text>
               </SecondaryButton>
               : null
             }
@@ -66,8 +59,8 @@ export const PlanDescription: React.VFC<Props> = (props) => {
           <Text>{description}</Text>
         </DescriptionBase>
       {form ?
-        <UpdateDialog isOpen={isDialogOpen} handleClose={() => setIsDialogOpen(false)} handleAction={handleAction}
-                      maxLength={maxLength} value={description} i18n={form.i18n}/>
+        <UpdateDialog title={t("description.formTitme")} isOpen={isDialogOpen} handleClose={() => setIsDialogOpen(false)} handleAction={handleAction}
+                      maxLength={maxLength} value={description} />
         : null
       }
     </Container>

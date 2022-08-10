@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useTranslation } from "next-i18next"
 import styled from 'styled-components'
 
 import { Text, FaPencilAltIcon, Heading, SecondaryButton, StatusLabel } from 'smarthr-ui'
@@ -9,27 +10,20 @@ interface Props {
   maxLength: number
   visible: boolean
   form?: SubmitForm
-  i18n: {
-    label: string
-    edit: string
-  }
 }
 
 interface SubmitForm {
   action: string
   method: string
   authenticityToken: string
-  i18n: {
-    title: string
-    save: string
-    close: string
-  }
 }
 
 export const PlanTitle: React.VFC<Props> = (props) => {
-  const { title, maxLength, visible, form, i18n } = props
+  const { title, maxLength, visible, form } = props
 
   const [isEditing, setIsEditing] = useState(false)
+
+  const { t } = useTranslation()
 
   const handleSave = (updateString: string) => {
     const body = {
@@ -49,15 +43,15 @@ export const PlanTitle: React.VFC<Props> = (props) => {
 
   return (
     <Container>
-      <StatusLabel skeleton={true} type={visible ? "success" : "required"}>{i18n.label}</StatusLabel>
+      <StatusLabel type={visible ? "blue" : "red"}>{visible ? t("settings.visible") : t("settings.invisible")}</StatusLabel>
       <MarginWrapper><Heading>{title}</Heading></MarginWrapper>
       {form ?
         <MarginWrapper>
           <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>
-            <Text size="S" weight="bold" color="TEXT_BLACK">{i18n.edit}</Text>
+            <Text size="S" weight="bold" color="TEXT_BLACK">{t("button.edit")}</Text>
           </SecondaryButton>
-          <UpdateDialog isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
-                        maxLength={maxLength} value={title} i18n={form.i18n}/>
+          <UpdateDialog title={t("dialog.editTitle")} isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
+                        maxLength={maxLength} value={title} />
         </MarginWrapper>
         : null
       }

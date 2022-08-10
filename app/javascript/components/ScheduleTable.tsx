@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
+import { useTranslation } from "next-i18next";
 
 import { TabBar, TabItem, ThemeProvider } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, InitialProps } from './ScheduleCard'
@@ -16,17 +17,15 @@ type Row = { time: string, schedules: Array<CardProps | null> }
 interface Props {
   groupedSchedules: GroupedSchedules
   initial?: InitialProps
-  i18n: {
-    startEnd: string
-  }
 }
 
 export const ScheduleTable: React.VFC<Props> = (props) => {
-  const { groupedSchedules, initial, i18n } = props
+  const { groupedSchedules, initial } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
   const current = hash === "" ? Object.keys(groupedSchedules)[0] : ''
 
+  const { t } = useTranslation()
 
   const [currentKey, setCurrentDate] = useState(current)
 
@@ -47,7 +46,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
+                <TableHeadCell width="20%">{t("table.startEnd")}</TableHeadCell>
                 {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
               </TableRow>
             </TableHead>

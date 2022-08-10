@@ -9,8 +9,7 @@ function IndexPage() {
 
   return (
     <div>
-      <Navigation rootLink="" current="" schedulesLink="" locales={{i18n: { label: "test"}, options: []}}
-                  i18n={{label: 'test', rootButton: "test", scheduleButton: "test", plansButton: "test", help: "test"}}/>
+      <Navigation rootLink="" current="" schedulesLink="" locales={{options: []}} />
       <ScheduleTable {...dummyData} />
     </div>
   )

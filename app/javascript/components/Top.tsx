@@ -17,7 +17,7 @@ export const Top: React.VFC<Props> = (props) => {
           Schedule.select
           <PoweredBy>
             <Text>powered by</Text>
-            <SmartHRLogo width={95} height={16} fill="#00C4CC" />
+            <SmartHRLogo width={95} height={16} fill="brand" />
           </PoweredBy>
         </LineUp>
       </TitleBox>

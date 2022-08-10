@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {useRouter} from "next/router";
+import { useTranslation } from "next-i18next"
 import styled from 'styled-components'
 
 import { TabBar, TabItem, Text, ThemeProvider } from 'smarthr-ui'
@@ -16,21 +17,15 @@ interface Props {
   groupedPlans: GroupedPlans
   oopsImagePath: string
   uri: string
-  i18n: {
-    startEnd: string
-    track: string
-    memo: string
-    updateMemo: string
-    noPlans: string
-    noPlansDesc: string
-  }
 }
 
 export const PlanTable: React.VFC<Props> = (props) => {
-  const { groupedPlans, oopsImagePath, uri, i18n } = props
+  const { groupedPlans, oopsImagePath, uri } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
   const current = hash === "" ? Object.keys(groupedPlans)[0] : ''
+
+  const { t } = useTranslation()
 
   const [currentKey, setCurrentDate] = useState(current)
 
@@ -51,8 +46,8 @@ export const PlanTable: React.VFC<Props> = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
-                <TableHeadCell textCenter>{i18n.track}</TableHeadCell>
+                <TableHeadCell width="20%">{t("table.startEnd")}</TableHeadCell>
+                <TableHeadCell textCenter>{t("table.track")}</TableHeadCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -70,8 +65,8 @@ export const PlanTable: React.VFC<Props> = (props) => {
                   })
                   : <TableRow >
                     <TableBodyCell colSpan={2} noSidePadding>
-                      <Oops title={i18n.noPlans} imagePath={oopsImagePath}>
-                        <Text color="TEXT_GREY">{i18n.noPlansDesc}</Text>
+                      <Oops title={t("table.noPlans")} imagePath={oopsImagePath}>
+                        <Text color="TEXT_GREY">{t("table.noPlansDescription")}</Text>
                       </Oops>
                     </TableBodyCell>
                   </TableRow>
