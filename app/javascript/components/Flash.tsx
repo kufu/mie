@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const Flash: React.VFC<Props> = (props) => {
-  console.log(props)
   const [visible, setVisible] = useState(true)
 
   return (

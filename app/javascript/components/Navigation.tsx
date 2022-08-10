@@ -48,7 +48,6 @@ const generateNaviButton = (props: Props, current: string) => {
   const { t } = useTranslation()
   const buttons = []
 
-  console.log(t("nav.schedule"))
   buttons.push({
     children: t("nav.root"),
     current: current === null,
