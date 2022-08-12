@@ -106,6 +106,9 @@ GEM
     i18n (1.11.0)
       concurrent-ruby (~> 1.0)
     imgkit (1.6.2)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     json (2.6.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -219,6 +222,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.16)
   byebug
   imgkit
+  jbuilder (~> 2.11)
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
