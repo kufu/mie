@@ -16,5 +16,20 @@ Rails.application.routes.draw do
     end
   end
 
+  scope '2022' do
+    scope 'api' do
+      resources :schedules, only: %i[index]
+      resources :plans, only: %i[show update create] do
+        patch '/challange', to: 'plans#editable'
+
+        scope module: :plans do
+          get :ogp, to: 'ogps#show'
+        end
+      end
+    end
+
+    get '*path', to: 'static#frontend'
+  end
+
   get '*path', controller: 'application', action: 'not_found'
 end
