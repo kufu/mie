@@ -3,7 +3,8 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "http-server out/ --port=9999 -o"
   },
   "dependencies": {
     "@babel/preset-react": "^7.14.5",
@@ -26,6 +27,7 @@
     "webpack-cli": "^4.10.0"
   },
   "devDependencies": {
+    "http-server": "^14.1.1",
     "webpack-dev-server": "^4.9.3"
   }
 }
