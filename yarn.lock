@@ -4983,6 +4983,11 @@ multicast-dns@^7.2.5:
     dns-packet "^5.2.2"
     thunky "^1.0.2"
 
+mustache@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.2.0.tgz#e5892324d60a12ec9c2a73359edca52972bf6f64"
+  integrity sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==
+
 nan@^2.12.1:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.16.0.tgz#664f43e45460fb98faf00edca0bb0d7b8dce7916"
@@ -5019,6 +5024,13 @@ neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+next-export-i18n@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/next-export-i18n/-/next-export-i18n-2.0.3.tgz#2bed52da14ec4a13e4489d802464a826e178b892"
+  integrity sha512-RfiPn/ZE0nHDZok2Ci+LAMm2hoJKgdLj6ZSefjsUz21YNtaAl3xeVD4iOrV4A2PkN5WgecPWbeTFXqTZ66rqnA==
+  dependencies:
+    mustache "^4.2.0"
 
 next-i18next@^11.2.2:
   version "11.2.2"
