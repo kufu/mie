@@ -1,6 +1,5 @@
 import React from 'react'
 import type { AppProps } from 'next/app'
-import { appWithTranslation } from "next-i18next";
 
 import '../app/assets/stylesheets/reset.css'
 import '../app/assets/stylesheets/application.css'
@@ -17,4 +16,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default appWithTranslation(MyApp)
+export default MyApp
