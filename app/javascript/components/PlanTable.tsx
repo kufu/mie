@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useRouter} from "next/router";
-import { useTranslation } from "next-i18next"
+import { useTranslation } from "next-export-i18n"
 import styled from 'styled-components'
 
 import { TabBar, TabItem, Text, ThemeProvider } from 'smarthr-ui'

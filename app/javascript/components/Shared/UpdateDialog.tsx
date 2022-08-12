@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from 'styled-components'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 
 import {ActionDialog, Textarea, ThemeProvider} from "smarthr-ui";
 import createdTheme from "../Constants";

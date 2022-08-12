@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 
 import { TabBar, TabItem, ThemeProvider } from 'smarthr-ui'
 import { ScheduleCard, Props as CardProps, InitialProps } from './ScheduleCard'

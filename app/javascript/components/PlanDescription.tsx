@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useTranslation } from "next-i18next"
+import { useTranslation } from "next-export-i18n"
 import styled from 'styled-components'
 
 import {Base, Heading, SecondaryButton, FaPencilAltIcon, Text} from 'smarthr-ui'

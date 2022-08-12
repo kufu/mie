@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 
 import { MessageDialog, DefinitionList } from 'smarthr-ui'
 import { LanguageMap } from "./Shared"
