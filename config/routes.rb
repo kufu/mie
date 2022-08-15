@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   scope '2022' do
     scope 'api' do
+      get :me, to: 'me#show'
       resources :schedules, only: %i[index]
       resources :plans, only: %i[show update create] do
         patch '/challange', to: 'plans#editable'
