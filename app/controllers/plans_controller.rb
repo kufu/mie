@@ -6,6 +6,7 @@ class PlansController < ApplicationController
 
   def show
     @schedules = @plan.schedules
+    render 'api/plans/show.json'
   end
 
   def update
