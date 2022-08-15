@@ -9,10 +9,7 @@ import '../app/assets/stylesheets/static.scss'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return(
-    <>
-      <head></head>
       <Component {...pageProps} />
-    </>
   )
 }
 
