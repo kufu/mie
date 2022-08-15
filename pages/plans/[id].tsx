@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import PlanTitle from '../app/javascript/components/PlanTitle'
-import MakeEditableButton from "../app/javascript/components/MakeEditableButton";
-import PlanDescription from "../app/javascript/components/PlanDescription";
-import PlanTable from "../app/javascript/components/PlanTable";
+import PlanTitle from '../../app/javascript/components/PlanTitle'
+import MakeEditableButton from "../../app/javascript/components/MakeEditableButton";
+import PlanDescription from "../../app/javascript/components/PlanDescription";
+import PlanTable from "../../app/javascript/components/PlanTable";
 
 const dummyTitleData = {"title":"たいとる","maxLength":100,"visible":true}
 const dummyPlanDescriptionData = {"description":"説明","maxLength":100}
