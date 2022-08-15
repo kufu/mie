@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Navigation from '../app/javascript/components/Navigation'
 import PlanTitle from '../app/javascript/components/PlanTitle'
 import MakeEditableButton from "../app/javascript/components/MakeEditableButton";
 import PlanDescription from "../app/javascript/components/PlanDescription";
@@ -16,7 +15,6 @@ function PlanPage() {
 
   return (
     <div>
-      <Navigation rootLink="" current="" schedulesLink="" locales={ {options: []}} />
       <Container>
         <Title>
           <PlanTitle {...dummyTitleData} />

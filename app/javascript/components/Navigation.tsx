@@ -50,13 +50,13 @@ const generateNaviButton = (props: Props, current: string) => {
 
   buttons.push({
     children: t("nav.root"),
-    current: current === null,
+    current: current === '/',
     href: props.rootLink,
   })
 
   buttons.push({
     children: t("nav.schedule"),
-    current: current === "schedules",
+    current: current === "/schedules",
     icon: FaBullhornIcon,
     href: props.schedulesLink,
   })
@@ -65,7 +65,7 @@ const generateNaviButton = (props: Props, current: string) => {
     buttons.push(
       {
         children: t("nav.plan"),
-        current: current === "plans",
+        current: current === "/plans",
         icon: FaCalendarAltIcon,
         href: props.plansLink
       }
