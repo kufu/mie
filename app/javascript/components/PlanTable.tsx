@@ -23,7 +23,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
   const { groupedPlans, oopsImagePath, uri } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
-  const current = hash === "" ? Object.keys(groupedPlans)[0] : ''
+  const current = hash === "" ? Object.keys(groupedPlans)[0] : hash
 
   const { t } = useTranslation()
 

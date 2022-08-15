@@ -23,7 +23,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
   const { groupedSchedules, initial } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
-  const current = hash === "" ? Object.keys(groupedSchedules)[0] : ''
+  const current = hash === "" ? Object.keys(groupedSchedules)[0] : hash
 
   const { t } = useTranslation()
 
