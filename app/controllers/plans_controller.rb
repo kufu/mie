@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+
 class PlansController < ApplicationController
   before_action :set_plan
   before_action :check_user_owns_plan, only: :update
+
+  class PlanCrossoverError < StandardError; end
 
   def show
     @schedules = @plan.schedules
@@ -71,8 +74,7 @@ class PlansController < ApplicationController
     if @plan.valid?
       ps.save!
     else
-      flash[:error] = @plan.errors.messages[:schedules]
-      redirect_to schedules_path && return
+      raise PlanCrossoverError.new(@plan.errors.messages[:schedules])
     end
     @plan.update!(initial: false)
     ps.schedule

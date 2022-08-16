@@ -17,6 +17,7 @@ import { Props as DetailProps } from './ScheduleDetail'
 import UpdateDialog from "./Shared/UpdateDialog";
 import TermsOfServiceDialog from "./TermsOfServiceDialog";
 import { LanguageMap } from "./Shared"
+import Flash from "./Flash";
 
 type Language = "en" | "ja"
 type Mode = "list" | "plan"
@@ -83,6 +84,9 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         setIsDetailOpen(false)
         setIsMemoEditing(false)
         handleUpdate()
+      },
+      ()=>{
+        document.location.reload()
       })
   }
 
@@ -140,6 +144,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
+  const [error, setError] = useState<string>()
 
   const { t } = useTranslation()
 
@@ -155,12 +160,16 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
     request(action, body, () => {
       setIsDialogOpen(false)
       handleButtonClick()
-    })
+    }, handleFailure)
   }
 
   const handleButtonClick = () => {
     setIsClicked(true)
     handleUpdate()
+  }
+
+  const handleFailure = (error) => {
+    setError(error.toString())
   }
 
   if (initial) {
@@ -170,6 +179,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
         </SecondaryButton>
         <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} />
+        { error ? <Flash message={error} type={'error'} /> : null }
       </>
     )
   } else {
@@ -180,13 +190,16 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           authenticity_token: authenticityToken
         }
         body[targetKeyName] = targetKey
-        request(action, body, handleButtonClick)
+        request(action, body, handleButtonClick, handleFailure)
       }
 
       return (
-        <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
-          <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
-        </SecondaryButton>
+        <>
+          <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
+            <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+          </SecondaryButton>
+          { error ? <Flash message={error} type={'error'} /> : null }
+        </>
       )
     } else {
       return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
@@ -194,14 +207,22 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   }
 }
 
-const request = (planId: string, params: { [key: string]: string }, onSuccess) => {
+const request = (planId: string, params: { [key: string]: string }, onSuccess, onFailure) => {
   fetch('/2022/api/plans/' + planId, {
     method: 'post',
     credentials: 'same-origin',
     body: Object.keys(params).reduce((o,key)=>(o.set(key, params[key]), o), new FormData())
-  }).then(r => {
-    onSuccess()
   })
+    .then(async r => {
+      if(!r.ok) {
+        const errorMessage = await r.json()
+        throw new Error(errorMessage.message)
+      }
+      onSuccess()
+    })
+    .catch((e) => {
+      onFailure(e.message)
+    })
 }
 
 const Card = styled(Base)`

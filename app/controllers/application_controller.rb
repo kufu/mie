@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :server_error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::RoutingError, with: :not_found
+  rescue_from PlansController::PlanCrossoverError, with: :bad_request
 
   def set_user
     if session[:user_id]
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
                           description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true)
     end
     @plan = @user.plans.recent.first
+  end
+
+  def bad_request(e)
+    render status: :bad_request, content_type: 'application/json', body: JSON.dump({ message: e.message })
   end
 
   def not_found
