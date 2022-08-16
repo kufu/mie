@@ -208,7 +208,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       } else {
         return(
           <>
-            <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
+            <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
               <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
             </SecondaryButton>
             { error ? <Flash message={error} type={'error'} /> : null }
