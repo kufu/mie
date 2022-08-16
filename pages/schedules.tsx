@@ -1,22 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { GetStaticProps } from "next";
 
 import ScheduleTable from '../app/javascript/components/ScheduleTable'
 
-export default function Schedule(props: React.ComponentProps<typeof ScheduleTable>) {
+export default function Schedule() {
+  const [schedules, setSchedules] = useState<React.ComponentProps<typeof ScheduleTable>>()
+  useEffect(() => {
+    fetch('http://localhost:4000/2022/api/schedules')
+      .then((res) => res.json())
+      .then((data) => setSchedules(data.schedules))
+  }, [])
   return (
     <div>
-      <ScheduleTable {...props} />
+      { schedules ? <ScheduleTable {...schedules} /> : null }
     </div>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  const response = await fetch('http://localhost:3000/2022/api/schedules')
-  const body = await response.json()
-  return {
-    props: {
-      ...body.schedules
-    }
-  }
 }
