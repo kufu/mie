@@ -203,7 +203,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         </>
       )
     } else {
-      if (mode === 'plan') {
+      if (mode === 'list') {
         return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
       } else {
         return(
