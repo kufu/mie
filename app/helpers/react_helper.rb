@@ -96,9 +96,9 @@ module ReactHelper
   def create_navigation_props
     {
       current: request.path.split('/')[2],
-      rootLink: '/2021',
-      schedulesLink: schedules_path,
-      plansLink: @plan ? plan_path(@plan) : nil,
+      rootLink: '/2022',
+      schedulesLink: '/schedules',
+      plansLink: @plan ? "/plans/#{@plan.id}" : nil,
       locales: create_locale_selector_props,
     }
   end
