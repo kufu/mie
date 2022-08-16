@@ -9,6 +9,7 @@ interface Props {
   description: string
   maxLength?: number
   form?: SubmitForm
+  handleUpdate: () => void
 }
 
 interface SubmitForm {
@@ -19,7 +20,7 @@ interface SubmitForm {
 
 
 export const PlanDescription: React.VFC<Props> = (props) => {
-  const { description, maxLength, form } = props
+  const { description, maxLength, form, handleUpdate } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const { t } = useTranslation()
@@ -31,12 +32,13 @@ export const PlanDescription: React.VFC<Props> = (props) => {
       description: desc
     }
 
-    fetch(form.action, {
+    fetch('/2022/api/plans/' + form.action, {
       method: 'post',
       credentials: 'same-origin',
       body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
     }).then(r => {
-      document.location.reload()
+      setIsDialogOpen(false)
+      handleUpdate()
     })
   }
 

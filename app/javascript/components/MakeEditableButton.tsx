@@ -35,7 +35,7 @@ export const MakeEditableButton: React.VFC<Props> = (props) => {
       password: password,
     }
 
-    fetch(form.action, {
+    fetch('/2022/api/plans/' + form.action + '/challenge', {
       method: 'post',
       credentials: 'same-origin',
       body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())

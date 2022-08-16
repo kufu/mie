@@ -10,6 +10,7 @@ interface Props {
   maxLength: number
   visible: boolean
   form?: SubmitForm
+  handleUpdate: () => void
 }
 
 interface SubmitForm {
@@ -19,7 +20,7 @@ interface SubmitForm {
 }
 
 export const PlanTitle: React.VFC<Props> = (props) => {
-  const { title, maxLength, visible, form } = props
+  const { title, maxLength, visible, form, handleUpdate } = props
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -32,12 +33,13 @@ export const PlanTitle: React.VFC<Props> = (props) => {
       title: updateString
     }
 
-    fetch(form.action, {
+    fetch('/2022/api/plans/' + form.action, {
       method: 'post',
       credentials: 'same-origin',
       body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
     }).then(r => {
-      document.location.reload()
+      setIsEditing(false)
+      handleUpdate()
     })
   }
 
@@ -50,8 +52,12 @@ export const PlanTitle: React.VFC<Props> = (props) => {
           <SecondaryButton size="s" prefix={<FaPencilAltIcon/>} onClick={() => setIsEditing(true)}>
             <Text size="S" weight="bold" color="TEXT_BLACK">{t("button.edit")}</Text>
           </SecondaryButton>
-          <UpdateDialog title={t("dialog.editTitle")} isOpen={isEditing} handleClose={() => setIsEditing(false)} handleAction={handleSave}
-                        maxLength={maxLength} value={title} />
+          <UpdateDialog title={t("dialog.editTitle")}
+                        isOpen={isEditing}
+                        handleClose={() => setIsEditing(false)} handleAction={handleSave}
+                        maxLength={maxLength}
+                        value={title}
+          />
         </MarginWrapper>
         : null
       }

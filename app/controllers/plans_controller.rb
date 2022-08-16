@@ -33,7 +33,7 @@ class PlansController < ApplicationController
   def editable
     if @plan.password == params[:password]
       @plan.update!(user: @user)
-      redirect_to plan_path(@plan)
+      head :ok
     else
       flash[:error] = I18n.t('errors.password_incorrect')
       head :unauthorized

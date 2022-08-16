@@ -69,7 +69,7 @@ module ReactHelper
 
     if user.plans.include?(plan)
       method = 'patch'
-      action = plan_path(plan)
+      action = plan.id
       props[:form] = {
         action:,
         method:,
@@ -114,7 +114,7 @@ module ReactHelper
 
     if user.plans.include?(plan)
       method = 'patch'
-      action = plan_path(plan)
+      action = plan.id
       props[:form] = {
         action:,
         method:,
@@ -140,7 +140,7 @@ module ReactHelper
     props[:visible] = plan.public
 
     method = 'patch'
-    action = plan_path(plan)
+    action = plan.id
 
     props[:form] = {
       action:,
@@ -154,7 +154,7 @@ module ReactHelper
     props = {}
 
     method = 'patch'
-    action = plan_own_path(plan)
+    action = plan.id
 
     props[:form] = {
       action:,

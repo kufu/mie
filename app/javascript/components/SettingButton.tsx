@@ -18,6 +18,7 @@ import createdTheme from "./Constants";
 interface Props {
   visible: boolean
   form: SubmitForm
+  handleUpdate: () => void
 }
 
 interface SubmitForm {
@@ -27,7 +28,7 @@ interface SubmitForm {
 }
 
 export const SettingButton: React.VFC<Props> = (props) => {
-  const { visible, form } = props
+  const { visible, form, handleUpdate } = props
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isVisibleSelected, setIsVisibleSelected] = useState(visible)
@@ -47,12 +48,13 @@ export const SettingButton: React.VFC<Props> = (props) => {
       password: password,
     }
 
-    fetch(form.action, {
+    fetch('/2022/api/plans/' + form.action, {
       method: 'post',
       credentials: 'same-origin',
       body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
     }).then(r => {
-      document.location.reload()
+      handleUpdate()
+      setIsDialogOpen(false)
     })
   }
 
@@ -90,7 +92,7 @@ export const SettingButton: React.VFC<Props> = (props) => {
           <Forms
             title={t("settings.changeVisibility")}
             titleType="subBlockTitle"
-            helpMessage={t("settings.visibilityDescription", {current: t(visible ? ".settings.visible" : "settings.invisible")})}
+            helpMessage={t("settings.visibilityDescription", {current: t(visible ? "settings.visible" : "settings.invisible")})}
             labelId="visibility"
             innerMargin="XS"
           >
@@ -104,8 +106,8 @@ export const SettingButton: React.VFC<Props> = (props) => {
 
               <RadioBtn name="visibility" value="invisible" onChange={(e) => handleVisibilityChange(e.target.value)} checked={!isVisibleSelected}>
                 <Text as="p">
-                  <Text weight="bold">{t("settings.visibleText")}</Text><br />
-                  {t("settings.visibleDescription")}
+                  <Text weight="bold">{t("settings.invisibleText")}</Text><br />
+                  {t("settings.invisibleDescription")}
                 </Text>
               </RadioBtn>
             </RadioButtons>

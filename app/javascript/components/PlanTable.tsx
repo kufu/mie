@@ -17,10 +17,11 @@ interface Props {
   groupedPlans: GroupedPlans
   oopsImagePath: string
   uri: string
+  handleUpdate: () => void
 }
 
 export const PlanTable: React.VFC<Props> = (props) => {
-  const { groupedPlans, oopsImagePath, uri } = props
+  const { groupedPlans, oopsImagePath, uri, handleUpdate } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
   const current = hash === "" ? Object.keys(groupedPlans)[0] : hash
@@ -59,7 +60,7 @@ export const PlanTable: React.VFC<Props> = (props) => {
                         <TableBodyCell noSidePadding as="th">
                           <ScheduleTime time={row.time}/>
                         </TableBodyCell>
-                        <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} /></TableBodyCell>
+                        <TableBodyCell noSidePadding><ScheduleCard {...row.schedule} handleUpdate={handleUpdate} /></TableBodyCell>
                       </TableRow>
                     )
                   })
