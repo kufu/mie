@@ -27,7 +27,7 @@ class PlansController < ApplicationController
                head :bad_request
              end
 
-    redirect_to redirect_path_with_identifier(target)
+    head :ok
   end
 
   def editable
