@@ -97,8 +97,8 @@ module ReactHelper
     {
       current: request.path.split('/')[2],
       rootLink: '/2022',
-      schedulesLink: '/schedules',
-      plansLink: @plan ? "/plans/#{@plan.id}" : nil,
+      schedulesLink: '/2022/schedules',
+      plansLink: @plan ? "/2022/plans/#{@plan.id}" : nil,
       locales: create_locale_selector_props,
     }
   end

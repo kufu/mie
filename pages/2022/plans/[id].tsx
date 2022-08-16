@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import PlanTitle from '../../app/javascript/components/PlanTitle'
-import MakeEditableButton from "../../app/javascript/components/MakeEditableButton";
-import PlanDescription from "../../app/javascript/components/PlanDescription";
-import PlanTable from "../../app/javascript/components/PlanTable";
-import SettingButton from "../../app/javascript/components/SettingButton";
+import PlanTitle from '../../../app/javascript/components/PlanTitle'
+import MakeEditableButton from "../../../app/javascript/components/MakeEditableButton";
+import PlanDescription from "../../../app/javascript/components/PlanDescription";
+import PlanTable from "../../../app/javascript/components/PlanTable";
+import SettingButton from "../../../app/javascript/components/SettingButton";
 
 type APIResult = {
   id: string

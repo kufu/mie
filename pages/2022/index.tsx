@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from "next-export-i18n";
 
-import Top from '../app/javascript/components/Top'
+import Top from '../../app/javascript/components/Top'
 
 function IndexPage() {
   const { t } = useTranslation()

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { GetStaticProps } from "next";
 
-import ScheduleTable from '../app/javascript/components/ScheduleTable'
+import ScheduleTable from '../../app/javascript/components/ScheduleTable'
 
 export default function Schedule() {
   const [schedules, setSchedules] = useState<React.ComponentProps<typeof ScheduleTable>>()
