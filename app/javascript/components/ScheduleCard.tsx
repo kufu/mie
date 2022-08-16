@@ -313,6 +313,8 @@ const Description = styled(LineClamp)`
 const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  height: 27px;
 `
 
 const AddedText = styled.div`

@@ -31,7 +31,7 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
   const { t } = useTranslation()
 
   return (
-    <MessageDialog
+    <MaxWidthMessageDialog
       title={t("card.detail.title")}
       closeText={t("button.close")}
       onPressEscape={handleOnClickClose}
@@ -42,6 +42,10 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
     />
   )
 }
+
+const MaxWidthMessageDialog = styled(MessageDialog)`
+  max-width: 100%;
+`
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
   const { speakers, startEndTime, language, description } = props
