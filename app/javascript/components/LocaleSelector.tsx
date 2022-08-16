@@ -42,6 +42,7 @@ export const LocaleSelector: React.VFC<Props> = (props) => {
 const ResizedSelect = styled(Select)`
   height: 30px !important;
   select {
+    min-height: 30px !important;
     padding: 3px 8px;
   }
 `

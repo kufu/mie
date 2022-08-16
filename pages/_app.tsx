@@ -40,7 +40,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return(
     <>
       <Navigation current={currentPath} {...me} />
-      <Component {...pageProps} />
+      <div style={{padding: '32px'}}>
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }
