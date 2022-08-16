@@ -222,7 +222,7 @@ module ReactHelper
   def plan_edit_props(plan, schedule, mode)
     props = {}
     method = 'patch'
-    action = plan_path(plan)
+    action = plan.id
 
     include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
     props[:memo] = include_plan&.memo || ''

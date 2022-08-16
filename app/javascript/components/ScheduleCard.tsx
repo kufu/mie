@@ -77,12 +77,9 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
       memo: updateMemo
     }
 
-    fetch(form.action, {
-      method: 'post',
-      credentials: 'same-origin',
-      body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
-    }).then(r => {
-      document.location.reload()
+    request(form.action, body, () => {
+      setIsDetailOpen(false)
+      setIsMemoEditing(false)
     })
   }
 
@@ -152,12 +149,9 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 
     body[targetKeyName] = targetKey
 
-    fetch(action, {
-      method: 'post',
-      credentials: 'same-origin',
-      body: Object.keys(body).reduce((o,key)=>(o.set(key, body[key]), o), new FormData())
-    }).then(r => {
-      document.location.reload()
+    request(action, body, () => {
+      setIsDialogOpen(false)
+      handleButtonClick()
     })
   }
 
@@ -175,34 +169,35 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       </>
     )
   } else {
-    if (targetKeyName === "remove_schedule_id") {
-      if (mode == "list") {
-        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
-      } else {
-        return (
-          <form action={action} acceptCharset="UTF-8" method="post" onSubmit={handleButtonClick}>
-            <input type="hidden" name="_method" value="patch"/>
-            <input type="hidden" name="authenticity_token" value={authenticityToken}/>
-            <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
-            <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked}>
-              <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
-            </SecondaryButton>
-          </form>
-        )
+    if (targetKeyName.startsWith("add_")) {
+      const onClick = () => {
+        const body = {
+          _method: "patch",
+          authenticity_token: authenticityToken
+        }
+        body[targetKeyName] = targetKey
+        request(action, body, handleButtonClick)
       }
-    } else {
+
       return (
-        <form action={action} acceptCharset="UTF-8" method="post" onSubmit={handleButtonClick}>
-          <input type="hidden" name="_method" value="patch"/>
-          <input type="hidden" name="authenticity_token" value={authenticityToken}/>
-          <input type="hidden" name={targetKeyName} id={targetKeyName + "-" + targetKey} value={targetKey}/>
-          <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked}>
-            <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
-          </SecondaryButton>
-        </form>
+        <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
+          <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+        </SecondaryButton>
       )
+    } else {
+      return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
     }
   }
+}
+
+const request = (planId: string, params: { [key: string]: string }, onSuccess) => {
+  fetch('/2022/api/plans/' + planId, {
+    method: 'post',
+    credentials: 'same-origin',
+    body: Object.keys(params).reduce((o,key)=>(o.set(key, params[key]), o), new FormData())
+  }).then(r => {
+    onSuccess()
+  })
 }
 
 const Card = styled(Base)`
