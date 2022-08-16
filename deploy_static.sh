@@ -1,3 +1,4 @@
+fc-cache -fv
 rm -r public/_next
 yarn build
 cp -r out/_next public/
