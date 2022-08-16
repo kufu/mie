@@ -16,12 +16,15 @@ type Option = {
 
 export const LocaleSelector: React.VFC<Props> = (props) => {
   const [current, setCurrent] = useState<string>(props.current ? props.current : "")
+  if( props.current !== current ) setCurrent(props.current)
 
   const { t } = useTranslation()
 
   const changeLocaleHandler = (e) => {
     setCurrent(e.target.value)
-    document.location.href = "?locale=" + escape(e.target.value)
+
+    fetch('/2022/api/me?locale=' + escape(e.target.value))
+      .then(res => document.location.reload())
   }
 
   return (

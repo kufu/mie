@@ -35,7 +35,6 @@ export const Navigation: React.FC<Props> = (props) => {
         </Container>
       </Nav>
       <AppNavi
-        label={t("nav.label")}
         buttons={generateNaviButton(props, current)}
       >
         <Child><LocaleSelector {...locales} /></Child>

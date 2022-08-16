@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
     return unless ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale'])
 
     session[:locale] = params['locale']
-    redirect_to request.path
+    head :ok && return
   end
 
   def with_time_zone(&)
