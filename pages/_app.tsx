@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import type { AppProps } from 'next/app'
+import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(timezone)
 
 import '../app/assets/stylesheets/reset.css'
 import '../app/assets/stylesheets/application.css'
@@ -23,6 +27,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       .then(response => response.json())
       .then(data => setMe(data.me))
   }, [])
+
+  if (me.locales.current && me.locales.current === "Etc/UTC") {
+    const guessed = dayjs.tz.guess()
+    fetch('/2022/api/me?locale=' + guessed)
+      .then(response => response.json())
+      .then(data => {
+        setMe(data.me)
+      })
+  }
 
   return(
     <>
