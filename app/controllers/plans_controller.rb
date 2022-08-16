@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-
 class PlansController < ApplicationController
+  protect_from_forgery
+  layout false
+
   before_action :set_plan
   before_action :check_user_owns_plan, only: :update
 
   class PlanCrossoverError < StandardError; end
+
+  def page; end
 
   def show
     @schedules = @plan.schedules

@@ -28,7 +28,7 @@ function PlanPage() {
     const { id } = router.query
     if(!id) return
 
-    fetch('http://localhost:4000/2022/api/plans/' + id)
+    fetch('/2022/api/plans/' + id)
       .then(response => response.json())
       .then(data => setPlan(data.plan))
   }, [router, lastMod])

@@ -51,3 +51,8 @@ yarn-error.log*
 .env*.local
 .vercel
 *.tsbuildinfo
+
+# BADFIX
+/app/views/**/page.html.erb
+/app/views/static/root2022.html.erb
+/public/_next

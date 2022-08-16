@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   end
 
   scope '2022' do
+    get '/', to: 'static#root2022'
+
+    get :schedules, to: 'schedules#page'
+    get '/plans/:id', to: 'plans#page'
     scope 'api' do
       get :me, to: 'me#show'
       resources :schedules, only: %i[index]
@@ -28,8 +32,6 @@ Rails.application.routes.draw do
         end
       end
     end
-
-    get '*path', to: 'static#frontend'
   end
 
   get '*path', controller: 'application', action: 'not_found'
