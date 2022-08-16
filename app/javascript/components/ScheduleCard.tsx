@@ -37,6 +37,7 @@ export interface Props {
   memo?: string
   memoMaxLength: number
   initial?: InitialProps
+  handleUpdate: () => void
 }
 
 export interface SubmitFormProps {
@@ -48,6 +49,7 @@ export interface SubmitFormProps {
   buttonText: string
   mode: Mode
   initial? :InitialProps
+  handleUpdate: () => void
 }
 
 export interface InitialProps {
@@ -59,7 +61,7 @@ export interface InitialProps {
 }
 
 export const ScheduleCard: React.VFC<Props> = (props) => {
-  const { title, mode, description, trackName, speakers, language, memo, memoMaxLength, form, initial, details } = props
+  const { title, mode, description, trackName, speakers, language, memo, memoMaxLength, form, initial, details, handleUpdate } = props
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [isMemoEditing, setIsMemoEditing] = useState(false)
 
@@ -78,9 +80,10 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
     }
 
     request(form.action, body, () => {
-      setIsDetailOpen(false)
-      setIsMemoEditing(false)
-    })
+        setIsDetailOpen(false)
+        setIsMemoEditing(false)
+        handleUpdate()
+      })
   }
 
   const detailProps: DetailProps = {
@@ -125,7 +128,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
           </UpdateMemoButton>
           : null
         }
-        <MarginWrapper>{ form ? <SubmitForm {...form} initial={initial} /> : null }</MarginWrapper>
+        <MarginWrapper>{ form ? <SubmitForm {...form} initial={initial} handleUpdate={handleUpdate} /> : null }</MarginWrapper>
         <MarginWrapper><TextButton size="s" onClick={() => setIsDetailOpen(true)}><Text size="S" weight="bold" color="TEXT_BLACK">{t("card.showDetail")}</Text></TextButton></MarginWrapper>
       </Actions>
       <ScheduleDetail {...detailProps} />
@@ -134,7 +137,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode } = props
+  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
 
@@ -157,6 +160,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 
   const handleButtonClick = () => {
     setIsClicked(true)
+    handleUpdate()
   }
 
   if (initial) {

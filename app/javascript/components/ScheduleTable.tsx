@@ -17,10 +17,11 @@ type Row = { time: string, schedules: Array<CardProps | null> }
 interface Props {
   groupedSchedules: GroupedSchedules
   initial?: InitialProps
+  handleUpdate: () => void
 }
 
 export const ScheduleTable: React.VFC<Props> = (props) => {
-  const { groupedSchedules, initial } = props
+  const { groupedSchedules, initial, handleUpdate } = props
   const router = useRouter()
   const hash = router.asPath.split("#")[1] || ''
   const current = hash === "" ? Object.keys(groupedSchedules)[0] : hash
@@ -62,7 +63,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
                         <TableBodyCell key={index} />
                         : <TableBodyCell key={index}>
                           <CellItemStretcher>
-                            <ScheduleCard {...schedule} initial={initial} />
+                            <ScheduleCard {...schedule} initial={initial} handleUpdate={handleUpdate} />
                           </CellItemStretcher>
                         </TableBodyCell>
                     )}
