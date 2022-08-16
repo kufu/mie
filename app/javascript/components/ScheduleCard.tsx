@@ -164,11 +164,12 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   }
 
   const handleButtonClick = () => {
-    setIsClicked(true)
+    setIsClicked(false)
     handleUpdate()
   }
 
   const handleFailure = (error) => {
+    setIsClicked(false)
     setError(error.toString())
   }
 
@@ -183,16 +184,16 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       </>
     )
   } else {
-    if (targetKeyName.startsWith("add_")) {
-      const onClick = () => {
-        const body = {
-          _method: "patch",
-          authenticity_token: authenticityToken
-        }
-        body[targetKeyName] = targetKey
-        request(action, body, handleButtonClick, handleFailure)
+    const onClick = () => {
+      setIsClicked(true)
+      const body = {
+        _method: "patch",
+        authenticity_token: authenticityToken
       }
-
+      body[targetKeyName] = targetKey
+      request(action, body, handleButtonClick, handleFailure)
+    }
+    if (targetKeyName.startsWith("add_")) {
       return (
         <>
           <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
@@ -202,7 +203,18 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         </>
       )
     } else {
-      return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
+      if (mode === 'plan') {
+        return (<AddedText><FaCheckCircleIcon size={14}/><MarginWrapper><Text weight="bold" size="S" color="TEXT_BLACK">{t("card.added")}</Text></MarginWrapper></AddedText>)
+      } else {
+        return(
+          <>
+            <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
+              <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+            </SecondaryButton>
+            { error ? <Flash message={error} type={'error'} /> : null }
+          </>
+        )
+      }
     }
   }
 }
