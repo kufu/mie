@@ -81,7 +81,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   flex-direction: row;
-  background: #0B374D;
+  background: #BF4545;
   height: 50px;
 `
 
