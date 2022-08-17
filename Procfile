@@ -1,2 +1,2 @@
-release: sh deploy_static.sh
-web: bundle exec puma -C config/puma.rb
+release: bin/rails db:prepare
+web: sh deploy_static.sh run
