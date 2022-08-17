@@ -39,6 +39,7 @@ export interface Props {
   memoMaxLength: number
   initial?: InitialProps
   handleUpdate: () => void
+  termsOfService: string
 }
 
 export interface SubmitFormProps {
@@ -51,6 +52,7 @@ export interface SubmitFormProps {
   mode: Mode
   initial? :InitialProps
   handleUpdate: () => void
+  termsOfService: string
 }
 
 export interface InitialProps {
@@ -141,7 +143,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate } = props
+  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate, termsOfService } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [error, setError] = useState<string>()
@@ -179,7 +181,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
           <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
         </SecondaryButton>
-        <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} />
+        <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} termsOfService={termsOfService} />
         { error ? <Flash message={error} type={'error'} /> : null }
       </>
     )

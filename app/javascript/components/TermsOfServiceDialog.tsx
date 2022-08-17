@@ -12,6 +12,7 @@ interface Props {
   isOpen: boolean
   closeHandler: () => void
   actionHandler: () => void
+  termsOfService: string
 }
 
 type ResponseMessage = {
@@ -20,7 +21,7 @@ type ResponseMessage = {
 }
 
 export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
-  const { actionHandler, closeHandler, isOpen } = props
+  const { actionHandler, closeHandler, isOpen, termsOfService } = props
   const [isActiveClicked, setIsActiveClicked] = useState(false)
   const [responseMessage, setResponseMessage] = useState<ResponseMessage | null>(null)
 
@@ -47,7 +48,7 @@ export const TermsOfServiceDialog: React.VFC<Props> = (props) => {
         <Text>{t("termsOfService.description")}</Text>
         <TermsOfService>
           <TermsOfServiceText>
-          <Text size="S" leading="RELAXED"><span dangerouslySetInnerHTML={{__html: t("termsOfService.termsOfService")}}></span></Text>
+          <Text size="S" leading="RELAXED"><span dangerouslySetInnerHTML={{__html: termsOfService}}></span></Text>
           </TermsOfServiceText>
         </TermsOfService>
       </DialogBody>

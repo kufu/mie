@@ -239,6 +239,7 @@ module ReactHelper
       buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
       mode:,
     }
+    props[:form][:termsOfService] = terms_of_service_props[:termsOfService] if plan.initial?
 
     props
   end
