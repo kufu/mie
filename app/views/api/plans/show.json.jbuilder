@@ -1,7 +1,6 @@
 plan_table = create_plan_table_props(@plan, @user)
 plan_description = create_plan_description_props(@plan, @user)
 plan_title = create_plan_title_props(@plan, @user)
-plan_make_editable_button = create_make_editable_button_props(@plan)
 
 json.plan do |node|
   node.id @plan.id
@@ -32,4 +31,5 @@ json.plan do |node|
 
   node.visible plan_title[:visible]
   node.groupedPlans plan_table[:groupedPlans]
+  node.uri plan_table[:uri]
 end

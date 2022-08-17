@@ -56,7 +56,7 @@ module ReactHelper
 
     props[:groupedPlans] = plans_table_props(plan, user)
     props[:oopsImagePath] = asset_path('2021/rubykaigi.png')
-    props[:uri] = url_for([plan, { only_path: false }])
+    props[:uri] = @plan_uri
     props
   end
 

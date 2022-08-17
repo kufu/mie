@@ -22,6 +22,7 @@ class PlansController < ApplicationController
 
   def show
     @schedules = @plan.schedules
+    @plan_uri = request.protocol + request.host_with_port + '/2022/plans/' + @plan.id # FIXME
     render 'api/plans/show.json'
   end
 
