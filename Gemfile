@@ -37,6 +37,5 @@ gem 'rack-contrib', '~> 2.3.0'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
-gem 'webpacker', '~> 5.4'
 
 gem "jbuilder", "~> 2.11"
