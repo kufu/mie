@@ -12,15 +12,21 @@ interface Props {
 export const Errors: React.VFC<Props> = (props) => {
   const { t } = useTranslation()
 
+  const index = Math.floor(Math.random() * 5);
+  const ninjas =  ["blackNinja.png", "blueNinja.png", "purpleNinja.png", "redNinja.png", "yellowNinja.png"]
+  const [imagePath, setImagePath]  =  useState('/static/' + ninjas[index])
+
+
+
   const propsFor404 = {
-    title: t("errors.not_found"),
-    description: t("errors.not_found_desc"),
-    imagePath: "" // TODO
+    title: t("errors.notFound"),
+    description: t("errors.notFoundDesc"),
+    imagePath: imagePath
   }
 
   const propsFor500 = {
-    title: t("errors.internal_server_error"),
-    imagePath: "" // TODO
+    title: t("errors.internalServerError"),
+    imagePath: imagePath
   }
 
   var oopsProps

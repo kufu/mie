@@ -37,11 +37,11 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
+    render template: 'errors/not_found', status: 404, content_type: 'text/html'
   end
 
   def server_error
-    render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
+    render template: 'errors/server_error', status: 500, content_type: 'text/html'
   end
 
   private

@@ -52,7 +52,8 @@ const Image = styled.div<{imagePath: string}>`
   height: 104px;
   width: 102px;
   background-image: url('${props => props.imagePath}');
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 `
 
 const TextArea = styled.div`
