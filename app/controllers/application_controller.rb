@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  layout false
+
   before_action :set_user
   before_action :set_plan
   before_action :set_locale
