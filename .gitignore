@@ -56,3 +56,7 @@ yarn-error.log*
 /app/views/**/page.html.erb
 /app/views/static/root2022.html.erb
 /public/_next
+
+/archive/out
+/public/2021/
+/public/2021.html
