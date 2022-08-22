@@ -109,7 +109,9 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
         )}
         <TipList>
           <Lng><Text size="S" color="TEXT_GREY">Lang:</Text><MarginWrapper><Text size="S">{LanguageMap[language] || "?"}</Text></MarginWrapper></Lng>
-          <Lng><Text size="S" color="TEXT_GREY">Track:</Text><MarginWrapper><Text size="S">{trackName}</Text></MarginWrapper></Lng>
+          {
+            mode === "plan" ? <Lng><Text size="S" color="TEXT_GREY">Track:</Text><MarginWrapper><Text size="S">{trackName}</Text></MarginWrapper></Lng> : null
+          }
         </TipList>
       </Speaker>
 
