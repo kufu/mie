@@ -94,7 +94,9 @@ class PlansController < ApiController
 
   def remove_plan
     schedule = Schedule.find(params[:remove_schedule_id])
-    @plan.plan_schedules.find_by(schedule:).destroy!
+    target = @plan.plan_schedules.find_by(schedule:)
+    raise NotHasScheduleError.new(["No schedule plan id"]) unless target
+    target.destroy!
     @plan.update!(initial: false)
     schedule
   end
