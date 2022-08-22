@@ -1,140 +1,164 @@
 ---
+sep08:
+  events:
+  - type: keynote
+    begin: '10:50'
+    end: '12:00'
+    talks:
+      Grand Auditorium: kateinoigakukun
+  - type: break
+    begin: '12:00'
+    end: '13:30'
+    name: Lunch Break
+  - type: talk
+    begin: '13:30'
+    end: '14:00'
+    talks:
+      Grand Auditorium: ko1
+      Middle Auditorium: schwad4hd14
+  - type: talk
+    begin: '14:10'
+    end: '14:40'
+    talks:
+      Grand Auditorium: maximecb
+      Middle Auditorium: fugakkbn
+  - type: talk
+    begin: '14:50'
+    end: '15:20'
+    talks:
+      Grand Auditorium: ono-max
+      Middle Auditorium: oceanicpanda
+  - type: break
+    begin: '15:20'
+    end: '15:50'
+    name: Afternoon Break
+  - type: talk
+    begin: '15:50'
+    end: '16:20'
+    talks:
+      Grand Auditorium: k0kubun
+      Middle Auditorium: yamori813
+  - type: talk
+    begin: '16:30'
+    end: '17:40'
+    talks:
+      Grand Auditorium: tric
 sep09:
   events:
   - type: keynote
-    begin: '10:00'
-    end: '10:55'
+    begin: '09:30'
+    end: '10:40'
     talks:
-      A: mametter
+      Grand Auditorium: yukihiro_matz
   - type: talk
-    begin: '11:00'
-    end: '11:25'
+    begin: '10:50'
+    end: '11:20'
     talks:
-      A: k0kubun
+      Grand Auditorium: _st0012
+      Middle Auditorium: yu_suke1994
+  - type: talk
+    begin: '11:30'
+    end: '12:00'
+    talks:
+      Grand Auditorium: jemmaissroff
+      Middle Auditorium: koic
   - type: break
-    begin: '11:55'
-    end: '13:00'
+    begin: '12:00'
+    end: '13:30'
     name: Lunch Break
   - type: talk
-    begin: '13:00'
-    end: '13:25'
-    talks:
-      A: jeremyevans0
-      B: koic
-  - type: talk
     begin: '13:30'
-    end: '13:55'
+    end: '14:00'
     talks:
-      A: schwad4hd14
-      B: ko1
+      Grand Auditorium: Kenta Murata
+      Middle Auditorium: udzura
   - type: talk
-    begin: '14:00'
-    end: '14:25'
+    begin: '14:10'
+    end: '14:40'
     talks:
-      A: peterzhu2118
-      B: coe401_
+      Grand Auditorium: eightbitraptor
+      Middle Auditorium: fujimotos
   - type: talk
-    begin: '14:30'
-    end: '14:55'
+    begin: '14:50'
+    end: '15:20'
     talks:
-      A: vinistock
-      B: m_seki
+      Grand Auditorium: KnuX
+      Middle Auditorium: coe401_
+  - type: break
+    begin: '15:20'
+    end: '15:50'
+    name: Afternoon Break
   - type: talk
-    begin: '15:00'
-    end: '15:25'
+    begin: '15:50'
+    end: '16:20'
     talks:
-      A: duerst
-      B: udzura
+      Grand Auditorium: shioyama
+      Middle Auditorium: m_seki
   - type: talk
-    begin: '15:30'
-    end: '15:55'
+    begin: '16:30'
+    end: '17:40'
     talks:
-      A: paracycle
-      B: yamori813
+      Grand Auditorium: rubylangorg
 sep10:
   events:
-  - type: keynote
-    begin: '10:00'
-    end: '10:55'
-    talks:
-      A: chrisgseaton
   - type: talk
-    begin: '11:00'
-    end: '11:25'
+    begin: '09:30'
+    end: '10:00'
     talks:
-      A: eregontp
-      B: hasumikin
+      Grand Auditorium: mametter
+      Middle Auditorium: yujiyokoo
   - type: talk
-    begin: '11:30'
-    end: '11:55'
+    begin: '10:10'
+    end: '10:40'
     talks:
-      A: maximecb
-      B: p_ck_
-  - type: break
-    begin: '11:55'
-    end: '13:00'
-    name: Lunch Break
+      Grand Auditorium: kddnewton
+      Middle Auditorium: _ksss_
   - type: talk
-    begin: '13:00'
-    end: '13:25'
+    begin: '10:50'
+    end: '11:20'
     talks:
-      A: kddnewton
-      B: shugomaeda
-  - type: talk
-    begin: '13:30'
-    end: '13:55'
-    talks:
-      A: tagomoris
-      B: aycabta
-  - type: talk
-    begin: '14:00'
-    end: '14:55'
-    talks:
-      A: rubylangorg
-sep11:
-  events:
-  - type: talk
-    begin: '10:00'
-    end: '10:25'
-    talks:
-      A: dmagliola
-      B: pink_bangbi
-  - type: talk
-    begin: '10:30'
-    end: '10:55'
-    talks:
-      A: MauroEldritch
-      B: mrkn
-  - type: talk
-    begin: '11:00'
-    end: '11:25'
-    talks:
-      A: flavorjones
-      B: ima1zumi
+      Grand Auditorium: ioquatix
+      Middle Auditorium: pink_bangbi
   - type: talk
     begin: '11:30'
-    end: '11:55'
+    end: '12:00'
     talks:
-      A: schneems
-      B: hsbt
+      Grand Auditorium: vnmakarov
+      Middle Auditorium: hsbt
   - type: break
-    begin: '11:55'
-    end: '13:00'
+    begin: '12:00'
+    end: '13:30'
     name: Lunch Break
   - type: talk
-    begin: '13:00'
-    end: '13:25'
-    talks:
-      A: elct9620
-      B: yu_suke1994
-  - type: talk
     begin: '13:30'
-    end: '13:55'
+    end: '14:00'
     talks:
-      A: matschaffer
-      B: ktou
+      Grand Auditorium: peterzhu2118
+      Middle Auditorium: nay3
+  - type: talk
+    begin: '14:10'
+    end: '14:40'
+    talks:
+      Grand Auditorium: ktou
+      Middle Auditorium: kurotaky
+  - type: talk
+    begin: '14:50'
+    end: '15:20'
+    talks:
+      Grand Auditorium: jeremyevans0
+      Middle Auditorium: ima1zumi
+  - type: break
+    begin: '15:20'
+    end: '15:50'
+    name: Afternoon Break
+  - type: talk
+    begin: '15:50'
+    end: '16:20'
+    talks:
+      Grand Auditorium: soutaro
+      Middle Auditorium: znz
   - type: keynote
-    begin: '14:00'
-    end: '15:00'
+    begin: '16:30'
+    end: '17:40'
     talks:
-      A: yukihiro_matz
+      Grand Auditorium: alanwusx
