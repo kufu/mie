@@ -116,6 +116,7 @@ const Title = styled.div`
   background-image: url('/static/rubykaigi2022_large.svg');
   width: 232px;
   height: 32px;
+  background-repeat: no-repeat;
 `
 
 const TwitterLogo: React.VFC<{}> = () => {

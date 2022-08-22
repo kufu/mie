@@ -127,4 +127,5 @@ const RubyKaigiLogo = styled.div`
   background-image: url('/static/rubykaigi2022.svg');
   width: 138px;
   height: 19px;
+  background-repeat: no-repeat;
 `
