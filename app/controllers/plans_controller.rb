@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-class PlansController < ApplicationController
+class PlansController < ApiController
   protect_from_forgery
 
   before_action :set_plan
   before_action :check_user_owns_plan, only: :update
 
-  class PlanCrossoverError < StandardError; end
 
   def page
     @ogpstr =

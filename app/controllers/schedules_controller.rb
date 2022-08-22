@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SchedulesController < ApplicationController
+class SchedulesController < ApiController
 
   def page; end
 

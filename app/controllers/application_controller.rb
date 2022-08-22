@@ -9,10 +9,13 @@ class ApplicationController < ActionController::Base
 
   around_action :with_time_zone
 
+  class PlanCrossoverError < StandardError; end
+  class NotHasScheduleError < StandardError; end
+
   rescue_from Exception, with: :server_error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::RoutingError, with: :not_found
-  rescue_from PlansController::PlanCrossoverError, with: :bad_request
+  rescue_from PlanCrossoverError, with: :bad_request
 
   def set_user
     if session[:user_id]
