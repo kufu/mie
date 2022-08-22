@@ -146,7 +146,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate, termsOfService } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
-  const [error, setError] = useState<string>()
+  const [errors, setErrors] = useState<string[]>([])
 
   const { t } = useTranslation()
 
@@ -172,8 +172,10 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 
   const handleFailure = (error) => {
     setIsClicked(false)
-    setError(error.toString())
+    setErrors([...errors, ...(JSON.parse(error))])
   }
+
+  const errorComponents = errors.length > 0 ? errors.map((e) => <Flash key={e} message={e} type="error" />) : null
 
   if (initial) {
     return (
@@ -182,7 +184,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
         </SecondaryButton>
         <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} termsOfService={termsOfService} />
-        { error ? <Flash message={error} type={'error'} /> : null }
+        {errorComponents}
       </>
     )
   } else {
@@ -201,7 +203,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
           <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
             <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
           </SecondaryButton>
-          { error ? <Flash message={error} type={'error'} /> : null }
+          {errorComponents}
         </>
       )
     } else {
@@ -213,7 +215,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
             <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
               <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
             </SecondaryButton>
-            { error ? <Flash message={error} type={'error'} /> : null }
+            {errorComponents}
           </>
         )
       }
