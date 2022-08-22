@@ -161,11 +161,11 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
 
     request(action, body, () => {
       setIsDialogOpen(false)
-      handleButtonClick()
+      handleSuccess()
     }, handleFailure)
   }
 
-  const handleButtonClick = () => {
+  const handleSuccess = () => {
     setIsClicked(false)
     handleUpdate()
   }
@@ -195,7 +195,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         authenticity_token: authenticityToken
       }
       body[targetKeyName] = targetKey
-      request(action, body, handleButtonClick, handleFailure)
+      request(action, body, handleSuccess, handleFailure)
     }
     if (targetKeyName.startsWith("add_")) {
       return (
