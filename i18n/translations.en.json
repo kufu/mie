@@ -89,6 +89,6 @@
     }
   },
   "application": {
-    "intro": "\"RubyKaigi 2022 Schedule.select\" is RubyKaigi's first official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!\nIf you have ever wondered, \"Which session should I watch…\" before attending a conference, then this is the app for you.\nWe developed this app so participants could share their \"viewing schedules\" and \"reasons for interest\" before the event, which they could use as a reference for session selection and to enjoy the conference even more.\nWhy do you want to see the session? Share it before the event and let's enjoy RubyKaigi Takeout 2022 together!"
+    "intro": "\"RubyKaigi 2022 Schedule.select\" is RubyKaigi's official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!\nIf you have ever wondered, \"Which session should I watch…\" before attending a conference, then this is the app for you.\nWe developed this app so participants could share their \"viewing schedules\" and \"reasons for interest\" before the event, which they could use as a reference for session selection and to enjoy the conference even more.\nWhy do you want to see the session? Share it before the event and let's enjoy RubyKaigi 2022 together!"
   }
 }
