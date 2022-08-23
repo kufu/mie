@@ -21,6 +21,7 @@ interface BodyProps {
     twitter: string | null
   }[]
   startEndTime: string
+  timezone: string
   language: string
   description: string
 }
@@ -48,7 +49,7 @@ const MaxWidthMessageDialog = styled(MessageDialog)`
 `
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
-  const { speakers, startEndTime, language, description } = props
+  const { speakers, startEndTime, timezone, language, description } = props
 
   const { t } = useTranslation()
 
@@ -90,7 +91,7 @@ const DialogBody: React.VFC<BodyProps> = (props) => {
       <Row>
         <DefinitionList layout="double" items={[
           {
-            term: t("card.detail.startEndTime"),
+            term: t("card.detail.startEndTime", { zone: timezone }),
             description: startEndTime
           },
           {
