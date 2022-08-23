@@ -12,8 +12,11 @@ export default function Schedule() {
       .then((data) => setSchedules(data.schedules))
   }, [lastMod])
   return (
-    <div>
-      { schedules ? <ScheduleTable {...schedules} handleUpdate={() => setLastMod(Date.now())} /> : null }
-    </div>
+    <>
+      <title>Schedules | RubyKaigi 2022 Schedule.select</title>
+      <div>
+        { schedules ? <ScheduleTable {...schedules} handleUpdate={() => setLastMod(Date.now())} /> : null }
+      </div>
+    </>
   )
 }

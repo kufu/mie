@@ -7,9 +7,12 @@ function IndexPage() {
   const { t } = useTranslation()
 
   return (
-    <div>
-      <Top intro={t("application.intro")} />
-    </div>
+    <>
+      <title>RubyKaigi 2022 Schedule.select</title>
+      <div>
+        <Top intro={t("application.intro")} />
+      </div>
+    </>
   )
 }
 

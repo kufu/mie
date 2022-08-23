@@ -15,7 +15,8 @@ class PlansController < ApiController
       '<meta property="og:url" content="' + request.protocol + request.host_with_port + '/2022/plans/' + @plan.id + '">' +
       '<meta property="og:image" content="' + request.protocol + request.host_with_port + '/2022/api/plans/' + @plan.id + '/ogp?h=' + Digest::MD5.hexdigest(@plan.description) + '" />' +
       '<meta property="og:type" content="website">' +
-      '<meta name="twitter:card" content="summary_large_image"/>'
+      '<meta name="twitter:card" content="summary_large_image"/>' +
+      "<title>#{@plan.title} | RubyKaigi 2022 Schedule.select</title>"
   end
 
   def show
