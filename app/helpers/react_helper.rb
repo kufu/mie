@@ -38,7 +38,7 @@ module ReactHelper
           }
         end,
         startEndTime: "#{I18n.l(schedule.start_at, format: :default)} - #{I18n.l(schedule.end_at, format: :timetable)}",
-        timezone: Time.now.zone,
+        timezone: Time.zone.tzinfo.abbr,
         language: schedule.language,
         description: schedule.description,
       },
