@@ -61,7 +61,7 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
                     {row.schedules.map((schedule, index) =>
                       schedule === null ?
                         <TableBodyCell key={index} />
-                        : <TableBodyCell key={index}>
+                        : <TableBodyCell key={index + schedule.id}>
                           <CellItemStretcher>
                             <ScheduleCard {...schedule} initial={initial} handleUpdate={handleUpdate} />
                           </CellItemStretcher>

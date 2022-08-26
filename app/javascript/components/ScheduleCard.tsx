@@ -24,6 +24,7 @@ type Mode = "list" | "plan"
 type Details = Omit<DetailProps, "isOpen" | "handleOnClickClose">
 
 export interface Props {
+  id: string
   title: string
   mode: Mode
   description: string

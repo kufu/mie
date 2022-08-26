@@ -5,6 +5,7 @@ module ReactHelper
 
   def schedule_to_card_props(schedule, plan, user, mode = 'list')
     props = {
+      id: schedule.id,
       title: schedule.title,
       mode:,
       description: schedule.description,
