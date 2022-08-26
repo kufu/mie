@@ -6,7 +6,7 @@ class PlansController < ApplicationController
   def page
     @ogpstr =
       '<meta property="og:title" content="' + @plan.title + '">' +
-      '<meta property="og:site_name" content="RubyKaigi Takeout 2022 Schedule.select powerd by SmartHR">' +
+      '<meta property="og:site_name" content="RubyKaigi 2022 Schedule.select powerd by SmartHR">' +
       '<meta property="og:description" content="' + @plan.description + '">' +
       '<meta property="og:url" content="' + request.protocol + request.host_with_port + '/2022/plans/' + @plan.id + '">' +
       '<meta property="og:image" content="' + request.protocol + request.host_with_port + '/2022/api/plans/' + @plan.id + '/ogp?h=' + Digest::MD5.hexdigest(@plan.description) + '" />' +
