@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     get :schedules, to: 'schedules#page'
     get '/plans/:id', to: 'plans#page'
-    scope 'api' do
+    namespace 'api' do
       get :me, to: 'me#show'
       resources :schedules, only: %i[index]
       resources :plans, only: %i[show update create] do

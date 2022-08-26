@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApiController < ApplicationController
+class Api::ApiController < ApplicationController
   layout false
 
   rescue_from Exception, with: :server_error

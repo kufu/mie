@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Plans
+module Api::Plans
   class OgpsController < ApplicationController
     before_action :set_plan
 
