@@ -167,7 +167,6 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
   }
 
   const handleSuccess = () => {
-    setIsClicked(false)
     handleUpdate()
   }
 
