@@ -237,7 +237,6 @@ module ReactHelper
       authenticityToken: form_authenticity_token(form_options: { action:, method: }),
       targetKeyName: include_plan ? 'remove_schedule_id' : 'add_schedule_id',
       targetKey: schedule.id,
-      buttonText: include_plan ? I18n.t('card.remove') : I18n.t('card.add'),
       mode:,
     }
     props[:form][:termsOfService] = terms_of_service_props[:termsOfService] if plan.initial?

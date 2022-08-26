@@ -48,7 +48,6 @@ export interface SubmitFormProps {
   authenticityToken: string
   targetKeyName: string
   targetKey: string
-  buttonText: string
   mode: Mode
   initial? :InitialProps
   handleUpdate: () => void
@@ -145,7 +144,7 @@ export const ScheduleCard: React.VFC<Props> = (props) => {
 }
 
 const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
-  const { action, authenticityToken, targetKeyName, targetKey, buttonText, initial, mode, handleUpdate, termsOfService } = props
+  const { action, authenticityToken, targetKeyName, targetKey, initial, mode, handleUpdate, termsOfService } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -183,7 +182,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
     return (
       <>
         <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} size="s" onClick={() => setIsDialogOpen(true)}>
-          <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+          <Text size="S" weight="bold" color="TEXT_BLACK">{t("card.add")}</Text>
         </SecondaryButton>
         <TermsOfServiceDialog isOpen={isDialogOpen} closeHandler={() => setIsDialogOpen(false)} actionHandler={acceptHandler} termsOfService={termsOfService} />
         {errorComponents}
@@ -203,7 +202,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
       return (
         <>
           <SecondaryButton prefix={<FaPlusCircleIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
-            <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+            <Text size="S" weight="bold" color="TEXT_BLACK">{t("card.add")}</Text>
           </SecondaryButton>
           {errorComponents}
         </>
@@ -215,7 +214,7 @@ const SubmitForm: React.VFC<SubmitFormProps> = (props) => {
         return(
           <>
             <SecondaryButton prefix={<FaTrashIcon size={16}/>} type="submit" name="commit" size="s" disabled={isClicked} onClick={onClick}>
-              <Text size="S" weight="bold" color="TEXT_BLACK">{buttonText}</Text>
+              <Text size="S" weight="bold" color="TEXT_BLACK">{t("card.remove")}</Text>
             </SecondaryButton>
             {errorComponents}
           </>
