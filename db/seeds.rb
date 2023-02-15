@@ -9,10 +9,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
+  rubykaigi2021 = Event.create!(name: 'rubykaigi2021')
+
   speakers_yaml = {}.merge(*YAML.load_file('db/seeds/speakers.yml').values)
 
   speakers_by_id = speakers_yaml.transform_values do |val|
-    speaker = Speaker.find_or_initialize_by(handle: "@#{val['id']}")
+    speaker = Speaker.find_or_initialize_by(handle: "@#{val['id']}", event: rubykaigi2021)
     speaker.update!(
       name: val['name'],
       thumbnail: "https://www.gravatar.com/avatar/#{val['gravatar_hash']}/?s=268&d=https%3A%2F%2Frubykaigi.org%2F2020%2Fimages%2Fspeakers%2Fdummy-avatar.png",
@@ -30,7 +32,7 @@ ActiveRecord::Base.transaction do
 
   if ENV['SCHEDULE_FIND_BY'] == 'title'
     schedules_by_id = presentation_yaml.transform_values do |val|
-      schedule = Schedule.find_or_initialize_by(title: val['title'])
+      schedule = Schedule.find_or_initialize_by(title: val['title'], event: rubykaigi2021)
       schedule.attributes = {
         description: val['description'],
         language: val['language'].downcase
@@ -51,7 +53,8 @@ ActiveRecord::Base.transaction do
           schedule.update!(
             track_name: "Track#{track_name}",
             start_at: start_at,
-            end_at: end_at
+            end_at: end_at,
+            event: rubykaigi2021
           )
         end
       end
@@ -68,7 +71,8 @@ ActiveRecord::Base.transaction do
           hash[id] = Schedule.find_or_initialize_by(
             track_name: "Track#{track_name}",
             start_at: start_at,
-            end_at: end_at
+            end_at: end_at,
+            event: rubykaigi2021
           )
         end
       end
