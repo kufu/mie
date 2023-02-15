@@ -4,3 +4,4 @@ one:
   description: "Plans for test"
   user: one
   public: true
+  event: party
