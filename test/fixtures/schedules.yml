@@ -44,3 +44,12 @@ five:
   track_name: TrackC
   language: 1
   event: party
+
+dojo_one:
+  title: "Schedule title 1 in Dojo"
+  description: "This is Schedule title 1 in Dojo description"
+  start_at: 2022-12-31 10:00:00
+  end_at: 2023-01-01 10:40:00
+  track_name: TrackA
+  language: 0
+  event: dojo

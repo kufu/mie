@@ -34,3 +34,10 @@ denny:
   thumbnail: "https://example.com/thumbnail5"
   profile: hello
   event: party
+
+cat:
+  name: "Cat"
+  handle: "space cat"
+  thumbnail: "https://example.com/thumbnail6"
+  profile: meow
+  event: dojo
