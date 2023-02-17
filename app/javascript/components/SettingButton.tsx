@@ -7,7 +7,7 @@ import {
   SecondaryButton,
   FaCogIcon,
   Input,
-  RadioButtonNew,
+  RadioButton,
   FormGroup,
   Text,
   ThemeProvider
@@ -143,7 +143,7 @@ const DialogBody = styled(DialogBase)`
   padding: 24px;
 `
 
-const RadioBtn = styled(RadioButtonNew)`
+const RadioBtn = styled(RadioButton)`
   margin: 8px;
 `
 
