@@ -76,7 +76,7 @@ module ReactHelper
 
     props[:groupedPlans] = plans_table_props(plan, user)
     props[:oopsImagePath] = asset_path('2021/rubykaigi.png')
-    props[:uri] = url_for([plan, { only_path: false }])
+    props[:uri] = event_plan_url(plan, event_name: plan.event.name)
     props[:i18n] = plans_table_i18n
     props
   end
@@ -91,7 +91,7 @@ module ReactHelper
 
     if user.plans.include?(plan)
       method = 'patch'
-      action = plan_path(plan)
+      action = event_plan_path(plan, event_name: plan.event.name)
       props[:form] = {
         action:,
         method:,
@@ -123,8 +123,8 @@ module ReactHelper
     {
       current: request.path.split('/')[2],
       rootLink: '/2021',
-      schedulesLink: schedules_path,
-      plansLink: @plan ? plan_path(@plan) : nil,
+      schedulesLink: event_schedules_path,
+      plansLink: @plan ? event_plan_path(@plan, event_name: @plan.event.name) : nil,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }
@@ -145,7 +145,7 @@ module ReactHelper
 
     if user.plans.include?(plan)
       method = 'patch'
-      action = plan_path(plan)
+      action = event_plan_path(plan, event_name: plan.event.name)
       props[:form] = {
         action:,
         method:,
@@ -161,8 +161,8 @@ module ReactHelper
     props
   end
 
-  def create_info_panel_props
-    action = plans_path
+  def create_info_panel_props(event)
+    action = event_plans_path(event_name: event.name)
     {
       form: {
         action:,
@@ -178,7 +178,7 @@ module ReactHelper
     props[:i18n] = setting_button_i18n(plan.public)
 
     method = 'patch'
-    action = plan_path(plan)
+    action = event_plan_path(plan, event_name: plan.event.name)
 
     props[:form] = {
       action:,
@@ -268,7 +268,7 @@ module ReactHelper
   def plan_edit_props(plan, schedule, mode)
     props = {}
     method = 'patch'
-    action = plan_path(plan)
+    action = event_plan_path(plan, event_name: plan.event.name)
 
     include_plan = plan.plan_schedules.find { |ps| ps.schedule == schedule }
     props[:memo] = include_plan&.memo || ''
