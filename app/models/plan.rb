@@ -40,6 +40,7 @@ class Plan < ApplicationRecord
   include BCrypt
 
   belongs_to :user
+  belongs_to :event
   has_many :plan_schedules
   has_many :schedules, through: :plan_schedules
 

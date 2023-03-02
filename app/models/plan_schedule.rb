@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class PlanSchedule < ApplicationRecord
+  include ActiveModel::Validations
+  validates_with Validators::EventEqualityValidator
+
   belongs_to :plan
   belongs_to :schedule
 

@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_084641) do
+ActiveRecord::Schema.define(version: 2023_02_14_192924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "plan_schedules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "plan_id", null: false
@@ -33,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_084641) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_hash"
     t.boolean "initial", default: true, null: false
+    t.uuid "event_id", null: false
   end
 
   create_table "schedule_speakers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -51,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_084641) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "track_name", null: false
     t.integer "language", default: 0, null: false
+    t.uuid "event_id", null: false
   end
 
   create_table "speakers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -62,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_084641) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "github"
     t.string "twitter"
+    t.uuid "event_id", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

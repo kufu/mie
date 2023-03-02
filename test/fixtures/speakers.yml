@@ -5,27 +5,39 @@ johnny:
   handle: silverhand
   thumbnail: "https://example.com/thumbnail1"
   profile: rockerboy
+  event: party
 
 kerry:
   name: "Kerry Eurodyne"
   handle: ponponshit
   thumbnail: "https://example.com/thumbnail2"
   profile: rockerboy
+  event: party
 
 nancy:
   name: "Nancy"
   handle: besisis
   thumbnail: "https://example.com/thumbnail3"
   profile: freak
+  event: party
 
 henry:
   name: "Henry"
   handle: henry
   thumbnail: "https://example.com/thumbnail4"
   profile: gold
+  event: party
 
 denny:
   name: "Denny"
   handle: denny
   thumbnail: "https://example.com/thumbnail5"
   profile: hello
+  event: party
+
+cat:
+  name: "Cat"
+  handle: "space cat"
+  thumbnail: "https://example.com/thumbnail6"
+  profile: meow
+  event: dojo

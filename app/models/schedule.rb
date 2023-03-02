@@ -5,6 +5,8 @@ class Schedule < ApplicationRecord
   has_many :speakers, through: :schedule_speakers
   has_many :plan_schedules
 
+  belongs_to :event
+
   enum language: { en: 0, ja: 1, 'en & ja': 2 }
 
   validates :title, presence: true, length: { in: 1..100 }

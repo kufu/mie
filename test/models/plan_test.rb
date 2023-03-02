@@ -52,7 +52,7 @@ class PlanTest < ActiveSupport::TestCase
   test "Can't select schedules that same start-end time" do
     schs = schedules(:four, :five)
 
-    p = Plan.create!(title: 'test', user: User.create!)
+    p = Plan.create!(title: 'test', user: User.create!, event: events(:party))
     p.plan_schedules.create(schedule: schs[0])
     p.plan_schedules.create(schedule: schs[1])
     assert_not p.valid?
@@ -65,17 +65,19 @@ class PlanTest < ActiveSupport::TestCase
       track_name: 'test track',
       speakers: [johnny],
       start_at: Time.zone.parse('2021-07-30 12:00:00'),
-      end_at: Time.zone.parse('2021-07-30 13:00:00')
+      end_at: Time.zone.parse('2021-07-30 13:00:00'),
+      event: events(:party)
     )
     right = Schedule.create!(
       title: 'test2',
       track_name: 'test track',
       speakers: [kerry],
       start_at: Time.zone.parse('2021-07-30 12:30:00'),
-      end_at: Time.zone.parse('2021-07-30 13:20:00')
+      end_at: Time.zone.parse('2021-07-30 13:20:00'),
+      event: events(:party)
     )
 
-    p = Plan.create!(title: 'test', user: User.create!)
+    p = Plan.create!(title: 'test', user: User.create!, event: events(:party))
     p.plan_schedules.create(schedule: left)
     p.plan_schedules.create(schedule: right)
     assert_not p.valid?
@@ -88,17 +90,19 @@ class PlanTest < ActiveSupport::TestCase
       track_name: 'test track',
       speakers: [johnny],
       start_at: Time.zone.parse('2021-07-30 12:00:00'),
-      end_at: Time.zone.parse('2021-07-30 13:00:00')
+      end_at: Time.zone.parse('2021-07-30 13:00:00'),
+      event: events(:party)
     )
     right = Schedule.create!(
       title: 'test2',
       track_name: 'test track',
       speakers: [kerry],
       start_at: Time.zone.parse('2021-07-30 13:00:00'),
-      end_at: Time.zone.parse('2021-07-30 14:00:00')
+      end_at: Time.zone.parse('2021-07-30 14:00:00'),
+      event: events(:party)
     )
 
-    p = Plan.create!(title: 'test', user: User.create!)
+    p = Plan.create!(title: 'test', user: User.create!, event: events(:party))
     p.plan_schedules.create(schedule: left)
     p.plan_schedules.create(schedule: right)
     assert p.valid?

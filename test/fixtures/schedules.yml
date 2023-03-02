@@ -7,6 +7,7 @@ one:
   end_at: 2021-07-20 10:40:00
   track_name: TrackA
   language: 0
+  event: party
 
 two:
   title: "Schedule title 2"
@@ -15,6 +16,7 @@ two:
   end_at: 2021-07-20 11:40:00
   track_name: TrackB
   language: 0
+  event: party
 
 three:
   title: "Schedule title 3"
@@ -23,6 +25,7 @@ three:
   end_at: 2021-07-21 10:40:00
   track_name: TrackA
   language: 1
+  event: party
 
 four:
   title: "Schedule title 4"
@@ -31,6 +34,7 @@ four:
   end_at: 2021-07-21 11:40:00
   track_name: TrackB
   language: 1
+  event: party
 
 five:
   title: "Schedule title 5"
@@ -39,3 +43,13 @@ five:
   end_at: 2021-07-21 11:40:00
   track_name: TrackC
   language: 1
+  event: party
+
+dojo_one:
+  title: "Schedule title 1 in Dojo"
+  description: "This is Schedule title 1 in Dojo description"
+  start_at: 2022-12-31 10:00:00
+  end_at: 2023-01-01 10:40:00
+  track_name: TrackA
+  language: 0
+  event: dojo
