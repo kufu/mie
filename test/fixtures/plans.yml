@@ -4,3 +4,11 @@ one:
   description: "Plans for test"
   user: one
   public: true
+  event: party
+
+two:
+  title: "Test plan 1"
+  description: "Plans for dojo"
+  user: two
+  public: true
+  event: dojo
