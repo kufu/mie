@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root to: 'static#index'
 
-  scope '2021' do
+  scope '2023' do
     get '/', to: 'static#top'
 
     resources :schedules, only: %i[index show]

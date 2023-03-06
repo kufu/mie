@@ -38,8 +38,8 @@ en:
     schedule: "Schedule"
     plan: "My Plans"
   info:
-    create_plan_title: "Create your RubyKaigi 2021 Takeout Plans"
-    create_plan_text: "Create your RubyKaigi 2021 Takeout Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
+    create_plan_title: "Create your RubyKaigi 2023 Takeout Plans"
+    create_plan_text: "Create your RubyKaigi 2023 Takeout Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
     terms_of_service: "Terms of service"
   table:
     start_end: "Start...End time"
@@ -77,7 +77,7 @@ en:
     visible: "Public"
     invisible: "Private"
   terms_of_service:
-    description: "RubyKaigi Takeout 2021 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
+    description: "RubyKaigi Takeout 2023 Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
   dialog:
     edit_title: "Edit the title"
     edit_memo: "Edit a note for \"%{title}\""
@@ -110,7 +110,7 @@ en:
 
   application:
     intro: |-
-      "RubyKaigi Takeout 2021 Schedule.select" is RubyKaigi's first official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!
+      "RubyKaigi Takeout 2023 Schedule.select" is RubyKaigi's first official schedule creation and sharing app. You can list the sessions you are interested in and create your own viewing schedule!
       If you have ever wondered, "Which session should I watch…" before attending a conference, then this is the app for you.
       We developed this app so participants could share their "viewing schedules" and "reasons for interest" before the event, which they could use as a reference for session selection and to enjoy the conference even more.
-      Why do you want to see the session? Share it before the event and let's enjoy RubyKaigi Takeout 2021 together!
+      Why do you want to see the session? Share it before the event and let's enjoy RubyKaigi Takeout 2023 together!

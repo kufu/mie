@@ -75,7 +75,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
-    props[:oopsImagePath] = asset_path('2021/rubykaigi.png')
+    props[:oopsImagePath] = asset_path('2023/rubykaigi.png')
     props[:uri] = url_for([plan, { only_path: false }])
     props[:i18n] = plans_table_i18n
     props
@@ -122,7 +122,7 @@ module ReactHelper
   def create_navigation_props
     {
       current: request.path.split('/')[2],
-      rootLink: '/2021',
+      rootLink: '/2023',
       schedulesLink: schedules_path,
       plansLink: @plan ? plan_path(@plan) : nil,
       locales: create_locale_selector_props,
@@ -211,14 +211,14 @@ module ReactHelper
     {
       title: I18n.t('errors.not_found'),
       description: I18n.t('errors.not_found_desc'),
-      imagePath: asset_path('2021/rubykaigi.png')
+      imagePath: asset_path('2023/rubykaigi.png')
     }
   end
 
   def create_server_error_props
     {
       title: I18n.t('errors.internal_server_error'),
-      imagePath: asset_path('2021/rubykaigi.png')
+      imagePath: asset_path('2023/rubykaigi.png')
     }
   end
 
