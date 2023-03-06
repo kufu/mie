@@ -30,7 +30,7 @@ export const Top: React.VFC<Props> = (props) => {
         { intro.split("\n").map(line => <TopText>{line}</TopText> )}
       </IntroArea>
       <LinkArea>
-        <p><TextLink href={"https://rubykaigi.org/2023-takeout"} target="_blank">The official website of RubyKaigi 2023</TextLink></p>
+        <p><TextLink href={"https://rubykaigi.org/2023"} target="_blank">The official website of RubyKaigi 2023</TextLink></p>
         <p><TextLink href={"https://twitter.com/rubykaigi"} target="_blank"><TwitterLogo /> Twitter</TextLink></p>
         <p><TextLink href={"https://smarthr.co.jp/"} target="_blank">SmartHR</TextLink></p>
       </LinkArea>

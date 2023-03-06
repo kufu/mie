@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
 
   def set_plan
     if @user.plans.blank?
-      @user.plans.create!(title: 'My RubyKaigi 2023 Takeout set list',
-                          description: 'Enjoy my RubyKaigi 2023 Takeout set list',
+      @user.plans.create!(title: 'My RubyKaigi 2023 set list',
+                          description: 'Enjoy my RubyKaigi 2023 set list',
                           public: true, event_id: Event.last.id)
     end
     @plan = @user.plans.recent.first
