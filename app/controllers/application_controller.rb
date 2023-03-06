@@ -32,11 +32,13 @@ class ApplicationController < ActionController::Base
     @plan = @user.plans.recent.first
   end
 
-  def not_found
+  def not_found(e)
+    Rails.logger.debug("#{e}\n#{e.backtrace.join("\n")}")
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 
-  def server_error
+  def server_error(e)
+    Rails.logger.error("#{e}\n#{e.backtrace.join("\n")}")
     render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
   end
 
