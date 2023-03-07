@@ -39,7 +39,7 @@ interface BodyProps {
 export const ScheduleDetail: React.VFC<Props> = (props) => {
   const { isOpen, handleOnClickClose, body, i18n } = props
   return (
-    <MessageDialog
+    <MaxWidthMessageDialog
       title={i18n.title}
       closeText={i18n.close}
       onPressEscape={handleOnClickClose}
@@ -50,6 +50,10 @@ export const ScheduleDetail: React.VFC<Props> = (props) => {
     />
   )
 }
+
+const MaxWidthMessageDialog = styled(MessageDialog)`
+  max-width: 100%;
+`
 
 const DialogBody: React.VFC<BodyProps> = (props) => {
   const { speakers, startEndTime, language, description, i18n } = props
