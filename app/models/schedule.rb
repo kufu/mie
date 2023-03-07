@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Schedule < ApplicationRecord
+  include Events
+
   has_many :schedule_speakers
   has_many :speakers, through: :schedule_speakers
   has_many :plan_schedules

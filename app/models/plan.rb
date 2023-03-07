@@ -38,6 +38,7 @@ end
 
 class Plan < ApplicationRecord
   include BCrypt
+  include Events
 
   belongs_to :user
   belongs_to :event

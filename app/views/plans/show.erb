@@ -3,8 +3,8 @@
   <meta property="og:title" content="<%= @plan.title %>">
   <meta property="og:site_name" content="RubyKaigi 2023 Schedule.select powerd by SmartHR">
   <meta property="og:description" content="<%= @plan.description %>">
-  <meta property="og:url" content="<%= plan_url %>">
-  <meta property="og:image" content="<%= plan_ogp_url(@plan, h: Digest::MD5.hexdigest(@plan.description)) %>" />
+  <meta property="og:url" content="<%= event_plan_url(event_name: @plan.event.name) %>">
+  <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image"/>
 <% end %>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PlansController < ApplicationController
+  include EventRouting
+
   before_action :set_plan
   before_action :check_user_owns_plan, only: :update
 
@@ -29,7 +31,7 @@ class PlansController < ApplicationController
   def editable
     if @plan.password == params[:password]
       @plan.update!(user: @user)
-      redirect_to plan_path(@plan)
+      redirect_to event_plan_path(@plan, event_name: @plan.event.name)
     else
       flash[:error] = I18n.t('errors.password_incorrect')
       head :unauthorized
@@ -41,7 +43,7 @@ class PlansController < ApplicationController
 
   def create
     @plan = @user.plans.create!(title: 'My Plans')
-    redirect_to plan_path @plan
+    redirect_to event_plan_path(@plan, event_name: @plan.event.name)
   end
 
   private
@@ -52,7 +54,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    @plan = Plan.find(params[:id] || params[:plan_id])
+    @plan = Plan.on_event(@event).find(params[:id] || params[:plan_id])
     raise ActiveRecord::RecordNotFound if @plan.user != @user && !@plan.public?
   end
 
@@ -71,7 +73,7 @@ class PlansController < ApplicationController
       ps.save!
     else
       flash[:error] = @plan.errors.messages[:schedules]
-      redirect_to schedules_path && return
+      redirect_to event_schedules_path(event_name: @plan.event.name) && return
     end
     @plan.update!(initial: false)
     ps.schedule
