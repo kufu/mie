@@ -38,6 +38,7 @@ const ResizedSelect = styled(Select)`
   height: 30px !important;
   select {
     padding: 3px 8px;
+    min-height: 30px;
   }
 `
 
