@@ -75,7 +75,7 @@ module ReactHelper
     props = {}
 
     props[:groupedPlans] = plans_table_props(plan, user)
-    props[:oopsImagePath] = asset_path('2021/rubykaigi.png')
+    props[:oopsImagePath] = asset_path("#{plan.event.name}/rubykaigi.png")
     props[:uri] = event_plan_url(plan, event_name: plan.event.name)
     props[:i18n] = plans_table_i18n
     props
@@ -126,6 +126,7 @@ module ReactHelper
       schedulesLink: event_schedules_path,
       plansLink: @plan ? event_plan_path(@plan, event_name: @plan.event.name) : nil,
       mainColor: @event.event_theme.main_color,
+      logoImage: asset_path("#{@event.name}/rubykaigi_logo.svg"),
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }
@@ -212,14 +213,14 @@ module ReactHelper
     {
       title: I18n.t('errors.not_found'),
       description: I18n.t('errors.not_found_desc'),
-      imagePath: asset_path('2021/rubykaigi.png')
+      imagePath: asset_path("#{@event.name}/rubykaigi.png")
     }
   end
 
   def create_server_error_props
     {
       title: I18n.t('errors.internal_server_error'),
-      imagePath: asset_path('2021/rubykaigi.png')
+      imagePath: asset_path("#{@event.name}/rubykaigi.png")
     }
   end
 
@@ -229,9 +230,9 @@ module ReactHelper
       mainColor: @event.event_theme.main_color,
       subColor: @event.event_theme.sub_color,
       accentColor: @event.event_theme.accent_color,
-      intro: @event.event_theme.overview,
       siteLabel: @event.event_theme.site_label,
       siteUrl: @event.event_theme.site_url,
+      titleImage: asset_path("#{@event.name}/title.svg")
     }
   end
 

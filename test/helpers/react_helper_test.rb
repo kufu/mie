@@ -322,7 +322,7 @@ class ReactHelperTest < ActionView::TestCase
             memo: plan.plan_schedules.find_by(schedule: schs[3]).memo, sortKey: schs[3].start_at.to_i }
         ]
       },
-      oopsImagePath: '/2021/rubykaigi.png',
+      oopsImagePath: '/happy-party/rubykaigi.png',
       uri: 'http://test.host/happy-party/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
       i18n: {
         startEnd: I18n.t('table.start_end'),
@@ -356,7 +356,7 @@ class ReactHelperTest < ActionView::TestCase
             memo: plan.plan_schedules.find_by(schedule: schs[3]).memo, sortKey: schs[3].start_at.to_i }
         ]
       },
-      oopsImagePath: '/2021/rubykaigi.png',
+      oopsImagePath: '/happy-party/rubykaigi.png',
       uri: 'http://test.host/happy-party/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
       i18n: {
         startEnd: I18n.t('table.start_end'),
