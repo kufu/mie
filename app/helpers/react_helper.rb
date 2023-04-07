@@ -125,6 +125,7 @@ module ReactHelper
       rootLink: '/2021',
       schedulesLink: event_schedules_path,
       plansLink: @plan ? event_plan_path(@plan, event_name: @plan.event.name) : nil,
+      mainColor: @event.event_theme.main_color,
       locales: create_locale_selector_props,
       i18n: navigation_i18n
     }

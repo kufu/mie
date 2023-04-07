@@ -11,6 +11,7 @@ interface Props {
   rootLink: string
   schedulesLink: string
   plansLink?: string
+  mainColor: string
   locales: LocaleSelectorProps
   i18n: {
     label: string
@@ -22,11 +23,14 @@ interface Props {
 }
 
 export const Navigation: React.FC<Props> = (props) => {
-  const { current, locales, i18n } = props
+  const { current, locales, mainColor, i18n } = props
+
+  const theme = createdTheme
+  theme.color.MAIN = mainColor
 
   return (
-    <ThemeProvider theme={createdTheme}>
-      <Nav>
+    <ThemeProvider theme={theme}>
+      <Nav theme={theme}>
         <Container>
           <RubyKaigiLogo />
           <CenteredWrapper>
@@ -86,7 +90,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   flex-direction: row;
-  background: #0B374D;
+  background: ${p => p.theme.color.MAIN};
   height: 50px;
 `
 
