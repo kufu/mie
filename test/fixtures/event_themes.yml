@@ -1,0 +1,16 @@
+party-theme:
+  event: party
+  main_color: '#0B374D'
+  sub_color: '#EBE0CE'
+  accent_color: '#D7D165'
+  overview: 'hoge'
+  site_label: 'foo'
+  site_url: 'https://example.com'
+dojo-theme:
+  event: dojo
+  main_color: '#0B374D'
+  sub_color: '#EBE0CE'
+  accent_color: '#D7D165'
+  overview: 'piyo'
+  site_label: 'boom'
+  site_url: 'https://example.com/2'
