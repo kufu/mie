@@ -57,7 +57,7 @@ class ReactHelperTest < ActionView::TestCase
       memo: '',
       memoMaxLength: 1024,
       form: {
-        action: plan_path(plan),
+        action: event_plan_path(plan, event_name: plan.event.name),
         method: 'patch',
         authenticityToken: form_authenticity_token(''),
         targetKeyName: 'remove_schedule_id',
@@ -128,7 +128,7 @@ class ReactHelperTest < ActionView::TestCase
       memo: '',
       memoMaxLength: 1024,
       form: {
-        action: plan_path(plan),
+        action: event_plan_path(plan, event_name: plan.event.name),
         method: 'patch',
         authenticityToken: form_authenticity_token(''),
         targetKeyName: 'add_schedule_id',
@@ -323,7 +323,7 @@ class ReactHelperTest < ActionView::TestCase
         ]
       },
       oopsImagePath: '/2021/rubykaigi.png',
-      uri: 'http://test.host/2021/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
+      uri: 'http://test.host/happy-party/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
       i18n: {
         startEnd: I18n.t('table.start_end'),
         track: I18n.t('table.track'),
@@ -357,7 +357,7 @@ class ReactHelperTest < ActionView::TestCase
         ]
       },
       oopsImagePath: '/2021/rubykaigi.png',
-      uri: 'http://test.host/2021/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
+      uri: 'http://test.host/happy-party/plans/aa67c98c-d81f-5a9c-b0bc-26caa0051aea',
       i18n: {
         startEnd: I18n.t('table.start_end'),
         track: I18n.t('table.track'),
@@ -373,7 +373,7 @@ class ReactHelperTest < ActionView::TestCase
   test 'create_info_panel_props' do
     expect = {
       form: {
-        action: '/2021/plans',
+        action: '/happy-party/plans',
         authenticityToken: form_authenticity_token('/plans')
       },
       i18n: {
@@ -385,6 +385,6 @@ class ReactHelperTest < ActionView::TestCase
         buttonText: I18n.t('button.plan_create_button')
       }
     }
-    assert_equal expect, create_info_panel_props
+    assert_equal expect, create_info_panel_props(events(:party))
   end
 end

@@ -24,16 +24,20 @@ class ApplicationController < ActionController::Base
   def set_plan
     if @user.plans.blank?
       @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list',
-                          description: 'Enjoy my RubyKaigi 2021 Takeout set list', public: true)
+                          description: 'Enjoy my RubyKaigi 2021 Takeout set list',
+                          public: true,
+                          event: @event)
     end
     @plan = @user.plans.recent.first
   end
 
-  def not_found
+  def not_found(err)
+    Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}")
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 
-  def server_error
+  def server_error(err)
+    Rails.logger.error("#{err}\n#{err.backtrace.join("\n")}")
     render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
   end
 
