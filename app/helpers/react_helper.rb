@@ -122,7 +122,7 @@ module ReactHelper
   def create_navigation_props
     {
       current: request.path.split('/')[2],
-      rootLink: '/2021',
+      rootLink: "/#{@event.name}",
       schedulesLink: event_schedules_path,
       plansLink: @plan ? event_plan_path(@plan, event_name: @plan.event.name) : nil,
       mainColor: @event.event_theme.main_color,
