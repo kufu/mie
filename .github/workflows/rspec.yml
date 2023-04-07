@@ -27,5 +27,9 @@ jobs:
           bundler-cache: true
       - name: Create database
         run: bin/rails db:setup
+      - name: yarn
+        run: yarn install
+      - name: Build frontend
+        run: NODE_OPTIONS=--openssl-legacy-provider bin/rails webpacker:compile
       - name: Run tests
         run: bin/rails test
