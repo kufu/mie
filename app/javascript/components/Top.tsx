@@ -5,10 +5,15 @@ import {SmartHRLogo as shrSmartHRLogo, Text, TextLink, Heading, LineUp} from 'sm
 
 interface Props {
   intro: string
+  mainColor: string
+  subColor: string
+  accentColor: string
+  siteLabel: string
+  siteUrl: string
 }
 
 export const Top: React.VFC<Props> = (props) => {
-  const { intro } = props
+  const { intro, mainColor, subColor, accentColor, siteLabel, siteUrl } = props
   return (
     <Container>
       <TitleBox>
@@ -22,15 +27,15 @@ export const Top: React.VFC<Props> = (props) => {
         </LineUp>
       </TitleBox>
       <ColorLines>
-        <ColorLine color="#0B374C" />
-        <ColorLine color="#EBE0CE" />
-        <ColorLine color="#D7D165" />
+        <ColorLine color={mainColor} />
+        <ColorLine color={subColor} />
+        <ColorLine color={accentColor} />
       </ColorLines>
       <IntroArea>
         { intro.split("\n").map(line => <TopText>{line}</TopText> )}
       </IntroArea>
       <LinkArea>
-        <p><TextLink href={"https://rubykaigi.org/2021-takeout"} target="_blank">The official website of RubyKaigi 2021</TextLink></p>
+        <p><TextLink href={siteUrl} target="_blank">{siteLabel}</TextLink></p>
         <p><TextLink href={"https://twitter.com/rubykaigi"} target="_blank"><TwitterLogo /> Twitter</TextLink></p>
         <p><TextLink href={"https://smarthr.co.jp/"} target="_blank">SmartHR</TextLink></p>
       </LinkArea>

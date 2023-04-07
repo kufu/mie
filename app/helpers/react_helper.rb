@@ -225,7 +225,13 @@ module ReactHelper
 
   def create_top_props
     {
-      intro: I18n.t('application.intro')
+      intro: I18n.t('application.intro'),
+      mainColor: @event.event_theme.main_color,
+      subColor: @event.event_theme.sub_color,
+      accentColor: @event.event_theme.accent_color,
+      intro: @event.event_theme.overview,
+      siteLabel: @event.event_theme.site_label,
+      siteUrl: @event.event_theme.site_url,
     }
   end
 
