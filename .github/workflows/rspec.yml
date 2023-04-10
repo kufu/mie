@@ -22,6 +22,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.19.1
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -30,6 +33,7 @@ jobs:
       - name: yarn
         run: yarn install
       - name: Build frontend
-        run: NODE_OPTIONS=--openssl-legacy-provider bin/rails webpacker:compile
+        #run: NODE_OPTIONS=--openssl-legacy-provider bin/rails webpacker:compile
+        run: bin/rails webpacker:compile
       - name: Run tests
         run: bin/rails test
