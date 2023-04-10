@@ -9,7 +9,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
-  rubykaigi2021 = Event.create!(name: 'rubykaigi2021')
+  rubykaigi2021 = Event.new(name: 'rubykaigi2021')
+  rubykaigi2021.build_event_theme
+  rubykaigi2021.save!
 
   speakers_yaml = {}.merge(*YAML.load_file('db/seeds/speakers.yml').values)
 

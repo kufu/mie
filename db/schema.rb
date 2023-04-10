@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_14_192924) do
+ActiveRecord::Schema.define(version: 2023_04_07_074130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "event_themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id", null: false
+    t.string "main_color", default: "#0B374D", null: false
+    t.string "sub_color", default: "#EBE0CE", null: false
+    t.string "accent_color", default: "#D7D165", null: false
+    t.string "overview", default: "", null: false
+    t.string "site_label", default: "", null: false
+    t.string "site_url", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
