@@ -42,7 +42,7 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = @user.plans.create!(title: 'My Plans')
+    @plan = @user.plans.where(event: @event).create!(title: 'My Plans')
     redirect_to event_plan_path(@plan, event_name: @plan.event.name)
   end
 
