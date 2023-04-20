@@ -13,6 +13,7 @@ ActiveRecord::Base.transaction do
   base_event = Event.find_or_initialize_by(name: '2023')
   base_event.build_event_theme if base_event.new_record?
   base_event.save!
+  base_event.reload
 
   speakers_yaml = {}.merge(*YAML.load_file('db/seeds/speakers.yml').values)
 
@@ -28,7 +29,7 @@ ActiveRecord::Base.transaction do
     speaker
   end
 
-  Speaker.where.not(id: speakers_by_id.values).destroy_all
+  Speaker.where.not(id: speakers_by_id.values).where.not(event: base_event).destroy_all
 
   schedule_yaml = YAML.load_file('db/seeds/schedule.yml')
   presentation_yaml = YAML.load_file('db/seeds/presentations.yml')
@@ -45,13 +46,16 @@ ActiveRecord::Base.transaction do
 
     schedule_yaml.each do |date, schedules|
       schedules['events'].each do |event|
-        next if event['type'] == 'break'
-
         start_at = Time.zone.parse("#{date} #{event['begin']} JST")
         end_at = Time.zone.parse("#{date} #{event['end']} JST")
 
-        event['talks'].each do |track_name, id|
-          schedule = schedules_by_id[id]
+        case event['type']
+        when 'break'
+          next
+        when 'lt'
+          next # LTのデータが埋まったら対応する
+        else
+          event['talks'].each do |track_name, id| schedule = schedules_by_id[id]
 
           schedule.update!(
             track_name: "Track#{track_name}",
@@ -59,24 +63,30 @@ ActiveRecord::Base.transaction do
             end_at: end_at,
             event: base_event
           )
+          end
         end
       end
     end
   else
     schedules_by_id = schedule_yaml.each_with_object({}) do |(date, schedules), hash|
       schedules['events'].each do |event|
-        next if event['type'] == 'break'
-
         start_at = Time.zone.parse("#{date} #{event['begin']} JST")
         end_at = Time.zone.parse("#{date} #{event['end']} JST")
 
-        event['talks'].each do |track_name, id|
-          hash[id] = Schedule.find_or_initialize_by(
-            track_name: "Track#{track_name}",
-            start_at: start_at,
-            end_at: end_at,
-            event: base_event
-          )
+        case event['type']
+        when 'break'
+          next
+        when 'lt'
+          next # LTのデータが埋まったら対応する
+        else
+          event['talks'].each do |track_name, id|
+            hash[id] = Schedule.find_or_initialize_by(
+              track_name: "Track#{track_name}",
+              start_at: start_at,
+              end_at: end_at,
+              event: base_event
+            )
+          end
         end
       end
     end
