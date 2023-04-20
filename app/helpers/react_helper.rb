@@ -198,7 +198,7 @@ module ReactHelper
     }
 
     method = 'patch'
-    action = plan_own_path(plan)
+    action = event_plan_own_path(plan, event_name: @event.name)
 
     props[:form] = {
       action:,
