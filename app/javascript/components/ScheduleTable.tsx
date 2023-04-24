@@ -44,8 +44,8 @@ export const ScheduleTable: React.VFC<Props> = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeadCell width="20%">{i18n.startEnd}</TableHeadCell>
-                {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index}  width="40%" textCenter>{track}</TableHeadCell>)}
+                <TableHeadCell minWidth={"150px"}>{i18n.startEnd}</TableHeadCell>
+                {groupedSchedules[currentKey].trackList.map((track, index) => <TableHeadCell key={index} textCenter>{track}</TableHeadCell>)}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -81,6 +81,7 @@ const Wrapper = styled.div`
 `
 const TableWrapper = styled.div`
   margin-top: 16px;
+  overflow-y: auto;
 `
 /* テーブルセル内の要素の幅高さ 100% にする */
 const CellItemStretcher = styled.div`
@@ -88,6 +89,7 @@ const CellItemStretcher = styled.div`
   height: 100%;
   > * {
     width: 100%;
+    min-width: 400px;
   }
 `
 
