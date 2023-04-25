@@ -8,6 +8,7 @@ class EventThemeTest < ActiveSupport::TestCase
       main_color: '#000000',
       sub_color: '#000000',
       accent_color: '#000000',
+      text_color: '#000000',
       overview: 'test',
       site_label: 'test',
       site_url: 'test'
