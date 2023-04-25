@@ -1,9 +1,9 @@
 {
   "name": "mie",
   "description": "mieだよ〜",
-  "website": "https://rubykaigi.smarthr.co.jp/2021/",
+  "website": "https://rubykaigi.smarthr.co.jp/2023/",
   "repository": "https://github.com/kufu/mie",
-  "success_url": "/2021",
+  "success_url": "/2023",
   "env": {
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",

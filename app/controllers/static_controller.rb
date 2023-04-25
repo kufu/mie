@@ -4,7 +4,7 @@ class StaticController < ApplicationController
   include EventRouting
 
   def index
-    redirect_to '/2021'
+    redirect_to '/2023'
   end
 
   def top; end

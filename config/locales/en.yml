@@ -38,8 +38,8 @@ en:
     schedule: "Schedule"
     plan: "My Plans"
   info:
-    create_plan_title: "Create your RubyKaigi 2021 Takeout Plans"
-    create_plan_text: "Create your RubyKaigi 2021 Takeout Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
+    create_plan_title: "Create your RubyKaigi Plans"
+    create_plan_text: "Create your RubyKaigi Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
     terms_of_service: "Terms of service"
   table:
     start_end: "Start...End time"
