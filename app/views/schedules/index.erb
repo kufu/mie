@@ -1,8 +1,8 @@
 <% content_for :head do %>
-  <meta property="og:title" content="RubyKaigi 2021 Takeout Schedule.select">
-  <meta property="og:site_name" content="RubyKaigi Takeout 2021 Schedule.select powerd by SmartHR">
+  <meta property="og:title" content="RubyKaigi Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
   <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
-  <meta property="og:image" content="<%= asset_url("2021/takeout.png") %>" />
+  <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image"/>
 <% end %>
