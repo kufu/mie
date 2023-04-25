@@ -216,6 +216,7 @@ const Card = styled(Base)`
 
 const Speaker = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 `
@@ -223,6 +224,8 @@ const Speaker = styled.div`
 const Profile = styled.div`
   display: flex;
   align-items: center;
+  min-width: 320px;
+  margin-bottom: 8px;
 `
 
 const MarginWrapper = styled.div`
@@ -256,7 +259,7 @@ const Lng = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px 12px;
-  margin-left: 8px;
+  margin-right: 8px;
 
   height: 24px;
   left: 330.5px;
