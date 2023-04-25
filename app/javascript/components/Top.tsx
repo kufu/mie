@@ -18,7 +18,7 @@ export const Top: React.VFC<Props> = (props) => {
   return (
     <Container>
       <TitleBox>
-        <div><img src={titleImage} /></div>
+        <div><img height={"54px"} src={titleImage} /></div>
         <Cluster gap={1} align={"end"}>
           Schedule.select
           <PoweredBy>
