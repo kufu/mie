@@ -40,7 +40,7 @@ export const Navigation: React.FC<Props> = (props) => {
             </MarginWrapper>
             <PoweredByWrapper>
               <Text size="S">powered by</Text>
-              <SmartHRLogo width="95" height="16" fill="#00C4CC" />
+              <SmartHRLogo width="110px" height="20px" fill="white" />
             </PoweredByWrapper>
           </CenteredWrapper>
         </Container>
