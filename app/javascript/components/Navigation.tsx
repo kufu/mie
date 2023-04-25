@@ -33,7 +33,7 @@ export const Navigation: React.FC<Props> = (props) => {
     <ThemeProvider theme={theme}>
       <Nav theme={theme}>
         <Container>
-          <img src={logoImage} />
+          <img height={"24px"} src={logoImage} />
           <CenteredWrapper>
             <MarginWrapper>
               <Text>Schedule.select</Text>
