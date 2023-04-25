@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {SmartHRLogo as shrSmartHRLogo, Text, TextLink, Heading, LineUp} from 'smarthr-ui'
+import {SmartHRLogo as shrSmartHRLogo, Text, TextLink, Heading, Cluster} from 'smarthr-ui'
 
 interface Props {
   intro: string
@@ -19,13 +19,13 @@ export const Top: React.VFC<Props> = (props) => {
     <Container>
       <TitleBox>
         <div><img src={titleImage} /></div>
-        <LineUp gap={1}>
+        <Cluster gap={1} align={"end"}>
           Schedule.select
           <PoweredBy>
             <Text>powered by</Text>
-            <SmartHRLogo width={95} height={16} fill="#00C4CC" />
+            <SmartHRLogo width={"88px"} height={"16px"} fill="brand" />
           </PoweredBy>
-        </LineUp>
+        </Cluster>
       </TitleBox>
       <ColorLines>
         <ColorLine color={mainColor} />
@@ -78,13 +78,12 @@ const ColorLine = styled.div`
 
 const PoweredBy = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2px;
+  align-items: baseline;
+  gap: 8px;
 `
 
 const SmartHRLogo = styled(shrSmartHRLogo)`
-  margin-bottom: 10px;
+  padding: 0;
 `
 
 const IntroArea = styled.div`
