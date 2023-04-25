@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
 
   def set_plan
     if @user.plans.where(event: @event).blank?
-      @user.plans.create!(title: 'My RubyKaigi 2021 Takeout set list',
-                          description: 'Enjoy my RubyKaigi 2021 Takeout set list',
+      @user.plans.create!(title: "My RubyKaigi #{@event.name} set list",
+                          description: "Enjoy my RubyKaigi #{@event.name} set list",
                           public: true,
                           event: @event)
     end
