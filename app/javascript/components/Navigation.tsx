@@ -33,14 +33,14 @@ export const Navigation: React.FC<Props> = (props) => {
     <ThemeProvider theme={theme}>
       <Nav theme={theme}>
         <Container>
-          <img src={logoImage} />
+          <img height={"24px"} src={logoImage} />
           <CenteredWrapper>
             <MarginWrapper>
               <Text>Schedule.select</Text>
             </MarginWrapper>
             <PoweredByWrapper>
               <Text size="S">powered by</Text>
-              <SmartHRLogo width="95" height="16" fill="#00C4CC" />
+              <SmartHRLogo width="110px" height="20px" fill="white" />
             </PoweredByWrapper>
           </CenteredWrapper>
         </Container>
