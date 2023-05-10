@@ -50,6 +50,8 @@ may11:
     begin: '16:40'
     end: '17:40'
     name: Lightning Talks
+    talks:
+      Large Hall: lt
 may12:
   events:
   - type: break

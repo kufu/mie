@@ -77,7 +77,14 @@ ActiveRecord::Base.transaction do
         when 'break'
           next
         when 'lt'
-          next # LTのデータが埋まったら対応する
+          event['talks'].each do |track_name, id|
+            hash[id] = Schedule.find_or_initialize_by(
+              track_name: "Track#{track_name}",
+              start_at: start_at,
+              end_at: end_at,
+              event: base_event
+            )
+          end
         else
           event['talks'].each do |track_name, id|
             hash[id] = Schedule.find_or_initialize_by(
