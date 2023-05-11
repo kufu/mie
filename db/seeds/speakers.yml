@@ -17,12 +17,14 @@ keynotes:
       inside CRuby, and to win the Ruby Prize in 2021 for her work on optimizing Ruby’s
       performance.
     github_id: maximecb
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f1457acc3f8d176db1d28e9f30779ae6
   soutaro:
     id: soutaro
     name: Soutaro Matsumoto
-    bio: Software engineer at Square.
+    bio: Soutaro is the designer of RBS, the developer of Steep, a Ruby core committer,
+      and a software engineer at Block. He received his PhD in engineering about type
+      checking Ruby programs in 2010, and he is still working for it.
     github_id: soutaro
     twitter_id: soutaro
     gravatar_hash: 1fab9d01b25e99522f3dfd01e3d4cb51
@@ -32,7 +34,7 @@ speakers:
     name: Alan Wu
     bio: Alan maintains YJIT with the Ruby and Rails infrastructure team at Shopify
       and is a Ruby committer. Alan is able to read some Japanese.
-    github_id: 
+    github_id:
     twitter_id: alanwusx
     gravatar_hash: a32c78e5547baf884bf35ec9bec3233f
   Morriar:
@@ -44,7 +46,7 @@ speakers:
       Shopify. He uses his expertise for the adoption of better Ruby tooling and practices
       including Sorbet and gradual typing.
     github_id: Morriar
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 45235bde1575071487435f6b0c4e44d7
   eregontp:
     id: eregontp
@@ -76,7 +78,7 @@ speakers:
     id: rubylangorg
     name: CRuby Committers
     bio: ''
-    github_id: 
+    github_id:
     twitter_id: rubylangorg
     gravatar_hash: ce6d997265cefede13ee7e7e2a2cf9b2
   osyoyu:
@@ -95,7 +97,7 @@ speakers:
       a virtual community for women and non-binary Ruby developers. She lives in Lawrence,
       KS with her husband and their pets.
     github_id: egiurleo
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 6b2b0c8aed66cbacbf5a49f944e3256f
   fables-tales:
     id: fables-tales
@@ -104,7 +106,7 @@ speakers:
       and the author of Rubyfmt! She loves Ruby and has been working in it for over
       a decade, and wants to hug every cat!
     github_id: fables-tales
-    twitter_id: 
+    twitter_id:
     gravatar_hash: '09befb5c07e24f52c13e8c350b4e3b74'
   fredolinhares:
     id: fredolinhares
@@ -123,7 +125,7 @@ speakers:
       and run our local meet-up called [Ruby Banitsa](https://rubybanitsa.com). I'm
       an occasional Rails and RuboCop contributor, maintaining the web-console gem.
     github_id: gsamokovarov
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 1ac5a00efa41cd58c421d3cd98dda7b9
   sue445:
     id: sue445
@@ -143,7 +145,7 @@ speakers:
       Author of RedAmber, a DataFrame library in Ruby.
       A member of Red Data Tools.
     github_id: heronshoes
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 341b2b9a76d4870d875e470603c14728
   hsbt:
     id: hsbt
@@ -163,7 +165,7 @@ speakers:
       Ph.D. student at SOKENDAI (NII, National Institute of Informatics). Researcher for information security and formal language. Ruby committer.
       I am the author of Regexp optimization to prevent ReDoS in Ruby 3.2.0.
     github_id: makenowjust
-    twitter_id: 
+    twitter_id:
     gravatar_hash: db1b7e3c6fe6f6a0e9752b2c19bf5473
   hasumikin:
     id: hasumikin
@@ -194,7 +196,7 @@ speakers:
       Ruby on Rails Podcast. She has been working on an implementation of Object Shapes
       in MRI and is excited to share it with you!
     github_id: jemmaissroff
-    twitter_id: 
+    twitter_id:
     gravatar_hash: cae3948facb482f85043d095cf954013
   jeremyevans0:
     id: jeremyevans0
@@ -252,7 +254,7 @@ speakers:
       of Tokyo in 2007. Now he is still working on MRI development at Cookpad Inc.
       He is also a director of Ruby Association.
     github_id: ko1
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 990397e8b38d6f5f4ae8ff343e8b883a
   maciejmensfeld:
     id: maciejmensfeld
@@ -284,7 +286,7 @@ speakers:
       his students have contributed to the implementation of Ruby, mostly in the area
       of I18N.
     github_id: duerst
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f52e87b92cafb1e8c6d155076b56ecff
   p_ck_:
     id: p_ck_
@@ -313,7 +315,7 @@ speakers:
       his head over segmentation faults he can be found brewing beer and building
       mechanical keyboards.
     github_id: eightbitraptor
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 43f0363b6c12155c36d0c06043c268fd
   saramic:
     id: saramic
@@ -339,7 +341,7 @@ speakers:
     bio: A contributor to ruby/debug, ruby/vscode-rdbg. He has been developing the
       test frameworks and Chrome Integration in debug.gem.
     github_id: ono-max
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 6ad4e29b60eb3fbdf98051f27628ce8e
   flyerhzm:
     id: flyerhzm
@@ -348,7 +350,7 @@ speakers:
       engineer with a passion for code quality, server performance, and scalability.
       I enjoy giving back to the open source community.
     github_id: flyerhzm
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 13c60e2a5806406b537daa542d3495da
   ioquatix:
     id: ioquatix
@@ -461,7 +463,7 @@ speakers:
     name: Yuma Sawai
     bio: Hokkaido johodai B2
     github_id: aaaa777
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 48d47ea5a5aa3549d37c43be35161af4
   mametter:
     id: mametter
@@ -479,3 +481,10 @@ speakers:
     github_id: unasuke
     twitter_id: yu_suke1994
     gravatar_hash: 858f777cffa7e215697ff78db4e52791
+  lt:
+    id:
+    name: Lightning Talks
+    bio: Lightning Talks
+    github_id:
+    twitter_id:
+    gravatar_hash:

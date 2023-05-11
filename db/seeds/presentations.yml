@@ -36,14 +36,14 @@ gsamokovarov:
   speakers:
   - id: gsamokovarov
 egiurleo:
-  title: Generating type signatures for dynamic mixins with Tapioca
+  title: Generating RBIs for dynamic mixins with Sorbet and Tapioca
   type: presentation
   language: EN
   live_or_recorded: venue
   description: |-
-    Last year, Tapioca became the official tool for generating RBI type signatures in the Sorbet ecosystem. Using Tapioca, developers can quickly generate accurate type signatures for external Ruby gems, allowing them to use Sorbet in their projects even if most gems have not yet added type signatures.
+    Last year, Tapioca became the official tool for generating RBI files for Sorbet. Using Tapioca, developers can quickly generate accurate RBIs for external Ruby gems, allowing them to use Sorbet in their projects even if most gems have not yet added type signatures.
 
-    In this talk, I’ll explain how I implemented new functionality in Tapioca to help it generate type signatures for dynamic mixins in Ruby gems. Along the way, we’ll learn about how Tapioca uses information about the Ruby object model to generate type signatures, and how this work has impacted the Ruby language as a whole.
+    In this talk, I’ll explain how I implemented new functionality in Tapioca to help it generate RBIs for dynamic mixins in Ruby gems. Along the way, we’ll learn about how Tapioca uses information about the Ruby object model to generate RBIs, and how this work has impacted the Ruby language as a whole.
   speakers:
   - id: egiurleo
 makenowjust:
@@ -121,9 +121,9 @@ tompng:
   live_or_recorded: venue
   description: |-
     Nowadays, we can use the power of types when writing code in an editor or IDE.
-    But how about in irb?
-    What if the auto completion of irb gets more accurate using type information? Wouldn’t it be happy?
-    In this talk, I will talk about how to implement type based auto completion and make your own customized irb.
+    But how about in IRB?
+    What if the auto completion of IRB gets more accurate using type information? Wouldn’t it be happy?
+    In this talk, I will show how to implement type based auto completion and make your own customized IRB.
   speakers:
   - id: tompng
 eightbitraptor:
@@ -204,8 +204,9 @@ m_seki:
   type: presentation
   language: JA
   live_or_recorded: venue
-  description: Ruby3で導入されたRactorを使って実アプリケーションを高速化しながらRactorのプログラミングモデルを学びました。この経験から得た、Ractorのモデルに合わせた構造の書き換え、Ractorに適したシチュエーション、イディオムについて説明します。また、dRuby,
-    Rindaとのプログラミングモデルの違いについても議論します。
+  description: I learned Ractor by improving the speed of my application. From this
+    experience, I'll show you situations where Ractor is a good fit and how I changed
+    it for Ractor.
   speakers:
   - id: m_seki
 headius:
@@ -246,9 +247,9 @@ coe401_:
   description: |-
     The fact that there is no increment/decrement operator in Ruby is known to many Rubyists. Currently, if you try to write code like `i = 0; i++` in Ruby, MRI's parser considers it syntactically invalid.
 
-    Still if we want them, that means adding a new syntax for `++` operator to Ruby. This seems like a simple syntax at first glance, but to achieve this we need to dig a little deeper into MRI, explore parse.y - the parser file called "魔窟" (the maze), and consider the compatibility with existing specifications of Ruby.
+    Still, if we want them that means adding a new syntax for `++` operator to Ruby. This seems like a simple syntax at first glance, but to achieve this we need to dig a little deeper into MRI, and explore parse.y - the parser file called "魔窟" (the maze), and consider the compatibility with existing specifications of Ruby.
 
-    This talk will show you some ideas to obtain `++` with the trial-and-error process of a programmer who is not an expert of parser, thereby making the interesting topics, lexical analysis and parsing more familiar to you.
+    This talk will show you some ideas to obtain `++` with the trial-and-error process of a programmer who is not an expert in a parser, thereby making the interesting topics, lexical analysis, and parsing more familiar to you.
   speakers:
   - id: coe401_
 kddnewton:
@@ -314,7 +315,7 @@ eregontp:
   speakers:
   - id: eregontp
 koic:
-  title: The resurrection of the fast parallel test runner
+  title: The Resurrection of the Fast Parallel Test Runner
   type: presentation
   language: JA
   live_or_recorded: venue
@@ -326,7 +327,7 @@ koic:
 
     Both parallel_tests and test-queue support testing in parallel, and each has a different strategy. The test-queue strategy has distinct advantages over parallel_tests but maintenance was stuck when I got a commit bit for test-queue. So I've been contributing to the resurrection of the product sustainability. I will share some lesser-known parallel testing insights I've gained in reviving the test-queue. And explore possibilities of parallel programming in Ruby.
 
-    I hope this talk makes an opportunity to make your test faster and makes you happy.
+    I hope this talk provides an opportunity to make your test faster and makes you happy.
   speakers:
   - id: koic
 shioyama:
@@ -407,11 +408,8 @@ ono-max:
     Would it be helpful if we could see the Active Record object as a table? Debug Visualizer allows you to visualize many objects in many ways, such as bar charts and line charts!
     Demo: https://www.youtube.com/watch?v=9vLVCrpzlDQ
 
-    VS Code Record & Replay View:
-    We want to go back to some points when debugging it, don’t we? You can quickly go back and forth between the program by clicking on Record & Replay View!
-
-    VS Code Trace View:
-    Do you ever want to see what methods have been called until a specific place? You can check the tracing logs if you use Trace View!
+    Trace Inspector:
+    Trace Inspector is useful when tracing in VS Code. Users can search tracing logs easily and get a lot of helpful information by using Rdbg Trace Inspector. For example, users can know which method is called, which line is executed, local variables at some point, and so on.
   speakers:
   - id: ono-max
 jemmaissroff:
@@ -575,7 +573,7 @@ flyerhzm:
 
     I have built [synvert](https://synvert.net/) for years, it allows you to write snippet code to rewrite ruby code, it provides CLI, GUI, and VSCode extension, and it can automatically generate snippets, so even junior developers can rewrite code based on AST at will.
 
-    You'll learn how to use rex and racc to define a css-like node query language, and how to mutate code based on AST node. You'll also learn how to use synvert GUI to rewrite your code even if you don't have any idea about AST.
+    You'll learn how to query and mutate code based on AST node. You'll also learn how to use synvert GUI to rewrite your code even if you don't have any idea about AST.
   speakers:
   - id: flyerhzm
 ledsun:
@@ -643,10 +641,22 @@ p_ck_:
   speakers:
   - id: p_ck_
 soutaro:
-  title: Soutaro Keynote
+  title: Parsing RBS
   type: keynote
-  language: JA
+  language: EN
   live_or_recorded: venue
-  description: Soutaro Keynote
+  description: "Development of advanced IDE features requires parsing broken source
+    code because writing something in editors usually causes intermediate – syntactically
+    incorrect states. This is not only for Ruby code, but also for RBS type definitions.\n\nIn
+    this talk, I will introduce my error tolerant parser and the tricks that generate
+    better syntax trees from incorrect RBS source code. "
   speakers:
   - id: soutaro
+lt:
+  title: Lightning Talks
+  type: lt
+  language: 'en & ja'
+  live_or_recorded: venue
+  description: https://rubykaigi.org/2023/presentations/lt/
+  speakers:
+  - id: lt
