@@ -33,6 +33,7 @@ ActiveRecord::Base.transaction do
 
   schedule_yaml = YAML.load_file('db/seeds/schedule.yml')
   presentation_yaml = YAML.load_file('db/seeds/presentations.yml')
+  track_tag_yaml = YAML.load_file('db/seeds/track_tag.yml')
 
   if ENV['SCHEDULE_FIND_BY'] == 'title'
     schedules_by_id = presentation_yaml.transform_values do |val|
@@ -53,12 +54,23 @@ ActiveRecord::Base.transaction do
         when 'break'
           next
         when 'lt'
-          next # LTのデータが埋まったら対応する
+          # next # LTのデータが埋まったら対応する
+          event['talks'].each do |track_name, id| schedule = schedules_by_id[id]
+
+          schedule.update!(
+            track_name: "Track#{track_name}",
+            track_tag: track_tag_yaml['track'][track_name],
+            start_at: start_at,
+            end_at: end_at,
+            event: base_event
+          )
+          end
         else
           event['talks'].each do |track_name, id| schedule = schedules_by_id[id]
 
           schedule.update!(
             track_name: "Track#{track_name}",
+            track_tag: track_tag_yaml['track'][track_name],
             start_at: start_at,
             end_at: end_at,
             event: base_event
