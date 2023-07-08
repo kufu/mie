@@ -1,13 +1,16 @@
 class AddReferencesToEvents < ActiveRecord::Migration[6.1]
+  class MigrationEvent < ActiveRecord::Base
+    self.table_name = :events
+  end
+
   def up
     add_column :plans, :event_id, :uuid, foreign_key: true
     add_column :schedules, :event_id, :uuid, foreign_key: true
     add_column :speakers, :event_id, :uuid, foreign_key: true
 
 
-    Event.create!(name: 'test') if Event.count == 0
-    default_event = Event.first
-
+    MigrationEvent.create!(name: 'test') if MigrationEvent.count == 0
+    default_event = MigrationEvent.first
     Plan.reset_column_information
     Schedule.reset_column_information
     Speaker.reset_column_information
