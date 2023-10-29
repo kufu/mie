@@ -5,5 +5,5 @@ SmartHRが開発した、RubyKaigiの公式スケジュールアプリです。
 # Usage
 
 ```sh
-bin/rails s
+bin/dev
 ```
