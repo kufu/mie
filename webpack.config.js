@@ -16,5 +16,17 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx|)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      }
+    ]
+  }
 }
