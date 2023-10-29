@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.3'
 
-gem 'rails', "~> 7.0"
+gem 'rails', '~> 7.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -33,8 +33,8 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'bcrypt', '~> 3.1.16'
+gem 'jsbundling-rails', '~> 1.2'
 gem 'rack-contrib', '~> 2.3.0'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
-gem "jsbundling-rails", "~> 1.2"
