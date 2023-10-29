@@ -38,3 +38,5 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
 gem 'webpacker', '~> 5.4'
+
+gem "jsbundling-rails", "~> 1.2"
