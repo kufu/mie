@@ -27,6 +27,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.3'
+  gem "erb-formatter", "~> 0.4.3"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -40,3 +41,4 @@ gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
 
 gem "tailwindcss-rails", "~> 2.0"
+
