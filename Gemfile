@@ -38,3 +38,5 @@ gem 'rack-contrib', '~> 2.3.0'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'react-rails', '~> 2.6.1'
 gem 'rubocop', '~> 1.18'
+
+gem "tailwindcss-rails", "~> 2.0"
