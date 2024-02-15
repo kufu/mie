@@ -103,35 +103,6 @@ module ReactHelper
     props
   end
 
-  def create_locale_selector_props
-    props = {}
-    props[:current] = session[:locale] if session[:locale]
-    props[:options] = grouped_timezones.map do |k, v|
-      {
-        label: k,
-        options: v.map { |zone| { label: zone, value: zone } }
-      }
-    end
-    props[:i18n] = {
-      label: I18n.t('nav.select_locale')
-    }
-
-    props
-  end
-
-  def create_navigation_props
-    {
-      current: request.path.split('/')[2],
-      rootLink: "/#{@event.name}",
-      schedulesLink: event_schedules_path,
-      plansLink: @plan ? event_plan_path(@plan, event_name: @plan.event.name) : nil,
-      mainColor: @event.event_theme.main_color,
-      logoImage: asset_path("#{@event.name}/rubykaigi_logo.svg"),
-      locales: create_locale_selector_props,
-      i18n: navigation_i18n
-    }
-  end
-
   def create_plan_title_props(plan, user)
     props = {
       title: plan.title,
