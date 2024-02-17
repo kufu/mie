@@ -195,18 +195,6 @@ module ReactHelper
     }
   end
 
-  def create_top_props
-    {
-      intro: I18n.t('application.intro'),
-      mainColor: @event.event_theme.main_color,
-      subColor: @event.event_theme.sub_color,
-      accentColor: @event.event_theme.accent_color,
-      siteLabel: @event.event_theme.site_label,
-      siteUrl: @event.event_theme.site_url,
-      titleImage: asset_path("#{@event.name}/title.svg")
-    }
-  end
-
   private
 
   def schedule_table_props(table_array, plan, user)

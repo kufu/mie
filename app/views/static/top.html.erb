@@ -1,0 +1,35 @@
+<% content_for :head do %>
+  <meta property="og:title" content="RubyKaigi Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+  <meta property="og:url" content="<%= root_url + "#{@event.name}/" %>">
+  <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
+
+<div class="pt-20 pl-36 flex flex-col gap-4">
+  <div class="text-[#0B374D] text-2xl">
+    <div>
+      <img src="<%= asset_path("#{@event.name}/title.svg") %>" />
+    </div>
+    <div>
+      Schedule.select <span>powered by</span> SmartHR
+    </div>
+  </div>
+  <div class="flex my-4">
+    <div class="w-28 h-1 bg-[var(--mainColor)]" style="--mainColor: <%= @event.event_theme.main_color %>"></div>
+    <div class="w-28 h-1 bg-[var(--subColor)]" style="--subColor: <%= @event.event_theme.sub_color %>"></div>
+    <div class="w-28 h-1 bg-[var(--accentColor)]" style="--accentColor: <%= @event.event_theme.accent_color %>"></div>
+  </div>
+  <div class="w-[600px] break-keep my-6 text-[#0B374D] text-base leading-[200%]">
+      <%= I18n.t('application.intro') %>
+  </div>
+  <div class="mb-4">
+    <p class=""><a href="<%= @event.event_theme.site_url %>">Official Site</a></p>
+    <p class=""><a href="https://twitter.com/rubykaigi">Twitter</a></p>
+    <p class=""><a href="https://smarthr.co.jp/">SmartHR</a></p>
+  </div>
+  <div class="">
+    This website is made with Rails7, Hotwire and TailwindCSS
+  </div>
+</div>
