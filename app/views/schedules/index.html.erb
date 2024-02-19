@@ -9,17 +9,17 @@
 
 <% @table_array = create_table_array(@schedules) %>
 
-<div>
+<div data-controller="schedule-table">
   <div>
     <div>
       <% @table_array.keys.map do |k| %>
-        <button><%= k %></button>
+        <button data-action="click->schedule-table#switch" value="<%= k %>"><%= k %></button>
       <% end %>
     </div>
   </div>
   <div>
     <% schedule_table(@table_array).each do |k, v| %>
-      <table>
+      <table id="schedule-<%= k %>" class="schedule-table hidden">
         <thead>
           <th><%= I18n.t('table.start_end') %></th>
           <% v[:track_list].each do |track| %>
