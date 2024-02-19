@@ -195,6 +195,21 @@ module ReactHelper
     }
   end
 
+  def schedule_table_props(table_array, plan, user)
+    props = table_array.map do |k, v|
+      track_list = v.first.compact
+      rows = v[1..].map do |s|
+        sort_keys = s[1..].compact.map(&:start_at).map(&:to_i).uniq
+        { time: s.first,
+          schedules: s[1..].map { |sc| sc.nil? ? sc : schedule_to_card_props(sc, plan, user) },
+          sortKey: sort_keys[0] }
+      end
+      [k, { trackList: track_list, rows: rows.sort_by { |r| r[:sortKey] } }]
+    end
+
+    props.to_h
+  end
+
   private
 
   def schedule_table_props(table_array, plan, user)

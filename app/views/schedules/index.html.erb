@@ -1,0 +1,56 @@
+<% content_for :head do %>
+  <meta property="og:title" content="RubyKaigi Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+  <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
+  <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
+
+<% @table_array = create_table_array(@schedules) %>
+
+<div>
+  <div>
+    <div>
+      <% @table_array.keys.map do |k| %>
+        <button><%= k %></button>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <% schedule_table(@table_array).each do |k, v| %>
+      <table>
+        <thead>
+          <th><%= I18n.t('table.start_end') %></th>
+          <% v[:track_list].each do |track| %>
+            <th><%= track %></th>
+          <% end %>
+        </thead>
+        <tbody>
+          <% v[:rows].each do |row| %>
+            <tr>
+              <th><%= row[:time] %></th>
+              <% row[:schedules].each do |schedule| %>
+                <% if schedule %>
+                  <td>
+                    <div><%= schedule.title %></div>
+                    <div><%= schedule.description %></div>
+                    <div><%= schedule.language %></div>
+                    <div><%= schedule.track_name %></div>
+                    <div>
+                      <% schedule.speakers.each do |speaker| %>
+                        <div><%= speaker.name %></div>
+                      <% end %>
+                    </div>
+                  </td>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
