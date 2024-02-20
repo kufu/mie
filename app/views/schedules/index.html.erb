@@ -31,21 +31,9 @@
             <tr>
               <th><%= row[:time] %></th>
               <% row[:schedules].each do |schedule| %>
-                <% if schedule %>
                   <td>
-                    <div><%= schedule.title %></div>
-                    <div><%= schedule.description %></div>
-                    <div><%= schedule.language %></div>
-                    <div><%= schedule.track_name %></div>
-                    <div>
-                      <% schedule.speakers.each do |speaker| %>
-                        <div><%= speaker.name %></div>
-                      <% end %>
-                    </div>
+                    <div class="mt-4 p-2"><%= schedule ? render("schedules/card", schedule:) : nil %></div>
                   </td>
-                <% else %>
-                  <td></td>
-                <% end %>
               <% end %>
             </tr>
           <% end %>

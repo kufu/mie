@@ -1,0 +1,43 @@
+<div class="flex h-full">
+  <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+    <div class="flex flex-col justify-between items-start">
+      <% schedule.speakers.each do |speaker| %>
+        <div class="flex items-center m-w-80 mb-2">
+          <div class="w-6 h-6 rounded-sm bg-cover" style="background-image: url('<%= speaker.thumbnail %>')"></div>
+          <div class="ml-2 text-sm font-bold text-[rgb(112,109,101)]"><%= speaker.name %></div>
+        </div>
+      <% end %>
+      <div class="flex">
+        <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+          <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
+        </div>
+        <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+          <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track_name %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-xl  my-2"><%= schedule.title %></h3>
+      <p class="text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
+    </div>
+    <div class="flex justify-end">
+      <div>
+        <% if @plan.plan_schedules.find { |ps| ps.schedule==schedule } %>
+          <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+            <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
+            <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 border border-solid border-box border-[rgb(214,211,208)] hover:border-[rgb(202,198,194)] rounded-md bg-white hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] inline-flex items-center text-center cursor-pointer" %>
+          <% end %>
+        <% else %>
+          <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+            <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+            <%= form.submit I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 border border-solid border-box border-[rgb(214,211,208)] hover:border-[rgb(202,198,194)] rounded-md bg-white hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] inline-flex items-center text-center cursor-pointer" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="ml-2">
+        <button class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"><%= I18n.t('card.show_detail') %></button>
+      </div>
+    </div>
+  </div>
+</div>
