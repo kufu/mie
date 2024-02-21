@@ -4,3 +4,4 @@ var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 import "./controllers"
+import "@hotwired/turbo-rails"

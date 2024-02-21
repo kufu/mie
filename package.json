@@ -8,6 +8,7 @@
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
     "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.12",
