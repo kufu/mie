@@ -20,17 +20,24 @@
     </div>
   </div>
 
-  <div class="flex items-center min-w-max bg-white pr-6 pl-6">
+  <div data-controller="navigation" class="flex items-center min-w-max bg-white pr-6 pl-6">
     <ul class="self-stretch flex items-stretch gap-4 m-0 p-0">
       <li>
-        <a aria-current="page" href="<%= "/#{@event.name}" %>"
-          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 relative after:content-[''] after:absolute after:right-0 after:bottom-0 after:left-0 after:block after:h-1 after:bg-[var(--mainColor)]"
+        <a
+          href="<%= event_path %>"
+          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_path) ? 'nav-current' : '' %>"
           style="--mainColor:<%= @event.event_theme.main_color %>"
-          >
+          <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
+        >
           <%= I18n.t('nav.root') %></a>
       </li>
       <li>
-        <a href="<%= event_schedules_path %>" class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2">
+        <a
+          href="<%= event_schedules_path %>"
+          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_schedules_path) ? 'nav-current' : '' %>"
+          style="--mainColor:<%= @event.event_theme.main_color %>"
+          <%= sanitize current_path?(event_schedules_path) ? 'aria-current="page"' : '' %>
+        >
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" color="#706d65" class=""
             role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
             style="color: rgb(112, 109, 101);">
@@ -40,24 +47,32 @@
           </svg>
           <%= I18n.t('nav.schedule') %></a>
       </li>
-      <li>
-        <a href="<%= @plan ? event_plan_path(@plan, event_name: @plan.event.name) : "#" %>" class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2">
-          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="#706d65" class=""
-            role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
-            style="color: rgb(112, 109, 101);">
-            <path
-              d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z">
-            </path>
-          </svg>
-          <%= I18n.t('nav.plan') %></a>
-      </li>
+      <% if @plan %>
+        <li>
+          <a
+            href="<%= event_plan_path(@plan, event_name: @plan.event.name) %>"
+            class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'nav-current' : '' %>"
+            style="--mainColor:<%= @event.event_theme.main_color %>"
+            <%= sanitize current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'aria-current="page"' : '' %>
+          >
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="#706d65" class=""
+              role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+              style="color: rgb(112, 109, 101);">
+              <path
+                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z">
+              </path>
+            </svg>
+            <%= I18n.t('nav.plan') %></a>
+        </li>
+      <% end %>
     </ul>
     <div class="ml-auto">
       <label class="flex items-center gap-3">
         <h1 class="" color="TEXT_GREY">
-          <%= I18n.t('nav.select_locale') %></h1>
-        <div class="">
-          <select class="px-1 py-3 min-h-[30px]">
+          <%= I18n.t('nav.select_locale') %>
+        </h1>
+        <div class="relative box-border w-[16.25em]">
+          <select class="px-[3px] py-2 min-h-[30px] appearance-none cursor-pointer outline-none rounded-md border border-solid border-[rgb(214,211,208)] bg-white ps-2 pe-8 text-sm text-[rgb(35,34,30)] w-full align-middle">
             <% grouped_timezones.map do |k, v| %>
               <optgroup label="<%= k %>">
                 <% v.map do |locale| %>

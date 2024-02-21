@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  .nav-current {
+    @apply  relative after:content-[''] after:absolute after:right-0 after:bottom-0 after:left-0 after:block after:h-1 after:bg-[var(--mainColor)];
+  }
+
   .tab-btn-active {
     @apply relative text-[rgb(35,34,30)] border-[var(--mainColor)];
   }
