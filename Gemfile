@@ -43,3 +43,5 @@ gem 'rubocop', '~> 1.18'
 gem "tailwindcss-rails", "~> 2.0"
 gem "stimulus-rails", "~> 1.3"
 
+
+gem "turbo-rails", "~> 2.0"
