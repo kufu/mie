@@ -5,9 +5,11 @@ export default class extends Controller {
   connect() {
     var id = window.location.hash
     var tables = document.getElementsByClassName("schedule-table");
+    var buttons = document.getElementsByClassName("tab-button");
 
     if (id == "") {
-      tables[0].classList.remove("hidden")
+      tables[0].classList.remove("hidden");
+      buttons[0].classList.add("tab-btn-active");
       return
     }
 
@@ -20,6 +22,12 @@ export default class extends Controller {
         element.classList.add("hidden")
       }
     });
+
+    [...buttons].forEach(element => {
+      if (element.value == id.slice(1)) {
+        element.classList.add("tab-btn-active")
+      }
+    })
   }
 
   switch(event) {
@@ -33,6 +41,13 @@ export default class extends Controller {
         element.classList.add("hidden")
       }
     });
+
+    var buttons = document.getElementsByClassName("tab-button");
+    [...buttons].forEach(element => {
+      element.classList.remove("tab-btn-active")
+    })
+
+    event.currentTarget.classList.add("tab-btn-active");
 
     window.location.hash = '#' + event.currentTarget.value;
   }

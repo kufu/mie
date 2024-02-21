@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+@layer utilities {
+  .tab-btn-active {
+    @apply relative text-[rgb(35,34,30)] border-[var(--mainColor)];
   }
 }
-
-*/
