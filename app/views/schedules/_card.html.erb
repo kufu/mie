@@ -36,7 +36,13 @@
         <% end %>
       </div>
       <div class="ml-2">
-        <button class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"><%= I18n.t('card.show_detail') %></button>
+        <a
+          class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
+          href="<%= event_schedule_dialog_url(schedule, event_name: @plan.event.name) %>"
+          data-turbo-frame="modal"
+        >
+          <%= I18n.t('card.show_detail') %>
+        </a>
       </div>
     </div>
   </div>

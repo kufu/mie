@@ -6,4 +6,8 @@ class SchedulesController < ApplicationController
   def index
     @schedules = Schedule.on_event(@event).includes(:speakers).order(:start_at)
   end
+
+  def dialog
+    @schedule = Schedule.find(params[:schedule_id])
+  end
 end
