@@ -26,12 +26,12 @@
         <% if @plan.plan_schedules.find { |ps| ps.schedule==schedule } %>
           <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
             <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
-            <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 border border-solid border-box border-[rgb(214,211,208)] hover:border-[rgb(202,198,194)] rounded-md bg-white hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] inline-flex items-center text-center cursor-pointer" %>
+            <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
           <% end %>
         <% else %>
           <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
             <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-            <%= form.submit I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 border border-solid border-box border-[rgb(214,211,208)] hover:border-[rgb(202,198,194)] rounded-md bg-white hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] inline-flex items-center text-center cursor-pointer" %>
+            <%= form.submit I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
           <% end %>
         <% end %>
       </div>

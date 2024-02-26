@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .normal-button {
+    @apply box-border cursor-pointer inline-flex justify-center items-center whitespace-nowrap gap-2 text-center rounded-md border border-solid border-[rgb(214,211,208)] py-3 px-4 font-bold bg-white text-[rgb(35,34,30)] hover:border-[rgb(202,198,194)] hover:bg-[rgb(242,242,242)];
+  }
+}
+
 @layer utilities {
   .nav-current {
     @apply  relative after:content-[''] after:absolute after:right-0 after:bottom-0 after:left-0 after:block after:h-1 after:bg-[var(--mainColor)];
