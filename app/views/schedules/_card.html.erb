@@ -1,49 +1,97 @@
-<div class="flex h-full">
-  <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-    <div class="flex flex-col justify-between items-start">
-      <% schedule.speakers.each do |speaker| %>
-        <div class="flex items-center m-w-80 mb-2">
-          <div class="w-6 h-6 rounded-sm bg-cover" style="background-image: url('<%= speaker.thumbnail %>')"></div>
-          <div class="ml-2 text-sm font-bold text-[rgb(112,109,101)]"><%= speaker.name %></div>
-        </div>
-      <% end %>
-      <div class="flex">
-        <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
-          <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
-        </div>
-        <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
-          <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track_name %></span>
+<%= turbo_frame_tag schedule do %>
+  <div class="flex h-full">
+    <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+      <div class="flex flex-col justify-between items-start">
+        <% schedule.speakers.each do |speaker| %>
+          <div class="flex items-center m-w-80 mb-2">
+            <div class="w-6 h-6 rounded-sm bg-cover" style="background-image: url('<%= speaker.thumbnail %>')"></div>
+            <div class="ml-2 text-sm font-bold text-[rgb(112,109,101)]"><%= speaker.name %></div>
+          </div>
+        <% end %>
+        <div class="flex">
+          <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+            <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
+          </div>
+          <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+            <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track_name %></span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="mb-6">
-      <h3 class="text-xl  my-2"><%= schedule.title %></h3>
-      <p class="text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
-    </div>
-    <div class="flex justify-end">
-      <div>
-        <% if @plan.plan_schedules.find { |ps| ps.schedule==schedule } %>
-          <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-            <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
-            <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
-          <% end %>
-        <% else %>
-          <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-            <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-            <%= form.submit I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
-          <% end %>
+      <div class="mb-6">
+        <h3 class="text-xl  my-2"><%= schedule.title %></h3>
+        <p class="text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
+        <% if mode == :plan && @plan.schedules.include?(schedule) %>
+          <div class="my-4 mx-0">
+            <h4 class="mb-2 text-sm text-[rgb(112,109,101)]"><%= I18n.t('table.memo') %></h4>
+            <div class="p-4 bg-[rgb(248,247,246)]">
+              <span class="text-sm"><%= @plan.plan_schedules.find { _1.schedule == schedule }&.memo %></span>
+            </div>
+          </div>
         <% end %>
       </div>
-      <div class="ml-2">
-        <a
-          class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
-          href="<%= event_schedule_dialog_url(schedule, event_name: @plan.event.name) %>"
-          data-turbo-frame="modal"
-        >
-          <%= I18n.t('card.show_detail') %>
-        </a>
+
+      <div class="flex justify-end">
+        <% if mode == :plan && @plan.schedules.include?(schedule) %>
+          <div class="mr-auto">
+            <button
+              class="p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button"
+              data-controller="dialog"
+              data-dialog-element-id-value="edit-memo-dialog"
+              data-action="click->dialog#open"
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+              <%= I18n.t('button.update_memo') %>
+            </button>
+            <dialog id="edit-memo-dialog">
+              <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch) do |f| %>
+                <div data-controller="word-counter" data-word-counter-max-value="<%= plan_memo_max_length %>" class="max-w-[min(100vw-16px,800px)] rounded-md bg-white shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)]">
+                  <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                    <p class="text-xl"><%= I18n.t('dialog.edit_memo', title: schedule.title) %></p>
+                  </div>
+                  <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                    <div class="w-[656px] p-6">
+                      <%= f.hidden_field :edit_memo_schedule_id, value: schedule.id %>
+                      <%= f.text_area :memo, value: @plan.plan_schedules.find { _1.schedule == schedule }&.memo, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
+                      <div class="font-xs mt-2 text-[rgb(112,109,101)]">
+                        <span data-word-counter-target="counter"></span>/<%= plan_memo_max_length %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                    <div class="flex justify-end">
+                      <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                      <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button", style: "--mainColor: #{@event.event_theme.main_color}; --hoverColor: #{@event.event_theme.main_color};" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </dialog>
+          </div>
+        <% end %>
+        <div>
+          <% if @plan.schedules.include?(schedule) %>
+            <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+              <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
+              <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
+            <% end %>
+          <% else %>
+            <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+              <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+              <%= form.submit I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="ml-2">
+          <a
+            class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
+            href="<%= event_schedule_dialog_url(schedule, event_name: @plan.event.name) %>"
+            data-turbo-frame="modal"
+          >
+            <%= I18n.t('card.show_detail') %>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

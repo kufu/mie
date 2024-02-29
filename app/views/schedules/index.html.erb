@@ -42,7 +42,7 @@
               </th>
               <% row[:schedules].each do |schedule| %>
                   <td>
-                    <div class="mt-4 p-2"><%= schedule ? render("schedules/card", schedule:) : nil %></div>
+                    <div class="mt-4 p-2"><%= schedule ? render("schedules/card", schedule:, mode: :schedule) : nil %></div>
                   </td>
               <% end %>
             </tr>

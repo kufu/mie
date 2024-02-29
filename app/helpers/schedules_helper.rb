@@ -17,7 +17,7 @@ module SchedulesHelper
       track_list = v.first.compact
       rows = v[1..].map do |s|
         sort_keys = s[1..].compact.map(&:start_at).map(&:to_i).uniq
-        { time: s.first.match(/^(.+?)\s\((.+?)\)$/).then { { range: _1[1], zone: _1[2] } }, # 「01:15 - 01:40 (UTC)」みたいな文字列を想定
+        { time: split_time_and_zone(s.first),
           schedules: s[1..],
           sort_key: sort_keys[0] }
       end

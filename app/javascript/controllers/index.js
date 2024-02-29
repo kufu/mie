@@ -9,3 +9,6 @@ application.register("dialog", DialogController)
 
 import ScheduleTableController from "./schedule_table_controller"
 application.register("schedule-table", ScheduleTableController)
+
+import WordCounterController from "./word_counter_controller"
+application.register("word-counter", WordCounterController)

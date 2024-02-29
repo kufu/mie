@@ -15,17 +15,21 @@ class PlansController < ApplicationController
                add_and_remove_plans
              elsif params[:edit_memo_schedule_id]
                edit_memo
-             elsif params[:description]
+             elsif params[:plan][:description]
                edit_description
-             elsif params[:visibility]
+             elsif params[:plan][:public]
                edit_password_and_visibility
-             elsif params[:title]
+             elsif params[:plan][:title]
                edit_title
              else
                head :bad_request
              end
 
-    redirect_to redirect_path_with_identifier(target)
+    if target
+      render 'schedules/_card', locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule }
+    else
+      redirect_to event_plan_url(@plan, event_name: @event.name)
+    end
   end
 
   def editable
@@ -94,7 +98,7 @@ class PlansController < ApplicationController
   end
 
   def edit_description
-    @plan.update!(description: params[:description])
+    @plan.update!(description: params[:plan][:description])
     nil
   end
 
@@ -104,14 +108,14 @@ class PlansController < ApplicationController
   end
 
   def edit_password_and_visibility
-    @plan.password = params[:password] if params[:password] != ''
-    @plan.public = params[:visibility] == 'true'
+    @plan.password = params[:plan][:password] if params[:plan][:password] != ''
+    @plan.public = params[:plan][:public] == 'true'
     @plan.save!
     nil
   end
 
   def edit_title
-    @plan.update(title: params[:title])
+    @plan.update(title: params[:plan][:title])
     nil
   end
 end
