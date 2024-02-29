@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%= javascript_pack_tag 'application' %>
 <html>
   <head prefix="og: http://ogp.me/ns#">
     <title>RubyKaigi Schedule.select</title>
@@ -14,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <%= yield(:head) %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body style="font-family: 'Roboto', 'Noto Sans JP', sans-serif;">

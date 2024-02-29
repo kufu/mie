@@ -33,7 +33,6 @@ jobs:
       - name: yarn
         run: yarn install
       - name: Build frontend
-        #run: NODE_OPTIONS=--openssl-legacy-provider bin/rails webpacker:compile
-        run: bin/rails webpacker:compile
+        run: yarn build
       - name: Run tests
         run: bin/rails test
