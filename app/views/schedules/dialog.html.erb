@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <dialog id="dialog-modal">
-    <div data-controller="schedule-modal" class="rounded-md">
+    <div data-controller="dialog" data-dialog-element-id-value="dialog-modal" data-dialog-open-value="true" class="rounded-md">
       <div class="flex flex-col justify-start border-b border-solid border-[rgb(214,211,208)] py-4 px-6">
         <p class="my-0 text-xl"><%= I18n.t('card.detail.title') %></p>
       </div>
@@ -75,7 +75,7 @@
       <div class="flex justify-end py-4 px-6 border-t border-solid border-[rgb(214,211,208)]">
         <button
           class="normal-button"
-          data-action="click->schedule-modal#close"
+          data-action="click->dialog#close"
           autofocus
         >
           <%= I18n.t('button.close') %>

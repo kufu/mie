@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import ScheduleModalController from "./schedule_modal_controller"
-application.register("schedule-modal", ScheduleModalController)
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
 
 import ScheduleTableController from "./schedule_table_controller"
 application.register("schedule-table", ScheduleTableController)
