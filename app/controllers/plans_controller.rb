@@ -3,7 +3,7 @@
 class PlansController < ApplicationController
   include EventRouting
 
-  before_action :set_plan
+  before_action :set_plan, except: :create
   before_action :check_user_owns_plan, only: :update
 
   def show
@@ -50,14 +50,19 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = @user.plans.where(event: @event).create!(title: 'My Plans')
-    redirect_to event_plan_path(@plan, event_name: @plan.event.name)
+    @plan = @user.plans.where(event: @event).create!(plan_params)
+    add_and_remove_plans if plan_add_or_remove?
+    redirect_to event_schedules_path(event_name: @plan.event.name)
   end
 
   private
 
+  def plan_params
+    params.require(:plan).permit(:title, :description, :public)
+  end
+
   def plan_add_or_remove?
-    params[:add_schedule_id] || params[:remove_schedule_id]
+    params[:add_schedule_id] || params[:remove_schedule_id] || params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]
   end
 
   def redirect_path_with_identifier(target)
@@ -72,15 +77,17 @@ class PlansController < ApplicationController
 
   def add_and_remove_plans
     ret = nil
+    add_id = params[:add_schedule_id] || params[:plan][:add_schedule_id]
+    remove_id = params[:remove_schedule_id] || params[:plan][:remove_schedule_id]
     ActiveRecord::Base.transaction do
-      ret = add_plan if params[:add_schedule_id]
-      ret = remove_plan if params[:remove_schedule_id]
+      ret = add_plan(add_id) if add_id
+      ret = remove_plan(remove_id) if remove_id
     end
     ret
   end
 
-  def add_plan
-    ps = @plan.plan_schedules.build(schedule: Schedule.find(params[:add_schedule_id]))
+  def add_plan(id)
+    ps = @plan.plan_schedules.build(schedule: Schedule.find(id))
     if @plan.valid?
       ps.save!
     else
@@ -91,8 +98,8 @@ class PlansController < ApplicationController
     ps.schedule
   end
 
-  def remove_plan
-    schedule = Schedule.find(params[:remove_schedule_id])
+  def remove_plan(id)
+    schedule = Schedule.find(id)
     @plan.plan_schedules.find_by(schedule:).destroy!
     @plan.update!(initial: false)
     schedule

@@ -22,13 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_plan
-    if @user.plans.where(event: @event).blank?
-      @user.plans.create!(title: "My RubyKaigi #{@event.name} set list",
-                          description: "Enjoy my RubyKaigi #{@event.name} set list",
-                          public: true,
-                          event: @event)
-    end
-    @plan = @user.plans.where(event: @event).recent.first
+    @plan = @user.plans.where(event: @event).recent&.first ||
+      @user.plans.build(title: "My RubyKaigi #{@event.name} set list",
+                        description: "Enjoy my RubyKaigi #{@event.name} set list",
+                        public: true,
+                        event: @event)
   end
 
   def not_found(err)

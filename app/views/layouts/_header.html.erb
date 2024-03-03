@@ -47,7 +47,7 @@
           </svg>
           <%= I18n.t('nav.schedule') %></a>
       </li>
-      <% if @plan %>
+      <% unless @plan.new_record? %>
         <li>
           <a
             href="<%= event_plan_path(@plan, event_name: @plan.event.name) %>"
