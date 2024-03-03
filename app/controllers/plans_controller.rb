@@ -11,7 +11,7 @@ class PlansController < ApplicationController
   end
 
   def update
-    target = if params[:add_schedule_id] || params[:remove_schedule_id]
+    target = if plan_add_or_remove?
                add_and_remove_plans
              elsif params[:edit_memo_schedule_id]
                edit_memo
@@ -25,8 +25,10 @@ class PlansController < ApplicationController
                head :bad_request
              end
 
-    if params[:add_schedule_id] || params[:remove_schedule_id]
+    if plan_add_or_remove? && params[:mode] == 'schedule'
       redirect_to event_schedules_path(event_name: @event.name)
+    elsif plan_add_or_remove? && params[:mode] == 'plan'
+      redirect_to event_plan_path(@plan, event_name: @event.name)
     elsif target
       render 'schedules/_card', locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule, inactive: false }
     else
@@ -53,6 +55,10 @@ class PlansController < ApplicationController
   end
 
   private
+
+  def plan_add_or_remove?
+    params[:add_schedule_id] || params[:remove_schedule_id]
+  end
 
   def redirect_path_with_identifier(target)
     identifier = target&.start_at&.strftime('%Y-%m-%d')

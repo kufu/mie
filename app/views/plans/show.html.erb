@@ -210,30 +210,34 @@
     </div>
     <div class="mt-4 overflow-y-auto">
       <% @plans_table.each do |k, v| %>
-        <table id="schedule-<%= k %>" class="schedule-table hidden h-full w-full border-collapse border-spacing-0">
-          <thead>
-            <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
-            <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
-          </thead>
-          <tbody>
-            <% v.each do |row| %>
-              <tr>
-                <th class="py-2">
-                  <div class="flex flex-col gap-1">
-                    <div class="flex items-center">
-                      <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
-                      <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
-                    </div>
-                    <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
-                  </div>
-                </th>
-                <td>
-                  <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div id="schedule-<%= k %>" class="schedule-table hidden">
+          <%= turbo_frame_tag plan_turbo_frame_tag(@event, k) do %>
+            <table class="h-full w-full border-collapse border-spacing-0">
+              <thead>
+                <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
+                <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
+              </thead>
+              <tbody>
+                <% v.each do |row| %>
+                  <tr>
+                    <th class="py-2">
+                      <div class="flex flex-col gap-1">
+                        <div class="flex items-center">
+                          <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
+                          <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+                        </div>
+                        <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
+                      </div>
+                    </th>
+                    <td>
+                      <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

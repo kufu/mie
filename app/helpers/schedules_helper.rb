@@ -11,8 +11,8 @@ module SchedulesHelper
     schedule_turbo_frame_tag(event, schedule_track_row(schedule))
   end
 
-  def card_button_turbo_frame_option(mode, event, schedule)
-    mode == :schedule ? { turbo_frame: schedule_turbo_frame_tag_from_schedule(event, schedule) } : {}
+  def schedule_card_button_turbo_frame_option(mode, event, schedule)
+    { turbo_frame: schedule_turbo_frame_tag_from_schedule(event, schedule) }
   end
 
   def create_table_array(schedules)

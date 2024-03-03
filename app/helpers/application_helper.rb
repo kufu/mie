@@ -9,4 +9,11 @@ module ApplicationHelper
   def split_time_and_zone(time_str)
     time_str.match(/^(.+?)\s\((.+?)\)$/).then { { range: _1[1], zone: _1[2] } }
   end
+
+  def card_button_turbo_frame_option(mode, event, schedule)
+    return schedule_card_button_turbo_frame_option(mode, event, schedule) if mode == :schedule
+    return plan_card_button_turbo_frame_option(mode, event, schedule) if mode == :plan
+
+    {}
+  end
 end

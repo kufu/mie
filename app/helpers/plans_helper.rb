@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 module PlansHelper
+  def plan_turbo_frame_tag(event, schedule_day)
+    "plan-#{event.name}-anker-#{schedule_day}"
+  end
+
+  def plan_turbo_frame_tag_from_schedule(event, schedule)
+    plan_turbo_frame_tag(event, schedule_track_row(schedule))
+  end
+
+  def plan_card_button_turbo_frame_option(mode, event, schedule)
+    { turbo_frame: plan_turbo_frame_tag_from_schedule(event, schedule) }
+  end
+
   def plan_title_max_length
     Plan.validators_on(:title).detect do |v|
       v.is_a?(ActiveModel::Validations::LengthValidator)
