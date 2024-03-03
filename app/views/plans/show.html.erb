@@ -228,7 +228,7 @@
                   </div>
                 </th>
                 <td>
-                  <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan) %></div>
+                  <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
                 </td>
               </tr>
             <% end %>

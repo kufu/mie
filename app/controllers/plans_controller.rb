@@ -25,8 +25,10 @@ class PlansController < ApplicationController
                head :bad_request
              end
 
-    if target
-      render 'schedules/_card', locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule }
+    if params[:add_schedule_id] || params[:remove_schedule_id]
+      redirect_to event_schedules_path(event_name: @event.name)
+    elsif target
+      render 'schedules/_card', locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule, inactive: false }
     else
       redirect_to event_plan_url(@plan, event_name: @event.name)
     end

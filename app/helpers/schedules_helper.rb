@@ -3,6 +3,18 @@
 module SchedulesHelper
   include HelperConcern
 
+  def schedule_turbo_frame_tag(event, schedule_day)
+    "schedule-#{event.name}-anker-#{schedule_day}"
+  end
+
+  def schedule_turbo_frame_tag_from_schedule(event, schedule)
+    schedule_turbo_frame_tag(event, schedule_track_row(schedule))
+  end
+
+  def card_button_turbo_frame_option(mode, event, schedule)
+    mode == :schedule ? { turbo_frame: schedule_turbo_frame_tag_from_schedule(event, schedule) } : {}
+  end
+
   def create_table_array(schedules)
     group_schedules_by_date(schedules).to_h do |k, v|
       tracks = v.map(&:track_name).uniq.sort { |l, r| l.reverse <=> r.reverse } # TODO: 2023用超その場しのぎ実装、今すぐどうにかしてほしい
