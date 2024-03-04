@@ -10,6 +10,10 @@
   .normal-button {
     @apply box-border cursor-pointer inline-flex justify-center items-center whitespace-nowrap gap-2 text-center rounded-md border border-solid border-[rgb(214,211,208)] py-3 px-4 font-bold bg-white text-[rgb(35,34,30)] hover:border-[rgb(202,198,194)] hover:bg-[rgb(242,242,242)] disabled:border-[rgb(202,198,194)] disabled:bg-[rgb(242,242,242)] disabled:cursor-not-allowed;
   }
+
+  .dialog {
+    @apply max-w-[min(100vw-16px,800px)] rounded-md bg-white shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] backdrop:bg-[rgba(3,3,2,0.5)];
+  }
 }
 
 @layer utilities {
