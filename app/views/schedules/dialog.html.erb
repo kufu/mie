@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <dialog id="dialog-modal">
+  <dialog id="dialog-modal" class="rounded-md bg-white shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] backdrop:bg-[rgba(3,3,2,0.5)]">
     <div data-controller="dialog" data-dialog-element-id-value="dialog-modal" data-dialog-open-value="true" class="rounded-md">
       <div class="flex flex-col justify-start border-b border-solid border-[rgb(214,211,208)] py-4 px-6">
         <p class="my-0 text-xl"><%= I18n.t('card.detail.title') %></p>
