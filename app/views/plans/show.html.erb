@@ -195,50 +195,66 @@
 
   <% @plans_table = plans_table(@plan) %>
 
-  <% #TODO: schedules/index と統合してパーシャル化したい %>
-  <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
-    <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
-      <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
-        <% @plans_table.keys.map do |k| %>
-          <button data-action="click->schedule-table#switch" value="<%= k %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]" style="--mainColor: <%= @event.event_theme.main_color %>;">
-            <%= k %>
-          </button>
-        <% end %>
+  <%= turbo_frame_tag @event do %>
+    <% #TODO: schedules/index と統合してパーシャル化したい %>
+    <% if @plans_table.empty? %>
+      <div class="w-full h-full flex items-center justify-center">
+        <div class="flex items-center justify-center w-[1120px] h-[275px]">
+          <div class="h-28 w-28 bg-cover" style="background-image: url('<%= asset_path("#{@event.name}/rubykaigi.png") %>');"></div>
+          <div class="ml-4">
+            <div class="mb-2">
+              <h1 class="text-2xl"><%= I18n.t('table.no_plans') %></h1>
+            </div>
+            <div class="mb-2">
+              <%= I18n.t('table.no_plans_description') %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="mt-4 overflow-y-auto">
-      <% @plans_table.each do |k, v| %>
-        <div id="schedule-<%= k %>" class="schedule-table hidden">
-          <%= turbo_frame_tag plan_turbo_frame_tag(@event, k) do %>
-            <table class="h-full w-full border-collapse border-spacing-0">
-              <thead>
-                <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
-                <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
-              </thead>
-              <tbody>
-                <% v.each do |row| %>
-                  <tr>
-                    <th class="py-2">
-                      <div class="flex flex-col gap-1">
-                        <div class="flex items-center">
-                          <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
-                          <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+    <% else %>
+      <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
+        <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
+          <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+            <% @plans_table.keys.map do |k| %>
+              <button data-action="click->schedule-table#switch" value="<%= k %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]" style="--mainColor: <%= @event.event_theme.main_color %>;">
+                <%= k %>
+              </button>
+            <% end %>
+          </div>
+        </div>
+        <div class="mt-4 overflow-y-auto">
+          <% @plans_table.each do |k, v| %>
+            <div id="schedule-<%= k %>" class="schedule-table hidden">
+              <table class="h-full w-full border-collapse border-spacing-0">
+                <thead>
+                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
+                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
+                </thead>
+                <tbody>
+                  <% v.each do |row| %>
+                    <tr>
+                      <th class="py-2">
+                        <div class="flex flex-col gap-1">
+                          <div class="flex items-center">
+                            <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
+                            <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+                          </div>
+                          <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
                         </div>
-                        <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
-                      </div>
-                    </th>
-                    <td>
-                      <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
+                      </th>
+                      <td>
+                        <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= turbo_frame_tag "modal" %>

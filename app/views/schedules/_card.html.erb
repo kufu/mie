@@ -72,7 +72,7 @@
             <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
               <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
               <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button", data: card_button_turbo_frame_option(mode, @event, schedule) %>
+              <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
             <% end %>
           <% elsif @plan.new_record? %>
             <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
@@ -115,7 +115,7 @@
             <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
               <%= form.hidden_field :add_schedule_id, value: schedule.id %>
               <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: card_button_turbo_frame_option(mode, @event, schedule) %>
+              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
             <% end %>
           <% end %>
         </div>

@@ -7,6 +7,10 @@ export default class extends Controller {
     var tables = document.getElementsByClassName("schedule-table");
     var buttons = document.getElementsByClassName("tab-button");
 
+    if (tables.length <= 0) {
+      return
+    }
+
     if (id == "") {
       tables[0].classList.remove("hidden");
       buttons[0].classList.add("tab-btn-active");
