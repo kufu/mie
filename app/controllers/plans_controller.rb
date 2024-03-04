@@ -62,7 +62,7 @@ class PlansController < ApplicationController
   end
 
   def plan_add_or_remove?
-    params[:add_schedule_id] || params[:remove_schedule_id] || params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]
+    params[:add_schedule_id] || params[:remove_schedule_id] || (params[:plan] && (params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]))
   end
 
   def redirect_path_with_identifier(target)
@@ -77,8 +77,8 @@ class PlansController < ApplicationController
 
   def add_and_remove_plans
     ret = nil
-    add_id = params[:add_schedule_id] || params[:plan][:add_schedule_id]
-    remove_id = params[:remove_schedule_id] || params[:plan][:remove_schedule_id]
+    add_id = params[:add_schedule_id] || params.dig(:plan, :add_schedule_id)
+    remove_id = params[:remove_schedule_id] || params.dig(:plan, :remove_schedule_id)
     ActiveRecord::Base.transaction do
       ret = add_plan(add_id) if add_id
       ret = remove_plan(remove_id) if remove_id
