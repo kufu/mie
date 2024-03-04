@@ -3,8 +3,10 @@
 Rails.application.routes.draw do
   root to: redirect('/2023')
 
+
   scope '/:event_name', as: 'event' do
     get '/', to: 'static#top'
+    get '/terms-of-service', to: 'static#terms_of_service'
 
     resources :schedules, only: %i[index show] do
       get '/dialog', to: 'schedules#dialog'

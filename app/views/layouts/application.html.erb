@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
+    <meta name="turbo-visit-control" content="reload">
     <%= yield(:head) %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
@@ -24,8 +25,5 @@
     <div class="p-8">
       <%= yield %>
     </div>
-    <% flash.each do |k, v| %>
-    <%= react_component("Flash", type: k, message: v) %>
-  <% end %>
   </body>
 </html>

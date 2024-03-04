@@ -58,7 +58,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:title, :description, :public)
+    params.require(:plan).permit(:title, :description, :public, :initial)
   end
 
   def plan_add_or_remove?

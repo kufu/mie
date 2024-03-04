@@ -77,14 +77,42 @@
               <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button", data: card_button_turbo_frame_option(mode, @event, schedule) %>
             <% end %>
           <% elsif @plan.new_record? %>
-            <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: 'POST') do |form| %>
-              <%= form.hidden_field :title %>
-              <%= form.hidden_field :description %>
-              <%= form.hidden_field :public %>
-              <%= form.hidden_field :mode, value: mode %>
-              <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: card_button_turbo_frame_option(mode, @event, schedule) %>
-            <% end %>
+            <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
+              <button class="p-2 text-sm font-bold min-h-5 normal-button"
+                      data-action="click->dialog#open"
+              >
+                <%= I18n.t('card.add') %>
+              </button>
+              <dialog id="terms-of-service-<%= schedule.id %>" class="max-w-[min(100vw-16px,800px)] rounded-md bg-white shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] backdrop:bg-[rgba(3,3,2,0.5)]">
+                <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                  <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
+                </div>
+                <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                  <div class="w-[656px] p-6 flex flex-col gap-6 shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] bg-white">
+                    <span class="text-sm"><%= I18n.t('terms_of_service.description') %></span>
+                    <div class="bg-[rgb(248,247,246)] h-[400px] w-full overflow-auto">
+                      <div class="p-2 h-full">
+                        <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
+                  <div class="flex justify-end">
+                    <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
+                    <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: 'POST') do |form| %>
+                      <%= form.hidden_field :title %>
+                      <%= form.hidden_field :description %>
+                      <%= form.hidden_field :public %>
+                      <%= form.hidden_field :mode, value: mode %>
+                      <%= form.hidden_field :initial, value: false %>
+                      <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+                      <%= form.submit I18n.t('button.accept_to_add'), class: "text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" }, style: "--mainColor: #{@event.event_theme.main_color}; --hoverColor: #{@event.event_theme.main_color};" %>
+                    <% end %>
+                  </div>
+                </div>
+              </dialog>
+            </div>
           <% else %>
             <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
               <%= form.hidden_field :add_schedule_id, value: schedule.id %>
