@@ -71,12 +71,12 @@
         <h1 class="" color="TEXT_GREY">
           <%= I18n.t('nav.select_locale') %>
         </h1>
-        <div class="relative box-border w-[16.25em]">
-          <select class="px-[3px] py-2 min-h-[30px] appearance-none cursor-pointer outline-none rounded-md border border-solid border-[rgb(214,211,208)] bg-white ps-2 pe-8 text-sm text-[rgb(35,34,30)] w-full align-middle">
+        <div class="relative box-border w-[16.25em]" data-controller="locale" data-locale-current-value="<%= session[:locale] %>">
+          <select data-action="change->locale#change" class="px-[3px] py-2 min-h-[30px] appearance-none cursor-pointer outline-none rounded-md border border-solid border-[rgb(214,211,208)] bg-white ps-2 pe-8 text-sm text-[rgb(35,34,30)] w-full align-middle">
             <% grouped_timezones.map do |k, v| %>
               <optgroup label="<%= k %>">
                 <% v.map do |locale| %>
-                  <option label="<%= locale %>" value="<%= locale %>"><%= locale %></option>
+                  <option label="<%= locale %>" value="<%= locale %>" <%= locale == session[:locale] ? "selected" : nil %>><%= locale %></option>
                 <% end %>
               </optgroup>
             <% end %>

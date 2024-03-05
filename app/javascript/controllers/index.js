@@ -7,6 +7,9 @@ import { application } from "./application"
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
 
+import LocaleController from "./locale_controller"
+application.register("locale", LocaleController)
+
 import ScheduleTableController from "./schedule_table_controller"
 application.register("schedule-table", ScheduleTableController)
 

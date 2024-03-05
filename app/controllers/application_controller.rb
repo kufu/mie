@@ -44,16 +44,14 @@ class ApplicationController < ActionController::Base
   def create_and_set_user
     @user = User.create!
     session[:user_id] = @user.id
-    session[:locale] = 'Etc/UTC'
     @user
   end
 
   def set_locale
-    return unless params['locale']
-    return unless ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale'])
+    return unless params.key?('locale')
 
-    session[:locale] = params['locale']
-    redirect_to request.path
+    locale = ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale']) ? params['locale'] : 'Etc/UTC'
+    session[:locale] = locale
   end
 
   def with_time_zone(&)
