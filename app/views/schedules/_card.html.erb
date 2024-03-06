@@ -20,7 +20,7 @@
 
       <div class="mb-6">
         <h3 class="text-xl  my-2"><%= schedule.title %></h3>
-        <p class="text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
+        <p class="line-clamp-3 text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
         <% if mode == :plan && @plan.schedules.include?(schedule) %>
           <div class="my-4 mx-0">
             <h4 class="mb-2 text-sm text-[rgb(112,109,101)]"><%= I18n.t('table.memo') %></h4>
