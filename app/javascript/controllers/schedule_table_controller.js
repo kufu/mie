@@ -1,57 +1,57 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="schedule-table"
 export default class extends Controller {
-  connect() {
-    var id = window.location.hash
-    var tables = document.getElementsByClassName("schedule-table");
-    var buttons = document.getElementsByClassName("tab-button");
+  connect () {
+    const id = window.location.hash;
+    const tables = document.getElementsByClassName('schedule-table');
+    const buttons = document.getElementsByClassName('tab-button');
 
     if (tables.length <= 0) {
-      return
+      return;
     }
 
-    if (id == "") {
-      tables[0].classList.remove("hidden");
-      buttons[0].classList.add("tab-btn-active");
-      return
+    if (id === '') {
+      tables[0].classList.remove('hidden');
+      buttons[0].classList.add('tab-btn-active');
+      return;
     }
 
-    var target = document.getElementById('schedule-' + id.slice(1));
+    const target = document.getElementById('schedule-' + id.slice(1));
 
     [...tables].forEach(element => {
-      if (element.id == target.id) {
-        element.classList.remove("hidden")
+      if (element.id === target.id) {
+        element.classList.remove('hidden');
       } else {
-        element.classList.add("hidden")
+        element.classList.add('hidden');
       }
     });
 
     [...buttons].forEach(element => {
-      if (element.value == id.slice(1)) {
-        element.classList.add("tab-btn-active")
+      if (element.value === id.slice(1)) {
+        element.classList.add('tab-btn-active');
       }
-    })
+    });
   }
 
-  switch(event) {
-    var tables = document.getElementsByClassName("schedule-table");
-    var target = document.getElementById('schedule-' + event.currentTarget.value);
+  switch (event) {
+    const tables = document.getElementsByClassName('schedule-table');
+    const target = document.getElementById('schedule-' + event.currentTarget.value);
 
     [...tables].forEach(element => {
-      if (element.id == target.id) {
-        element.classList.remove("hidden")
+      if (element.id === target.id) {
+        element.classList.remove('hidden');
       } else {
-        element.classList.add("hidden")
+        element.classList.add('hidden');
       }
     });
 
-    var buttons = document.getElementsByClassName("tab-button");
+    const buttons = document.getElementsByClassName('tab-button');
     [...buttons].forEach(element => {
-      element.classList.remove("tab-btn-active")
-    })
+      element.classList.remove('tab-btn-active');
+    });
 
-    event.currentTarget.classList.add("tab-btn-active");
+    event.currentTarget.classList.add('tab-btn-active');
 
     window.location.hash = '#' + event.currentTarget.value;
   }

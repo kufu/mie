@@ -1,31 +1,31 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="dialog"
 export default class extends Controller {
-  static values = { elementId: String, open: { type: Boolean, default: false } }
+  static values = { elementId: String, open: { type: Boolean, default: false } };
 
-  connect() {
+  connect () {
     this.dialog = document.getElementById(this.elementIdValue);
     if (this.openValue) {
       this.open();
     }
   }
 
-  open() {
-    document.documentElement.classList.add("overflow-hidden");
+  open () {
+    document.documentElement.classList.add('overflow-hidden');
 
-    this.dialog.addEventListener("close", (e) => {
-      document.documentElement.classList.remove("overflow-hidden");
-    })
+    this.dialog.addEventListener('close', (e) => {
+      document.documentElement.classList.remove('overflow-hidden');
+    });
 
     this.dialog.showModal();
   }
 
-  close() {
+  close () {
     this.dialog.close();
   }
 
-  disconnect() {
+  disconnect () {
     this.close();
   }
 }
