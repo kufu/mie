@@ -59,7 +59,7 @@
                   <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
                     <div class="flex justify-end">
                       <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
-                      <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button", style: "--mainColor: #{@event.event_theme.main_color}; --hoverColor: #{@event.event_theme.main_color};" %>
+                      <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
                     </div>
                   </div>
                 </div>
@@ -105,7 +105,7 @@
                       <%= form.hidden_field :mode, value: mode %>
                       <%= form.hidden_field :initial, value: false %>
                       <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-                      <%= form.submit I18n.t('button.accept_to_add'), class: "text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" }, style: "--mainColor: #{@event.event_theme.main_color}; --hoverColor: #{@event.event_theme.main_color};" %>
+                      <%= form.submit I18n.t('button.accept_to_add'), class: "text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
                     <% end %>
                   </div>
                 </div>

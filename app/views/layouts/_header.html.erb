@@ -1,5 +1,5 @@
 <nav>
-  <div class="flex items-center direction-row h-[50px]" style="background-color: <%= @event.event_theme.main_color %>;">
+  <div class="flex items-center direction-row h-[50px] bg-[var(--mainColor)]">
     <div class="flex flex-row items-center mx-4 my-0 text-white">
       <img height="24px" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
       <div class="flex items-center">
@@ -26,7 +26,6 @@
         <a
           href="<%= event_path %>"
           class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_path) ? 'nav-current' : '' %>"
-          style="--mainColor:<%= @event.event_theme.main_color %>"
           <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
         >
           <%= I18n.t('nav.root') %></a>
@@ -35,7 +34,6 @@
         <a
           href="<%= event_schedules_path %>"
           class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_schedules_path) ? 'nav-current' : '' %>"
-          style="--mainColor:<%= @event.event_theme.main_color %>"
           <%= sanitize current_path?(event_schedules_path) ? 'aria-current="page"' : '' %>
         >
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" color="#706d65" class=""
@@ -52,7 +50,6 @@
           <a
             href="<%= event_plan_path(@plan, event_name: @plan.event.name) %>"
             class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-3 py-2 <%= current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'nav-current' : '' %>"
-            style="--mainColor:<%= @event.event_theme.main_color %>"
             <%= sanitize current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'aria-current="page"' : '' %>
           >
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="#706d65" class=""
