@@ -7,8 +7,6 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <% end %>
 
-<% @table_array = create_table_array(@schedules) %>
-
 <%= turbo_frame_tag @event do %>
 <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
   <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
@@ -21,7 +19,7 @@
     </div>
   </div>
   <div class="mt-4 overflow-y-auto">
-    <% schedule_table(@table_array).each do |k, v| %>
+    <% @schedule_table.each do |k, v| %>
       <div id="schedule-<%= k %>" class="schedule-table hidden">
         <table class="h-full w-full border-collapse border-spacing-0">
           <thead>

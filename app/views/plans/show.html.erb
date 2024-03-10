@@ -189,8 +189,6 @@
     </div>
   </div>
 
-  <% @plans_table = plans_table(@plan) %>
-
   <%= turbo_frame_tag @event do %>
     <% #TODO: schedules/index と統合してパーシャル化したい %>
     <% if @plans_table.empty? %>

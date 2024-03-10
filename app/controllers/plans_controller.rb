@@ -2,12 +2,14 @@
 
 class PlansController < ApplicationController
   include EventRouting
+  include ScheduleTable
 
   before_action :set_plan, except: :create
   before_action :check_user_owns_plan, only: :update
 
   def show
     @schedules = @plan.schedules
+    @plans_table = plans_table(@plan)
   end
 
   def update
