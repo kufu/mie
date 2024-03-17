@@ -6,6 +6,7 @@
 
 # editor
 /.idea/
+/.vscode/
 
 # Ignore bundler config.
 /.bundle
