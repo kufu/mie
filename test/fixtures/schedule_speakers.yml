@@ -23,3 +23,49 @@ five:
 fix:
   schedule: five
   speaker: johnny
+
+kaigi_day1_time1_track1-efren:
+  schedule: kaigi_day1_time1_track1
+  speaker: efren
+kaigi_day1_time2_track1-parker: 
+  schedule: kaigi_day1_time2_track1
+  speaker: parker
+kaigi_day1_time2_track2-melvin:
+  schedule: kaigi_day1_time2_track2
+  speaker: melvin
+kaigi_day1_time2_track3-joe:
+  schedule: kaigi_day1_time2_track3
+  speaker: joe
+kaigi_day1_time3_track1-austin:
+  schedule: kaigi_day1_time3_track1
+  speaker: austin
+kaigi_day1_time3_track2-tamisha:
+  schedule: kaigi_day1_time3_track2
+  speaker: tamisha
+kaigi_day1_time4_track1-cindie:
+  schedule: kaigi_day1_time4_track1
+  speaker: cindie
+kaigi_day2_time1_track1-willene:
+  schedule: kaigi_day2_time1_track1
+  speaker: willene
+kaigi_day2_time1_track2-scotty:
+  schedule: kaigi_day2_time1_track2
+  speaker: scotty
+kaigi_day2_time1_track3-kaycee:
+  schedule: kaigi_day2_time1_track3
+  speaker: kaycee
+kaigi_day2_time2_track1-paula:
+  schedule: kaigi_day2_time2_track1
+  speaker: paula
+kaigi_day2_time2_track2-linnie:
+  schedule: kaigi_day2_time2_track2
+  speaker: linnie
+kaigi_day2_time3_track1-martha:
+  schedule: kaigi_day2_time3_track1
+  speaker: martha
+kaigi_day2_time3_track2-dante:
+  schedule: kaigi_day2_time3_track2
+  speaker: dante
+kaigi_day2_time4_track1-elaine:
+  schedule: kaigi_day2_time4_track1
+  speaker: elaine

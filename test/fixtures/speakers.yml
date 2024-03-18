@@ -41,3 +41,95 @@ cat:
   thumbnail: "https://example.com/thumbnail6"
   profile: meow
   event: dojo
+
+
+efren:
+  name: Efren Harris
+  handle: Leto
+  thumbnail: https://example.com/thumbnail1
+  profile: Future Administration Facilitator
+  event: kaigi
+parker:
+  name: Parker Deckow
+  handle: Iapetus
+  thumbnail: https://example.com/thumbnail1
+  profile: Dynamic Orchestrator
+  event: kaigi
+melvin:
+  name: Melvin Corwin
+  handle: Atlas
+  thumbnail: https://example.com/thumbnail1
+  profile: Administration Technician
+  event: kaigi
+joe:
+  name: Joe Dickinson
+  handle: Themis
+  thumbnail: https://example.com/thumbnail1
+  profile: Central Technician
+  event: kaigi
+austin:
+  name: Austin Frami
+  handle: Clymene
+  thumbnail: https://example.com/thumbnail1
+  profile: Banking Architect
+  event: kaigi
+tamisha:
+  name: Tamisha Ernser
+  handle: Astraeus
+  thumbnail: https://example.com/thumbnail1
+  profile: Future Retail Designer
+  event: kaigi
+cindie:
+  name: Cindie Reichel
+  handle: Epimetheus
+  thumbnail: https://example.com/thumbnail1
+  profile: Human Assistant
+  event: kaigi
+willene:
+  name: Willene Bode
+  handle: Eurynome
+  thumbnail: https://example.com/thumbnail1
+  profile: Product Manufacturing Supervisor
+  event: kaigi
+scotty:
+  name: Scotty Kirlin
+  handle: Perses
+  thumbnail: https://example.com/thumbnail1
+  profile: Regional Consulting Architect
+  event: kaigi
+kaycee:
+  name: Kaycee Jacobi
+  handle: Atlas
+  thumbnail: https://example.com/thumbnail1
+  profile: Retail Administrator
+  event: kaigi
+paula:
+  name: Paula Adams
+  handle: Theia
+  thumbnail: https://example.com/thumbnail1
+  profile: Dynamic Administrator
+  event: kaigi
+linnie:
+  name: Linnie Kunde
+  handle: Themis
+  thumbnail: https://example.com/thumbnail1
+  profile: Future Legal Planner
+  event: kaigi
+martha:
+  name: Martha Dare
+  handle: Clymene
+  thumbnail: https://example.com/thumbnail1
+  profile: Corporate Sales Agent
+  event: kaigi
+dante:
+  name: Dante Reynolds
+  handle: Eurynome
+  thumbnail: https://example.com/thumbnail1
+  profile: Manufacturing Director
+  event: kaigi
+elaine:
+  name: Elaine Murazik
+  handle: Tethys
+  thumbnail: https://example.com/thumbnail1
+  profile: Dynamic Healthcare Assistant
+  event: kaigi
