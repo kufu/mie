@@ -72,11 +72,11 @@
             <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
               <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
               <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit I18n.t('card.remove'), class: "p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
+              <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
             <% end %>
           <% elsif @plan.new_record? %>
             <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
-              <button class="p-2 text-sm font-bold min-h-5 normal-button"
+              <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
                       data-action="click->dialog#open"
               >
               <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
@@ -106,7 +106,7 @@
                       <%= form.hidden_field :mode, value: mode %>
                       <%= form.hidden_field :initial, value: false %>
                       <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-                      <%= form.submit I18n.t('button.accept_to_add'), class: "text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
+                      <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
                     <% end %>
                   </div>
                 </div>
@@ -116,13 +116,13 @@
             <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
               <%= form.hidden_field :add_schedule_id, value: schedule.id %>
               <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
+              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "add-plan-button p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
             <% end %>
           <% end %>
         </div>
         <div class="ml-2">
           <a
-            class="p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
+            class="show-detail-button p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
             href="<%= event_schedule_dialog_url(schedule, event_name: @plan.event.name) %>"
             data-turbo-frame="modal"
           >

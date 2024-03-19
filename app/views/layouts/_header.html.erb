@@ -1,7 +1,9 @@
 <nav>
   <div class="flex items-center direction-row h-[50px] bg-[var(--mainColor)]">
     <div class="flex flex-row items-center mx-4 my-0 text-white">
-      <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
+      <% unless Rails.env.test? %>
+        <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
+      <% end %>
       <div class="flex items-center">
         <div class="flex items-center gap-0.5 ml-2">
           <span class="">Schedule.select</span>
