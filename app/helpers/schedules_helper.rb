@@ -5,7 +5,7 @@ module SchedulesHelper
 
   def create_table_array(schedules)
     group_schedules_by_date(schedules).to_h do |k, v|
-      tracks = v.map(&:track_name).uniq.sort { |l, r| l.reverse <=> r.reverse } # TODO: 2023用超その場しのぎ実装、今すぐどうにかしてほしい
+      tracks = v.sort_by(&:track_tag).map(&:track_name).uniq
       arrays = group_schedules_by_time(v).map { |time, s| [time] + track_mapping_schedules(tracks, s) }
       arrays.unshift([nil, tracks].flatten)
       [k, arrays]
