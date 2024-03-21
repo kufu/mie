@@ -23,10 +23,10 @@ class ApplicationController < ActionController::Base
 
   def set_plan
     @plan = @user.plans.where(event: @event).recent&.first ||
-      @user.plans.build(title: "My RubyKaigi #{@event.name} set list",
-                        description: "Enjoy my RubyKaigi #{@event.name} set list",
-                        public: true,
-                        event: @event)
+            @user.plans.build(title: "My RubyKaigi #{@event.name} set list",
+                              description: "Enjoy my RubyKaigi #{@event.name} set list",
+                              public: true,
+                              event: @event)
   end
 
   def not_found(err)
@@ -50,7 +50,13 @@ class ApplicationController < ActionController::Base
   def set_locale
     return unless params.key?('locale')
 
-    locale = ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale']) ? params['locale'] : 'Etc/UTC'
+    locale = if ActiveSupport::TimeZone.all.map do |z|
+                  z.tzinfo.identifier
+                end.include?(params['locale'])
+               params['locale']
+             else
+               'Etc/UTC'
+             end
     session[:locale] = locale
   end
 

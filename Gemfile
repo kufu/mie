@@ -7,7 +7,7 @@ ruby '3.3.0'
 
 gem 'rails', '~> 7.1.3.2'
 
-gem "propshaft"
+gem 'propshaft'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -20,9 +20,9 @@ gem 'rack-contrib', '~> 2.3.0'
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'jsbundling-rails', '~> 1.2'
-gem "turbo-rails", "~> 2.0"
-gem "stimulus-rails", "~> 1.3"
-gem "tailwindcss-rails", "~> 2.0"
+gem 'stimulus-rails', '~> 1.3'
+gem 'tailwindcss-rails', '~> 2.0'
+gem 'turbo-rails', '~> 2.0'
 
 gem 'imgkit'
 install_if -> { RUBY_PLATFORM =~ /darwin/ } do
@@ -36,14 +36,14 @@ group :development, :test do
 end
 
 group :development do
+  gem 'erb-formatter', '~> 0.4.3'
   gem 'listen', '~> 3.3'
-  gem "erb-formatter", "~> 0.4.3"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

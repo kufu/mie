@@ -13,26 +13,15 @@ class PlansController < ApplicationController
   end
 
   def update
-    target = if plan_add_or_remove?
-               add_and_remove_plans
-             elsif params[:edit_memo_schedule_id]
-               edit_memo
-             elsif params[:plan][:description]
-               edit_description
-             elsif params[:plan][:public]
-               edit_password_and_visibility
-             elsif params[:plan][:title]
-               edit_title
-             else
-               head :bad_request
-             end
+    target = switch_update_type_and_exec
 
     if plan_add_or_remove? && params[:mode] == 'schedule'
       redirect_to event_schedules_path(event_name: @event.name)
     elsif plan_add_or_remove? && params[:mode] == 'plan'
       redirect_to event_plan_path(@plan, event_name: @event.name)
     elsif target
-      render 'schedules/_card', locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule, inactive: false }
+      render 'schedules/_card',
+             locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule, inactive: false }
     else
       redirect_to event_plan_url(@plan, event_name: @event.name)
     end
@@ -59,12 +48,32 @@ class PlansController < ApplicationController
 
   private
 
+  def switch_update_type_and_exec
+    if plan_add_or_remove?
+      add_and_remove_plans
+    elsif params[:edit_memo_schedule_id]
+      edit_memo
+    elsif params[:plan][:description]
+      edit_description
+    elsif params[:plan][:public]
+      edit_password_and_visibility
+    elsif params[:plan][:title]
+      edit_title
+    else
+      head :bad_request
+    end
+  end
+
   def plan_params
     params.require(:plan).permit(:title, :description, :public, :initial)
   end
 
   def plan_add_or_remove?
-    params[:add_schedule_id] || params[:remove_schedule_id] || (params[:plan] && (params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]))
+    if params[:plan]
+      params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]
+    else
+      params[:add_schedule_id] || params[:remove_schedule_id]
+    end
   end
 
   def redirect_path_with_identifier(target)

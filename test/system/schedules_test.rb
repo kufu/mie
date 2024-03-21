@@ -1,4 +1,6 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class SchedulesTest < ApplicationSystemTestCase
   test 'schedule has all days buttons' do
@@ -69,12 +71,12 @@ class SchedulesTest < ApplicationSystemTestCase
     find(class: ['confirm-terms-of-service-button']).click
 
     # wait for turbo frame
-    if has_selector?('dialog', visible: true, wait: (0.25).seconds)
+    if has_selector?('dialog', visible: true, wait: 0.25.seconds)
       has_no_selector?('dialog', visible: true, wait: 1.seconds)
     end
 
     table_rows = all('tr')
-    assert table_rows[2].all(class: ['add-plan-button']).all? { _1.disabled? }
+    assert table_rows[2].all(class: ['add-plan-button']).all?(&:disabled?)
   end
 
   test 'when one schedule added to plan, that schedule button to be remove button' do
@@ -84,7 +86,7 @@ class SchedulesTest < ApplicationSystemTestCase
     find(class: ['confirm-terms-of-service-button']).click
 
     # wait for turbo frame
-    if has_selector?('dialog', visible: true, wait: (0.25).seconds)
+    if has_selector?('dialog', visible: true, wait: 0.25.seconds)
       has_no_selector?('dialog', visible: true, wait: 1.seconds)
     end
 
