@@ -22,17 +22,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v3
         with:
-          node-version: 16.19.1
+          node-version: 20.11.1
+
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - uses: nanasess/setup-chromedriver@v2
+
       - name: Create database
         run: bin/rails db:setup
+
       - name: yarn
         run: yarn install
-      - name: Build frontend
-        run: yarn build
+
       - name: Run tests
         run: bin/rails test
+
+      - name: Run system tests
+        run: bin/rails test:system
