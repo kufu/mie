@@ -96,6 +96,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
+    dotenv (3.1.0)
     drb (2.2.1)
     erb-formatter (0.4.3)
       syntax_tree (~> 6.0)
@@ -273,6 +274,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.16)
   byebug
   capybara
+  dotenv (~> 3.1)
   erb-formatter (~> 0.4.3)
   imgkit
   jsbundling-rails (~> 1.2)
