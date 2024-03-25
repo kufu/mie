@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   root to: redirect('/2023')
 
+  get 'auth/:provider/callback', to: 'sessions#create'
+
   scope '/:event_name', as: 'event' do
     get '/', to: 'static#top'
     get '/terms-of-service', to: 'static#terms_of_service'

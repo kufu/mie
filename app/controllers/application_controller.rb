@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_user
   before_action :set_plan
   before_action :set_locale
+  before_action :set_last_path
 
   around_action :with_time_zone
 
@@ -58,6 +59,10 @@ class ApplicationController < ActionController::Base
                'Etc/UTC'
              end
     session[:locale] = locale
+  end
+
+  def set_last_path
+    session[:last_path] = request.path
   end
 
   def with_time_zone(&)
