@@ -51,6 +51,7 @@ en:
     add: "Add to my schedule"
     added: "Added to my schedule"
     remove: "Remove from my schedule"
+    inactive: "Another track selected"
     show_detail: "Show detail"
     detail:
       title: "The details"

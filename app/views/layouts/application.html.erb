@@ -6,25 +6,31 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag('2021/favicon.ico') %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <style type="text/css">
+      body {
+        --mainColor: <%= @event.event_theme.main_color %>;
+        --hoverColor: <%= @event.event_theme.main_color %>;
+        --subColor: <%= @event.event_theme.sub_color %>;
+        --accentColor: <%= @event.event_theme.accent_color %>;
+      }
+    </style>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=auto" rel="stylesheet">
 
+    <meta name="turbo-visit-control" content="reload">
     <%= yield(:head) %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body style="font-family: 'Roboto', 'Noto Sans JP', sans-serif;">
+  <body class="bg-[#f8f7f6] leading-4" style="font-family: 'Roboto', 'Noto Sans JP', sans-serif;">
     <header>
-      <%= react_component("Navigation", create_navigation_props) %>
+      <%= render 'layouts/header' %>
     </header>
-    <div class="container">
+    <div class="p-8">
       <%= yield %>
     </div>
-    <% flash.each do |k, v| %>
-    <%= react_component("Flash", type: k, message: v) %>
-  <% end %>
   </body>
 </html>

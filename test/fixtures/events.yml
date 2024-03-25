@@ -2,3 +2,5 @@ party:
   name: 'happy-party'
 dojo:
   name: 'programing-dojo'
+kaigi:
+  name: 'real-event-test'

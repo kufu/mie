@@ -2,30 +2,29 @@
 
 class PlansController < ApplicationController
   include EventRouting
+  include ScheduleTable
 
-  before_action :set_plan
+  before_action :set_plan, except: :create
   before_action :check_user_owns_plan, only: :update
 
   def show
     @schedules = @plan.schedules
+    @plans_table = plans_table(@plan)
   end
 
   def update
-    target = if params[:add_schedule_id] || params[:remove_schedule_id]
-               add_and_remove_plans
-             elsif params[:edit_memo_schedule_id]
-               edit_memo
-             elsif params[:description]
-               edit_description
-             elsif params[:visibility]
-               edit_password_and_visibility
-             elsif params[:title]
-               edit_title
-             else
-               head :bad_request
-             end
+    target = switch_update_type_and_exec
 
-    redirect_to redirect_path_with_identifier(target)
+    if plan_add_or_remove? && params[:mode] == 'schedule'
+      redirect_to event_schedules_path(event_name: @event.name)
+    elsif plan_add_or_remove? && params[:mode] == 'plan'
+      redirect_to event_plan_path(@plan, event_name: @event.name)
+    elsif target
+      render 'schedules/_card',
+             locals: { schedule: target, mode: params[:edit_memo_schedule_id] ? :plan : :schedule, inactive: false }
+    else
+      redirect_to event_plan_url(@plan, event_name: @event.name)
+    end
   end
 
   def editable
@@ -42,11 +41,40 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = @user.plans.where(event: @event).create!(title: 'My Plans')
-    redirect_to event_plan_path(@plan, event_name: @plan.event.name)
+    @plan = @user.plans.where(event: @event).create!(plan_params)
+    add_and_remove_plans if plan_add_or_remove?
+    redirect_to event_schedules_path(event_name: @plan.event.name)
   end
 
   private
+
+  def switch_update_type_and_exec
+    if plan_add_or_remove?
+      add_and_remove_plans
+    elsif params[:edit_memo_schedule_id]
+      edit_memo
+    elsif params[:plan][:description]
+      edit_description
+    elsif params[:plan][:public]
+      edit_password_and_visibility
+    elsif params[:plan][:title]
+      edit_title
+    else
+      head :bad_request
+    end
+  end
+
+  def plan_params
+    params.require(:plan).permit(:title, :description, :public, :initial)
+  end
+
+  def plan_add_or_remove?
+    if params[:plan]
+      params[:plan][:add_schedule_id] || params[:plan][:remove_schedule_id]
+    else
+      params[:add_schedule_id] || params[:remove_schedule_id]
+    end
+  end
 
   def redirect_path_with_identifier(target)
     identifier = target&.start_at&.strftime('%Y-%m-%d')
@@ -60,15 +88,17 @@ class PlansController < ApplicationController
 
   def add_and_remove_plans
     ret = nil
+    add_id = params[:add_schedule_id] || params.dig(:plan, :add_schedule_id)
+    remove_id = params[:remove_schedule_id] || params.dig(:plan, :remove_schedule_id)
     ActiveRecord::Base.transaction do
-      ret = add_plan if params[:add_schedule_id]
-      ret = remove_plan if params[:remove_schedule_id]
+      ret = add_plan(add_id) if add_id
+      ret = remove_plan(remove_id) if remove_id
     end
     ret
   end
 
-  def add_plan
-    ps = @plan.plan_schedules.build(schedule: Schedule.find(params[:add_schedule_id]))
+  def add_plan(id)
+    ps = @plan.plan_schedules.build(schedule: Schedule.find(id))
     if @plan.valid?
       ps.save!
     else
@@ -79,8 +109,8 @@ class PlansController < ApplicationController
     ps.schedule
   end
 
-  def remove_plan
-    schedule = Schedule.find(params[:remove_schedule_id])
+  def remove_plan(id)
+    schedule = Schedule.find(id)
     @plan.plan_schedules.find_by(schedule:).destroy!
     @plan.update!(initial: false)
     schedule
@@ -94,7 +124,7 @@ class PlansController < ApplicationController
   end
 
   def edit_description
-    @plan.update!(description: params[:description])
+    @plan.update!(description: params[:plan][:description])
     nil
   end
 
@@ -104,14 +134,14 @@ class PlansController < ApplicationController
   end
 
   def edit_password_and_visibility
-    @plan.password = params[:password] if params[:password] != ''
-    @plan.public = params[:visibility] == 'true'
+    @plan.password = params[:plan][:password] if params[:plan][:password] != ''
+    @plan.public = params[:plan][:public] == 'true'
     @plan.save!
     nil
   end
 
   def edit_title
-    @plan.update(title: params[:title])
+    @plan.update(title: params[:plan][:title])
     nil
   end
 end

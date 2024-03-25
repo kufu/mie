@@ -1,0 +1,254 @@
+
+<% content_for :head do %>
+  <meta property="og:title" content="<%= @plan.title %>">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+  <meta property="og:description" content="<%= @plan.description %>">
+  <meta property="og:url" content="<%= event_plan_url(event_name: @plan.event.name) %>">
+  <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
+
+<%= turbo_frame_tag @plan do %>
+  <div class="flex items-center mx-auto mt-3 mb-6 max-w-[1120px]">
+    <div class="mr-auto">
+      <div class="flex items-center gap-1">
+        <span class="box-content inline-flex items-center justify-center gap-1 border border-transparent bg-white py-2 px-1 whitespace-nowrap text-sm font-bold min-w-[3.5em] min-h-[1em]">
+          <%= I18n.t(@plan.public? ? 'settings.visible' : 'settings.invisible') %>
+        </span>
+        <div class="ml-2"><h1 class="text-2xl"><%= @plan.title %></h1></div>
+        <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-title-dialog">
+          <% if @plan.user == @user %>
+            <button
+              class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+              data-action="click->dialog#open"
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+              <%= I18n.t('button.edit') %>
+            </button>
+            <dialog id="edit-title-dialog" class="dialog max-w-[min(100vw-16px,800px)]">
+              <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch, model: @plan) do |f| %>
+                <div data-controller="word-counter" data-word-counter-max-value="<%= plan_title_max_length %>">
+                  <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                    <p class="text-xl"><%= I18n.t('dialog.edit_title') %></p>
+                  </div>
+                  <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                    <div class="w-[656px] p-6">
+                      <%= f.text_area :title, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
+                      <div class="font-xs mt-2 text-[rgb(112,109,101)]">
+                        <span data-word-counter-target="counter"></span>/<%= plan_title_max_length %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                    <div class="flex justify-end">
+                      <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                      <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </dialog>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% if @plan.user == @user %>
+      <div data-controller="dialog" data-dialog-element-id-value="edit-setting-dialog">
+        <button
+          class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+          data-action="click->dialog#open"
+        >
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
+          <%= I18n.t('settings.title') %>
+        </button>
+        <dialog id="edit-setting-dialog" class="dialog max-w-[min(100vw-16px,800px)]">
+          <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch, model: @plan) do |f| %>
+            <div class="border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+              <p class="my-0 text-xl"><%= I18n.t('settings.title') %></p>
+            </div>
+            <div class="max-h-[calc(100vh-212px)] overflow-auto">
+              <div class="w-[656px] p-6 border-b border-[rgb(214,211,208)]">
+                <div class="py-2 w-full">
+                  <div><%= f.label :password, I18n.t('settings.set_password'), class: "text-[rgb(112,109,101)] font-bold" %></div>
+                  <div class="mt-2"><%= I18n.t('settings.password_expression') %></div>
+                  <div class="mt-4">
+                    <%= f.password_field :password, class: "w-full rounded-md text-[rgb(35,34,30)]" %>
+                  </div>
+                </div>
+                <div class="mt-4 w-full">
+                  <div class="mt-2"><%= f.label :public, value: I18n.t('settings.visible_text'), class: "text-[rgb(112,109,101)] font-bold" %></div>
+                  <div class="mt-2"><%= I18n.t('settings.visibility_description', current: I18n.t(@plan.public ? 'settings.visible' : 'settings.invisible')) %></div>
+                  <div class="mt-1 flex flex-col py-4">
+                    <div class="m-2 inline-flex items-start flex-col">
+                      <div>
+                        <%= f.radio_button :public, true %>
+                        <%= f.label :public_true, I18n.t('settings.visible_text') %>
+                      </div>
+                      <%= f.label :public_true, I18n.t('settings.visible_description'), class: "ml-5 mt-1" %>
+                    </div>
+                    <div class="mt-4 m-2 inline-flex items-start flex-col">
+                      <div>
+                        <%= f.radio_button :public, false %>
+                        <%= f.label :public_false, I18n.t('settings.invisible_text') %>
+                      </div>
+                      <%= f.label :public_false, I18n.t('settings.invisible_description'), class: "ml-5 mt-1" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col border-t border-[rgb(214,211,208)] py-4 px-6">
+              <div class="flex justify-end">
+                <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
+              </div>
+            </div>
+          <% end %>
+        </dialog>
+      </div>
+    <% else %>
+      <div data-controller="dialog" data-dialog-element-id-value="make-editable-dialog">
+        <button
+          class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+          data-action="click->dialog#open"
+        >
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
+          <%= I18n.t('button.make_editable') %>
+        </button>
+        <dialog id="make-editable-dialog" class="dialog max-w-[min(100vw-16px,800px)]">
+          <%= form_with(url: event_plan_own_url(@plan, event_name: @plan.event.name), method: :patch) do |f| %>
+            <div class="border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+              <p class="my-0 text-xl"><%= I18n.t('settings.title') %></p>
+            </div>
+            <div class="max-h-[calc(100vh-212px)] overflow-auto">
+              <div class="w-[656px] p-6 border-b border-[rgb(214,211,208)]">
+                <div class="py-2 w-full">
+                  <div><%= f.label :password, I18n.t('dialog.input_password'), class: "text-[rgb(112,109,101)] font-bold" %></div>
+                  <div class="mt-4">
+                    <%= f.password_field :password, class: "w-full rounded-md text-[rgb(35,34,30)]" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col border-t border-[rgb(214,211,208)] py-4 px-6">
+              <div class="flex justify-end">
+                <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                <%= f.submit I18n.t('button.make_editable'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
+              </div>
+            </div>
+          <% end %>
+        </dialog>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mx-auto mt-2 mb-0 max-w-[1120px] flex flex-col gap-3">
+    <div class="flex justify-between items-end">
+      <div class="flex flex-col gap-1">
+        <h1 class="text-base"><%= I18n.t('description.title') %></h1>
+        <span class="text-sm text-[rgb(112,109,101)]"><%= I18n.t('description.notice') %></span>
+      </div>
+      <% if @plan.user == @user %>
+        <div data-controller="dialog" data-dialog-element-id-value="edit-description-dialog">
+          <button
+            class="p-2 text-sm min-h-[calc(0.857143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+            data-action="click->dialog#open"
+          >
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+            <%= I18n.t('button.edit') %>
+          </button>
+          <dialog id="edit-description-dialog" class="dialog max-w-[min(100vw-16px,800px)]">
+            <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch, model: @plan) do |f| %>
+              <div data-controller="word-counter" data-word-counter-max-value="<%= plan_description_max_length %>">
+                <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                  <p class="text-xl"><%= I18n.t('description.form_titme') %></p>
+                </div>
+                <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                  <div class="w-[656px] p-6">
+                    <%= f.text_area :description, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
+                    <div class="font-xs mt-2 text-[rgb(112,109,101)]">
+                      <span data-word-counter-target="counter"></span>/<%= plan_description_max_length %>
+                    </div>
+                  </div>
+                </div>
+                <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                  <div class="flex justify-end">
+                    <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                    <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </dialog>
+        </div>
+      <% end %>
+    </div>
+    <div class="p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+      <span class="text-base"><%= @plan.description %></span>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag @event do %>
+    <% #TODO: schedules/index と統合してパーシャル化したい %>
+    <% if @plans_table.empty? %>
+      <div class="w-full h-full flex items-center justify-center">
+        <div class="flex items-center justify-center w-[1120px] h-[275px]">
+          <div class="h-28 w-28 bg-cover" style="background-image: url('<%= asset_path("#{@event.name}/rubykaigi.png") %>');"></div>
+          <div class="ml-4">
+            <div class="mb-2">
+              <h1 class="text-2xl"><%= I18n.t('table.no_plans') %></h1>
+            </div>
+            <div class="mb-2">
+              <%= I18n.t('table.no_plans_description') %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
+        <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
+          <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+            <% @plans_table.keys.map do |k| %>
+              <button data-action="click->schedule-table#switch" value="<%= k %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+                <%= k %>
+              </button>
+            <% end %>
+          </div>
+        </div>
+        <div class="mt-4 overflow-y-auto">
+          <% @plans_table.each do |k, v| %>
+            <div id="schedule-<%= k %>" class="schedule-table hidden">
+              <table class="h-full w-full border-collapse border-spacing-0">
+                <thead>
+                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
+                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
+                </thead>
+                <tbody>
+                  <% v.each do |row| %>
+                    <tr>
+                      <th class="py-2">
+                        <div class="flex flex-col gap-1">
+                          <div class="flex items-center">
+                            <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
+                            <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+                          </div>
+                          <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
+                        </div>
+                      </th>
+                      <td>
+                        <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= turbo_frame_tag "modal" %>

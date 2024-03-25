@@ -22,13 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_plan
-    if @user.plans.where(event: @event).blank?
-      @user.plans.create!(title: "My RubyKaigi #{@event.name} set list",
-                          description: "Enjoy my RubyKaigi #{@event.name} set list",
-                          public: true,
-                          event: @event)
-    end
-    @plan = @user.plans.where(event: @event).recent.first
+    @plan = @user.plans.where(event: @event).recent&.first ||
+            @user.plans.build(title: "My RubyKaigi #{@event.name} set list",
+                              description: "Enjoy my RubyKaigi #{@event.name} set list",
+                              public: true,
+                              event: @event)
   end
 
   def not_found(err)
@@ -46,16 +44,20 @@ class ApplicationController < ActionController::Base
   def create_and_set_user
     @user = User.create!
     session[:user_id] = @user.id
-    session[:locale] = 'Etc/UTC'
     @user
   end
 
   def set_locale
-    return unless params['locale']
-    return unless ActiveSupport::TimeZone.all.map { |z| z.tzinfo.identifier }.include?(params['locale'])
+    return unless params.key?('locale')
 
-    session[:locale] = params['locale']
-    redirect_to request.path
+    locale = if ActiveSupport::TimeZone.all.map do |z|
+                  z.tzinfo.identifier
+                end.include?(params['locale'])
+               params['locale']
+             else
+               'Etc/UTC'
+             end
+    session[:locale] = locale
   end
 
   def with_time_zone(&)

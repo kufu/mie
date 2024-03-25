@@ -1,0 +1,61 @@
+<% content_for :head do %>
+  <meta property="og:title" content="RubyKaigi Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+  <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
+  <% unless Rails.env.test? %>
+    <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
+  <% end %>
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
+
+<%= turbo_frame_tag @event do %>
+<div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
+  <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
+    <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+      <% @table_array.keys.map do |k| %>
+        <button data-action="click->schedule-table#switch" value="<%= k %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+          <%= k %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-4 overflow-y-auto">
+    <% @schedule_table.each do |k, v| %>
+      <div id="schedule-<%= k %>" class="schedule-table hidden">
+        <table class="h-full w-full border-collapse border-spacing-0">
+          <thead>
+            <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
+            <% v[:track_list].each do |track| %>
+              <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= track %></th>
+            <% end %>
+          </thead>
+          <tbody>
+            <% v[:rows].each do |row| %>
+              <% @selected = @plan.plan_schedules.map(&:schedule).any? { row[:schedules].include?(_1) } %>
+              <tr class="align-baseline">
+                <th class="py-2 px-0 align-baseline">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex items-center">
+                      <p class="text-xl font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
+                      <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+                    </div>
+                    <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
+                  </div>
+                </th>
+                <% row[:schedules].each do |schedule| %>
+                    <td>
+                      <div class="p-2"><%= schedule ? render("schedules/card", schedule:, mode: :schedule, inactive: @selected) : nil %></div>
+                    </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<%= turbo_frame_tag "modal" %>

@@ -8,4 +8,8 @@ class StaticController < ApplicationController
   end
 
   def top; end
+
+  def terms_of_service
+    render html: I18n.t('terms_of_service.terms_of_service').html_safe
+  end
 end
