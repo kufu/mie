@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: redirect('/2023')
+  root to: redirect('/2024')
 
   scope '/:event_name', as: 'event' do
     get '/', to: 'static#top'
