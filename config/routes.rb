@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: redirect('/2023')
+  root to: redirect('/2024')
 
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/session', to: 'sessions#delete'
