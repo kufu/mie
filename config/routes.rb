@@ -3,7 +3,8 @@
 Rails.application.routes.draw do
   root to: redirect('/2023')
 
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get '/auth/:provider/callback', to: 'sessions#create'
+  delete '/session', to: 'sessions#delete'
 
   scope '/:event_name', as: 'event' do
     get '/', to: 'static#top'
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
         resource :ogp, only: %i[show]
       end
     end
+
+    resource :profile, only: %i[show update]
   end
 
   get '*path', controller: 'application', action: 'not_found'

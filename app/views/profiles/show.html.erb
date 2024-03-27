@@ -1,0 +1,37 @@
+<% if @user && @user.profile %>
+  <div class="flex justify-center">
+    <div class="w-1/2">
+      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+        <div class="flex gap-4">
+          <img class="w-36 h-36 rounded-full" src="<%= @user.profile.avatar_url %>">
+          <div class="flex flex-col gap-2 w-full">
+            <div class="flex-grow flex flex-col gap-2">
+              <h1 class="text-4xl"><%= @user.profile.name %></h1>
+              <h2><%= @user.profile.email %></h2>
+            </div>
+            <div class="self-end">
+              <%= form_with(url: '/session', method: :delete) do |f| %>
+                <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="flex items-center justify-center h-96">
+    <div class="h-auto">
+      <%= form_tag('/auth/github', method: 'post' , data: {turbo: false}) do %>
+        <button type='submit' class="p-2 border border-black border-solid rounded-md">
+          <div class="flex items-center gap-2">
+            <img src="/icons/github-mark.svg" class="w-6 h-6">
+            <span class="font-bold">
+              Sign up with GitHub
+            </span>
+          </div>
+        </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>

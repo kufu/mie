@@ -25,11 +25,13 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found(err)
+    print_error_if_test(err)
     Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}")
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 
   def server_error(err)
+    print_error_if_test(err)
     Rails.logger.error("#{err}\n#{err.backtrace.join("\n")}")
     render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
   end
@@ -65,5 +67,13 @@ class ApplicationController < ActionController::Base
     else
       yield
     end
+  end
+
+  def print_error_if_test(err)
+    return unless Rails.env.test?
+
+    pp params
+    puts err.message
+    puts err.backtrace.join("\n")
   end
 end
