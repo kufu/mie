@@ -19,6 +19,8 @@ Rails.application.routes.draw do
         resource :ogp, only: %i[show]
       end
     end
+
+    resource :profile, only: %i[show update]
   end
 
   get '*path', controller: 'application', action: 'not_found'
