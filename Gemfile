@@ -24,6 +24,9 @@ gem 'stimulus-rails', '~> 1.3'
 gem 'tailwindcss-rails', '~> 2.0'
 gem 'turbo-rails', '~> 2.0'
 
+gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
 gem 'imgkit'
 install_if -> { RUBY_PLATFORM =~ /darwin/ } do
   gem 'wkhtmltoimage-binary'
@@ -32,6 +35,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv', '~> 3.1'
   gem 'rubocop', '~> 1.18'
 end
 
