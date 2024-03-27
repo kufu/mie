@@ -13,21 +13,15 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, with: :not_found
 
   def set_user
-    if session[:user_id]
-      @user = User.find(session[:user_id])
-    else
-      create_and_set_user
-    end
-  rescue ActiveRecord::RecordNotFound
-    create_and_set_user
+    @user = User.find(session[:user_id]) if session[:user_id]
   end
 
   def set_plan
-    @plan = @user.plans.where(event: @event).recent&.first ||
-            @user.plans.build(title: "My RubyKaigi #{@event.name} set list",
-                              description: "Enjoy my RubyKaigi #{@event.name} set list",
-                              public: true,
-                              event: @event)
+    @plan = (@user && @user.plans.where(event: @event).recent&.first) ||
+            Plan.new(title: "My RubyKaigi #{@event.name} set list",
+                     description: "Enjoy my RubyKaigi #{@event.name} set list",
+                     public: true,
+                     event: @event)
   end
 
   def not_found(err)

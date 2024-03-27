@@ -41,6 +41,7 @@ class PlansController < ApplicationController
   end
 
   def create
+    create_and_set_user unless @user
     @plan = @user.plans.where(event: @event).create!(plan_params)
     add_and_remove_plans if plan_add_or_remove?
     redirect_to event_schedules_path(event_name: @plan.event.name)
