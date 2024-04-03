@@ -6,8 +6,7 @@ class SchedulesController < ApplicationController
 
   def index
     @schedules = Schedule.on_event(@event).includes(:speakers).order(:start_at)
-    @table_array = create_table_array(@schedules)
-    @schedule_table = schedule_table(@table_array)
+    @schedule_table = Schedule::Tables.new(@schedules)
   end
 
   def dialog
