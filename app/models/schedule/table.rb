@@ -5,7 +5,7 @@ class Schedule
     attr_reader :track_list, :rows
 
     def initialize(schedules)
-      @track_list = schedules.map(&:track_name).sort.uniq
+      @track_list = schedules.map(&:track).uniq.sort_by(&:position).map(&:name)
 
       grouped_schedules = schedules.group_by do |s|
         start_at = I18n.l(s.start_at, format: :timetable)
