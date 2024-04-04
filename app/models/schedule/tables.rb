@@ -12,7 +12,7 @@ class Schedule
     end
 
     def days
-      @map.keys.sort_by(&:to_i)
+      @map.keys.sort_by { Time.parse(_1).to_i }
     end
 
     def [](key)
