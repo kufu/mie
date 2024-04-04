@@ -62,7 +62,7 @@ class PlanTest < ActiveSupport::TestCase
     johnny, kerry = speakers(:johnny, :kerry)
     left = Schedule.create!(
       title: 'test1',
-      track_name: 'test track',
+      track: tracks(:party_track_a),
       speakers: [johnny],
       start_at: Time.zone.parse('2021-07-30 12:00:00'),
       end_at: Time.zone.parse('2021-07-30 13:00:00'),
@@ -70,7 +70,7 @@ class PlanTest < ActiveSupport::TestCase
     )
     right = Schedule.create!(
       title: 'test2',
-      track_name: 'test track',
+      track: tracks(:party_track_b),
       speakers: [kerry],
       start_at: Time.zone.parse('2021-07-30 12:30:00'),
       end_at: Time.zone.parse('2021-07-30 13:20:00'),
@@ -87,7 +87,7 @@ class PlanTest < ActiveSupport::TestCase
     johnny, kerry = speakers(:johnny, :kerry)
     left = Schedule.create!(
       title: 'test1',
-      track_name: 'test track',
+      track: tracks(:party_track_a),
       speakers: [johnny],
       start_at: Time.zone.parse('2021-07-30 12:00:00'),
       end_at: Time.zone.parse('2021-07-30 13:00:00'),
@@ -95,7 +95,7 @@ class PlanTest < ActiveSupport::TestCase
     )
     right = Schedule.create!(
       title: 'test2',
-      track_name: 'test track',
+      track: tracks(:party_track_a),
       speakers: [kerry],
       start_at: Time.zone.parse('2021-07-30 13:00:00'),
       end_at: Time.zone.parse('2021-07-30 14:00:00'),
