@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       @user.create_profile(
         provider: user_info['provider'],
         uid: user_info['uid'],
-        name: user_info['info']['name'],
+        name: user_info['extra']['raw_info']['login'],
         avatar_url: user_info['info']['image']
       )
     end

@@ -11,8 +11,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
         provider: 'github',
         uid:,
         info: {
-          name: 'test person',
           image: 'https://example.com/avatar'
+        },
+        extra: {
+          raw_info: {
+            login: 'test person'
+          }
         }
       }
     )
