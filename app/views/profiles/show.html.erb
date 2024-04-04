@@ -7,7 +7,6 @@
           <div class="flex flex-col gap-2 w-full">
             <div class="flex-grow flex flex-col gap-2">
               <h1 class="text-4xl"><%= @user.profile.name %></h1>
-              <h2><%= @user.profile.email %></h2>
             </div>
             <div class="self-end">
               <%= form_with(url: '/session', method: :delete) do |f| %>

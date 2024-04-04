@@ -8,7 +8,6 @@ profile_one:
   provider: "github"
   uid: "1234"
   name: 'test profile 1'
-  email: 'test1@example.com'
   avatar_url: 'https://example.com/avatar/1'
   user: one
 
@@ -16,7 +15,6 @@ profile_two:
   provider: "github"
   uid: "5678"
   name: 'test profile 2'
-  email: 'test2@example.com'
   avatar_url: 'https://example.com/avatar/2'
   user: two
 

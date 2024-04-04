@@ -12,7 +12,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
         uid:,
         info: {
           name: 'test person',
-          email: 'test@example.com',
           image: 'https://example.com/avatar'
         }
       }

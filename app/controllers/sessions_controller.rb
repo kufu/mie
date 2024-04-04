@@ -17,7 +17,6 @@ class SessionsController < ApplicationController
         provider: user_info['provider'],
         uid: user_info['uid'],
         name: user_info['info']['name'],
-        email: user_info['info']['email'],
         avatar_url: user_info['info']['image']
       )
     end
