@@ -1,6 +1,6 @@
 <nav>
-  <div class="flex items-center direction-row h-[50px] bg-[var(--mainColor)]">
-    <div class="flex flex-row items-center mx-4 my-0 text-white">
+  <div class="flex items-center justify-end direction-row h-[50px] bg-[var(--mainColor)]">
+    <div class="flex flex-row flex-grow items-center mx-4 my-0 text-white">
       <% unless Rails.env.test? %>
         <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
       <% end %>
@@ -19,6 +19,11 @@
           </figure>
         </div>
       </div>
+    </div>
+    <div class="flex items-center">
+      <% if @user&.profile %>
+        <img src="<%= @user.profile.avatar_url %>" class="rounded-full h-8 w-8 mr-4" >
+      <% end %>
     </div>
   </div>
 
@@ -64,6 +69,15 @@
             <%= I18n.t('nav.plan') %></a>
         </li>
       <% end %>
+      <li>
+        <a
+          href="<%= event_profile_path %>"
+          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_profile_path) ? 'nav-current' : '' %>"
+          <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
+        >
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" width="1em" height="1em" class="" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="color: rgb(112, 109, 101);"><path d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z"></path></svg>
+          <%= I18n.t('nav.profile') %></a>
+      </li>
     </ul>
     <div class="ml-auto">
       <label class="flex items-center justify-start gap-2">

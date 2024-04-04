@@ -22,6 +22,11 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+# Ignore local envs
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
 
 /public/assets
 .byebug_history

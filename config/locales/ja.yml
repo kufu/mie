@@ -6,6 +6,7 @@ ja:
     root: "top"
     schedule: "スケジュール"
     plan: "視聴予定"
+    profile: "プロフィール"
   info:
     create_plan_title: "セッションの視聴予定を作成しませんか？"
     create_plan_text: "RubyKaigi mie.ru 君を使って、RubyKaigi2021 Takeoutのセッション視聴予定表を作成しましょう！ 利用規約に同意の上、予定の作成ボタンを押してください。"
@@ -63,6 +64,7 @@ ja:
     accept_to_add: "同意して追加する"
     make_editable: "パスワードを入力して編集"
     check_password: "編集可能にする"
+    signout: "サインアウト"
   default_vales:
     plan_title: "視聴予定"
 

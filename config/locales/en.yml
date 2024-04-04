@@ -37,6 +37,7 @@ en:
     root: "Top"
     schedule: "Schedule"
     plan: "My Plans"
+    profile: "Profile"
   info:
     create_plan_title: "Create your RubyKaigi Plans"
     create_plan_text: "Create your RubyKaigi Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
@@ -94,6 +95,7 @@ en:
     accept_to_add: "Accept and add to Plans"
     make_editable: "Make editable"
     check_password: "Take edit permission"
+    signout: "Sign out"
   default_vales:
     plan_title: "My plans"
 
