@@ -21,5 +21,36 @@ class Schedule
     test '#rows returns array sorted by track start time' do
       assert_equal @table.rows.map { _1.tracks['TrackA'] }, @table.rows.map { _1.tracks['TrackA'] }.sort_by(&:start_at)
     end
+
+    test '#track_list returns track names sorted by Track#position' do
+      event = Event.build(name: 'track_sort_test')
+      event.build_event_theme(
+        main_color: '#0B374D',
+        sub_color: '#EBE0CE',
+        accent_color: '#D7D165',
+        text_color: '#23221F',
+        overview: 'hoge',
+        site_label: 'foo',
+        site_url: 'https://example.com'
+      )
+      event.save!
+      track_a = event.tracks.create!(name: 'A', position: 2)
+      track_b = event.tracks.create!(name: 'B', position: 1)
+      speaker = event.speakers.create!(name: 'kinoppyd', handle: 'ppyd', profile: 'wooo', thumbnail: 'https://example.com')
+
+      schedule_a = track_a.schedules.create!(title: 'test1', speakers: [speaker], start_at: '2024-04-06 01:50', end_at: '2024-04-06 01:55')
+      schedule_b = track_b.schedules.create!(title: 'test2', speakers: [speaker], start_at: '2024-04-06 01:50', end_at: '2024-04-06 01:55')
+
+      table = Schedule::Table.new([schedule_a, schedule_b])
+
+      assert_equal %w[B A], table.track_list
+
+      track_a.update!(position: 1)
+      track_b.update!(position: 2)
+
+      table = Schedule::Table.new([schedule_a, schedule_b])
+
+      assert_equal %w[A B], table.track_list
+    end
   end
 end
