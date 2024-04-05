@@ -38,8 +38,10 @@ class Schedule
       track_b = event.tracks.create!(name: 'B', position: 1)
       speaker = event.speakers.create!(name: 'kinoppyd', handle: 'ppyd', profile: 'wooo', thumbnail: 'https://example.com')
 
-      schedule_a = track_a.schedules.create!(title: 'test1', speakers: [speaker], start_at: '2024-04-06 01:50', end_at: '2024-04-06 01:55')
-      schedule_b = track_b.schedules.create!(title: 'test2', speakers: [speaker], start_at: '2024-04-06 01:50', end_at: '2024-04-06 01:55')
+      schedule_a = track_a.schedules.create!(title: 'test1', speakers: [speaker], start_at: '2024-04-06 01:50',
+                                             end_at: '2024-04-06 01:55')
+      schedule_b = track_b.schedules.create!(title: 'test2', speakers: [speaker], start_at: '2024-04-06 01:50',
+                                             end_at: '2024-04-06 01:55')
 
       table = Schedule::Table.new([schedule_a, schedule_b])
 
