@@ -60,8 +60,7 @@ ActiveRecord::Base.transaction do
           schedule.update!(
             track: track,
             start_at: start_at,
-            end_at: end_at,
-            event: base_event
+            end_at: end_at
           )
           end
         end
@@ -82,8 +81,7 @@ ActiveRecord::Base.transaction do
             hash[id] = Schedule.find_or_initialize_by(
               track: track,
               start_at: start_at,
-              end_at: end_at,
-              event: base_event
+              end_at: end_at
             )
           end
         else
@@ -92,8 +90,7 @@ ActiveRecord::Base.transaction do
             hash[id] = Schedule.find_or_initialize_by(
               track: track,
               start_at: start_at,
-              end_at: end_at,
-              event: base_event
+              end_at: end_at
             )
           end
         end

@@ -5,7 +5,7 @@ require 'test_helper'
 class Schedule
   class TableTest < ActiveSupport::TestCase
     def setup
-      schedules = Schedule.where(event: events(:kaigi))
+      schedules = events(:kaigi).schedules
       tables = Schedule::Tables.new(schedules)
       @table = tables[tables.days.first]
     end
