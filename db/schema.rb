@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_06_154330) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_06_155428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -95,6 +95,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_154330) do
     t.uuid "event_id", null: false
   end
 
+  create_table "team_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "team_id", null: false
+    t.uuid "profile_id", null: false
+    t.integer "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_team_profiles_on_profile_id"
+    t.index ["team_id", "profile_id"], name: "index_team_profiles_on_team_id_and_profile_id", unique: true
+    t.index ["team_id"], name: "index_team_profiles_on_team_id"
+  end
+
   create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -118,5 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_154330) do
 
   add_foreign_key "profiles", "users"
   add_foreign_key "schedules", "tracks"
+  add_foreign_key "team_profiles", "profiles"
+  add_foreign_key "team_profiles", "teams"
   add_foreign_key "tracks", "events"
 end
