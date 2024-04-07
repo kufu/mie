@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resource :profile, only: %i[show update]
   end
 
-  resources :teams
+  resources :teams, except: :index
 
   get '*path', controller: 'application', action: 'not_found'
 end

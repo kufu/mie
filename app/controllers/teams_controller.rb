@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
+  prepend_before_action :set_default_event
   before_action :set_team, only: %i[show edit update destroy]
-
-  # GET /teams
-  def index
-    @teams = Team.all
-  end
 
   # GET /teams/1
   def show; end
@@ -55,5 +51,10 @@ class TeamsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def team_params
     params.require(:team).permit(:name)
+  end
+
+  def set_default_event
+    @event = Event.all.order(created_at: :desc).first
+    request.path_parameters[:event_name] = @event.name
   end
 end

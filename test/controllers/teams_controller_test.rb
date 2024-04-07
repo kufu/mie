@@ -4,12 +4,7 @@ require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @team = teams(:one)
-  end
-
-  test 'should get index' do
-    get teams_url
-    assert_response :success
+    @team = teams(:alpha)
   end
 
   test 'should get new' do
@@ -19,10 +14,10 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create team' do
     assert_difference('Team.count') do
-      post teams_url, params: { team: { name: @team.name } }
+      post teams_url, params: { team: { name: 'Charlie' } }
     end
 
-    assert_redirected_to team_url(Team.last)
+    assert_redirected_to team_url(Team.find_by(name: 'Charlie'))
   end
 
   test 'should show team' do
@@ -36,7 +31,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update team' do
-    patch team_url(@team), params: { team: { name: @team.name } }
+    patch team_url(@team), params: { team: { name: 'Delta' } }
     assert_redirected_to team_url(@team)
   end
 
