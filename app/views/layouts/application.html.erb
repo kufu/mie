@@ -21,6 +21,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=auto" rel="stylesheet">
 
     <meta name="turbo-visit-control" content="reload">
+    <% if Rails.env.test? %>
+      <%= tag :meta, name: :rails_env, content: Rails.env %>
+    <% end %>
     <%= yield(:head) %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>

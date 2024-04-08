@@ -13,7 +13,7 @@ export default class extends Controller {
   static values = { current: { type: String, default: '' } };
 
   connect () {
-    if (this.currentValue === '') {
+    if (this.currentValue === '' && !this.isTestEnvironment) {
       Turbo.visit(this.nonSearchParamURL(window.location) + '?' + new URLSearchParams({ locale: dayjs.tz.guess() }));
     }
   }
@@ -24,5 +24,15 @@ export default class extends Controller {
 
   nonSearchParamURL (location) {
     return location.toString().split('?')[0];
+  }
+
+  get isTestEnvironment() {
+    const railsEnv = document.head.querySelector("meta[name=rails_env]")
+    if ( railsEnv === null ) {
+      return false;
+    } else {
+      return railsEnv.content === "test"
+    }
+
   }
 }

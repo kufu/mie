@@ -12,7 +12,7 @@ class Schedule
         @start_end = "#{start_at} - #{end_at}"
         @timezone = schedules[0].end_at.strftime('%Z')
         @schedules = schedules
-        @tracks = schedules.map { [_1.track_name, _1] }.to_h
+        @tracks = schedules.map { [_1.track.name, _1] }.to_h
         @sort_key = schedules[0].start_at
       end
     end

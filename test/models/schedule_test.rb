@@ -38,22 +38,6 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not s.valid?
   end
 
-  test 'track name must greater than 0, less than 32' do
-    s = schedules(:one)
-
-    s.track_name = ''
-    assert_not s.valid?
-
-    s.track_name = 'TrackA'
-    assert s.valid?
-
-    s.track_name = 'あ' * 32
-    assert s.valid?
-
-    s.track_name = 'い' * 33
-    assert_not s.valid?
-  end
-
   test 'language must be presented' do
     s = schedules(:one)
 

@@ -6,7 +6,7 @@ class Schedule
   class Table
     class RowTest < ActiveSupport::TestCase
       def setup
-        schedules = Schedule.where(event: events(:kaigi))
+        schedules = events(:kaigi).schedules
         @tables = Schedule::Tables.new(schedules)
       end
 
