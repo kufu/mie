@@ -8,7 +8,7 @@
 <% end %>
 
 <div class="pt-20 pl-36 flex flex-col gap-4">
-  <div class="text-[#000000] text-2xl">
+  <div class="text-[<%= @event.event_theme.text_color %>] text-2xl">
     <div>
       <img src="<%= asset_path("#{@event.name}/title.svg") %>" />
     </div>
@@ -21,7 +21,7 @@
     <div class="w-28 h-1 bg-[var(--subColor)]"></div>
     <div class="w-28 h-1 bg-[var(--accentColor)]"></div>
   </div>
-  <div class="w-[600px] break-keep my-6 text-[#000000] text-base leading-[200%]">
+  <div class="w-[600px] break-keep my-6 text-[<%= @event.event_theme.text_color %>] text-base leading-[200%]">
       <%= I18n.t('application.intro') %>
   </div>
   <div class="mb-4">
