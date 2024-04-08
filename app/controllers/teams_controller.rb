@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
+  class InvalidStateError < StandardError; end
+
   prepend_before_action :set_default_event
   before_action :set_team, only: %i[show edit update destroy]
+  before_action :check_user_belongs_to_team, only: %i[show update destroy]
+
+  rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
   # GET /teams/1
   def show; end
@@ -12,12 +17,14 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  # GET /teams/1/edit
-  def edit; end
-
   # POST /teams
   def create
+    if @user.profile.belongs_to_any_team?
+      raise TeamsController::InvalidStateError, "User #{@user} already belongs team #{@user.profile.teams}"
+    end
+
     @team = Team.new(team_params)
+    @team.team_profiles.build(profile: @user.profile, role: :admin)
 
     if @team.save
       redirect_to @team, notice: 'Team was successfully created.'
@@ -28,6 +35,8 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1
   def update
+    raise TeamsController::InvalidStateError, 'role admin required' unless @team.admin?(@user)
+
     if @team.update(team_params)
       redirect_to @team, notice: 'Team was successfully updated.', status: :see_other
     else
@@ -37,6 +46,8 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/1
   def destroy
+    raise TeamsController::InvalidStateError, 'role admin required' unless @team.admin?(@user)
+
     @team.destroy!
     redirect_to teams_url, notice: 'Team was successfully destroyed.', status: :see_other
   end
@@ -56,5 +67,15 @@ class TeamsController < ApplicationController
   def set_default_event
     @event = Event.all.order(created_at: :desc).first
     request.path_parameters[:event_name] = @event.name
+  end
+
+  def not_permitted_operation
+    render template: 'errors/forbidden', status: :forbidden, layout: 'application', content_type: 'text/html'
+  end
+
+  def check_user_belongs_to_team
+    return if @user.profile.belongs_to_team?(@team)
+
+    render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 end

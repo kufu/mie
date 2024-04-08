@@ -1,0 +1,84 @@
+<dialog id="edit-setting-dialog" class="dialog max-w-[min(100vw-16px,800px)] min-w-[500px] w-1/2">
+  <%= turbo_frame_tag "member-manage-dialog" do %>
+    <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+      <p class="text-xl"><%= I18n.t('dialog.manage_members') %></p>
+    </div>
+
+    <div class="max-h-[calc(100vh-212px)] overflow-auto">
+      <div class="p-6">
+        <% if @team.admin?(@user) %>
+          <div>
+            <%= form_with(url: team_members_path(@team), method: :post) do |f| %>
+              <div>
+                <div class="w-full m-1">
+                  <%= f.label :profile_name, I18n.t('dialog.username_to_invite') %>
+                </div>
+                <div class="flex gap-4 w-full">
+                  <%= f.text_field :profile_name, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full" %>
+                  <%= f.submit I18n.t('button.invite'), class: "primary-button" %>
+                </div>
+              </div>
+              <% if @dialog_errors.present? %>
+              <ul>
+                <% @dialog_errors.each do |error| %>
+                  <li><p class="text-sm text-red-500"><%= error %></p></li>
+                <% end %>
+              </ul>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="mt-8">
+          <div class="m-4">
+            <% if @team_profile&.errors&.any? %>
+              <ul class="list-disc text-red-600">
+                <% @team_profile.errors.each do |error| %>
+                  <li><%= error.message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <ul>
+            <% @team.team_profiles.each do |tp| %>
+              <li class="my-4">
+                <div class="flex">
+                  <div class="flex items-center gap-4">
+                    <img src="<%= tp.profile.avatar_url %>" class="h-10 w-10 rounded-full" />
+                    <p class="text-lg"><span class="font-bold"><%= tp.profile.name %></span> (<%= tp.human_attribute_enum(:role) %>)</p>
+                  </div>
+                  <% if @team.admin?(@user) %>
+                    <div class="flex justify-end grow gap-4">
+                      <% if tp.admin? || tp.member? %>
+                        <%= form_with(url: team_member_path(tp.profile, team_id: @team), method: :patch) do |f| %>
+                          <% if tp.admin? %>
+                            <%= f.hidden_field :role, value: :member %>
+                            <%= f.submit I18n.t('button.set_member'), class: "primary-button w-36" %>
+                          <% end %>
+                          <% if tp.member? %>
+                            <%= f.hidden_field :role, value: :admin %>
+                            <%= f.submit I18n.t('button.set_admin'), class: "primary-button w-36" %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                      <%= form_with(url: "/teams/#{@team.id}/members/#{tp.profile.id}", method: :delete) do |f| %>
+                        <%= f.hidden_field :role, value: :admin %>
+                        <%= f.submit tp.invitation? ? I18n.t('button.cancel') : I18n.t('button.remove'), class: "danger-button w-24" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+      <div class="flex justify-end">
+        <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+      </div>
+    </div>
+  <% end %>
+</dialog>

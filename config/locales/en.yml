@@ -38,6 +38,7 @@ en:
     schedule: "Schedule"
     plan: "My Plans"
     profile: "Profile"
+    team: "Team"
   info:
     create_plan_title: "Create your RubyKaigi Plans"
     create_plan_text: "Create your RubyKaigi Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."
@@ -82,9 +83,12 @@ en:
     description: "RubyKaigi Schedule.select powered by SmartHR wants you to accept Terms of Service in order for you to create your own schedule. You won’t see this message when you add talks to your schedule again."
   dialog:
     edit_title: "Edit the title"
+    edit_name: "Edit the name"
     edit_memo: "Edit a note for \"%{title}\""
     terms_of_service: "Terms of service"
     input_password: "Input password"
+    manage_members: Members
+    username_to_invite: "User name to invite"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -96,6 +100,12 @@ en:
     make_editable: "Make editable"
     check_password: "Take edit permission"
     signout: "Sign out"
+    create_new_team: "Create new team"
+    invite: "Invite"
+    set_admin: "Set admin"
+    set_member: "Set member"
+    cancel: "Cancel"
+    remove: "Remove"
   default_vales:
     plan_title: "My plans"
 
@@ -105,11 +115,20 @@ en:
     internal_server_error: "Internal server error"
     not_found: "404! The contents you are looking for is not found."
     not_found_desc: "Why don’t you go to Talks and make your own schedule?"
+    user_not_found: "User [%{user}] dose not exists."
+    no_admins: "Require at least one admin must exists."
 
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"
+
+  activerecord:
+    attributes:
+      team_profile/role:
+        admin: Admin
+        member: Member
+        invitation: Wait for accept
 
   application:
     intro: |-

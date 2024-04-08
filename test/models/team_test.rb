@@ -32,4 +32,16 @@ class TeamTest < ActiveSupport::TestCase
     team = Team.new(name: 'test team')
     assert_not team.valid?
   end
+
+  test '#admin? returns true when admin user given' do
+    assert teams(:alpha).admin?(users(:one))
+  end
+
+  test '#admin? returns false when member user given' do
+    assert_not teams(:alpha).admin?(users(:two))
+  end
+
+  test '#admin? returns false when invitation user given' do
+    assert_not teams(:alpha).admin?(users(:three))
+  end
 end

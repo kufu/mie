@@ -1,11 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-team_profile_1:
+team_profile1:
   team: alpha
   profile: profile_one
-  role: 1
+  role: 0
 
-team_profile_2:
+team_profile2:
   team: alpha
   profile: profile_two
+  role: 1
+
+team_profile3:
+  team: alpha
+  profile: profile_three
   role: 2
+
+team_profile4:
+  team: alpha
+  profile: profile_four
+  role: 1

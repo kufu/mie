@@ -9,4 +9,12 @@ class Profile < ApplicationRecord
   validates :uid, presence: true
   validates :name, presence: true
   validates :avatar_url, presence: true
+
+  def belongs_to_any_team?
+    team_profiles.where(role: %i[admin member]).exists?
+  end
+
+  def belongs_to_team?(team)
+    team_profiles.where(team:, role: %i[admin member]).exists?
+  end
 end

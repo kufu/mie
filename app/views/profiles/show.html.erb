@@ -1,5 +1,6 @@
 <% if @user && @user.profile %>
-  <div class="flex justify-center">
+  <div class="flex flex-col justify-center items-center gap-8">
+
     <div class="w-1/2">
       <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
         <div class="flex gap-4">
@@ -17,6 +18,28 @@
         </div>
       </div>
     </div>
+
+    <div class="w-1/2">
+      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+        <h2 class="text-4xl">Team</h2>
+        <% if TeamProfile.where(profile: @user.profile, role: [:admin, :member]).present? %>
+          <div class="flex justify-center items-center py-4">
+            <a href="<%= team_path(@user.profile.teams.first) %>" class="normal-button"><%= @user.profile.teams.first.name %></a>
+          </div>
+        <% else %>
+          <div class="flex flex-col justify-center items-center py-4 gap-4">
+            <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each do |invitation| %>
+                <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
+                  <%= f.hidden_field :role, value: :member %>
+                  <%= f.submit "join to #{invitation.team.name}", class: "primary-button min-w-64" %>
+                <% end %>
+            <% end %>
+            <a href="<%= new_team_path %>" class="primary-button min-w-64"><%= I18n.t('button.create_new_team') %></a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 <% else %>
   <div class="flex items-center justify-center h-96">

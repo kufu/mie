@@ -9,7 +9,7 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <% end %>
 
-<%= turbo_frame_tag @event do %>
+<%= turbo_frame_tag @event, refresh: :morph do %>
 <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
   <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
     <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
