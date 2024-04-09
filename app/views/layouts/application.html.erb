@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= favicon_link_tag('2021/favicon.ico') %>
+    <%= favicon_link_tag('2024/favicon.ico') %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <style type="text/css">
       body {
@@ -13,6 +13,7 @@
         --hoverColor: <%= @event.event_theme.main_color %>;
         --subColor: <%= @event.event_theme.sub_color %>;
         --accentColor: <%= @event.event_theme.accent_color %>;
+        --textColor: <%= @event.event_theme.text_color %>;
       }
     </style>
 
