@@ -1,6 +1,6 @@
 <nav>
   <div class="flex items-center justify-end direction-row h-[50px] bg-[var(--mainColor)]">
-    <div class="flex flex-row flex-grow items-center mx-4 my-0 text-[<%= @event.event_theme.text_color %>]">
+    <div class="flex flex-row flex-grow items-center mx-4 my-0 text-[var(--textColor)]">
       <% unless Rails.env.test? %>
         <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
       <% end %>
