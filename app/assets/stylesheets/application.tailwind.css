@@ -4,7 +4,7 @@
 
 @layer components {
   .primary-button {
-    @apply box-border cursor-pointer inline-flex justify-center items-center whitespace-nowrap gap-2 text-center rounded-md border border-solid border-[var(--mainColor)] py-3 px-4 font-bold bg-[var(--mainColor)] text-white hover:border-[var(--hoverColor)] hover:bg-[var(--hoverColor)] disabled:border-[rgb(202,198,194)] disabled:bg-[rgb(242,242,242)] disabled:cursor-not-allowed;
+    @apply box-border cursor-pointer inline-flex justify-center items-center whitespace-nowrap gap-2 text-center rounded-md border border-solid border-[var(--mainColor)] py-3 px-4 font-bold bg-[var(--mainColor)] text-[var(--textColor)] hover:border-[var(--hoverColor)] hover:bg-[var(--hoverColor)] disabled:border-[rgb(202,198,194)] disabled:bg-[rgb(242,242,242)] disabled:cursor-not-allowed;
   }
 
   .normal-button {
