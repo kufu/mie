@@ -61,7 +61,7 @@ ActiveRecord::Base.transaction do
           next # LTのデータが埋まったら対応する
         else
           event['talks'].each do |track_name, id| schedule = schedules_by_id[id]
-          track = Track.find_or_create_by!(event: base_event, name: "Track#{track_name}")
+          track = Track.find_or_create_by!(event: base_event, name: track_name)
           schedule.update!(
             track: track,
             start_at: start_at,
@@ -81,7 +81,7 @@ ActiveRecord::Base.transaction do
         when 'break'
           next
         when 'lt'
-          track = Track.find_or_create_by!(event: base_event, name: "TrackLarge Hall")
+          track = Track.find_or_create_by!(event: base_event, name: "Large Hall")
           Schedule.find_or_create_by!(
             track: track,
             start_at: start_at,
@@ -92,7 +92,7 @@ ActiveRecord::Base.transaction do
           )
         else
           event['talks'].each do |track_name, id|
-            track = Track.find_or_create_by!(event: base_event, name: "Track#{track_name}")
+            track = Track.find_or_create_by!(event: base_event, name: track_name)
             hash[id] = Schedule.find_or_initialize_by(
               track: track,
               start_at: start_at,
