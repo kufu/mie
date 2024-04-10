@@ -10,7 +10,13 @@ class TeamsController < ApplicationController
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
   # GET /teams/1
-  def show; end
+  def show
+    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
+    @schedule_table = Schedule::Tables.new(@schedules)
+    @member_schedules_map = @team.profiles.to_h do |profile|
+      [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
+    end
+  end
 
   # GET /teams/new
   def new

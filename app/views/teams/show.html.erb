@@ -51,3 +51,53 @@
     </div>
   </div>
 </div>
+
+
+<div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
+  <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
+    <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+      <% @schedule_table.days.each do |day| %>
+        <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+          <%= day %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-4 overflow-y-auto">
+    <% @schedule_table.days.each do |day| %>
+      <div id="schedule-<%= day %>" class="schedule-table hidden">
+        <table class="h-full w-full border-collapse border-spacing-0">
+          <thead>
+            <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
+            <% @schedule_table[day].track_list.each do |track| %>
+              <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= track %></th>
+            <% end %>
+          </thead>
+          <tbody>
+            <% @schedule_table[day].rows.each do |row| %>
+              <% @selected = @plan.plan_schedules.map(&:schedule).any? { row.schedules.include?(_1) } %>
+              <tr class="align-baseline">
+                <th class="py-2 px-0 align-baseline">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex items-center">
+                      <p class="text-xl font-normal mr-4 shrink-0"><%= row.start_end %></p>
+                      <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
+                    </div>
+                    <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
+                  </div>
+                </th>
+                <% @schedule_table[day].track_list.each do |track| %>
+                    <td>
+                      <div class="p-2"><%= row.tracks[track] ? render("schedules/card", schedule: row.tracks[track], mode: :team, inactive: @selected) : nil %></div>
+                    </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= turbo_frame_tag "modal" %>
