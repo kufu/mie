@@ -118,7 +118,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       patch team_member_path(profiles(:profile_three), team_id: teams(:alpha)), params: { role: :member }
     end
 
-    assert_response :ok
+    assert_redirected_to teams(:alpha)
   end
 
   test 'invitations can not change other invitations to member' do

@@ -36,7 +36,7 @@ class MembersController < ApplicationController
     invitation_user_check(old_role)
 
     if @dialog_errors.empty? && @team_profile.save
-      render 'dialog'
+      old_role == 'invitation' ? redirect_to(@team) : render('dialog')
     else
       render 'dialog', status: :unprocessable_entity
     end
