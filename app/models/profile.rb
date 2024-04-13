@@ -10,11 +10,19 @@ class Profile < ApplicationRecord
   validates :name, presence: true
   validates :avatar_url, presence: true
 
+  def current_team
+    team_profiles.first&.team
+  end
+
   def belongs_to_any_team?
     team_profiles.where(role: %i[admin member]).exists?
   end
 
   def belongs_to_team?(team)
     team_profiles.where(team:, role: %i[admin member]).exists?
+  end
+
+  def invitations?
+    team_profiles.where(role: :invitation).exists?
   end
 end

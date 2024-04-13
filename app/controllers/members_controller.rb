@@ -43,14 +43,18 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    raise MembersController::NoPermissionError, 'Not admin' unless @team.admin?(@user)
+    raise MembersController::NoPermissionError, 'Not admin' unless delete_permission?
 
-    if @team_profile.admin? && @team.team_profiles.where(role: :admin).count <= 1
-      @dialog_errors << I18n.t('errors.no_admins')
-    end
+    # for check_no_one_admin validation
+    @team_profile.role = :invitation
 
-    if @dialog_errors.empty? && @team_profile.destroy
-      render 'dialog'
+    if @team_profile.valid? && @team_profile.destroy
+      if remove_itself?
+        session[:breakout_turbo] = true
+        redirect_to event_profile_path(event_name: @event.name), status: :see_other
+      else
+        render 'dialog'
+      end
     else
       render 'dialog', status: :unprocessable_entity
     end
@@ -81,6 +85,14 @@ class MembersController < ApplicationController
 
   def invitation_become_a_member?
     @team_profile.profile == @user.profile && params[:role] == 'member'
+  end
+
+  def remove_itself?
+    @team_profile.profile == @user.profile && (request.method == 'DELETE' || request[:_method] == 'delete')
+  end
+
+  def delete_permission?
+    @team.admin?(@user) || remove_itself?
   end
 
   def invitation_user_check(old_role)

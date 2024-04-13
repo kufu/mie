@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_plan
   before_action :set_locale
   before_action :set_last_path
+  before_action :breakout_turbo
 
   around_action :with_time_zone
 
@@ -75,5 +76,12 @@ class ApplicationController < ActionController::Base
     pp params
     puts err.message
     puts err.backtrace.join("\n")
+  end
+
+  def breakout_turbo
+    return unless session[:breakout_turbo]
+
+    session[:breakout_turbo] = nil
+    @breakout_turbo = true
   end
 end

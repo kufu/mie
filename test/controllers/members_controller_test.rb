@@ -142,12 +142,59 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
-  test 'delete member' do
+  test 'admin can delete member' do
+    omniauth_callback_uid(1234) # profile_one, admin role
+    get '/auth/github/callback'
+
+    assert_difference -> { TeamProfile.count } => -1 do
+      delete team_member_path(profiles(:profile_four), team_id: teams(:alpha))
+    end
+
+    assert_response :ok
+  end
+
+  test 'member can delete itself' do
+    omniauth_callback_uid(5678) # profile_two, memner role
+    get '/auth/github/callback'
+
+    assert_difference -> { TeamProfile.count } => -1 do
+      delete team_member_path(profiles(:profile_two), team_id: teams(:alpha))
+    end
+
+    assert_redirected_to event_profile_path(event_name: events(:party).name)
+  end
+
+  test 'member can not delete other ones' do
+    omniauth_callback_uid(5678) # profile_two, memner role
+    get '/auth/github/callback'
+
+    assert_no_difference -> { TeamProfile.count } do
+      delete team_member_path(profiles(:profile_four), team_id: teams(:alpha))
+    end
+
+    assert_response :forbidden
+  end
+
+  test 'invitation can delete itself' do
+    omniauth_callback_uid('9101112') # profile_three, invitation role
+    get '/auth/github/callback'
+
     assert_difference -> { TeamProfile.count } => -1 do
       delete team_member_path(profiles(:profile_three), team_id: teams(:alpha))
     end
 
-    assert_response :ok
+    assert_redirected_to event_profile_path(event_name: events(:party).name)
+  end
+
+  test 'invitation can not delete other ones' do
+    omniauth_callback_uid('9101112') # profile_three, invitation role
+    get '/auth/github/callback'
+
+    assert_no_difference -> { TeamProfile.count } do
+      delete team_member_path(profiles(:profile_four), team_id: teams(:alpha))
+    end
+
+    assert_response :forbidden
   end
 
   test 'delete member fail when team has only one admin' do
