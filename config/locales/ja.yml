@@ -58,10 +58,12 @@ ja:
     input_password: "パスワードを入力"
     manage_members: メンバー管理
     username_to_invite: "招待するユーザー名"
+    delete_team: "このチームを削除しますか？"
   button:
     settings: "設定"
     update_memo: "メモを更新"
     plan_create_button: "予定を作成"
+    create: "作成"
     edit: "編集"
     save: "保存"
     close: "閉じる"
@@ -75,6 +77,8 @@ ja:
     set_member: "メンバーにする"
     cancel: "取消"
     remove: "削除"
+    manage_members: "メンバーを管理"
+    delete_team: "チームを削除"
   default_vales:
     plan_title: "視聴予定"
 

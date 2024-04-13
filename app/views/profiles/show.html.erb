@@ -31,11 +31,13 @@
             <a href="<%= team_path(@user.profile.current_team) %>">
               <p><%= @user.profile.current_team.name %> (<%= @user.profile.team_profiles.first.human_attribute_enum(:role) %>)</p>
             </a>
-            <div class="flex-grow flex justify-end">
-              <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
-                <%= f.submit 'exit', class: 'danger-button' %>
-              <% end %>
-            </div>
+            <% unless @user.profile.current_team.admin?(@user) %>
+              <div class="flex-grow flex justify-end">
+                <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
+                  <%= f.submit 'exit', class: 'danger-button' %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         <% else %>
           <div class="flex flex-col justify-center items-center py-4 gap-4">

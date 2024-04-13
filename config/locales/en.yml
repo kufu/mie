@@ -89,10 +89,12 @@ en:
     input_password: "Input password"
     manage_members: Members
     username_to_invite: "User name to invite"
+    delete_team: "Are you sure delete this team?"
   button:
     settings: "Settings"
     update_memo: "Update memo"
     plan_create_button: "Create my plans"
+    create: "Create"
     edit: "Edit"
     save: "Save"
     close: "Close"
@@ -106,6 +108,8 @@ en:
     set_member: "Set member"
     cancel: "Cancel"
     remove: "Remove"
+    manage_members: "Manage members"
+    delete_team: "Delete team"
   default_vales:
     plan_title: "My plans"
 
