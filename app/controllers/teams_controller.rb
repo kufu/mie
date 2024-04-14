@@ -44,9 +44,10 @@ class TeamsController < ApplicationController
     raise TeamsController::InvalidStateError, 'role admin required' unless @team.admin?(@user)
 
     if @team.update(team_params)
+      session[:breakout_turbo] = true
       redirect_to @team, notice: 'Team was successfully updated.', status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render partial: 'rename_dialog', locals: { team: @team }, status: :unprocessable_entity
     end
   end
 
