@@ -6,14 +6,19 @@ class Schedule
       attr_reader :start_end, :timezone, :schedules, :tracks, :sort_key
 
       def initialize(schedules)
-        start_at = I18n.l(schedules[0].start_at, format: :timetable)
-        end_at = I18n.l(schedules[0].end_at, format: :timetable)
+        @start_at = I18n.l(schedules[0].start_at, format: :timetable)
+        @end_at = I18n.l(schedules[0].end_at, format: :timetable)
 
-        @start_end = "#{start_at} - #{end_at}"
+        @start_end = "#{@start_at} - #{@end_at}"
         @timezone = schedules[0].end_at.strftime('%Z')
         @schedules = schedules
         @tracks = schedules.map { [_1.track.name, _1] }.to_h
         @sort_key = schedules[0].start_at
+      end
+
+      def turbo_stream_id
+        date = schedules[0].start_at.strftime('%Y%m%d')
+        [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end
     end
   end
