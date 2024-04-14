@@ -16,7 +16,8 @@ class PlansController < ApplicationController
     target = switch_update_type_and_exec
 
     if plan_add_or_remove? && params[:mode] == 'schedule'
-      redirect_to event_schedules_path(event_name: @event.name)
+      set_attributes_for_turbo_steram
+      render 'update'
     elsif plan_add_or_remove? && params[:mode] == 'plan'
       redirect_to event_plan_path(@plan, event_name: @event.name)
     elsif target
@@ -144,5 +145,24 @@ class PlansController < ApplicationController
   def edit_title
     @plan.update(title: params[:plan][:title])
     nil
+  end
+
+  def set_attributes_for_turbo_steram
+    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
+    @schedule_table = Schedule::Tables.new(@schedules)
+
+    target_schedule_id = params[:add_schedule_id] ||
+                         params.dig(:plan, :add_schedule_id) ||
+                         params[:remove_schedule_id] ||
+                         params.dig(:plan, :remove_schedule_id)
+
+    @row, @track_list = catch(:abort) do
+      @schedule_table.days.each do |day|
+        table = @schedule_table[day]
+        table.rows.each do |row|
+          throw :abort, [row, table.track_list] if row.schedules.map(&:id).include?(target_schedule_id)
+        end
+      end
+    end
   end
 end

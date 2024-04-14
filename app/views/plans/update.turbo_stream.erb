@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @row.turbo_stream_id do %>
+  <%= render partial: 'schedules/table_row', locals: { row: @row, plan: @plan, track_list: @track_list} %>
+<% end %>
