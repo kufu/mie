@@ -16,7 +16,7 @@ class PlansController < ApplicationController
     target = switch_update_type_and_exec
 
     if plan_add_or_remove? && params[:mode] == 'schedule'
-      set_attributes_for_turbo_steram
+      set_attributes_for_turbo_stream
       render 'update'
     elsif plan_add_or_remove? && params[:mode] == 'plan'
       redirect_to event_plan_path(@plan, event_name: @event.name)
@@ -147,7 +147,7 @@ class PlansController < ApplicationController
     nil
   end
 
-  def set_attributes_for_turbo_steram
+  def set_attributes_for_turbo_stream
     @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
     @schedule_table = Schedule::Tables.new(@schedules)
 
