@@ -1,13 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  icon_url: MyString
+common_trophy:
+  name: Counterspell
+  description: Counter target spell.
+  icon_url: https://example.com/trophy/1
+  rarity: 0
+
+uncommon_trophy:
+  name: Tinker
+  description: At the time you play Tinker, sacrifice an artifact. Search your library for an artifact card and put that artifact into play. Shuffle your library afterward.
+  icon_url: https://example.com/trophy/2
   rarity: 1
 
-two:
-  name: MyString
-  description: MyText
-  icon_url: MyString
-  rarity: 1
+rare_trophy:
+  name: Time Spiral
+  description: Remove Time Spiral from the game. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
+  icon_url: https://example.com/trophy/3
+  rarity: 2
+
+mythic_rare:
+  name: Jace, the Mind Sculptor
+  description: Exile all cards from target player's library, then that player shuffles their hand into ther library.
+  icon_url: https://example.com/trophy/4
+  rarity: 3
