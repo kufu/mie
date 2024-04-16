@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  icon_url: MyString
+  rarity: 1
+
+two:
+  name: MyString
+  description: MyText
+  icon_url: MyString
+  rarity: 1
