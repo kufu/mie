@@ -11,7 +11,7 @@ class Profile < ApplicationRecord
   validates :avatar_url, presence: true
 
   def current_team
-    team_profiles.first&.team
+    team_profiles.find_by(role: %i[admin member])&.team
   end
 
   def belongs_to_any_team?

@@ -29,7 +29,9 @@
         <% if @user.profile.belongs_to_any_team? %>
           <div class="flex items-center py-4">
             <a href="<%= team_path(@user.profile.current_team) %>">
-              <p><%= @user.profile.current_team.name %> (<%= @user.profile.team_profiles.first.human_attribute_enum(:role) %>)</p>
+              <p><%= @user.profile.current_team.name %>
+                (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+              </p>
             </a>
             <% unless @user.profile.current_team.admin?(@user) %>
               <div class="flex-grow flex justify-end">
