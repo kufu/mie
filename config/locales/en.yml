@@ -123,6 +123,12 @@ en:
     no_admins: "Require at least one admin must exists."
     only_one_team: "Target user already belongs to other team."
 
+  teams:
+    about: 'About team feature'
+    features:
+      - "List all members plan in one page"
+      - "User can join to only one team"
+
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
