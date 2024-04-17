@@ -14,9 +14,10 @@ class MembersController < ApplicationController
     raise MembersController::NoPermissionError, 'Not admin' unless @team.admin?(@user)
 
     profile = Profile.find_by(name: params[:profile_name])
+    @team_profile = TeamProfile.build(team: @team, profile:)
 
     if profile
-      if @team.team_profiles.create(profile:)
+      if @team_profile.save
         render :dialog, status: :created
       else
         render 'dialog', status: :unprocessable_entity

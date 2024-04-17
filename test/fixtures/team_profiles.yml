@@ -19,3 +19,8 @@ team_profile4:
   team: alpha
   profile: profile_four
   role: 1
+
+team_profile5:
+  team: bravo
+  profile: profile_five
+  role: 0

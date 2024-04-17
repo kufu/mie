@@ -29,6 +29,17 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  test 'invite faild if target is already belongs to other team' do
+    omniauth_callback_uid('17181920') # profile_five
+    get '/auth/github/callback'
+
+    assert_no_difference -> { TeamProfile.count } do
+      post team_members_path(team_id: teams(:bravo)), params: { profile_name: profiles(:profile_two).name }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test 'admin can change member to admin' do
     assert_difference -> { TeamProfile.admin.count } => 1, -> { TeamProfile.member.count } => -1 do
       patch team_member_path(profiles(:profile_two), team_id: teams(:alpha)), params: { role: :admin }

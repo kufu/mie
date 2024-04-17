@@ -90,6 +90,7 @@ ja:
     not_found_desc: "Why don’t you go to Talks and make your own schedule?"
     user_not_found: "「%{user}」は登録されていません"
     no_admins: "最低でも1人の管理者が必要です"
+    only_one_team: "対象のユーザーは既に他のチームに所属しています"
 
   time:
     formats:
