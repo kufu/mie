@@ -27,12 +27,16 @@ class ApplicationController < ActionController::Base
   def not_found(err)
     print_error_if_test(err)
     Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}")
+    set_default_event
+    set_plan
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 
   def server_error(err)
     print_error_if_test(err)
     Rails.logger.error("#{err}\n#{err.backtrace.join("\n")}")
+    set_default_event
+    set_plan
     render template: 'errors/server_error', status: 500, layout: 'application', content_type: 'text/html'
   end
 
@@ -75,5 +79,10 @@ class ApplicationController < ActionController::Base
     pp params
     puts err.message
     puts err.backtrace.join("\n")
+  end
+
+  def set_default_event
+    @event = Event.all.order(created_at: :desc).first
+    request.path_parameters[:event_name] = @event.name
   end
 end
