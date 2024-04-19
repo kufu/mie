@@ -8,25 +8,42 @@
             <div class="ml-2 text-sm font-bold text-[rgb(112,109,101)]"><%= speaker.name %></div>
           </div>
         <% end %>
-        <div class="flex">
-          <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
-            <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
+
+        <% unless mode == :team %>
+          <div class="flex">
+            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+              <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
+            </div>
+            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+              <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track.name %></span>
+            </div>
           </div>
-          <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
-            <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track.name %></span>
-          </div>
-        </div>
+        <% end %>
       </div>
 
       <div class="mb-6">
         <h3 class="text-xl  my-2"><%= schedule.title %></h3>
-        <p class="line-clamp-3 text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
+
+        <% unless mode == :team %>
+          <p class="line-clamp-3 text-sm text-[rgb(35,34,31)] break-words overflow-y-hidden align-bottom"><%= schedule.description %></p>
+        <% end %>
+
         <% if mode == :plan && @plan.schedules.include?(schedule) %>
           <div class="my-4 mx-0">
             <h4 class="mb-2 text-sm text-[rgb(112,109,101)]"><%= I18n.t('table.memo') %></h4>
             <div class="p-4 bg-[rgb(248,247,246)]">
               <span class="text-sm"><%= @plan.plan_schedules.find { _1.schedule == schedule }&.memo %></span>
             </div>
+          </div>
+        <% end %>
+
+        <% if mode == :team %>
+          <div class="flex flex-wrap gap-2">
+            <% @team.profiles.each do |profile| %>
+              <% if @member_schedules_map[profile.id].include?(schedule.id) %>
+                <img src="<%= profile.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black" />
+              <% end %>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -67,59 +84,63 @@
             </dialog>
           </div>
         <% end %>
-        <div>
-          <% if @plan.plan_schedules.map(&:schedule).include?(schedule) # to avoid n+1 %>
-            <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-              <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
-              <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
-            <% end %>
-          <% elsif @plan.new_record? %>
-            <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
-              <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
-                      data-action="click->dialog#open"
-              >
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
-                <%= I18n.t('card.add') %>
-              </button>
-              <dialog id="terms-of-service-<%= schedule.id %>" class="dialog max-w-[min(100vw-16px,800px)]">
-                <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
-                  <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
-                </div>
-                <div class="max-h-[calc(100vh-212px)] overflow-auto">
-                  <div class="w-[656px] p-6 flex flex-col gap-6 shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] bg-white">
-                    <span class="text-sm"><%= I18n.t('terms_of_service.description') %></span>
-                    <div class="bg-[rgb(248,247,246)] h-[400px] w-full overflow-auto">
-                      <div class="p-2 h-full">
-                        <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
+
+        <% unless mode == :team %>
+          <div>
+            <% if @plan.plan_schedules.map(&:schedule).include?(schedule) # to avoid n+1 %>
+              <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+                <%= form.hidden_field :remove_schedule_id, value: schedule.id %>
+                <%= form.hidden_field :mode, value: mode %>
+                <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
+              <% end %>
+            <% elsif @plan.new_record? %>
+              <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
+                <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
+                        data-action="click->dialog#open"
+                >
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                  <%= I18n.t('card.add') %>
+                </button>
+                <dialog id="terms-of-service-<%= schedule.id %>" class="dialog max-w-[min(100vw-16px,800px)]">
+                  <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                    <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
+                  </div>
+                  <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                    <div class="w-[656px] p-6 flex flex-col gap-6 shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] bg-white">
+                      <span class="text-sm"><%= I18n.t('terms_of_service.description') %></span>
+                      <div class="bg-[rgb(248,247,246)] h-[400px] w-full overflow-auto">
+                        <div class="p-2 h-full">
+                          <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
-                  <div class="flex justify-end">
-                    <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
-                    <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: 'POST') do |form| %>
-                      <%= form.hidden_field :title %>
-                      <%= form.hidden_field :description %>
-                      <%= form.hidden_field :public %>
-                      <%= form.hidden_field :mode, value: mode %>
-                      <%= form.hidden_field :initial, value: false %>
-                      <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-                      <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
-                    <% end %>
+                  <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
+                    <div class="flex justify-end">
+                      <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
+                      <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: 'POST') do |form| %>
+                        <%= form.hidden_field :title %>
+                        <%= form.hidden_field :description %>
+                        <%= form.hidden_field :public %>
+                        <%= form.hidden_field :mode, value: mode %>
+                        <%= form.hidden_field :initial, value: false %>
+                        <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+                        <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
+                      <% end %>
+                    </div>
                   </div>
-                </div>
-              </dialog>
-            </div>
-          <% else %>
-            <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-              <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-              <%= form.hidden_field :mode, value: mode %>
-              <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "add-plan-button p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
+                </dialog>
+              </div>
+            <% else %>
+              <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
+                <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+                <%= form.hidden_field :mode, value: mode %>
+                <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "add-plan-button p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+
         <div class="ml-2">
           <a
             class="show-detail-button p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"

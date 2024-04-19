@@ -18,3 +18,23 @@ profile_two:
   avatar_url: 'https://example.com/avatar/2'
   user: two
 
+profile_three:
+  provider: "github"
+  uid: "9101112"
+  name: 'test profile 3'
+  avatar_url: 'https://example.com/avatar/3'
+  user: three
+
+profile_four:
+  provider: "github"
+  uid: "13141516"
+  name: 'test profile 4'
+  avatar_url: 'https://example.com/avatar/4'
+  user: four
+
+profile_five:
+  provider: "github"
+  uid: "17181920"
+  name: 'test profile 5'
+  avatar_url: 'https://example.com/avatar/5'
+  user: five

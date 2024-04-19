@@ -7,6 +7,7 @@ ja:
     schedule: "スケジュール"
     plan: "視聴予定"
     profile: "プロフィール"
+    team: "チーム"
   info:
     create_plan_title: "セッションの視聴予定を作成しませんか？"
     create_plan_text: "RubyKaigi mie.ru 君を使って、RubyKaigi2021 Takeoutのセッション視聴予定表を作成しましょう！ 利用規約に同意の上、予定の作成ボタンを押してください。"
@@ -51,13 +52,18 @@ ja:
     description: "RubyKaigi Schedule.select powered by SmartHR を利用するためには、下記の利用規約に同意する必要があります。予定を追加すると、規約に同意したとみなされます。"
   dialog:
     edit_title: "タイトルを編集"
+    edit_name: "名前を編集"
     edit_memo: "「%{title}」のメモを更新"
     terms_of_service: "サービスの利用規約"
     input_password: "パスワードを入力"
+    manage_members: メンバー管理
+    username_to_invite: "招待するユーザー名"
+    delete_team: "このチームを削除しますか？"
   button:
     settings: "設定"
     update_memo: "メモを更新"
     plan_create_button: "予定を作成"
+    create: "作成"
     edit: "編集"
     save: "保存"
     close: "閉じる"
@@ -65,8 +71,23 @@ ja:
     make_editable: "パスワードを入力して編集"
     check_password: "編集可能にする"
     signout: "サインアウト"
+    create_new_team: "新しいチームを作る"
+    invite: "招待"
+    set_admin: "管理者にする"
+    set_member: "メンバーにする"
+    cancel: "取消"
+    remove: "削除"
+    manage_members: "メンバーを管理"
+    delete_team: "チームを削除"
   default_vales:
     plan_title: "視聴予定"
+
+  teams:
+    about: 'チーム機能について'
+    features:
+      - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
+      - "ユーザーは1つのチームにしか所属することができません"
+
 
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
@@ -74,11 +95,21 @@ ja:
     internal_server_error: "Internal server error"
     not_found: "404! The contents you are looking for is not found."
     not_found_desc: "Why don’t you go to Talks and make your own schedule?"
+    user_not_found: "「%{user}」は登録されていません"
+    no_admins: "最低でも1人の管理者が必要です"
+    only_one_team: "対象のユーザーは既に他のチームに所属しています"
 
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
       timetable: "%H:%M"
+
+  activerecord:
+    attributes:
+      team_profile/role:
+        admin: 管理者
+        member: メンバー
+        invitation: 招待中
 
   application:
     intro: |-

@@ -12,6 +12,25 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    # OmniAuth test mode
+    OmniAuth.config.test_mode = true
+
+    # OmniAuth helper
+    def omniauth_callback_uid(uid)
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
+        {
+          provider: 'github',
+          uid:,
+          info: {
+            image: 'https://example.com/avatar'
+          },
+          extra: {
+            raw_info: {
+              login: 'test person'
+            }
+          }
+        }
+      )
+    end
   end
 end
