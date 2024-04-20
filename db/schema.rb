@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_013033) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_014234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_013033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "text_color", default: "#23221F", null: false
+  end
+
+  create_table "event_trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id", null: false
+    t.uuid "trophy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "trophy_id"], name: "index_event_trophies_on_event_id_and_trophy_id", unique: true
+    t.index ["event_id"], name: "index_event_trophies_on_event_id"
+    t.index ["trophy_id"], name: "index_event_trophies_on_trophy_id"
   end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -147,6 +157,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_013033) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "event_trophies", "events"
+  add_foreign_key "event_trophies", "trophies"
   add_foreign_key "profile_trophies", "profiles"
   add_foreign_key "profile_trophies", "trophies"
   add_foreign_key "profiles", "users"
