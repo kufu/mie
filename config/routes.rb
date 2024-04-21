@@ -28,5 +28,7 @@ Rails.application.routes.draw do
     resources :members, only: %i[create update destroy]
   end
 
+  get '/trigger/:id', to: 'triggers#trigger'
+
   get '*path', controller: 'application', action: 'not_found'
 end
