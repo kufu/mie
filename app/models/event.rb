@@ -7,7 +7,6 @@ class Event < ApplicationRecord
   has_many :event_trophies
   has_many :trophies, through: :event_trophies
 
-
   validates :name, presence: true, length: { in: 1..32 }
   validates :event_theme, presence: true
 
