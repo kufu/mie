@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_014234) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_21_023549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,6 +139,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_014234) do
     t.datetime "updated_at", null: false
     t.index ["event_id", "name"], name: "index_tracks_on_event_id_and_name", unique: true
     t.index ["event_id"], name: "index_tracks_on_event_id"
+  end
+
+  create_table "triggers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "description", null: false
+    t.string "key", null: false
+    t.jsonb "action", null: false
+    t.integer "amount", null: false
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
