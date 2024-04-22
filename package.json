@@ -12,7 +12,7 @@
     "yarn": "1.22.x"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --minify",
     "lint": "eslint --ext .js app/javascript"
   },
   "devDependencies": {
