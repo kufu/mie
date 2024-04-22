@@ -1,0 +1,22 @@
+<%= form_with(model: team, class: "contents") do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+        <% team.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit I18n.t('button.create'), class: "primary-button" %>
+  </div>
+<% end %>

@@ -16,3 +16,13 @@ dojo-theme:
   overview: 'piyo'
   site_label: 'boom'
   site_url: 'https://example.com/2'
+
+kaigi-theme:
+  event: kaigi
+  main_color: '#0B374D'
+  sub_color: '#EBE0CE'
+  accent_color: '#D7D165'
+  text_color: '#23221F'
+  overview: 'piyo'
+  site_label: 'boom'
+  site_url: 'https://example.com/3'

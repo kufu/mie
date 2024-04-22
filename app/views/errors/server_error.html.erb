@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <meta property="og:title" content="RubyKaigi Schedule.select">
+  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+  <meta property="og:image" content="<%= asset_url("2024/ogp_top.png") %>" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image"/>
+<% end %>
+
+<div class="w-full h-[90vh] flex items-center justify-center">
+  <div class="flex items-center justify-center w-[1120px] h-[275px]">
+    <div class="h-28 w-28 bg-cover" style="background-image: url('<%= asset_path("#{@event.name}/rubykaigi.png") %>');"></div>
+    <div class="ml-4">
+      <div class="mb-2">
+        <h1 class="text-2xl"><%= I18n.t('errors.internal_server_error') %></h1>
+      </div>
+    </div>
+  </div>
+</div>

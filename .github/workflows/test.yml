@@ -1,0 +1,46 @@
+name: Rails - Run tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://127.0.0.1:5432
+
+    services:
+      mysql:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.11.1
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: nanasess/setup-chromedriver@v2
+
+      - name: Create database
+        run: bin/rails db:setup
+
+      - name: yarn
+        run: yarn install
+
+      - name: Run tests
+        run: bin/rails test
+
+      - name: Run system tests
+        run: bin/rails test:system

@@ -10,8 +10,13 @@
 
 ActiveRecord::Base.transaction do
 
-  base_event = Event.find_or_initialize_by(name: '2023')
-  base_event.build_event_theme if base_event.new_record?
+  base_event = Event.find_or_initialize_by(name: '2024')
+  base_event.build_event_theme(
+    main_color: "#FFEB00",
+    sub_color: "#FF3F46",
+    accent_color: "#80F142",
+    text_color: "#000000"
+  ) if base_event.new_record?
   base_event.save!
   base_event.reload
 
@@ -56,12 +61,11 @@ ActiveRecord::Base.transaction do
           next # LTのデータが埋まったら対応する
         else
           event['talks'].each do |track_name, id| schedule = schedules_by_id[id]
-
+          track = Track.find_or_create_by!(event: base_event, name: track_name)
           schedule.update!(
-            track_name: "Track#{track_name}",
+            track: track,
             start_at: start_at,
-            end_at: end_at,
-            event: base_event
+            end_at: end_at
           )
           end
         end
@@ -77,21 +81,22 @@ ActiveRecord::Base.transaction do
         when 'break'
           next
         when 'lt'
-          event['talks'].each do |track_name, id|
-            hash[id] = Schedule.find_or_initialize_by(
-              track_name: "Track#{track_name}",
-              start_at: start_at,
-              end_at: end_at,
-              event: base_event
-            )
-          end
+          track = Track.find_or_create_by!(event: base_event, name: "Large Hall")
+          Schedule.find_or_create_by!(
+            track: track,
+            start_at: start_at,
+            end_at: end_at,
+            title: event['name'],
+            description: event['name'],
+            language: 'en & ja'
+          )
         else
           event['talks'].each do |track_name, id|
+            track = Track.find_or_create_by!(event: base_event, name: track_name)
             hash[id] = Schedule.find_or_initialize_by(
-              track_name: "Track#{track_name}",
+              track: track,
               start_at: start_at,
-              end_at: end_at,
-              event: base_event
+              end_at: end_at
             )
           end
         end
