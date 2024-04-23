@@ -11,6 +11,22 @@
 
 <%= turbo_frame_tag @event, refresh: :morph do %>
 <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
+  <label class="flex sm:hidden flex-col items-center mb-2">
+    <span class="mb-2 text-sm font-bold text-[rgb(112,109,101)]">
+      <%= I18n.t('nav.select_locale') %>
+    </span>
+    <div class="relative box-border w-[16.25em]" data-controller="locale" data-locale-current-value="<%= session[:locale] %>">
+      <select data-action="change->locale#change" class="py-[3px] px-2 min-h-[30px] appearance-none cursor-pointer outline-none rounded-md border border-solid border-[rgb(214,211,208)] bg-white ps-2 pe-8 text-sm text-[rgb(35,34,30)] w-full align-middle">
+        <% grouped_timezones.map do |k, v| %>
+          <optgroup label="<%= k %>">
+            <% v.map do |locale| %>
+              <option label="<%= locale %>" value="<%= locale %>" <%= locale == session[:locale] ? "selected" : nil %>><%= locale %></option>
+            <% end %>
+          </optgroup>
+        <% end %>
+      </select>
+    </div>
+  </label>
   <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
     <div class="relative flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
       <% @schedule_table.days.each do |day| %>
