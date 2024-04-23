@@ -13,7 +13,7 @@ module Admin
     end
 
     def show
-      @qrcode = url_to_svg_qrcode(url: "https://example.com/triggers/#{@trigger.id}?key=#{@trigger.key}")
+      @qrcode = url_to_svg_qrcode(url: trigger_url(@trigger, key: @trigger.key))
     end
 
     private

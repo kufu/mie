@@ -25,13 +25,13 @@ class TriggersControllerTest < ActionDispatch::IntegrationTest
     get '/auth/github/callback'
 
     assert_difference -> { ProfileTrophy.count } => 1 do
-      get "/trigger/#{@trigger.id}?key=testkey"
+      get trigger_path(@trigger, key: 'testkey')
     end
   end
 
   test 'trigger action requires profile' do
     assert_no_difference -> { ProfileTrophy.count } do
-      get "/trigger/#{@trigger.id}?key=testkey"
+      get trigger_path(@trigger, key: 'testkey')
     end
 
     assert_redirected_to event_profile_path

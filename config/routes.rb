@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :members, only: %i[create update destroy]
   end
 
-  get '/trigger/:id', to: 'triggers#trigger'
+  resources :triggers, only: %i[show]
 
   namespace :admin do
     resources :triggers, only: %i[index show]
