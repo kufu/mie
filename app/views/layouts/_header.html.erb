@@ -27,9 +27,13 @@
     </div>
     <div class="ml-2 mr-4 sm:hidden">
       <button id="button" type="button" class="">
-        <span id="bars" class="">open</span>
-        <span id="xmark" class="relative z-10 hidden">close</span>
-      <ul id="menu" class="fixed h-full top-0 right-0 flex flex-col items-center justify-center w-3/4 bg-[var(--mainColor)] translate-x-full transition-all ease-linear">
+        <span id="bars" class="">
+          <i class="fa-solid fa-bars fa-xl"></i>
+        </span>
+        <span id="xmark" class="relative z-20 hidden">
+          <i class="fa-solid fa-xmark  fa-xl"></i>
+        </span>
+      <ul id="menu" class="fixed z-10 h-full top-0 right-0 flex flex-col items-center justify-center w-3/4 bg-[var(--mainColor)] translate-x-full transition-all ease-linear">
         <li>
           <a
             href="<%= event_path %>"
