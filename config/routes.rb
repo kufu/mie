@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :triggers, only: %i[show]
 
   namespace :admin do
-    resources :triggers, only: %i[index show]
+    resources :triggers, only: %i[index show edit update]
   end
 
   get '*path', controller: 'application', action: 'not_found'

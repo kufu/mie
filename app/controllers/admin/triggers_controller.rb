@@ -4,16 +4,28 @@ module Admin
   class TriggersController < AdminController
     include QRcode
 
-    before_action :set_trigger, only: %i[show]
+    before_action :set_trigger, only: %i[show edit update]
     before_action :set_default_event
 
     def index
       @triggers = Trigger.where('expires_at > ?', Time.current).or(Trigger.where(expires_at: nil))
-      pp @triggers
     end
 
     def show
       @qrcode = url_to_svg_qrcode(url: trigger_url(@trigger, key: @trigger.key))
+    end
+
+    def edit; end
+
+    def update
+      @trigger.attributes = trigger_params
+      @trigger.refresh_key if params[:trigger][:auto_regenerate_key]
+
+      if @trigger.save
+        redirect_to admin_trigger_path(@trigger)
+      else
+        render 'edit', status: :unprocessable_entity
+      end
     end
 
     private
@@ -26,6 +38,10 @@ module Admin
       @event = Event.order(created_at: :desc).first
       request.path_parameters[:event_name] = @event.name
       @plan = Plan.new
+    end
+
+    def trigger_params
+      params.require(:trigger).permit(:description, :action, :key, :amount, :expires_at)
     end
   end
 end

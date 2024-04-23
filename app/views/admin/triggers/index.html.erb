@@ -6,6 +6,7 @@
         <th class="p-2 border">amount</th>
         <th class="p-2 border">expires_at</th>
         <th class="p-2 border">code</th>
+        <th class="p-2 border">edit</th>
       </tr> 
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
           <td class="p-2 border"><%= trigger.amount %></td>
           <td class="p-2 border"><%= trigger.expires_at %></td>
           <td class="p-2 border"><a href="<%= admin_trigger_path(trigger) %>" class="text-blue-500 visited:text-purple-500">code</a></td>
+          <td class="p-2 border"><a href="<%= edit_admin_trigger_path(trigger) %>" class="text-blue-500 visited:text-purple-500">edit</a></td>
         </tr>
       <% end %>
     </tbody>
