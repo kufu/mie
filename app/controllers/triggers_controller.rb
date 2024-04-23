@@ -8,7 +8,7 @@ class TriggersController < ApplicationController
     trigger = Trigger.find(params[:id])
     trigger.perform(@user.profile, params[:key])
 
-    redirect_to event_profile_path
+    redirect_to profile_path
   end
 
   private
@@ -16,7 +16,7 @@ class TriggersController < ApplicationController
   def make_sure_user_has_profile
     return if @user&.profile
 
-    redirect_to event_profile_path, flash: { error: I18n.t('errors.login_required') }
+    redirect_to profile_path, flash: { error: I18n.t('errors.login_required') }
   end
 
   def set_default_event

@@ -71,8 +71,8 @@
       <% end %>
       <li>
         <a
-          href="<%= event_profile_path %>"
-          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_profile_path) ? 'nav-current' : '' %>"
+          href="<%= profile_path %>"
+          class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(profile_path) ? 'nav-current' : '' %>"
           <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
         >
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" width="1em" height="1em" class="" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="color: rgb(112, 109, 101);"><path d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z"></path></svg>

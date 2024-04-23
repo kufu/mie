@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
     raise TeamsController::InvalidStateError, 'role admin required' unless @team.admin?(@user)
 
     @team.destroy!
-    redirect_to event_profile_path(@user.profile, event_name: @event.name), status: :see_other
+    redirect_to profile_path, status: :see_other
   end
 
   private

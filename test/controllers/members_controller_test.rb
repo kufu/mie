@@ -172,7 +172,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       delete team_member_path(profiles(:profile_two), team_id: teams(:alpha))
     end
 
-    assert_redirected_to event_profile_path(event_name: events(:party).name)
+    assert_redirected_to profile_path
   end
 
   test 'member can not delete other ones' do
@@ -194,7 +194,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       delete team_member_path(profiles(:profile_three), team_id: teams(:alpha))
     end
 
-    assert_redirected_to event_profile_path(event_name: events(:party).name)
+    assert_redirected_to profile_path
   end
 
   test 'invitation can not delete other ones' do
