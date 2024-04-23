@@ -1,0 +1,22 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th class="p-2 border">description</th>
+        <th class="p-2 border">amount</th>
+        <th class="p-2 border">expires_at</th>
+        <th class="p-2 border">code</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <% @triggers.each do |trigger| %>
+        <tr>
+          <th class="p-2 border"><%= trigger.description %></th>
+          <td class="p-2 border"><%= trigger.amount %></td>
+          <td class="p-2 border"><%= trigger.expires_at %></td>
+          <td class="p-2 border"><a href="<%= admin_trigger_path(trigger) %>" class="text-blue-500 visited:text-purple-500">code</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

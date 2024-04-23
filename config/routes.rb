@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get '/trigger/:id', to: 'triggers#trigger'
 
   namespace :admin do
-    resources :triggers, only: %i[show]
+    resources :triggers, only: %i[index show]
   end
 
   get '*path', controller: 'application', action: 'not_found'
