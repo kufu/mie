@@ -9,5 +9,9 @@ module EventRouting
 
   def set_event
     @event = Event.find_by!(name: params[:event_name])
+  rescue StandardError => e
+    set_default_event
+    set_plan
+    raise e
   end
 end
