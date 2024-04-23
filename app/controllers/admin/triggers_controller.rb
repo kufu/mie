@@ -5,7 +5,6 @@ module Admin
     include QRcode
 
     before_action :set_trigger, only: %i[show edit update]
-    before_action :set_default_event
 
     def index
       @triggers = Trigger.where('expires_at > ?', Time.current).or(Trigger.where(expires_at: nil))
@@ -32,12 +31,6 @@ module Admin
 
     def set_trigger
       @trigger = Trigger.find(params[:id])
-    end
-
-    def set_default_event
-      @event = Event.order(created_at: :desc).first
-      request.path_parameters[:event_name] = @event.name
-      @plan = Plan.new
     end
 
     def trigger_params

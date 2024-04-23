@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :set_default_event
   before_action :set_user
   before_action :set_plan
   before_action :set_locale
@@ -38,6 +39,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_default_event
+    return if @event
+
+    @event = Event.all.order(created_at: :desc).first
+    request.path_parameters[:event_name] = @event.name
+  end
 
   def create_and_set_user
     @user = User.create!

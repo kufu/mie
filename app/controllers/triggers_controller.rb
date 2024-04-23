@@ -18,9 +18,4 @@ class TriggersController < ApplicationController
 
     redirect_to profile_path, flash: { error: I18n.t('errors.login_required') }
   end
-
-  def set_default_event
-    @event = Event.all.order(created_at: :desc).first
-    request.path_parameters[:event_name] = @event.name
-  end
 end
