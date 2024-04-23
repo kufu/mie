@@ -26,9 +26,12 @@ class ApplicationController < ActionController::Base
                      event: @event)
   end
 
-  def not_found(err)
-    print_error_if_test(err)
-    Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}")
+  def not_found(err = nil)
+    if err
+      print_error_if_test(err)
+      Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}")
+    end
+
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
   end
 
