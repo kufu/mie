@@ -9,4 +9,8 @@ class Team < ApplicationRecord
   def admin?(user)
     !!user.profile.team_profiles.find_by(team: self)&.admin?
   end
+
+  def active_profiles
+    profiles.where(team_profiles: { role: %i[admin member] })
+  end
 end
