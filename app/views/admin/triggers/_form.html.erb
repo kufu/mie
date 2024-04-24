@@ -1,0 +1,32 @@
+<div>
+  <% if trigger.errors.any? %>
+    <ul class="list-disc">
+      <% trigger.errors.each do |e| %>
+        <li class="text-red-700"><%= e.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form_with(model: trigger, url: admin_trigger_path(trigger)) do |f| %>
+      <div class="p-2 flex flex-col">
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+      </div>
+      <div class="p-2 flex flex-col">
+        <%= f.label :action %>
+        <%= f.text_area :action, size: "50x5", value: trigger.action.is_a?(String) ? trigger.action : JSON.dump(trigger.action) %>
+      </div>
+      <div class="p-2 flex flex-col">
+        <%= f.label :amount %>
+        <%= f.number_field :amount %>
+      </div>
+      <div class="p-2 flex flex-col">
+        <%= f.label :expires_at %>
+        <%= f.datetime_local_field :expires_at %>
+      </div>
+      <div class="p-2 flex flex-col">
+        <%= f.submit 'Update', class: "primary-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -4,6 +4,8 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_many :team_profiles, dependent: :destroy
   has_many :teams, through: :team_profiles
+  has_many :profile_trophies, dependent: :destroy
+  has_many :trophies, through: :profile_trophies
 
   validates :provider, presence: true
   validates :uid, presence: true

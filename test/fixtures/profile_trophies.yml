@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+profile_trophy_one:
+  profile: profile_one
+  trophy: common_trophy
+
+profile_trophy_two:
+  profile: profile_one
+  trophy: uncommon_trophy

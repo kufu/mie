@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+event_trophies_one:
+  event: party
+  trophy: common_trophy
+
+event_trophies_two:
+  event: party
+  trophy: uncommon_trophy

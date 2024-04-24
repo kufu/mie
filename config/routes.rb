@@ -28,5 +28,11 @@ Rails.application.routes.draw do
     resources :members, only: %i[create update destroy]
   end
 
+  resources :triggers, only: %i[show]
+
+  namespace :admin do
+    resources :triggers, only: %i[index show edit update]
+  end
+
   get '*path', controller: 'application', action: 'not_found'
 end

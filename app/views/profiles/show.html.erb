@@ -13,6 +13,15 @@
             <div class="flex-grow flex flex-col gap-2">
               <h1 class="text-4xl"><%= @user.profile.name %></h1>
             </div>
+
+            <% if @user&.profile&.trophies&.present? %>
+              <div class="flex flex-wrap gap-1 py-2">
+                <% @user.profile.trophies.order(:order).each do |trophy| %>
+                  <img src="<%= trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
+                <% end %>
+              </div>
+            <% end %>
+
             <div class="self-end">
               <%= form_with(url: '/session', method: :delete) do |f| %>
                 <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>

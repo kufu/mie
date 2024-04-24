@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_06_155428) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_160649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_155428) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "text_color", default: "#23221F", null: false
+  end
+
+  create_table "event_trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id", null: false
+    t.uuid "trophy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "trophy_id"], name: "index_event_trophies_on_event_id_and_trophy_id", unique: true
+    t.index ["event_id"], name: "index_event_trophies_on_event_id"
+    t.index ["trophy_id"], name: "index_event_trophies_on_trophy_id"
   end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -52,6 +62,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_155428) do
     t.string "password_hash"
     t.boolean "initial", default: true, null: false
     t.uuid "event_id", null: false
+  end
+
+  create_table "profile_trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "profile_id", null: false
+    t.uuid "trophy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_profile_trophies_on_profile_id"
+    t.index ["trophy_id"], name: "index_profile_trophies_on_trophy_id"
   end
 
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -122,11 +141,37 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_155428) do
     t.index ["event_id"], name: "index_tracks_on_event_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "triggers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "description", null: false
+    t.string "key", null: false
+    t.jsonb "action", null: false
+    t.integer "amount", null: false
+    t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.string "icon_url", null: false
+    t.integer "rarity", default: 0, null: false
+    t.integer "order", default: 9999, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "special", default: false, null: false
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false, null: false
+  end
+
+  add_foreign_key "event_trophies", "events"
+  add_foreign_key "event_trophies", "trophies"
+  add_foreign_key "profile_trophies", "profiles"
+  add_foreign_key "profile_trophies", "trophies"
   add_foreign_key "profiles", "users"
   add_foreign_key "schedules", "tracks"
   add_foreign_key "team_profiles", "profiles"
