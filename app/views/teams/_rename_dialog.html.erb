@@ -1,4 +1,4 @@
-<dialog id="edit-name-dialog" class="dialog max-w-[min(100vw-16px,800px)]">
+<dialog id="edit-name-dialog" class="dialog w-full sm:max-w-[min(100vw-16px,800px)]">
   <%= turbo_frame_tag "teams-rename-dialog" do %>
     <%= form_with(url: team_path(team), method: :patch, model: team) do |f| %>
       <div data-controller="word-counter" data-word-counter-max-value="<%= team_name_max_length %>">
@@ -15,7 +15,7 @@
               </ul>
             </div>
           <% end %>
-          <div class="w-[656px] p-6">
+          <div class="w-full: sm:w-[656px] p-6">
             <%= f.text_area :name, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
             <div class="font-xs mt-2 text-[rgb(112,109,101)]">
               <span data-word-counter-target="counter"></span>/<%= team_name_max_length %>

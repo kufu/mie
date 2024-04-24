@@ -1,4 +1,4 @@
-<dialog id="edit-setting-dialog" class="dialog max-w-[min(100vw-16px,800px)] min-w-[500px] w-1/2">
+<dialog id="edit-setting-dialog" class="dialog w-full sm:max-w-[min(100vw-16px,800px)] sm:min-w-[500px]">
   <%= turbo_frame_tag "member-manage-dialog" do %>
     <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
       <p class="text-xl"><%= I18n.t('dialog.manage_members') %></p>
@@ -42,7 +42,7 @@
           <ul>
             <% @team.team_profiles.each do |tp| %>
               <li class="my-4">
-                <div class="flex">
+                <div class="flex flex-col sm:flex-row">
                   <div class="flex items-center gap-4">
                     <img src="<%= tp.profile.avatar_url %>" class="h-10 w-10 rounded-full" />
                     <p class="text-lg"><span class="font-bold"><%= tp.profile.name %></span> (<%= tp.human_attribute_enum(:role) %>)</p>
