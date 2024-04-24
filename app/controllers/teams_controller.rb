@@ -3,7 +3,6 @@
 class TeamsController < ApplicationController
   class InvalidStateError < StandardError; end
 
-  prepend_before_action :set_default_event
   before_action :set_team, only: %i[show edit update destroy]
   before_action :check_user_belongs_to_team, only: %i[show update destroy]
 
@@ -56,7 +55,7 @@ class TeamsController < ApplicationController
     raise TeamsController::InvalidStateError, 'role admin required' unless @team.admin?(@user)
 
     @team.destroy!
-    redirect_to event_profile_path(@user.profile, event_name: @event.name), status: :see_other
+    redirect_to profile_path, status: :see_other
   end
 
   private
@@ -69,11 +68,6 @@ class TeamsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def team_params
     params.require(:team).permit(:name)
-  end
-
-  def set_default_event
-    @event = Event.all.order(created_at: :desc).first
-    request.path_parameters[:event_name] = @event.name
   end
 
   def not_permitted_operation

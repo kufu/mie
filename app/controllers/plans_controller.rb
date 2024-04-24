@@ -87,6 +87,9 @@ class PlansController < ApplicationController
   def set_plan
     @plan = Plan.on_event(@event).find(params[:id] || params[:plan_id])
     raise ActiveRecord::RecordNotFound if @plan.user != @user && !@plan.public?
+  rescue StandardError => e
+    @plan ||= Plan.new
+    raise e
   end
 
   def add_and_remove_plans

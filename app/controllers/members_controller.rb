@@ -3,7 +3,6 @@
 class MembersController < ApplicationController
   class NoPermissionError < StandardError; end
 
-  prepend_before_action :set_default_event
   before_action :set_team
   before_action :set_team_profile, except: :create
   before_action :define_error_variable
@@ -52,7 +51,7 @@ class MembersController < ApplicationController
     if @team_profile.valid? && @team_profile.destroy
       if remove_itself?
         session[:breakout_turbo] = true
-        redirect_to event_profile_path(event_name: @event.name), status: :see_other
+        redirect_to profile_path, status: :see_other
       else
         render 'dialog'
       end
@@ -73,11 +72,6 @@ class MembersController < ApplicationController
 
   def define_error_variable
     @dialog_errors = []
-  end
-
-  def set_default_event
-    @event = Event.all.order(created_at: :desc).first
-    request.path_parameters[:event_name] = @event.name
   end
 
   def not_permitted_operation

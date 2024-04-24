@@ -100,7 +100,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
       delete team_url(@team)
     end
 
-    assert_redirected_to event_profile_path(profiles(:profile_one), event_name: events(:party).name)
+    assert_redirected_to profile_path
   end
 
   test 'should not destroy team if operator is not admin' do

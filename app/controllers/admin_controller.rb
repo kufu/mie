@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
-  skip_before_action :set_plan
   skip_before_action :set_locale
   skip_before_action :set_last_path
 

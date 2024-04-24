@@ -34,6 +34,6 @@ class TriggersControllerTest < ActionDispatch::IntegrationTest
       get trigger_path(@trigger, key: 'testkey')
     end
 
-    assert_redirected_to event_profile_path
+    assert_redirected_to profile_path
   end
 end
