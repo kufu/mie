@@ -55,7 +55,7 @@
               <% end %>
             <% else %>
               <p><%= @profile.current_team.name %>
-                (<%= @profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+                (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
               </p>
             <% end %>
 
