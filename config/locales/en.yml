@@ -90,6 +90,7 @@ en:
     manage_members: Members
     username_to_invite: "User name to invite"
     delete_team: "Are you sure delete this team?"
+    edit_introduce: "Edit introduce yourself"
   button:
     settings: "Settings"
     update_memo: "Update memo"

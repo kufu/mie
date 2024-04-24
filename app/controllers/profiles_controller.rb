@@ -10,4 +10,19 @@ class ProfilesController < ApplicationController
                  @user&.profile
                end
   end
+
+  def update
+    if @user.profile.update(profile_params)
+      @profile = @user.profile
+      render 'show', status: :ok
+    else
+      render 'dialog', status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def profile_params
+    params.require(:profile).permit(:introduce)
+  end
 end
