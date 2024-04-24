@@ -2,29 +2,31 @@
   <% turbo_page_requires_reload %>
 <% end %>
 
-<% if @user && @user.profile %>
+<% if @profile %>
   <div class="flex flex-col justify-center items-center gap-8">
 
     <div class="w-1/2">
       <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
         <div class="flex gap-4">
-          <img class="w-36 h-36 rounded-full" src="<%= @user.profile.avatar_url %>">
+          <img class="w-36 h-36 rounded-full" src="<%= @profile.avatar_url %>">
           <div class="flex flex-col gap-2 w-full">
             <div class="flex-grow flex flex-col gap-2">
-              <h1 class="text-4xl"><%= @user.profile.name %></h1>
+              <h1 class="text-4xl"><%= @profile.name %></h1>
             </div>
 
-            <% if @user&.profile&.trophies&.present? %>
+            <% if @profile&.trophies&.present? %>
               <div class="flex flex-wrap gap-1 py-2">
-                <% @user.profile.trophies.order(:order).each do |trophy| %>
+                <% @profile.trophies.order(:order).each do |trophy| %>
                   <img src="<%= image_url trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
                 <% end %>
               </div>
             <% end %>
 
             <div class="self-end">
-              <%= form_with(url: '/session', method: :delete) do |f| %>
-                <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
+              <% if my_profile? %>
+                <%= form_with(url: '/session', method: :delete) do |f| %>
+                  <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -35,22 +37,30 @@
     <div class="w-1/2">
       <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
         <h2 class="text-4xl">Team</h2>
-        <% if @user.profile.belongs_to_any_team? %>
+        <% if @profile.belongs_to_any_team? %>
           <div class="flex items-center py-4">
-            <a href="<%= team_path(@user.profile.current_team) %>">
-              <p><%= @user.profile.current_team.name %>
-                (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+
+            <% if my_profile? %>
+              <a href="<%= team_path(@user.profile.current_team) %>">
+                <p><%= @user.profile.current_team.name %>
+                  (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+                </p>
+              </a>
+              <% unless @user.profile.current_team.admin?(@user) %>
+                <div class="flex-grow flex justify-end">
+                  <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
+                    <%= f.submit 'exit', class: 'danger-button' %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p><%= @profile.current_team.name %>
+                (<%= @profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
               </p>
-            </a>
-            <% unless @user.profile.current_team.admin?(@user) %>
-              <div class="flex-grow flex justify-end">
-                <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
-                  <%= f.submit 'exit', class: 'danger-button' %>
-                <% end %>
-              </div>
             <% end %>
+
           </div>
-        <% else %>
+        <% elsif my_profile? %>
           <div class="flex flex-col justify-center items-center py-4 gap-4">
             <div class="p-2">
               <p class="text-xl"><%= I18n.t('teams.about') %></p>
