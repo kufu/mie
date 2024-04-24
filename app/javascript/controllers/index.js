@@ -2,16 +2,19 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from './application';
+import { application } from "./application"
 
-import DialogController from './dialog_controller';
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
 
-import LocaleController from './locale_controller';
+import HamburgerController from "./hamburger_controller"
+application.register("hamburger", HamburgerController)
 
-import ScheduleTableController from './schedule_table_controller';
+import LocaleController from "./locale_controller"
+application.register("locale", LocaleController)
 
-import WordCounterController from './word_counter_controller';
-application.register('dialog', DialogController);
-application.register('locale', LocaleController);
-application.register('schedule-table', ScheduleTableController);
-application.register('word-counter', WordCounterController);
+import ScheduleTableController from "./schedule_table_controller"
+application.register("schedule-table", ScheduleTableController)
+
+import WordCounterController from "./word_counter_controller"
+application.register("word-counter", WordCounterController)

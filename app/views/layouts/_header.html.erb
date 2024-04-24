@@ -22,12 +22,83 @@
     </div>
     <div class="flex items-center">
       <% if @user&.profile %>
-        <img src="<%= @user.profile.avatar_url %>" class="rounded-full h-8 w-8 mr-4" >
+        <img src="<%= @user.profile.avatar_url %>" class="rounded-full h-8 w-8 sm:mr-4" >
       <% end %>
+    </div>
+    <div data-controller="hamburger" class="ml-2 mr-4 sm:hidden">
+      <button data-action="click->hamburger#toggle"  type="button" class="">
+        <span data-hamburger-target="hamburger" class="">
+          <i class="fa-solid fa-bars fa-xl"></i>
+        </span>
+        <span data-hamburger-target="x" class="relative z-20 hidden">
+          <i class="fa-solid fa-xmark  fa-xl"></i>
+        </span>
+      <ul data-hamburger-target="sidebar" class="fixed z-10 h-full top-0 right-0 flex flex-col items-center justify-center w-3/4 bg-[var(--mainColor)] translate-x-full transition-all ease-linear">
+        <li>
+          <a
+            href="<%= event_path %>"
+            class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_path) ? 'nav-current' : '' %>"
+            <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
+          >
+            <%= I18n.t('nav.root') %></a>
+        </li>
+        <li>
+          <a
+            href="<%= event_schedules_path %>"
+            class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_schedules_path) ? 'nav-current' : '' %>"
+            <%= sanitize current_path?(event_schedules_path) ? 'aria-current="page"' : '' %>
+          >
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" color="#706d65" class=""
+              role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+              style="color: rgb(112, 109, 101);">
+              <path
+                d="M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0 0 19.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z">
+              </path>
+            </svg>
+            <%= I18n.t('nav.schedule') %></a>
+        </li>
+        <% unless @plan.new_record? %>
+          <li>
+            <a
+              href="<%= event_plan_path(@plan, event_name: @plan.event.name) %>"
+              class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'nav-current' : '' %>"
+              <%= sanitize current_path?(event_plan_path(@plan, event_name: @plan.event.name)) ? 'aria-current="page"' : '' %>
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" color="#706d65" class=""
+                role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+                style="color: rgb(112, 109, 101);">
+                <path
+                  d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z">
+                </path>
+              </svg>
+              <%= I18n.t('nav.plan') %></a>
+          </li>
+        <% end %>
+        <li>
+          <a
+            href="<%= event_profile_path %>"
+            class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(event_profile_path) ? 'nav-current' : '' %>"
+            <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
+          >
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" width="1em" height="1em" class="" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="color: rgb(112, 109, 101);"><path d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z"></path></svg>
+            <%= I18n.t('nav.profile') %></a>
+        </li>
+        <% if @user&.profile&.belongs_to_any_team? %>
+          <li>
+            <a
+              href="<%= team_path(@user.profile.current_team) %>"
+              class="flex items-center gap-2 h-max box-border m-0 boder-none bg-transparent px-2 py-3 <%= current_path?(team_path(@user.profile.current_team)) ? 'nav-current' : '' %>"
+              <%= sanitize current_path?(event_path) ? 'aria-current="page"' : '' %>
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 640 512" width="1em" height="1em" class="" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="color: rgb(112, 109, 101);"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"></path></svg>
+              <%= I18n.t('nav.team') %></a>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
-  <div data-controller="navigation" class="flex items-center min-w-max bg-white pr-6 pl-6 shadow-[rgba(3,3,2,0.3)_0_1px_2px_0] px-6">
+  <div data-controller="navigation" class="hidden sm:flex items-center min-w-max bg-white pr-6 pl-6 shadow-[rgba(3,3,2,0.3)_0_1px_2px_0] px-6">
     <ul class="self-stretch flex items-stretch gap-4 m-0 p-0">
       <li>
         <a
