@@ -1,12 +1,5 @@
 <% content_for :head do %>
-  <meta property="og:title" content="RubyKaigi Schedule.select">
-  <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
   <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
-  <% unless Rails.env.test? %>
-    <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
-  <% end %>
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image"/>
 <% end %>
 
 <%= turbo_frame_tag @event, refresh: :morph do %>

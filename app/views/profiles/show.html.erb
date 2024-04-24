@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <meta property="og:url" content="<%= profile_url %>">
+<% end %>
+
 <% if @breakout_turbo %>
   <% turbo_page_requires_reload %>
 <% end %>
