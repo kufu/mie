@@ -5,14 +5,14 @@
 <% if @profile %>
   <div class="flex flex-col justify-center items-center gap-8">
 
-    <div class="w-1/2">
-      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+    <div class="w-full sm:w-1/2">
+      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
         <%= turbo_frame_tag @profile do %>
-          <div class="flex gap-4">
-            <img class="w-36 h-36 rounded-full" src="<%= @profile.avatar_url %>">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <img class="w-24 h-24 sm:w-36 sm:h-36 rounded-full" src="<%= @profile.avatar_url %>">
             <div class="flex flex-col gap-2 w-full">
               <div class="flex gap-2">
-                <h1 class="text-4xl flex-grow"><%= @profile.name %></h1>
+                <h1 class="text-xl sm:text-4xl flex-grow"><%= @profile.name %></h1>
 
                 <% if my_profile? %>
                   <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
@@ -54,9 +54,9 @@
       </div>
     </div>
 
-    <div class="w-1/2">
-      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <h2 class="text-4xl">Team</h2>
+    <div class="w-full sm:w-1/2">
+      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+        <h2 class="text-xl sm:text-4xl">Team</h2>
         <% if @profile.belongs_to_any_team? %>
           <div class="flex items-center py-4">
 
