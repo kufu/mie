@@ -44,4 +44,9 @@ class TeamTest < ActiveSupport::TestCase
   test '#admin? returns false when invitation user given' do
     assert_not teams(:alpha).admin?(users(:three))
   end
+
+  test '#active_profiles returns profiles without invitations' do
+    assert_equal teams(:alpha).active_profiles.order(id: :asc),
+                 [profiles(:profile_one), profiles(:profile_two), profiles(:profile_four)].sort_by(&:id)
+  end
 end

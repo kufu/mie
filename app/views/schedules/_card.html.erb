@@ -39,7 +39,7 @@
 
         <% if mode == :team %>
           <div class="flex flex-wrap gap-2">
-            <% @team.profiles.each do |profile| %>
+            <% @team.active_profiles.each do |profile| %>
               <% if @member_schedules_map[profile.id].include?(schedule.id) %>
                 <img src="<%= profile.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black" />
               <% end %>
