@@ -29,6 +29,14 @@
 
               </div>
 
+              <% unless my_profile? %>
+                <div>
+                  <a class="text-blue-700 visited:text-purple-700" href="<%= event_plan_path(@profile.user.current_plan, event_name: @profile.user.current_plan.event.name) %>">
+                    <p><%= @profile.user.current_plan.title %></p>
+                  </a>
+                </div>
+              <% end %>
+
               <div class="flex-grow">
                 <p><%= @profile.introduce %></p>
               </div>
