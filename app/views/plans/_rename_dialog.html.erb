@@ -1,0 +1,24 @@
+
+<dialog id="edit-title-dialog" class="dialog">
+  <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch, model: @plan) do |f| %>
+    <div data-controller="word-counter" data-word-counter-max-value="<%= plan_title_max_length %>">
+      <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+        <p class="text-xl"><%= I18n.t('dialog.edit_title') %></p>
+      </div>
+      <div class="max-h-[calc(100vh-212px)] overflow-auto">
+        <div class="w-[656px] p-6">
+          <%= f.text_area :title, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
+          <div class="font-xs mt-2 text-[rgb(112,109,101)]">
+            <span data-word-counter-target="counter"></span>/<%= plan_title_max_length %>
+          </div>
+        </div>
+      </div>
+      <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+        <div class="flex justify-end">
+          <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+          <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</dialog>
