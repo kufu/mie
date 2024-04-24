@@ -1,7 +1,9 @@
 
 <% content_for :head do %>
+  <%# TODO: descriptionが埋め込めていない %>
   <meta property="og:description" content="<%= @plan.description %>">
   <meta property="og:url" content="<%= event_plan_url(event_name: @plan.event.name) %>">
+  <%# TODO: application.html.erb で ogp:image が上書きされているので、上書きされないような仕組みを考える必要がある %>
   <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
 <% end %>
 
@@ -143,7 +145,8 @@
     <div class="flex justify-between items-end">
       <div class="flex flex-col gap-1">
         <h1 class="text-base"><%= I18n.t('description.title') %></h1>
-        <span class="text-sm text-[rgb(112,109,101)]"><%= I18n.t('description.notice') %></span>
+        <%# TODO: 動的ogpが直ったらコメントインする %>
+        <!-- <span class="text-sm text-[rgb(112,109,101)]"><%= I18n.t('description.notice') %></span> -->
       </div>
       <% if @plan.user == @user %>
         <div data-controller="dialog" data-dialog-element-id-value="edit-description-dialog">
