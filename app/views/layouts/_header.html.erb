@@ -25,15 +25,15 @@
         <img src="<%= @user.profile.avatar_url %>" class="rounded-full h-8 w-8 sm:mr-4" >
       <% end %>
     </div>
-    <div class="ml-2 mr-4 sm:hidden">
-      <button id="button" type="button" class="">
-        <span id="bars" class="">
+    <div data-controller="hamburger" class="ml-2 mr-4 sm:hidden">
+      <button data-action="click->hamburger#toggle"  type="button" class="">
+        <span data-hamburger-target="hamburger" class="">
           <i class="fa-solid fa-bars fa-xl"></i>
         </span>
-        <span id="xmark" class="relative z-20 hidden">
+        <span data-hamburger-target="x" class="relative z-20 hidden">
           <i class="fa-solid fa-xmark  fa-xl"></i>
         </span>
-      <ul id="menu" class="fixed z-10 h-full top-0 right-0 flex flex-col items-center justify-center w-3/4 bg-[var(--mainColor)] translate-x-full transition-all ease-linear">
+      <ul data-hamburger-target="sidebar" class="fixed z-10 h-full top-0 right-0 flex flex-col items-center justify-center w-3/4 bg-[var(--mainColor)] translate-x-full transition-all ease-linear">
         <li>
           <a
             href="<%= event_path %>"
@@ -181,11 +181,3 @@
     </div>
   </div>
 </nav>
-
-<script>
-button.addEventListener('click', event => {
-  bars.classList.toggle('hidden')
-  xmark.classList.toggle('hidden')
-  menu.classList.toggle('translate-x-full')
-});
-</script>
