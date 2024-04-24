@@ -1,4 +1,4 @@
-<dialog id="edit-introduce-dialog" class="dialog w-full sm:max-w-[min(100vw-16px,800px)]">
+<dialog id="edit-introduce-dialog" class="dialog">
   <%= form_with(url: profile_path, method: :patch, model: profile) do |f| %>
     <div data-controller="word-counter" data-word-counter-max-value="<%= profile_introduce_max_length %>">
       <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">

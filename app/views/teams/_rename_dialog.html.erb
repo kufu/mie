@@ -1,4 +1,4 @@
-<dialog id="edit-name-dialog" class="dialog w-full sm:max-w-[min(100vw-16px,800px)]">
+<dialog id="edit-name-dialog" class="dialog">
   <%= turbo_frame_tag "teams-rename-dialog" do %>
     <%= form_with(url: team_path(team), method: :patch, model: team) do |f| %>
       <div data-controller="word-counter" data-word-counter-max-value="<%= team_name_max_length %>">
