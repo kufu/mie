@@ -29,6 +29,7 @@ class PlansController < ApplicationController
   end
 
   def editable
+    create_and_set_user unless @user
     if @plan.password == params[:password]
       @plan.update!(user: @user)
       redirect_to event_plan_path(@plan, event_name: @plan.event.name)
