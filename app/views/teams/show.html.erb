@@ -2,12 +2,12 @@
   <% turbo_page_requires_reload %>
 <% end %>
 
-<div class="flex items-center mx-auto mt-3 mb-6 max-w-[1120px]">
-  <div class="mr-auto">
-    <div class="flex items-center gap-1">
+<div class="flex flex-col sm:flex-row items-center mx-auto mt-3 mb-6 max-w-[1120px] gap-4">
+  <div class="w-full">
+    <div class="w-full flex items-center gap-1">
       <div class="ml-2"><h1 class="text-2xl"><%= @team.name %></h1></div>
       <% if @team.admin?(@user) %>
-        <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-name-dialog">
+        <div class="flex-grow flex justify-end sm:flex-grow-0 ml-2" data-controller="dialog" data-dialog-element-id-value="edit-name-dialog">
           <button
             class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
             data-action="click->dialog#open"
@@ -20,7 +20,8 @@
       <% end %>
     </div>
   </div>
-  <div class="flex gap-4">
+
+  <div class="w-full justify-end flex gap-4">
     <div data-controller="dialog" data-dialog-element-id-value="edit-setting-dialog">
       <button
         class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
