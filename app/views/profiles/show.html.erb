@@ -2,55 +2,93 @@
   <% turbo_page_requires_reload %>
 <% end %>
 
-<% if @user && @user.profile %>
+<% if @profile %>
   <div class="flex flex-col justify-center items-center gap-8">
 
-    <div class="w-1/2">
-      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <div class="flex gap-4">
-          <img class="w-36 h-36 rounded-full" src="<%= @user.profile.avatar_url %>">
-          <div class="flex flex-col gap-2 w-full">
-            <div class="flex-grow flex flex-col gap-2">
-              <h1 class="text-4xl"><%= @user.profile.name %></h1>
-            </div>
+    <div class="w-full sm:w-1/2">
+      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+        <%= turbo_frame_tag @profile do %>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <img class="w-24 h-24 sm:w-36 sm:h-36 rounded-full" src="<%= @profile.avatar_url %>">
+            <div class="flex flex-col gap-2 w-full">
+              <div class="flex gap-2">
+                <h1 class="text-xl sm:text-4xl flex-grow"><%= @profile.name %></h1>
 
-            <% if @user&.profile&.trophies&.present? %>
-              <div class="flex flex-wrap gap-1 py-2">
-                <% @user.profile.trophies.order(:order).each do |trophy| %>
-                  <img src="<%= image_url trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
+                <% if my_profile? %>
+                  <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
+                    <button
+                      class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+                      data-action="click->dialog#open"
+                    >
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+                      <%= I18n.t('button.edit') %>
+                    </button>
+                    <%= render 'dialog', profile: @profile %>
+                  </div>
+                <% end %>
+
+              </div>
+
+              <% unless my_profile? %>
+                <div>
+                  <a class="text-blue-700 visited:text-purple-700" href="<%= event_plan_path(@profile.user.current_plan, event_name: @profile.user.current_plan.event.name) %>">
+                    <p><%= @profile.user.current_plan.title %></p>
+                  </a>
+                </div>
+              <% end %>
+
+              <div class="flex-grow">
+                <p><%= @profile.introduce %></p>
+              </div>
+
+              <% if @profile&.trophies&.present? %>
+                <div class="flex flex-wrap gap-1 py-2">
+                  <% @profile.trophies.order(:order).each do |trophy| %>
+                    <img src="<%= image_url trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
+                  <% end %>
+                </div>
+              <% end %>
+
+              <div class="self-end">
+                <% if my_profile? %>
+                  <%= form_with(url: '/session', method: :delete) do |f| %>
+                    <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
+                  <% end %>
                 <% end %>
               </div>
-            <% end %>
-
-            <div class="self-end">
-              <%= form_with(url: '/session', method: :delete) do |f| %>
-                <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
-              <% end %>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
 
-    <div class="w-1/2">
-      <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <h2 class="text-4xl">Team</h2>
-        <% if @user.profile.belongs_to_any_team? %>
+    <div class="w-full sm:w-1/2">
+      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+        <h2 class="text-xl sm:text-4xl">Team</h2>
+        <% if @profile.belongs_to_any_team? %>
           <div class="flex items-center py-4">
-            <a href="<%= team_path(@user.profile.current_team) %>">
-              <p><%= @user.profile.current_team.name %>
-                (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+
+            <% if my_profile? %>
+              <a href="<%= team_path(@user.profile.current_team) %>">
+                <p><%= @user.profile.current_team.name %>
+                  (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+                </p>
+              </a>
+              <% unless @user.profile.current_team.admin?(@user) %>
+                <div class="flex-grow flex justify-end">
+                  <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
+                    <%= f.submit 'exit', class: 'danger-button' %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p><%= @profile.current_team.name %>
+                (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
               </p>
-            </a>
-            <% unless @user.profile.current_team.admin?(@user) %>
-              <div class="flex-grow flex justify-end">
-                <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
-                  <%= f.submit 'exit', class: 'danger-button' %>
-                <% end %>
-              </div>
             <% end %>
+
           </div>
-        <% else %>
+        <% elsif my_profile? %>
           <div class="flex flex-col justify-center items-center py-4 gap-4">
             <div class="p-2">
               <p class="text-xl"><%= I18n.t('teams.about') %></p>

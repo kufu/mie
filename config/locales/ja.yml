@@ -59,6 +59,7 @@ ja:
     manage_members: メンバー管理
     username_to_invite: "招待するユーザー名"
     delete_team: "このチームを削除しますか？"
+    edit_introduce: "自己紹介を編集"
   button:
     settings: "設定"
     update_memo: "メモを更新"

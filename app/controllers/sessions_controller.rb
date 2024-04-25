@@ -26,6 +26,7 @@ class SessionsController < ApplicationController
 
   def delete
     session[:user_id] = nil
+    session[:breakout_turbo] = true
 
     redirect_to root_path
   end

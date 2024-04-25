@@ -11,6 +11,7 @@ class Profile < ApplicationRecord
   validates :uid, presence: true
   validates :name, presence: true
   validates :avatar_url, presence: true
+  validates :introduce, length: { maximum: 256 }
 
   def current_team
     team_profiles.find_by(role: %i[admin member])&.team
