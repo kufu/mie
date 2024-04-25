@@ -1,6 +1,6 @@
 <%= turbo_frame_tag schedule do %>
   <div class="flex h-full">
-    <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+    <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
       <div class="flex flex-col justify-between items-start">
         <% schedule.speakers.each do |speaker| %>
           <div class="flex items-center m-w-80 mb-2">
@@ -10,11 +10,11 @@
         <% end %>
 
         <% unless mode == :team %>
-          <div class="flex">
-            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+          <div class="flex flex-wrap gap-2">
+            <div class="flex flex-row justify-center items-center px-3 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
               <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
             </div>
-            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+            <div class="flex flex-row justify-center items-center px-3 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
               <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track.name %></span>
             </div>
           </div>
@@ -71,7 +71,7 @@
                       <div class="font-xs mt-2 text-[rgb(112,109,101)]">
                         <span data-word-counter-target="counter"></span>/<%= plan_memo_max_length %>
                       </div>
-                    </div>
+                    </div
                   </div>
                   <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
                     <div class="flex justify-end">
