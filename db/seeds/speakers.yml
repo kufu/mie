@@ -26,7 +26,7 @@ keynotes:
     id: rubylangorg
     name: CRuby Committers
     bio: ''
-    github_id: 
+    github_id:
     twitter_id: rubylangorg
     gravatar_hash: ce6d997265cefede13ee7e7e2a2cf9b2
   yukihiro_matz:
@@ -53,15 +53,16 @@ speakers:
       working on improving Ruby for GitHub (and everyone else). He was an early contributor
       to Ruby's new parser Prism and an avid compiler nerd.
     github_id: HParker
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 18a40c6996fbaa47562e16bd42b0f430
   ahogappa0613:
     id: ahogappa0613
     name: ahogappa
-    bio: I am developing a game engine and a video game using Ruby. Additionally,
-      I am working on a one-binary tool for Ruby.
+    bio: |-
+      I am a web application developer at STORES, Inc.
+      As a hobby, I develop game engines and tools to pack ruby in one binary.
     github_id: ahogappa0613
-    twitter_id: 
+    twitter_id:
     gravatar_hash: c53f1542d84fc28ab81b979173af50ae
   eregontp:
     id: eregontp
@@ -122,7 +123,7 @@ speakers:
       Ph.D. student at SOKENDAI (NII, National Institute of Informatics). Researcher for information security and formal language. Ruby committer.
       I am the author of Regexp optimization to prevent ReDoS in Ruby 3.2.0.
     github_id: makenowjust
-    twitter_id: 
+    twitter_id:
     gravatar_hash: db1b7e3c6fe6f6a0e9752b2c19bf5473
   hasumikin:
     id: hasumikin
@@ -160,15 +161,15 @@ speakers:
     id: jhawthorn
     name: John Hawthorn
     bio: John is a Ruby Committer, a Rails Core member, and a Staff Engineer at GitHub
-      on the Ruby Architecture team. He窶冱 based in Victoria, Canada.
+      on the Ruby Architecture team. He’s based in Victoria, Canada.
     github_id: jhawthorn
     twitter_id: jhawthorn
     gravatar_hash: 355cd35cc4e716547c8bf3c6b507a1ca
   junk0612:
     id: junk0612
     name: Junichi Kobayashi
-    bio: Working at ESM, Inc., with a keen interest in Ruby parsers and their related
-      technologies.
+    bio: Working as a Rails programmer at ESM, Inc., with a keen interest in Ruby
+      parsers and their related technologies.
     github_id: junk0612
     twitter_id: junk0612
     gravatar_hash: afdb8e40066f7939ff82727bc0c892ce
@@ -179,7 +180,7 @@ speakers:
       That's why and how he met Ruby. He is currently working as a senior serverless
       strategist at Fastly. He also plays the contrabass once in a while.
     github_id: remore
-    twitter_id: 
+    twitter_id:
     gravatar_hash: fbe207d1bece86feb799fbc1841ce735
   KJTsanaktsidis:
     id: KJTsanaktsidis
@@ -207,7 +208,7 @@ speakers:
       Tokyo, 2007. Now he is still working on MRI development at STORES, Inc. He is
       also a director of Ruby Association.
     github_id: ko1
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 990397e8b38d6f5f4ae8ff343e8b883a
   ima1zumi:
     id: ima1zumi
@@ -218,7 +219,7 @@ speakers:
     gravatar_hash: 74b5a82b8710accc1e6189a19f0b4935
   duerst:
     id: duerst
-    name: Martin J. Dﾃｼrst
+    name: Martin J. Dürst
     bio: Martin is a Professor of Computer Science at Aoyama Gakuin University in
       Japan. He has been one of the main drivers of Internationalization (I18N) and
       the use of Unicode on the Web and the Internet. He published the first proposals
@@ -227,7 +228,7 @@ speakers:
       his students have contributed to the implementation of Ruby, mostly in the area
       of I18N.
     github_id: duerst
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f52e87b92cafb1e8c6d155076b56ecff
   qnighy:
     id: qnighy
@@ -256,7 +257,7 @@ speakers:
     id: m_seki
     name: Masatoshi SEKI
     bio: Masatoshi Seki is a Ruby committer and the author of several Ruby standard
-      libraries including dRuby, ERB, and Rinda. He窶冱 an expert in object-oriented
+      libraries including dRuby, ERB, and Rinda. He’s an expert in object-oriented
       programming, distributed systems, and eXtreme programming. He has been speaking
       at RubyKaigi every year since 2006 when the Kaigi first started. He is also
       Principal Engineer at Canon Medical Systems corp.
@@ -269,7 +270,7 @@ speakers:
     bio: Matt Muller is a software engineer and maintainer of AWS SDK for Ruby. You
       can find him on GitHub as @mullermp.
     github_id: mullermp
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 050a145197ec5162f0cf4c2711f47bdc
   eightbitraptor:
     id: eightbitraptor
@@ -281,7 +282,7 @@ speakers:
 
       When he's not scratching his head over a segfault he can be found brewing coffee and building keyboards.
     github_id: eightbitraptor
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 43f0363b6c12155c36d0c06043c268fd
   maximecb:
     id: maximecb
@@ -292,7 +293,7 @@ speakers:
       She is currently leading a project at Shopify to build YJIT, a new JIT compiler
       built inside CRuby.
     github_id: maximecb
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f1457acc3f8d176db1d28e9f30779ae6
   m3m0r7:
     id: m3m0r7
@@ -301,8 +302,8 @@ speakers:
       of experience as a software engineer, and I have served as a CTO in the past.
       Currently, I am working as an Engineering Manager. I frequently speak at events
       primarily within the PHP community. I am the author of books titled "Software
-      Design (Magazine)", "縺ｿ繧薙↑縺ｮ PHP ��Minna no PHP��" and "繝ｬ繧ｬ繧ｷ繝ｼ繧ｳ繝ｼ繝峨→縺ｩ縺�ｻ倥″蜷医≧縺具ｼ�Legacy code
-      to dou tsukiau ka��"
+      Design (Magazine)", "みんなの PHP （Minna no PHP）" and "レガシーコードとどう付き合うか（Legacy code
+      to dou tsukiau ka）"
     github_id: m3m0r7
     twitter_id: m3m0r7
     gravatar_hash: 218473ff7abad0fcd72865da2b23bb5b
@@ -349,7 +350,7 @@ speakers:
     bio: A wild (freelance) programmer. I can do cryptography and authentication/authorization
       a little.
     github_id: sylph01
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 3cffaccb703ff33ea0028f9f0caa8e4d
   gedorinku:
     id: gedorinku
@@ -367,7 +368,7 @@ speakers:
       never sleep). He's been working on Ruby tooling for the past decade, and has
       shipped hundreds of bugs across RubyGems & Bundler.
     github_id: segiddins
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 4d6be90af74894fd132fb06dacec04d7
   tagomoris:
     id: tagomoris
@@ -485,5 +486,5 @@ speakers:
       A newbie committer to Ruby, Swift, and LLVM, especially working on WebAssembly support for the languages.
       Also a graduate CS student at Waseda University.
     github_id: kateinoigakukun
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 7a4968fbcd56e81f95a4f3c186141b52
