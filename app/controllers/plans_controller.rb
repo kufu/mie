@@ -162,9 +162,9 @@ class PlansController < ApplicationController
 
     @row, @track_list = catch(:abort) do
       @schedule_table.days.each do |day|
-        table = @schedule_table[day]
-        table.rows.each do |row|
-          throw :abort, [row, table.track_list] if row.schedules.map(&:id).include?(target_schedule_id)
+        @table = @schedule_table[day]
+        @table.rows.each do |row|
+          throw :abort, [row, @table.track_list] if row.schedules.map(&:id).include?(target_schedule_id)
         end
       end
     end

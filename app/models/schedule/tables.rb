@@ -6,9 +6,9 @@ class Schedule
 
     def initialize(schedules)
       @schedules = schedules
-      @map = @schedules.group_by { _1.start_at.strftime(DATE_FORMAT) }.transform_values do |v|
-        Schedule::Table.new(v)
-      end
+      @map = @schedules.group_by { _1.start_at.strftime(DATE_FORMAT) }.map do |k, v|
+        [k, Schedule::Table.new(v, k)]
+      end.to_h
     end
 
     def days

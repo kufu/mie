@@ -52,9 +52,9 @@
             <% end %>
           </tbody>
         </table>
-        <div class="sm:hidden">
+        <div class="sm:hidden" id="mobile-table-<%= day %>">
           <% @schedule_table[day].rows.each do |row| %>
-            <%= render partial: 'table_row', locals: { row: row, plan: @plan, track_list: @schedule_table[day].track_list } %>
+            <%= render partial: 'mobile_table_row', locals: { row: row, plan: @plan, track_list: @schedule_table[day].track_list } %>
           <% end %>
         </div>
       </div>
