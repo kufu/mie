@@ -38,9 +38,9 @@ segiddins:
   live_or_recorded: venue
   description: Though the Marshal serialization format has fallen out of favor over
     the past decade, due to a lack cross-language interoperability and security vulnerabilities,
-    I think there窶冱 a lot to learn from it. Having recently reimplemented Marshal.load
+    I think there’s a lot to learn from it. Having recently reimplemented Marshal.load
     to sidestep the security concerns, I want to reintroduce the Ruby community to
-    the gem (see what I did there?) that is binary serialization. Let窶冱 walk through
+    the gem (see what I did there?) that is binary serialization. Let’s walk through
     how Marshal works under the hood, and see what ideas from it we can salvage for
     a modern take on data serialization.
   speakers:
@@ -103,7 +103,7 @@ tagomoris:
   speakers:
   - id: tagomoris
 kokuyouwind:
-  title: Let's use LLMs from Ruby 縲� Refine RBS type definitions using
+  title: Let's use LLMs from Ruby 〜 Refine RBS type definitions using
   type: presentation
   language: JA
   live_or_recorded: venue
@@ -112,7 +112,7 @@ kokuyouwind:
     Though Python is recognized as a de facto standard language to use LLMs, we are Rubyists so we would like to explore how we use LLMs in the Ruby language.
 
     In this session, we'll cover Langchain.rb as a way to use LLMs in the Ruby language and share examples of managing prompts and using various LLMS.
-    The development of RBS Goose, which is a tool to refine RBS type definitions, is a good practical example. We窶冤l share how it works including prompt construction, as well as the tips for LLMs development and our evaluation of its performance, including accuracy and speed, at the combination of various prompts, Few-Shot examples, and LLMs.
+    The development of RBS Goose, which is a tool to refine RBS type definitions, is a good practical example. We’ll share how it works including prompt construction, as well as the tips for LLMs development and our evaluation of its performance, including accuracy and speed, at the combination of various prompts, Few-Shot examples, and LLMs.
   speakers:
   - id: kokuyouwind
 osyoyu:
@@ -178,7 +178,7 @@ ko1:
   description: |-
     This talk presents recent updates to Ractor, which enables parallel and concurrent programming on Ruby.
 
-    Ractor still lacks fundamental features. For example, we cannot use 窶徨equire窶� method and 窶徼imeout窶� methods on non-main Ractors because of synchronization and implementation issues. We will discuss such problems and how to solve them.
+    Ractor still lacks fundamental features. For example, we cannot use “require” method and “timeout” methods on non-main Ractors because of synchronization and implementation issues. We will discuss such problems and how to solve them.
     From a performance point of view, we have introduced the M:N thread scheduler in Ruby 3.3 and we will show the performance analysis with recent improvements.
   speakers:
   - id: ko1
@@ -288,13 +288,13 @@ KnuX:
   language: EN
   live_or_recorded: venue
   description: |-
-    In certain online circles, Ruby has a reputation for """being slow""" (very vigorous air quotes). I don窶冲 think this is true; often applications are slow because they are doing a lot more work than expected or intended. It's easy to write innocent-looking code that is actually using expensive abstractions.
+    In certain online circles, Ruby has a reputation for """being slow""" (very vigorous air quotes). I don’t think this is true; often applications are slow because they are doing a lot more work than expected or intended. It's easy to write innocent-looking code that is actually using expensive abstractions.
 
     The Ruby 3 series has seen amazing advances in performance. What if, in addition to these advances, we don't have to run as much code? Have you heard the saying "The fastest code is the code which does not run"?
 
-    This is where a profiler comes in: A profiler lets you see where cpu, time, memory and other resources are being spent, and thus can be used to pinpoint exactly why an application is slow, and it窶冱 doing.
+    This is where a profiler comes in: A profiler lets you see where cpu, time, memory and other resources are being spent, and thus can be used to pinpoint exactly why an application is slow, and what it’s doing.
 
-    In this talk, I explore how Datadog窶冱 `ddtrace` open-source profiler works: what窶冱 needed to build a profiler that can be always on, why use sampling, what sources of data the Ruby VM provides, and how you can investigate your Ruby applications with it.
+    In this talk, I explore how Datadog’s `ddtrace` open-source profiler works: what’s needed to build a profiler that can be always on, why use sampling, what sources of data the Ruby VM provides, and how you can investigate your Ruby applications with it.
   speakers:
   - id: KnuX
 jeremyevans0:
@@ -344,9 +344,9 @@ maximecb:
   language: EN
   live_or_recorded: venue
   description: |-
-    With each of the past 3 Ruby releases, YJIT has delivered higher and higher performance. However, we are seeing diminishing returns, because as JIT-compiled code becomes faster, it makes up less and less of the total execution time, which is now becoming dominated by C function calls. As such, it may appear like there is a fundamental limit to Ruby窶冱 performance.
+    With each of the past 3 Ruby releases, YJIT has delivered higher and higher performance. However, we are seeing diminishing returns, because as JIT-compiled code becomes faster, it makes up less and less of the total execution time, which is now becoming dominated by C function calls. As such, it may appear like there is a fundamental limit to Ruby’s performance.
 
-    In the first half of the 20th century, some early airplane designers thought that the speed of sound was a fundamental limit on the speed reachable by airplanes, thus coining the term 窶徭ound barrier窶�. This limit was eventually overcome, as it became understood that airflow behaves differently at supersonic speeds.
+    In the first half of the 20th century, some early airplane designers thought that the speed of sound was a fundamental limit on the speed reachable by airplanes, thus coining the term “sound barrier”. This limit was eventually overcome, as it became understood that airflow behaves differently at supersonic speeds.
 
     In order to break the Ruby performance barrier, it will be necessary to reduce the dependency on C extensions, and start writing more gems in pure Ruby code. In this talk, I want to look at this problem more in depth, and explore how YJIT can help enable writing pure-Ruby software that delivers high performance levels.
   speakers:
@@ -382,7 +382,7 @@ udzura:
     and mruby-wasmized-by-emscripten, which only support top-level script execution.\n\nTo
     accomplish these objectives, the author decided to build a VM from scratch, utilizing
     mruby's elegant bytecode spec for its instruction set. This places mruby/edge
-    within the 窶徇ruby family窶� as a new member.\n\nThe talk will cover its internal
+    within the “mruby family” as a new member.\n\nThe talk will cover its internal
     technologies, challenges, mruby VM and WASM insights, and future prospects, including
     support for WASM Component Model in mruby/edge."
   speakers:
@@ -405,16 +405,16 @@ mametter:
   speakers:
   - id: mametter
 ahogappa0613:
-  title: It's about time to pack Ruby and Ruby script in one binary
+  title: It's about time to pack Ruby and Ruby scripts in one binary
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
     Ruby is designed to execute every combination of operating systems and architectures.
-    However, it窶冱 not easily portable because it's impossible to execute by only sharing a Ruby script.
+    However, it’s not easily portable because it's impossible to execute by only sharing a Ruby scripts.
     It needs to install Ruby of the same version and Gems in order to execute.
 
-    One solution to the issues is "one binary,窶� which involves creating an executable file that contains Ruby script and Gems necessary to execute.
+    One solution to the issues is "one binary,” which involves creating an executable file that contains Ruby script and Gems necessary to execute.
     I am developing a game engine by Ruby, so I must create one binary when distributing the game.
     I developed a Gem to package Ruby, scripts, and Gems into a single executable file.
     This Gem was developed to not depend on the Ruby version without changing Ruby.
@@ -432,7 +432,7 @@ eregontp:
     However it also has some downsides including long warmup times (it takes a while to JIT compile all the C extension code), compatibility with huge C extensions (e.g. grpc) and slower installation of C extensions gems.
     In the last release, TruffleRuby changed the approach to run C extensions natively, like CRuby.
     In this talk, we would like to tell you this story, illustrate the challenges and discuss which parts of the C API could be improved.
-    We also explore how to run C extensions faster by using 窶廬nline caches in C窶�, which could also be applied in CRuby.
+    We also explore how to run C extensions faster by using “Inline caches in C”, which could also be applied in CRuby.
     Come and learn from 10 years of implementing and optimizing C extensions in various ways!
   speakers:
   - id: eregontp
@@ -486,9 +486,9 @@ k0kubun:
   language: EN
   live_or_recorded: venue
   description: |-
-    Have you enabled Ruby 3.3 YJIT? You窶决e using a much slower Ruby if you haven窶冲. YJIT makes Railsbench 1.7x faster. In production, YJIT presents a 17% speedup to millions of requests per second at Shopify.
+    Have you enabled Ruby 3.3 YJIT? You’re using a much slower Ruby if you haven’t. YJIT makes Railsbench 1.7x faster. In production, YJIT presents a 17% speedup to millions of requests per second at Shopify.
 
-    Why does YJIT make Ruby so much faster? In this talk, you窶冤l explore the latest YJIT optimizations that have a huge impact on your application窶冱 performance. Once you understand what you're missing out on, you can't help but enable YJIT.
+    Why does YJIT make Ruby so much faster? In this talk, you’ll explore the latest YJIT optimizations that have a huge impact on your application’s performance. Once you understand what you're missing out on, you can't help but enable YJIT.
   speakers:
   - id: k0kubun
 m3m0r7:
@@ -524,7 +524,7 @@ tenderlove:
     reads as well as decreased the machine code required for JIT compilation. But
     what about cache misses?  Is there any way we can speed up instance variable access
     in that case? Ruby 3.3 introduced a red-black tree cache to speed up instance
-    variable cache misses. Let窶冱 learn how instance variables are implemented, and
+    variable cache misses. Let’s learn how instance variables are implemented, and
     how the red black tree cache speeds them up!
   speakers:
   - id: tenderlove
@@ -569,13 +569,13 @@ m_seki:
   speakers:
   - id: m_seki
 junk0612:
-  title: 'From LALR to IELR: A Lrama''s next step'
+  title: 'From LALR to IELR: A Lrama''s Next Step'
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    In `parse.y`, there is a variable that represents the state of the Lexer, based on the idea that the Parser and the Lexer can be separated. However, in reality, the state of Parser and Lexer are shared and cannot be said to be separated. Also, the Lexer state is manually managed, but historical history has clouded the view, and additions and modifications must be done with care.
-    With the replacement of the parser generator from Bison to Lrama, the time has come to attack `parse.y` from the parser generator side, and Lrama is trying to solve this problem by generating an algorithmic parser called PSLR. As a first step, I will show how Lrama can generate a parser for a new algorithm called IELR, which is a prerequisite for PSLR.
+    In parse.y, there is a variable that represents the state of the Lexer, based on the idea that the Parser and the Lexer can be separated. However, in reality, the state of Parser and Lexer are shared and cannot be said to be separated. Also, the Lexer state is manually managed, but historical history has clouded the view, and additions and modifications must be done with care.
+    With the replacement of the parser generator from Bison to Lrama, the time has come to attack parse.y from the parser generator side, and Lrama is trying to solve this problem by generating an algorithmic parser called PSLR. As a first step, I will show how Lrama can generate a parser for a new algorithm called IELR, which is a prerequisite for PSLR.
     IELR is an improved version of LALR and can parse grammars that LALR cannot. In this presentation, I will explain the implementation of Lrama and how the parser is actually generated.
   speakers:
   - id: junk0612
@@ -585,11 +585,11 @@ Yuryu:
   language: EN
   live_or_recorded: venue
   description: |-
-    I broke the world record of pi calculations with 100 trillion digits. When I was preparing for the challenge, I created a small Ruby script and an ERB template for the calculation software config file to automate benchmarking, and a shell one-liner to create a CSV file for review. The script saved me days of manual work and allowed me to find optimal parameters. The final calculation took 157 days, almost twice as fast as the earliest configurations, which could窶况e taken more than 300 days.
+    I broke the world record of pi calculations with 100 trillion digits. When I was preparing for the challenge, I created a small Ruby script and an ERB template for the calculation software config file to automate benchmarking, and a shell one-liner to create a CSV file for review. The script saved me days of manual work and allowed me to find optimal parameters. The final calculation took 157 days, almost twice as fast as the earliest configurations, which could’ve taken more than 300 days.
 
-    This talk will show you how I turned the vague problem scope (breaking the pi world record) into a smaller solvable task (automation with Ruby). You窶冤l also learn scripting techniques for benchmarking such as invoking an external program in Ruby, and multiline text formatting with the sed, grep, and paste commands.
+    This talk will show you how I turned the vague problem scope (breaking the pi world record) into a smaller solvable task (automation with Ruby). You’ll also learn scripting techniques for benchmarking such as invoking an external program in Ruby, and multiline text formatting with the sed, grep, and paste commands.
 
-    You may not calculate pi, but I窶冦 sure you have a thing or two that you want your computer to do for you!
+    You may not calculate pi, but I’m sure you have a thing or two that you want your computer to do for you!
   speakers:
   - id: Yuryu
 KJTsanaktsidis:
@@ -624,9 +624,9 @@ palkan_tula:
   language: EN
   live_or_recorded: venue
   description: |-
-    How often have you heard, 窶廬 wish Ruby had X from Y窶�? Developers tend to desire features they love in one language to be available in another. That窶冱 why, for example, we got pattern matching and shorthand Hashes added to Ruby. What窶冱 next? What will inspire the next Ruby syntax addition? Crystal? Elixir? Zig (have you heard about it)? PHP (why not)?
+    How often have you heard, “I wish Ruby had X from Y”? Developers tend to desire features they love in one language to be available in another. That’s why, for example, we got pattern matching and shorthand Hashes added to Ruby. What’s next? What will inspire the next Ruby syntax addition? Crystal? Elixir? Zig (have you heard about it)? PHP (why not)?
 
-    Let窶冱 embark on a fantastic journey of exploring syntax features from other languages, such as method overloading or null coalescing assignment, and how to port them to Ruby. But why is it fantastic? I want to turn fantasy into reality and show how we can experiment with Ruby syntax additions without waiting for official releases with experimental features.
+    Let’s embark on a fantastic journey of exploring syntax features from other languages, such as method overloading or null coalescing assignment, and how to port them to Ruby. But why is it fantastic? I want to turn fantasy into reality and show how we can experiment with Ruby syntax additions without waiting for official releases with experimental features.
   speakers:
   - id: palkan_tula
 makenowjust:
@@ -664,7 +664,7 @@ vinistock:
   description: |-
     During the last few years, the Ruby community invested significant effort into improving developer tooling. A lot of this effort has been divergent; trying out many solutions to find out what works best and fits Rubyists expectations.
 
-    So where are we at this point? How do we compare to other ecosystems? Is it time to converge, unite efforts and reduce fragmentation? And where are we going next? Let窶冱 analyze the full picture of Ruby developer tooling and try to answer these questions together.
+    So where are we at this point? How do we compare to other ecosystems? Is it time to converge, unite efforts and reduce fragmentation? And where are we going next? Let’s analyze the full picture of Ruby developer tooling and try to answer these questions together.
   speakers:
   - id: vinistock
 yukihiro_matz:
