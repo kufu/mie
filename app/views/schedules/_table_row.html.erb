@@ -10,10 +10,12 @@
     </div>
   </th>
   <% track_list.each do |track| %>
-    <% if row.tracks[track] %>
-      <td>
+    <td>
+      <% if row.tracks[track] %>
         <div class="p-2"><%= render("schedules/card", schedule: row.tracks[track], mode: :schedule, inactive: @selected) %></div>
-      </td>
-    <% end %>
+      <% else %>
+        <div class="sm:p-2"></div>
+      <% end %>
+    </td>
   <% end %>
 </tr>
