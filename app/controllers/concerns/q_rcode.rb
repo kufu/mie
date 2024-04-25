@@ -12,7 +12,7 @@ module QRcode
       color:,
       shape_rendering:,
       module_size:,
-      standalone: false,
+      standalone: true,
       use_path: true
     )
   end
