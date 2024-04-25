@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_last_path
-    session[:last_path] = request.path
+    session[:last_path] = request.fullpath
   end
 
   def with_time_zone(&)
