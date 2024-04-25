@@ -17,7 +17,7 @@
             <% if @user&.profile&.trophies&.present? %>
               <div class="flex flex-wrap gap-1 py-2">
                 <% @user.profile.trophies.order(:order).each do |trophy| %>
-                  <img src="<%= trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
+                  <img src="<%= image_url trophy.icon_url %>" class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
                 <% end %>
               </div>
             <% end %>
@@ -96,3 +96,4 @@
     </div>
   </div>
 <% end %>
+
