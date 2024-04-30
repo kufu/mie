@@ -36,4 +36,12 @@ class TriggersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to profile_path
   end
+
+  test 'no triggered if no session' do
+    assert_no_difference -> { ProfileTrophy.count } do
+      get trigger_path(@trigger, key: 'testkey')
+    end
+
+    assert_redirected_to profile_path
+  end
 end

@@ -7,9 +7,17 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     @team = teams(:alpha)
   end
 
-  test 'should get new' do
+  test 'should get new with session' do
+    omniauth_callback_uid(1234) # profile_one
+    get '/auth/github/callback'
+
     get new_team_url
     assert_response :success
+  end
+
+  test 'should not get new without session' do
+    get new_team_url
+    assert_redirected_to profile_path
   end
 
   test 'should create team and creator profile has admin role' do
@@ -36,6 +44,14 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :forbidden
+  end
+
+  test 'should not create team and redirect to profile if no session' do
+    assert_no_changes -> { [Team.count, TeamProfile.count] } do
+      post teams_url, params: { team: { name: 'Charlie' } }
+    end
+
+    assert_redirected_to profile_path
   end
 
   test 'should return new page when create with invalid param' do
@@ -76,6 +92,11 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test 'should not show team if no session' do
+    get team_url(@team)
+    assert_redirected_to profile_path
+  end
+
   test 'should update team' do
     omniauth_callback_uid(1234) # profile_one
     get '/auth/github/callback'
@@ -90,6 +111,11 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
 
     patch team_url(@team), params: { team: { name: 'Delta' } }
     assert_response :forbidden
+  end
+
+  test 'should not update team if no session' do
+    patch team_url(@team), params: { team: { name: 'Delta' } }
+    assert_redirected_to profile_path
   end
 
   test 'should destroy team' do
@@ -112,5 +138,10 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :forbidden
+  end
+
+  test 'should not destroy team if no session' do
+    delete team_url(@team)
+    assert_redirected_to profile_path
   end
 end

@@ -3,6 +3,7 @@
 class MembersController < ApplicationController
   class NoPermissionError < StandardError; end
 
+  before_action :make_sure_user_logged_in
   before_action :set_team
   before_action :set_team_profile, except: :create
   before_action :define_error_variable

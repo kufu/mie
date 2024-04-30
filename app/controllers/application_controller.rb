@@ -50,6 +50,13 @@ class ApplicationController < ActionController::Base
     request.path_parameters[:event_name] = @event.name
   end
 
+  def make_sure_user_logged_in
+    return if @user&.profile
+
+    session[:breakout_turbo] = true
+    redirect_to profile_path, flash: { error: I18n.t('errors.login_required') }
+  end
+
   def create_and_set_user
     @user = User.create!
     session[:user_id] = @user.id
