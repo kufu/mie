@@ -94,14 +94,15 @@
                 <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
               <% end %>
             <% elsif @plan.new_record? %>
-              <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
+              <% terms_of_service_dialog_id = SecureRandom.uuid %>
+              <div data-controller="dialog" data-dialog-element-id-value="<%= terms_of_service_dialog_id %>">
                 <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
                         data-action="click->dialog#open"
                 >
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
                   <%= I18n.t('card.add') %>
                 </button>
-                <dialog id="terms-of-service-<%= schedule.id %>" class="dialog">
+                <dialog id="<%= terms_of_service_dialog_id %>" class="dialog">
                   <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
                     <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
                   </div>
