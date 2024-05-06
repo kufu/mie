@@ -66,7 +66,8 @@ module Plans
     end
 
     def ogp_background_image
-      "data:image/png;base64,#{Base64.strict_encode64(File.read("app/assets/images/#{@event.name}/ogp.png", mode: 'rb'))}"
+      "data:image/png;base64,#{Base64.strict_encode64(File.read("app/assets/images/#{@event.name}/ogp.png",
+                                                                mode: 'rb'))}"
     end
   end
 end
