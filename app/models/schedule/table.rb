@@ -2,9 +2,10 @@
 
 class Schedule
   class Table
-    attr_reader :track_list, :rows
+    attr_reader :track_list, :rows, :day
 
-    def initialize(schedules)
+    def initialize(schedules, day = nil)
+      @day = day
       @track_list = schedules.map(&:track).uniq.sort_by(&:position).map(&:name)
 
       grouped_schedules = schedules.group_by do |s|
