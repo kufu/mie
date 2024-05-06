@@ -31,7 +31,11 @@
     <meta property="og:title" content="RubyKaigi Schedule.select">
     <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
     <% unless Rails.env.test? %>
-      <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
+      <% if controller_name == 'plans' && action_name = 'show' && @plan %>
+        <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
+      <% else %>
+        <meta property="og:image" content="<%= asset_url("#{@event.name}/ogp_top.png") %>" />
+      <% end %>
     <% end %>
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image"/>
