@@ -80,7 +80,7 @@
                     </div>
                     <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
                     <div class="p-2 pl-4 flex flex-wrap">
-                      <% @team.profiles.reject { |prof| row.schedules.any? { prof.current_plan&.schedule_checked(_1) } }.each do |prof| %>
+                      <% @team.active_profiles.reject { |prof| row.schedules.any? { prof.current_plan&.schedule_checked(_1) } }.each do |prof| %>
                         <img src="<%= prof.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black ml-[-16px]" />
                       <% end %>
                     </div>
