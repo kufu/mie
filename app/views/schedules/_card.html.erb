@@ -1,6 +1,6 @@
 <%= turbo_frame_tag schedule do %>
   <div class="flex h-full">
-    <div class="w-full min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+    <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
       <div class="flex flex-col justify-between items-start">
         <% schedule.speakers.each do |speaker| %>
           <div class="flex items-center m-w-80 mb-2">
@@ -10,11 +10,11 @@
         <% end %>
 
         <% unless mode == :team %>
-          <div class="flex">
-            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+          <div class="flex flex-wrap gap-2">
+            <div class="flex flex-row justify-center items-center px-3 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
               <span class="text-[rgb(112,109,101)]">Lang: </span><span class="ml-2"><%= schedule.language %></span>
             </div>
-            <div class="flex flex-row justify-center items-center px-3 mr-2 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
+            <div class="flex flex-row justify-center items-center px-3 h-6 bg-[rgb(248,247,246)] border border-solid border-[rgb(214,211,208)] box-border rounded-[100px] text-sm text-[rgb(35,34,31)]">
               <span class="text-[rgb(112,109,101)]">Track: </span><span class="ml-2"><%= schedule.track.name %></span>
             </div>
           </div>
@@ -48,7 +48,7 @@
         <% end %>
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex justify-end flex-wrap-reverse gap-2">
         <% if mode == :plan && @plan.schedules.include?(schedule) %>
           <div class="mr-auto" data-controller="dialog" data-dialog-element-id-value="edit-<%= schedule.id %>-memo-dialog">
             <button
@@ -94,14 +94,15 @@
                 <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
               <% end %>
             <% elsif @plan.new_record? %>
-              <div data-controller="dialog" data-dialog-element-id-value="terms-of-service-<%= schedule.id %>">
+              <% terms_of_service_dialog_id = SecureRandom.uuid %>
+              <div data-controller="dialog" data-dialog-element-id-value="<%= terms_of_service_dialog_id %>">
                 <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
                         data-action="click->dialog#open"
                 >
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
                   <%= I18n.t('card.add') %>
                 </button>
-                <dialog id="terms-of-service-<%= schedule.id %>" class="dialog">
+                <dialog id="<%= terms_of_service_dialog_id %>" class="dialog">
                   <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
                     <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
                   </div>
@@ -141,7 +142,7 @@
           </div>
         <% end %>
 
-        <div class="ml-2">
+        <div>
           <a
             class="show-detail-button p-2 text-sm bg-transparent hover:bg-[rgb(242,242,242)] text-[rgb(35,34,30)] box-border inline-flex justify-center items-center text-center rounded-md font-bold"
             href="<%= event_schedule_dialog_url(schedule, event_name: @plan.event.name) %>"

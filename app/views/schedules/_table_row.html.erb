@@ -2,16 +2,20 @@
 <tr class="align-baseline" id="<%= row.turbo_stream_id %>">
   <th class="py-2 px-0 align-baseline">
     <div class="flex flex-col gap-1">
-      <div class="flex items-center">
+      <div class="flex items-center my-4">
         <p class="text-xl font-normal mr-4 shrink-0"><%= row.start_end %></p>
         <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
       </div>
-      <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
+      <p class="hidden sm:block text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
     </div>
   </th>
   <% track_list.each do |track| %>
-      <td>
-        <div class="p-2"><%= row.tracks[track] ? render("schedules/card", schedule: row.tracks[track], mode: :schedule, inactive: @selected) : nil %></div>
-      </td>
+    <td>
+      <% if row.tracks[track] %>
+        <div class="p-2"><%= render("schedules/card", schedule: row.tracks[track], mode: :schedule, inactive: @selected) %></div>
+      <% else %>
+        <div class="sm:p-2"></div>
+      <% end %>
+    </td>
   <% end %>
 </tr>
