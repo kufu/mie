@@ -27,7 +27,7 @@ gem 'turbo-rails', '~> 2.0'
 gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
-gem 'imgkit'
+gem 'imgkit', '~> 1.6.3'
 install_if -> { RUBY_PLATFORM =~ /darwin/ } do
   gem 'wkhtmltoimage-binary'
 end
