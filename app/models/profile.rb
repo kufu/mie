@@ -17,6 +17,10 @@ class Profile < ApplicationRecord
     team_profiles.find_by(role: %i[admin member])&.team
   end
 
+  def current_plan
+    user.current_plan
+  end
+
   def belongs_to_any_team?
     team_profiles.where(role: %i[admin member]).exists?
   end
