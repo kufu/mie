@@ -62,4 +62,8 @@ class Plan < ApplicationRecord
     @password = Password.create(new_password)
     self.password_hash = @password
   end
+
+  def schedule_checked(schedule)
+    plan_schedules.find_by(schedule:).present?
+  end
 end

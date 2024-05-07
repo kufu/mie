@@ -79,6 +79,11 @@
                       <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
                     </div>
                     <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
+                    <div class="p-2 pl-4 flex flex-wrap">
+                      <% @team.active_profiles.reject { |prof| row.schedules.any? { prof.current_plan&.schedule_checked(_1) } }.each do |prof| %>
+                        <img src="<%= prof.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black ml-[-16px] mt-1" />
+                      <% end %>
+                    </div>
                   </div>
                 </th>
                 <% @schedule_table[day].track_list.each do |track| %>
