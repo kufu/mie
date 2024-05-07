@@ -64,6 +64,6 @@ class Plan < ApplicationRecord
   end
 
   def schedule_checked(schedule)
-    plan_schedules.find_by(schedule: schedule).present?
+    plan_schedules.find_by(schedule:).present?
   end
 end
