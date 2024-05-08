@@ -2,7 +2,9 @@
   <div class="flex items-center justify-end direction-row h-[50px] bg-[var(--mainColor)]">
     <div class="flex flex-col sm:flex-row flex-grow items-start sm:items-center mx-4 my-0 text-[var(--textColor)]">
       <% unless Rails.env.test? %>
-        <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
+        <a href="<%= event_path %>">
+          <img class="h-6" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>">
+        </a>
       <% end %>
       <div class="flex items-center text-xs sm:text-sm">
         <div class="flex items-center gap-0.5 sm:ml-2">
