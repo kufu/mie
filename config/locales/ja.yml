@@ -60,6 +60,7 @@ ja:
     username_to_invite: "招待するユーザー名"
     delete_team: "このチームを削除しますか？"
     edit_introduce: "自己紹介を編集"
+    read_qrcode_to_be_friend: "QRコードを読み込んで友達追加"
   button:
     settings: "設定"
     update_memo: "メモを更新"
@@ -80,6 +81,8 @@ ja:
     remove: "削除"
     manage_members: "メンバーを管理"
     delete_team: "チームを削除"
+    add_friend: "友達を追加"
+    reload: "再読み込み"
   default_vales:
     plan_title: "視聴予定"
 

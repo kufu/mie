@@ -29,6 +29,30 @@
                     </button>
                     <%= render 'dialog', profile: @profile %>
                   </div>
+                  <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="add-friend-dialog">
+                    <button
+                      class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+                      data-action="click->dialog#open"
+                    >
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                      <%= I18n.t('button.add_friend') %>
+                    </button>
+                    <dialog id="add-friend-dialog" class="dialog">
+                      <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                        <p class="text-xl"><%= I18n.t('dialog.read_qrcode_to_be_friend') %></p>
+                      </div>
+                      <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                        <div class="w-full sm:w-[656px] p-6">
+                          <%= turbo_frame_tag 'friend-qr', src: new_profile_friend_path, loading: :lazy  %>
+                        </div>
+                      </div>
+                      <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                        <div class="flex justify-end">
+                          <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
                 <% end %>
 
               </div>

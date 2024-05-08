@@ -91,6 +91,7 @@ en:
     username_to_invite: "User name to invite"
     delete_team: "Are you sure delete this team?"
     edit_introduce: "Edit introduce yourself"
+    read_qrcode_to_be_friend: "Read QR code to add friend"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -111,6 +112,8 @@ en:
     remove: "Remove"
     manage_members: "Manage members"
     delete_team: "Delete team"
+    add_friend: "Add friend"
+    reload: "Reload"
   default_vales:
     plan_title: "My plans"
 

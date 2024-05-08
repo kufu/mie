@@ -1,0 +1,9 @@
+<%= turbo_frame_tag 'friend-qr' do %>
+  <div class="w-full">
+    <%= @qrcode.html_safe %>
+    <div class="flex flex-col w-full mt-4">
+      expires at: <%= @trigger.expires_at %>
+      <a href="<%= new_profile_friend_path %>" class="normal-button mr-2"><%= I18n.t('button.reload') %></a>
+    </div>
+  </div>
+<% end %>
