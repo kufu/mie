@@ -109,7 +109,7 @@
         <div class="mt-4 overflow-y-auto">
           <% @plans_table.each do |k, v| %>
             <div id="schedule-<%= k %>" class="schedule-table hidden">
-              <table class="h-full w-full border-collapse border-spacing-0">
+              <table class="hidden sm:table h-full w-full border-collapse border-spacing-0">
                 <thead>
                   <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
                   <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
@@ -133,6 +133,11 @@
                   <% end %>
                 </tbody>
               </table>
+              <div class="sm:hidden" id="mobile-table-<%= k %>">
+                <% @plans_table[k].rows.each do |row| %>
+                  <%= render partial: 'mobile_table_row', locals: { row: row, plan: @plan, track_list: @plans_table[k].track_list } %>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>

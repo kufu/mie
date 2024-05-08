@@ -1,0 +1,7 @@
+<% @selected = @plan.plan_schedules.map(&:schedule).any? { row.schedules.include?(_1) } %>
+<p class="text-xl font-normal mr-4 shrink-0"><%= row.start_end %></p>
+<% track_list.each do |track| %>
+  <% if row.tracks[track] %>
+    <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
+  <% end %>
+<% end %>
