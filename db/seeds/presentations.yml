@@ -103,7 +103,7 @@ tagomoris:
   speakers:
   - id: tagomoris
 kokuyouwind:
-  title: Let's use LLMs from Ruby 〜 Refine RBS type definitions using
+  title: Let's use LLMs from Ruby 〜 Refine RBS codes using LLM 〜
   type: presentation
   language: JA
   live_or_recorded: venue
@@ -111,8 +111,8 @@ kokuyouwind:
     Large Language Models (LLMs) have evolved rapidly over the past few years and there have already been many practical applications in a variety of fields.
     Though Python is recognized as a de facto standard language to use LLMs, we are Rubyists so we would like to explore how we use LLMs in the Ruby language.
 
-    In this session, we'll cover Langchain.rb as a way to use LLMs in the Ruby language and share examples of managing prompts and using various LLMS.
-    The development of RBS Goose, which is a tool to refine RBS type definitions, is a good practical example. We’ll share how it works including prompt construction, as well as the tips for LLMs development and our evaluation of its performance, including accuracy and speed, at the combination of various prompts, Few-Shot examples, and LLMs.
+    In this session, I will explain the basics of Large Language Models(LLMs), and then cover Langchain.rb as a tool to use LLMs from the Ruby language.
+    The development of RBS Goose, which is a tool to refine RBS type signatures, is a good practical example. We’ll share how it works including prompt construction, as well as the tips for LLMs development and our evaluation of its performance, including accuracy and speed, at the combination of various prompts, Few-Shot examples, and LLMs.
   speakers:
   - id: kokuyouwind
 osyoyu:
@@ -146,7 +146,7 @@ jhawthorn:
   speakers:
   - id: jhawthorn
 ima1zumi:
-  title: Reline's Journey to GNU Readline Compatibility
+  title: 'Exploring Reline: Enhancing Command Line Usability'
   type: presentation
   language: JA
   live_or_recorded: venue
@@ -321,7 +321,7 @@ hasumikin:
   description: |-
     Lrama-generated-parse.c and Prism are attempting to create a universal parser of the Ruby language. I will show you a new PicoRuby compiler, which has to be the most memory-efficient among all Ruby compilers, designed to leverage those universal parsers.
 
-    Making a parser universal is not straightforward. This journey starts with investigating CRuby's internal implementation because the Lrama-generating-parser deeply originally depends on CRuby. We are going to replace the dependency with a bunch of code to make the parser universal. Another requirement is to improve the parsers, including Prism, regarding portability.
+    Making a parser universal is not straightforward. This journey starts with investigating CRuby's internal implementation because the Lrama-generated-parser deeply originally depends on CRuby. We are going to replace the dependency with a bunch of code to make the parser universal. Another requirement is to improve the parsers, including Prism, regarding portability.
 
     Finally, writing a memory-efficient VM code generator makes a universal parser a success. Let's delve into the concept of universality and deepen our understanding of it.
   speakers:
@@ -388,7 +388,7 @@ udzura:
   speakers:
   - id: udzura
 mametter:
-  title: The development roadmap and "good first issues" of TypeProf
+  title: Good first issues of TypeProf
   type: presentation
   language: JA
   live_or_recorded: venue
@@ -474,7 +474,7 @@ sylph01:
   - id: sylph01
 rubylangorg:
   title: Ruby Committers and the World
-  type: keynote
+  type: presentation
   language: JA
   live_or_recorded: venue
   description: CRuby committers on stage!

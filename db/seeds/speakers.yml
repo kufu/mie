@@ -22,13 +22,6 @@ keynotes:
     github_id: ioquatix
     twitter_id: ioquatix
     gravatar_hash: 1373435a1059a97614969ab154c5b224
-  rubylangorg:
-    id: rubylangorg
-    name: CRuby Committers
-    bio: ''
-    github_id:
-    twitter_id: rubylangorg
-    gravatar_hash: ce6d997265cefede13ee7e7e2a2cf9b2
   yukihiro_matz:
     id: yukihiro_matz
     name: Yukihiro "Matz" Matsumoto
@@ -53,7 +46,7 @@ speakers:
       working on improving Ruby for GitHub (and everyone else). He was an early contributor
       to Ruby's new parser Prism and an avid compiler nerd.
     github_id: HParker
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 18a40c6996fbaa47562e16bd42b0f430
   ahogappa0613:
     id: ahogappa0613
@@ -62,7 +55,7 @@ speakers:
       I am a web application developer at STORES, Inc.
       As a hobby, I develop game engines and tools to pack ruby in one binary.
     github_id: ahogappa0613
-    twitter_id:
+    twitter_id: 
     gravatar_hash: c53f1542d84fc28ab81b979173af50ae
   eregontp:
     id: eregontp
@@ -89,6 +82,13 @@ speakers:
     github_id: headius
     twitter_id: headius
     gravatar_hash: f1d37642fdaa1662ff46e4c65731e9ab
+  rubylangorg:
+    id: rubylangorg
+    name: CRuby Committers
+    bio: ''
+    github_id: 
+    twitter_id: rubylangorg
+    gravatar_hash: ce6d997265cefede13ee7e7e2a2cf9b2
   osyoyu:
     id: osyoyu
     name: Daisuke Aritomo (osyoyu)
@@ -123,7 +123,7 @@ speakers:
       Ph.D. student at SOKENDAI (NII, National Institute of Informatics). Researcher for information security and formal language. Ruby committer.
       I am the author of Regexp optimization to prevent ReDoS in Ruby 3.2.0.
     github_id: makenowjust
-    twitter_id:
+    twitter_id: 
     gravatar_hash: db1b7e3c6fe6f6a0e9752b2c19bf5473
   hasumikin:
     id: hasumikin
@@ -180,7 +180,7 @@ speakers:
       That's why and how he met Ruby. He is currently working as a senior serverless
       strategist at Fastly. He also plays the contrabass once in a while.
     github_id: remore
-    twitter_id:
+    twitter_id: 
     gravatar_hash: fbe207d1bece86feb799fbc1841ce735
   KJTsanaktsidis:
     id: KJTsanaktsidis
@@ -208,12 +208,13 @@ speakers:
       Tokyo, 2007. Now he is still working on MRI development at STORES, Inc. He is
       also a director of Ruby Association.
     github_id: ko1
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 990397e8b38d6f5f4ae8ff343e8b883a
   ima1zumi:
     id: ima1zumi
     name: Mari Imaizumi
-    bio: She is a software engineer also IRB and Reline maintainer.
+    bio: Mari Imaizumi is an IRB, Reline committer, and a software engineer at STORES,
+      inc.
     github_id: ima1zumi
     twitter_id: ima1zumi
     gravatar_hash: 74b5a82b8710accc1e6189a19f0b4935
@@ -228,7 +229,7 @@ speakers:
       his students have contributed to the implementation of Ruby, mostly in the area
       of I18N.
     github_id: duerst
-    twitter_id:
+    twitter_id: 
     gravatar_hash: f52e87b92cafb1e8c6d155076b56ecff
   qnighy:
     id: qnighy
@@ -270,7 +271,7 @@ speakers:
     bio: Matt Muller is a software engineer and maintainer of AWS SDK for Ruby. You
       can find him on GitHub as @mullermp.
     github_id: mullermp
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 050a145197ec5162f0cf4c2711f47bdc
   eightbitraptor:
     id: eightbitraptor
@@ -282,7 +283,7 @@ speakers:
 
       When he's not scratching his head over a segfault he can be found brewing coffee and building keyboards.
     github_id: eightbitraptor
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 43f0363b6c12155c36d0c06043c268fd
   maximecb:
     id: maximecb
@@ -293,17 +294,13 @@ speakers:
       She is currently leading a project at Shopify to build YJIT, a new JIT compiler
       built inside CRuby.
     github_id: maximecb
-    twitter_id:
+    twitter_id: 
     gravatar_hash: f1457acc3f8d176db1d28e9f30779ae6
   m3m0r7:
     id: m3m0r7
     name: memory
-    bio: I enjoy implementing VMs like JVM or RubyVM with PHP. I have around 10 years
-      of experience as a software engineer, and I have served as a CTO in the past.
-      Currently, I am working as an Engineering Manager. I frequently speak at events
-      primarily within the PHP community. I am the author of books titled "Software
-      Design (Magazine)", "みんなの PHP （Minna no PHP）" and "レガシーコードとどう付き合うか（Legacy code
-      to dou tsukiau ka）"
+    bio: I am a CTO at Liiga, Inc. I enjoy implementing VMs with PHP including JVM
+      and RubyVM. I have some book authors. My hobby is reading binary files.
     github_id: m3m0r7
     twitter_id: m3m0r7
     gravatar_hash: 218473ff7abad0fcd72865da2b23bb5b
@@ -322,7 +319,7 @@ speakers:
   coe401_:
     id: coe401_
     name: Misaki Shioi
-    bio: Web application developer. Rubyist. Member of Asakusa.rb.
+    bio: Web application programmer. Rubyist. Member of Asakusa.rb.
     github_id: shioimm
     twitter_id: coe401_
     gravatar_hash: 5b3338b3676d4f7091a575e584f3a4f4
@@ -350,7 +347,7 @@ speakers:
     bio: A wild (freelance) programmer. I can do cryptography and authentication/authorization
       a little.
     github_id: sylph01
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 3cffaccb703ff33ea0028f9f0caa8e4d
   gedorinku:
     id: gedorinku
@@ -368,7 +365,7 @@ speakers:
       never sleep). He's been working on Ruby tooling for the past decade, and has
       shipped hundreds of bugs across RubyGems & Bundler.
     github_id: segiddins
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 4d6be90af74894fd132fb06dacec04d7
   tagomoris:
     id: tagomoris
@@ -456,7 +453,8 @@ speakers:
   spikeolaf:
     id: spikeolaf
     name: Yuichiro Kaneko
-    bio: The author of Lrama LALR parser generator. Ruby committer.
+    bio: The author of [Lrama](https://github.com/ruby/lrama) LALR parser generator.
+      Ruby committer.
     github_id: yui-knk
     twitter_id: spikeolaf
     gravatar_hash: b3ba3ccedfbf4d605f00bafd1a732529
@@ -486,5 +484,5 @@ speakers:
       A newbie committer to Ruby, Swift, and LLVM, especially working on WebAssembly support for the languages.
       Also a graduate CS student at Waseda University.
     github_id: kateinoigakukun
-    twitter_id:
+    twitter_id: 
     gravatar_hash: 7a4968fbcd56e81f95a4f3c186141b52
