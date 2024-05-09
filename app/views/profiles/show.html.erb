@@ -29,6 +29,7 @@
                     </button>
                     <%= render 'dialog', profile: @profile %>
                   </div>
+                  <% if @user.admin? %>
                   <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="add-friend-dialog">
                     <button
                       class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
@@ -53,6 +54,7 @@
                       </div>
                     </dialog>
                   </div>
+                  <% end %>
                 <% end %>
 
               </div>
