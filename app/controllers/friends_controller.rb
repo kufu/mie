@@ -16,9 +16,7 @@ class FriendsController < ApplicationController
       @trigger = new_trigger
     end
 
-    unless @trigger.save
-      render
-    end
+    raise unless @trigger.save
 
     @qrcode = url_to_svg_qrcode(url: trigger_url(@trigger, key: @trigger.key))
   end

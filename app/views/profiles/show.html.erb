@@ -90,18 +90,20 @@
       </div>
     </div>
 
-    <div class="w-full sm:w-1/2">
-      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <h2 class="text-xl sm:text-4xl">Friends</h2>
-          <div class="flex flex-wrap p-2 gap-4">
-            <% @profile.friend_profiles.each do |friend| %>
-              <a href="/profiles/<%= friend.name %>">
-                <img src="<%= friend.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black" />
-              </a>
-            <% end %>
-          </div>
+    <% if @profile.friend_profiles.present? %>
+      <div class="w-full sm:w-1/2">
+        <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+          <h2 class="text-xl sm:text-4xl">Friends</h2>
+            <div class="flex flex-wrap p-2 gap-4">
+              <% @profile.friend_profiles.each do |friend| %>
+                <a href="/profiles/<%= friend.name %>">
+                  <img src="<%= friend.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black" />
+                </a>
+              <% end %>
+            </div>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <% if my_profile? || @profile.belongs_to_any_team? %>
       <div class="w-full sm:w-1/2">
