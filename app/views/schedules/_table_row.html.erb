@@ -13,6 +13,15 @@
     <td>
       <% if row.tracks[track] %>
         <div class="p-2"><%= render("schedules/card", schedule: row.tracks[track], mode: :schedule, inactive: @selected) %></div>
+        <% if @user&.profile %>
+          <div class="flex flex-wrap ml-6 mb-4">
+            <% @user.profile.friend_profiles.each do |profile| %>
+              <% if @friends_schedules_map[profile.id].include?(row.tracks[track].id) %>
+                <img src="<%= profile.avatar_url %>" class="h-8 w-8 rounded-full border-2 border-black mt-[-4px] ml-[-16px] mt-1" />
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       <% else %>
         <div class="sm:p-2"></div>
       <% end %>
