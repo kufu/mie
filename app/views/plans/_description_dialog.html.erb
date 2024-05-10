@@ -6,7 +6,7 @@
         <p class="text-xl"><%= I18n.t('description.form_titme') %></p>
       </div>
       <div class="max-h-[calc(100vh-212px)] overflow-auto">
-        <div class="w-full sm:w-[656px] p-6">
+        <div class="w-full p-6">
           <%= f.text_area :description, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
           <div class="font-xs mt-2 text-[rgb(112,109,101)]">
             <span data-word-counter-target="counter"></span>/<%= plan_description_max_length %>
