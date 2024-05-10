@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'rqrcode', '~> 2.2'
 
 gem 'rexml', '~> 3.2'
+
+gem 'solid_queue', '~> 0.3.0'
