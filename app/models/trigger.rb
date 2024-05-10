@@ -13,7 +13,7 @@ class Trigger < ApplicationRecord
 
   validate :check_action_is_json_string
 
-  def perform(target, given_key)
+  def perform(target, given_key = '')
     check_key(given_key)
     check_amount
     check_expires
