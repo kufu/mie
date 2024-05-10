@@ -183,7 +183,7 @@ GEM
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
-    pg (1.4.6)
+    pg (1.5.6)
     prettier_print (1.2.1)
     propshaft (0.8.0)
       actionpack (>= 7.0.0)
@@ -336,7 +336,7 @@ DEPENDENCIES
   listen (~> 3.3)
   omniauth-github (~> 2.0)
   omniauth-rails_csrf_protection (~> 1.0)
-  pg (~> 1.1)
+  pg (~> 1.5)
   propshaft
   puma (~> 5.0)
   rack-contrib (~> 2.3.0)
