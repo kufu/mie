@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/session', to: 'sessions#delete'
 
-  resource :profile, only: %i[show update]
+  resource :profile, only: %i[show update] do
+    resources :friends, only: %i[new]
+  end
   resources :profiles, only: %i[show update]
 
   scope '/:event_name', as: 'event' do

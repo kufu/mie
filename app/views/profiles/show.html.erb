@@ -29,11 +29,37 @@
                     </button>
                     <%= render 'dialog', profile: @profile %>
                   </div>
+                  <% if @user.admin? %>
+                  <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="add-friend-dialog">
+                    <button
+                      class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
+                      data-action="click->dialog#open"
+                    >
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
+                      <%= I18n.t('button.add_friend') %>
+                    </button>
+                    <dialog id="add-friend-dialog" class="dialog">
+                      <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                        <p class="text-xl"><%= I18n.t('dialog.read_qrcode_to_be_friend') %></p>
+                      </div>
+                      <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                        <div class="w-full sm:w-[656px] p-6">
+                          <%= turbo_frame_tag 'friend-qr', src: new_profile_friend_path, loading: :lazy  %>
+                        </div>
+                      </div>
+                      <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                        <div class="flex justify-end">
+                          <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
+                  <% end %>
                 <% end %>
 
               </div>
 
-              <% unless my_profile? %>
+              <% if !my_profile? && @profile.user.current_plan %>
                 <div>
                   <a class="text-blue-700 visited:text-purple-700" href="<%= event_plan_path(@profile.user.current_plan, event_name: @profile.user.current_plan.event.name) %>">
                     <p><%= @profile.user.current_plan.title %></p>
@@ -66,60 +92,77 @@
       </div>
     </div>
 
-    <div class="w-full sm:w-1/2">
-      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <h2 class="text-xl sm:text-4xl">Team</h2>
-        <% if @profile.belongs_to_any_team? %>
-          <div class="flex items-center py-4">
-
-            <% if my_profile? %>
-              <a href="<%= team_path(@user.profile.current_team) %>">
-                <p><%= @user.profile.current_team.name %>
-                  (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
-                </p>
-              </a>
-              <% unless @user.profile.current_team.admin?(@user) %>
-                <div class="flex-grow flex justify-end">
-                  <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
-                    <%= f.submit 'exit', class: 'danger-button' %>
-                  <% end %>
-                </div>
+    <% if @profile.friend_profiles.present? %>
+      <div class="w-full sm:w-1/2">
+        <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+          <h2 class="text-xl sm:text-4xl">Friends</h2>
+            <div class="flex flex-wrap p-2 gap-4">
+              <% @profile.friend_profiles.each do |friend| %>
+                <a href="/profiles/<%= friend.name %>">
+                  <img src="<%= friend.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black" />
+                </a>
               <% end %>
-            <% else %>
-              <p><%= @profile.current_team.name %>
-                (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
-              </p>
-            <% end %>
+            </div>
+        </div>
+      </div>
+    <% end %>
 
-          </div>
-        <% elsif my_profile? %>
-          <div class="flex flex-col justify-center items-center py-4 gap-4">
-            <div class="p-2">
-              <p class="text-xl"><%= I18n.t('teams.about') %></p>
-              <div class="p-4">
-                <ul class="list-disc list-inside leading-7">
-                  <% I18n.t('teams.features').each do |feature| %>
-                    <li><%= feature %></li>
+    <% if my_profile? || @profile.belongs_to_any_team? %>
+      <div class="w-full sm:w-1/2">
+        <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
+          <h2 class="text-xl sm:text-4xl">Team</h2>
+          <% if @profile.belongs_to_any_team? %>
+            <div class="flex items-center py-4">
+
+              <% if my_profile? %>
+                <a href="<%= team_path(@user.profile.current_team) %>">
+                  <p><%= @user.profile.current_team.name %>
+                    (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+                  </p>
+                </a>
+                <% unless @user.profile.current_team.admin?(@user) %>
+                  <div class="flex-grow flex justify-end">
+                    <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
+                      <%= f.submit 'exit', class: 'danger-button' %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p><%= @profile.current_team.name %>
+                  (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
+                </p>
+              <% end %>
+
+            </div>
+          <% elsif my_profile? %>
+            <div class="flex flex-col justify-center items-center py-4 gap-4">
+              <div class="p-2">
+                <p class="text-xl"><%= I18n.t('teams.about') %></p>
+                <div class="p-4">
+                  <ul class="list-disc list-inside leading-7">
+                    <% I18n.t('teams.features').each do |feature| %>
+                      <li><%= feature %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
+              <% if @user.profile.invitations? %>
+                <span class="m-4">OR</span>
+                <ul>
+                  <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each_with_index do |invitation, i| %>
+                      <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
+                        <%= f.hidden_field :role, value: :member %>
+                        <li><%= f.submit "join to #{invitation.team.name}", class: "primary-button w-64" %></li>
+                      <% end %>
                   <% end %>
                 </ul>
-              </div>
+              <% end %>
             </div>
-            <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
-            <% if @user.profile.invitations? %>
-              <span class="m-4">OR</span>
-              <ul>
-                <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each_with_index do |invitation, i| %>
-                    <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
-                      <%= f.hidden_field :role, value: :member %>
-                      <li><%= f.submit "join to #{invitation.team.name}", class: "primary-button w-64" %></li>
-                    <% end %>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
   </div>
 <% else %>

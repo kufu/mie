@@ -6,6 +6,8 @@ class Profile < ApplicationRecord
   has_many :teams, through: :team_profiles
   has_many :profile_trophies, dependent: :destroy
   has_many :trophies, through: :profile_trophies
+  has_many :friends, foreign_key: :from
+  has_many :friend_profiles, through: :friends, source: :to_profile
 
   validates :provider, presence: true
   validates :uid, presence: true
