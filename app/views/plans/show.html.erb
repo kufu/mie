@@ -134,8 +134,9 @@
                 </tbody>
               </table>
               <div class="sm:hidden" id="mobile-table-<%= k %>">
-                <% @plans_table[k].rows.each do |row| %>
-                  <%= render partial: 'mobile_table_row', locals: { row: row, plan: @plan, track_list: @plans_table[k].track_list } %>
+                <% v.each do |row| %>
+                  <p class="text-xl font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
+                  <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
                 <% end %>
               </div>
             </div>
