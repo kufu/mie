@@ -14,6 +14,8 @@ class Trigger < ApplicationRecord
   validate :check_action_is_json_string
 
   def perform(target, given_key = '')
+    return unless Conditions.new(conditions, target).satisfy?
+
     check_key(given_key)
     check_amount
     check_expires
