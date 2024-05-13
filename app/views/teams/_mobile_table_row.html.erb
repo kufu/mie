@@ -1,0 +1,15 @@
+<% @selected = @plan.plan_schedules.map(&:schedule).any? { row.schedules.include?(_1) } %>
+<p class="text-xl font-normal mr-4 shrink-0"><%= row.start_end %></p>
+<% filtered_profiles = @team.active_profiles.reject { |prof| row.schedules.any? { @member_schedules_map[prof.id].include?(_1.id) } } %>
+<% if filtered_profiles.any? %>
+  <div class="p-2 pl-4 flex flex-wrap">
+    <% filtered_profiles.each do |prof| %>
+      <img src="<%= prof.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black ml-[-16px] mt-1" />
+    <% end %>
+  </div>
+<% end %>
+<% track_list.each do |track| %>
+  <% if row.tracks[track] %>
+    <div class="p-2"><%= render("schedules/card", schedule: row.tracks[track], mode: :team, inactive: @selected) %></div>
+  <% end %>
+<% end %>

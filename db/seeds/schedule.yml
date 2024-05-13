@@ -116,7 +116,7 @@ may16:
     name: Lightning Talks
 may17:
   events:
-  - type: keynote
+  - type: talk
     begin: '10:10'
     end: '11:20'
     talks:

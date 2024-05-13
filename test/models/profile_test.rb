@@ -60,4 +60,11 @@ class ProfileTest < ActiveSupport::TestCase
     teams(:bravo).team_profiles.create!(profile: @profile, role: :admin)
     assert @profile.invitations?
   end
+
+  test '#friend_profiles retuns friends profile models' do
+    Friend.create!(from: @profile.id, to: profiles(:profile_one).id)
+    Friend.create!(from: @profile.id, to: profiles(:profile_two).id)
+
+    assert_equal [profiles(:profile_one), profiles(:profile_two)], @profile.friend_profiles.to_a
+  end
 end

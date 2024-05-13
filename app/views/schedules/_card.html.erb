@@ -66,7 +66,7 @@
                     <p class="text-xl"><%= I18n.t('dialog.edit_memo', title: schedule.title) %></p>
                   </div>
                   <div class="max-h-[calc(100vh-212px)] overflow-auto">
-                    <div class="w-[656px] p-6">
+                    <div class="w-full p-6">
                       <%= f.hidden_field :edit_memo_schedule_id, value: schedule.id, id: "#{schedule.id}-#{memo_dialog_element_id}" %>
                       <%= f.text_area :memo, value: @plan.plan_schedules.find { _1.schedule == schedule }&.memo, id: SecureRandom.uuid, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
                       <div class="font-xs mt-2 text-[rgb(112,109,101)]">

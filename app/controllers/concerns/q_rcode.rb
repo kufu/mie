@@ -13,6 +13,7 @@ module QRcode
       shape_rendering:,
       module_size:,
       standalone: true,
+      viewbox: true,
       use_path: true
     )
   end
