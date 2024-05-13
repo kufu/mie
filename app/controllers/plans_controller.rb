@@ -151,6 +151,7 @@ class PlansController < ApplicationController
     nil
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def set_attributes_for_turbo_stream
     @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
     @schedule_table = Schedule::Tables.new(@schedules)
@@ -173,4 +174,5 @@ class PlansController < ApplicationController
       [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
