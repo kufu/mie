@@ -168,5 +168,9 @@ class PlansController < ApplicationController
         end
       end
     end
+
+    @friends_schedules_map = @user.profile.friend_profiles.to_h do |profile|
+      [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
+    end
   end
 end
