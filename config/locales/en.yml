@@ -134,6 +134,9 @@ en:
       - "List all members plan in one page"
       - "User can join to only one team"
 
+  trophy:
+    rarity: "Rarity"
+
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
@@ -145,6 +148,11 @@ en:
         admin: Admin
         member: Member
         invitation: Wait for accept
+      trophy/rarity:
+        common: Common
+        uncommon: Uncommon
+        rare: Rare
+        mythic_rare: Mythic Rare
 
   application:
     intro: |-

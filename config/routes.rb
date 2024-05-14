@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   resources :triggers, only: %i[show]
 
+  resources :trophies, only: %i[show]
+
   namespace :admin do
     resources :triggers, only: %i[index show edit update]
   end
