@@ -10,7 +10,7 @@ gem 'rails', '~> 7.1.3.2'
 gem 'propshaft'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'rqrcode', '~> 2.2'
 
 gem 'rexml', '~> 3.2'
+
+gem 'solid_queue', '~> 0.3.0'

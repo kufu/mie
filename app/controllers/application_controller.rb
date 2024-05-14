@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   around_action :with_time_zone
 
+  after_action :check_trophy
+
   rescue_from Exception, with: :server_error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::RoutingError, with: :not_found
@@ -101,5 +103,9 @@ class ApplicationController < ActionController::Base
 
     session[:breakout_turbo] = nil
     @breakout_turbo = true
+  end
+
+  def check_trophy
+    TrophyJob.perform_later(@user.profile) if @user&.profile
   end
 end
