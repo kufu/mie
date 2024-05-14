@@ -92,6 +92,8 @@ ja:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
       - "ユーザーは1つのチームにしか所属することができません"
 
+  trophy:
+    rarity: "レアリティ"
 
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
@@ -115,6 +117,11 @@ ja:
         admin: 管理者
         member: メンバー
         invitation: 招待中
+      trophy/rarity:
+        common: コモン
+        uncommon: アンコモン
+        rare: レア
+        mythic_rare: 神話レア
 
   application:
     intro: |-

@@ -1,4 +1,7 @@
-<div class="flex flex-col items-center gap-4">
-  <img src="<%= image_url @trophy.icon_url %>" class="rounded-full h-24 w-24 border-4 <%= @trophy.common? ? "border-slate-950" : @trophy.uncommon? ? "border-gray-300" : @trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
-  <p><%= @trophy.description %></p>
-</div>
+<%= turbo_frame_tag @trophy do %>
+  <div class="flex flex-col items-center gap-4">
+    <img src="<%= image_url @trophy.icon_url %>" class="rounded-full h-24 w-24 border-4 <%= @trophy.common? ? "border-slate-950" : @trophy.uncommon? ? "border-gray-300" : @trophy.rare? ? "border-amber-300" : "border-orange-600" %>" />
+    <p><%= @trophy.description %></p>
+    <p><%= I18n.t("trophy.rarity") %>: <%= @trophy.human_attribute_enum(:rarity) %></p>
+  </div>
+<% end %>
