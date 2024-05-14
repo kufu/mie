@@ -10,8 +10,8 @@ class FriendsController < ApplicationController
 
     if @trigger
       @trigger.key = SecureRandom.uuid
-      @trigger.expires_at = Time.zone.now + 30.seconds
-      @trigger.amount = 1
+      @trigger.expires_at = Time.zone.now + 90.seconds
+      @trigger.amount = 7
     else
       @trigger = new_trigger
     end
@@ -51,8 +51,8 @@ class FriendsController < ApplicationController
           action: :craete
         }
       ],
-      expires_at: Time.zone.now + 30.seconds,
-      amount: 1
+      expires_at: Time.zone.now + 90.seconds,
+      amount: 7
     )
   end
 end
