@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="friend-code"
 export default class extends Controller {
   static targets = ['counter']
-  static values = { expiresAt: String }
+  static values = { expiresAt: Number }
 
   connect() {
     this.calc();
@@ -17,7 +17,7 @@ export default class extends Controller {
   }
 
   calc () {
-    const expiresAt = Date.parse(this.expiresAtValue);
+    const expiresAt = new Date(this.expiresAtValue);
     const now = Date.now();
 
     if (now < expiresAt) {
