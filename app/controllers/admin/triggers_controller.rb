@@ -7,7 +7,9 @@ module Admin
     before_action :set_trigger, only: %i[show edit update]
 
     def index
-      @triggers = Trigger.where('expires_at > ?', Time.current).or(Trigger.where(expires_at: nil))
+      @triggers = Trigger.where('expires_at > ?', Time.current)
+                         .or(Trigger.where(expires_at: nil))
+                         .order(description: :asc)
     end
 
     def show
