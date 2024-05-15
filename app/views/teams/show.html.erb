@@ -81,7 +81,7 @@
                     <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row.timezone %></p>
                     <div class="p-2 pl-4 flex flex-wrap">
                       <% @team.active_profiles.reject { |prof| row.schedules.any? { @member_schedules_map[prof.id].include?(_1.id) } }.each do |prof| %>
-                        <img src="<%= prof.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black ml-[-16px] mt-1" />
+                        <img src="<%= prof.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black bg-white ml-[-16px] mt-1" />
                       <% end %>
                     </div>
                   </div>
