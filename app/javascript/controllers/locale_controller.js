@@ -14,16 +14,16 @@ export default class extends Controller {
 
   connect () {
     if (this.currentValue === '' && !this.isTestEnvironment) {
-      Turbo.visit(this.nonSearchParamURL(window.location) + '?' + new URLSearchParams({ locale: dayjs.tz.guess() }));
+      const location = new URL(window.location.href);
+      location.searchParams.set('locale', dayjs.tz.guess());
+      Turbo.visit(location.href);
     }
   }
 
   change (e) {
-    Turbo.visit(this.nonSearchParamURL(window.location) + '?' + new URLSearchParams({ locale: e.target.value }));
-  }
-
-  nonSearchParamURL (location) {
-    return location.toString().split('?')[0];
+    const location = new URL(window.location.href);
+    location.searchParams.set('locale', e.target.value);
+    Turbo.visit(location.href);
   }
 
   get isTestEnvironment() {
