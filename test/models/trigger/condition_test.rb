@@ -377,9 +377,23 @@ class Trigger
       assert_not condition.satisfy?
     end
 
-    test '#satisfy? returns true when include action chain methods' do
-      Friend.create!(from: profiles(:profile_one).id, to: profiles(:profile_two).id)
+    test '#satisfy? returns false when include action(with empty array)' do
+      condition = Trigger::Condition.new(
+        {
+          model: 'Friend',
+          target: 'Profile',
+          props: {
+            from: 'target'
+          },
+          action: { 'includes' => [profiles(:profile_three).id], 'attribute' => 'to' }
+        },
+        profiles(:profile_one)
+      )
 
+      assert_not condition.satisfy?
+    end
+
+    test '#satisfy? returns false when include action chain methods' do
       condition = Trigger::Condition.new(
         {
           model: 'Friend',
@@ -392,7 +406,7 @@ class Trigger
         profiles(:profile_one)
       )
 
-      assert condition.satisfy?
+      assert_not condition.satisfy?
     end
 
     test '#satisfy? returns true when include action chain methods with eager loading' do
