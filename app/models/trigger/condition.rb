@@ -108,9 +108,7 @@ class Trigger
     end
 
     def includes_check(includes)
-      resolve_model_attribute.each do |obj|
-        return false unless includes.include?(obj)
-      end
+      resolve_model_attribute.any? { |obj| includes.include?(obj) }
     end
   end
 end
