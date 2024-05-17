@@ -11,9 +11,19 @@ export default class extends Controller {
       return;
     }
 
+
     if (id === '') {
-      tables[0].classList.remove('hidden');
-      buttons[0].classList.add('tab-btn-active');
+      const current = new Date();
+      const today = `${current.getFullYear()}-${("0"+(current.getMonth() + 1)).slice(-2)}-${current.getDate()}`;
+      var index = [...buttons].findIndex((button) => button.value.toString() === today );
+
+      if (index === -1) {
+        index = 0
+      }
+
+      tables[index].classList.remove('hidden');
+      buttons[index].classList.add('tab-btn-active');
+
       return;
     }
 
