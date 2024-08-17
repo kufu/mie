@@ -5,6 +5,8 @@ class SchedulesController < ApplicationController
   include ScheduleTable
 
   def index
+    return unless turbo_frame_request?
+
     @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
     @schedule_table = Schedule::Tables.new(@schedules)
 

@@ -39,7 +39,7 @@
   <% end %>
 <% else %>
   <%= turbo_frame_tag @event, refresh: :morph, src: event_schedules_path(event_name: @event.name) do %>
-    loading
+    <%= render partial: "table_skeleton", locals: { schedule_table: @schedule_table } %>
   <% end %>
 <% end %>
 
