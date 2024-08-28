@@ -36,7 +36,7 @@
     </div>
     <div class="flex flex-col border-t border-[rgb(214,211,208)] py-4 px-6">
       <div class="flex justify-end">
-        <a href="#" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></a>
+        <button type="button" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></button>
         <%= f.submit I18n.t('button.save'), data: { action: "click->dialog#close", "word-counter-target": "submit" }, class: "primary-button" %>
       </div>
     </div>
