@@ -1,0 +1,51 @@
+<div class="max-w-[1120px] mx-auto">
+  <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
+    <div class="relative flex sm:block justify-center flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+      <button class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+        <div class="h-2 m-4 bg-slate-300 rounded"></div>
+      </button>
+      <button class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+        <div class="h-2 m-4 bg-slate-300 rounded"></div>
+      </button>
+    </div>
+  </div>
+  <div class="mt-4 overflow-y-auto">
+    <div class="schedule-table">
+      <table class="hidden sm:table h-full w-full border-collapse border-spacing-0">
+        <thead>
+        <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left">
+          <div class="h-2 m-4 bg-slate-300 rounded"></div>
+        </th>
+        <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center">
+          <div class="h-2 m-4 bg-slate-300 rounded"></div>
+        </th>
+        </thead>
+        <tbody>
+        <% 4.times do %>
+          <tr>
+            <th class="py-2">
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center">
+                  <div class="h-2 m-4 bg-slate-300 rounded"></div>
+                </div>
+                <div class="h-2 m-4 bg-slate-300 rounded"></div>
+              </div>
+            </th>
+            <td>
+              <div class="mt-4 p-2"><%= render("schedules/card_skeleton") %></div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="sm:hidden">
+        <% 4.times do %>
+          <p class="text-xl font-normal mr-4 shrink-0">
+          <div class="h-2 m-4 bg-slate-300 rounded"></div>
+          </p>
+          <div class="mt-4 p-2"><%= render("schedules/card_skeleton") %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
