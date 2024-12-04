@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :server_error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::RoutingError, with: :not_found
+  rescue_from ActionController::ParameterMissing, with: :bad_request # TODO: Remove in Rails8
 
   def set_user
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -35,6 +36,12 @@ class ApplicationController < ActionController::Base
     end
 
     render template: 'errors/not_found', status: 404, layout: 'application', content_type: 'text/html'
+  end
+
+  def bad_request(err = nil)
+    Rails.logger.debug("#{err}\n#{err.backtrace.join("\n")}") if err
+
+    render status: :bad_request, body: nil
   end
 
   def server_error(err)
