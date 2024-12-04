@@ -24,8 +24,14 @@ Rails.application.routes.draw do
       scope module: :plans do
         resource :ogp, only: %i[show]
       end
+
+      resources :items, only: %i[create]
     end
+
+    resources :items, only: %i[update destroy]
   end
+
+  resolve('PlanSchedule') { [:event, :item] }
 
   resources :teams, except: :index do
     resources :members, only: %i[create update destroy]
