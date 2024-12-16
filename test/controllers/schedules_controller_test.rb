@@ -13,7 +13,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
 
     # TODO: don't check private instance variable
     target = @controller.send(:instance_variable_get, :@schedules)
-    assert_equal 5, target.length
+    assert_equal 7, target.length
   end
 
   test 'set variable @schedules for other event' do
