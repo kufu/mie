@@ -60,14 +60,13 @@
               <%= I18n.t('button.update_memo') %>
             </button>
             <dialog id="<%= memo_dialog_element_id %>" class="dialog max-w-[min(100vw-16px,800px)]">
-              <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch) do |f| %>
+              <%= form_with(url: event_item_url(@plan.plan_schedules.find { _1.schedule == schedule }, event_name: @plan.event.name), scope: 'plan_schedule', method: :patch) do |f| %>
                 <div data-controller="word-counter" data-word-counter-max-value="<%= plan_memo_max_length %>" class="">
                   <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
                     <p class="text-xl"><%= I18n.t('dialog.edit_memo', title: schedule.title) %></p>
                   </div>
                   <div class="max-h-[calc(100vh-212px)] overflow-auto">
                     <div class="w-full p-6">
-                      <%= f.hidden_field :edit_memo_schedule_id, value: schedule.id, id: "#{schedule.id}-#{memo_dialog_element_id}" %>
                       <%= f.text_area :memo, value: @plan.plan_schedules.find { _1.schedule == schedule }&.memo, id: SecureRandom.uuid, class: "border opacity-100 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
                       <div class="font-xs mt-2 text-[rgb(112,109,101)]">
                         <span data-word-counter-target="counter"></span>/<%= plan_memo_max_length %>
@@ -89,9 +88,7 @@
         <% unless mode == :team %>
           <div>
             <% if @plan.plan_schedules.map(&:schedule).include?(schedule) # to avoid n+1 %>
-              <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-                <%= form.hidden_field :remove_schedule_id, value: schedule.id, id: SecureRandom.uuid %>
-                <%= form.hidden_field :mode, value: mode, id: SecureRandom.uuid %>
+              <%= form_with(url: event_item_url(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
                 <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
               <% end %>
             <% elsif @plan.new_record? %>
@@ -120,7 +117,7 @@
                   <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
                     <div class="flex justify-end">
                       <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
-                      <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: 'POST') do |form| %>
+                      <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
                         <%= form.hidden_field :title %>
                         <%= form.hidden_field :description %>
                         <%= form.hidden_field :public %>
@@ -134,9 +131,8 @@
                 </dialog>
               </div>
             <% else %>
-              <%= form_with(url: event_plan_url(@plan, event_name: @plan.event.name), method: 'PATCH' ) do |form| %>
-                <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-                <%= form.hidden_field :mode, value: mode %>
+              <%= form_with(url: event_plan_items_url(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
+                <%= form.hidden_field :schedule_id, value: schedule.id %>
                 <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "add-plan-button p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
               <% end %>
             <% end %>

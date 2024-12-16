@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:memo)
+    params.require(:plan_schedule).permit(:memo)
   end
 
   def set_item
