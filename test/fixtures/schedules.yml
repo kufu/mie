@@ -8,6 +8,14 @@ one:
   track: party_track_a
   language: 0
 
+one_crossover:
+  title: "Schedule title 1 crossover"
+  description: "This is Schedule title 1 crossover description"
+  start_at: 2021-07-20 10:00:00
+  end_at: 2021-07-20 10:40:00
+  track: party_track_b
+  language: 0
+
 two:
   title: "Schedule title 2"
   description: "This is Schedule title 2 description"
@@ -38,6 +46,14 @@ five:
   start_at: 2021-07-21 11:00:00
   end_at: 2021-07-21 11:40:00
   track: party_track_c
+  language: 1
+
+six:
+  title: "Schedule title 6"
+  description: "This is Schedule title 6 description"
+  start_at: 2021-07-21 12:00:00
+  end_at: 2021-07-21 12:40:00
+  track: party_track_a
   language: 1
 
 dojo_one:
