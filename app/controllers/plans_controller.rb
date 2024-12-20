@@ -60,7 +60,7 @@ class PlansController < ApplicationController
   end
 
   def check_user_owns_plan
-    render status: :bad_request, body: nil  if @plan.nil?
+    render status: :bad_request, body: nil if @plan.nil?
     render status: :forbidden, body: nil unless @user.plans.include?(@plan)
   end
 

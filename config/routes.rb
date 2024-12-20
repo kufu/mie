@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :items, only: %i[update destroy]
   end
 
-  resolve('PlanSchedule') { [:event, :item] }
+  resolve('PlanSchedule') { %i[event item] }
 
   resources :teams, except: :index do
     resources :members, only: %i[create update destroy]

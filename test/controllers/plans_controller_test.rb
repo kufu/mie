@@ -20,7 +20,8 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
 
   test 'Create plan' do
     assert_difference('Plan.count') do
-      post event_plans_path(event_name: events(:dojo).name), params: { plan: { title: 'test', description: 'test', public: true, initial: false } }
+      post event_plans_path(event_name: events(:dojo).name),
+           params: { plan: { title: 'test', description: 'test', public: true, initial: false } }
     end
 
     assert_redirected_to event_schedules_path(event_name: events(:dojo).name)
@@ -28,7 +29,9 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
 
   test 'Create plan with first item' do
     assert_difference('PlanSchedule.count') do
-      post event_plans_path(event_name: events(:dojo).name), params: { plan: { title: 'test', description: 'test', public: true, initial: false, add_schedule_id: schedules(:dojo_one).id }}
+      post event_plans_path(event_name: events(:dojo).name),
+           params: { plan: { title: 'test', description: 'test', public: true, initial: false,
+                             add_schedule_id: schedules(:dojo_one).id } }
     end
 
     assert_redirected_to event_schedules_path(event_name: events(:dojo).name)

@@ -10,28 +10,32 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test 'Add new item to plan' do
     assert_difference('PlanSchedule.count', 1) do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:six).id }
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+           params: { schedule_id: schedules(:six).id }
     end
     assert_redirected_to event_plan_path(plans(:one), event_name: events(:party).name)
   end
 
   test 'Add new item to plan with turbo frames' do
     assert_difference('PlanSchedule.count', 1) do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:six).id }, as: :turbo_stream
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+           params: { schedule_id: schedules(:six).id }, as: :turbo_stream
     end
     assert_response :ok
   end
 
   test 'Reject add new item to plan when crossover item has exists' do
     assert_no_difference('PlanSchedule.count') do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:one_crossover).id }
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+           params: { schedule_id: schedules(:one_crossover).id }
     end
     assert_redirected_to event_plan_path(plans(:one), event_name: events(:party).name)
   end
 
   test 'Reject add new item to plan when crossover item has exists with turbo frames' do
     assert_no_difference('PlanSchedule.count') do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:one_crossover).id }, as: :turbo_stream
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+           params: { schedule_id: schedules(:one_crossover).id }, as: :turbo_stream
     end
     assert_redirected_to event_plan_path(plans(:one), event_name: events(:party).name)
   end
@@ -41,7 +45,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     plan.initial = true
     plan.save!
 
-    post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:six).id }
+    post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+         params: { schedule_id: schedules(:six).id }
     plan.reload
 
     assert_not plan.initial
@@ -52,7 +57,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     plan.initial = true
     plan.save!
 
-    post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:one_crossover).id }
+    post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+         params: { schedule_id: schedules(:one_crossover).id }
     plan.reload
 
     assert plan.initial
@@ -60,14 +66,16 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test 'Reject add item to plan when item is not belongs to event' do
     assert_no_difference('PlanSchedule.count') do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id), params: { schedule_id: schedules(:dojo_one).id }
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
+           params: { schedule_id: schedules(:dojo_one).id }
     end
     assert_response :not_found
   end
 
   test 'Reject add new item to plan that not owned' do
     assert_no_difference('PlanSchedule.count') do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:two).id), params: { schedule_id: schedules(:six).id }
+      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:two).id),
+           params: { schedule_id: schedules(:six).id }
     end
     assert_response :forbidden
   end
