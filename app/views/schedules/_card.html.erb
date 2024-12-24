@@ -89,6 +89,7 @@
           <div>
             <% if @plan.plan_schedules.map(&:schedule).include?(schedule) # to avoid n+1 %>
               <%= form_with(url: event_item_url(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
+                <%= form.hidden_field :mode, value: mode, id: SecureRandom.uuid %>
                 <%= form.submit I18n.t('card.remove'), class: "remove-plan-button p-2 text-sm font-bold min-h-5 normal-button", data: { turbo_frame: "event_#{@event.id}" } %>
               <% end %>
             <% elsif @plan.new_record? %>
@@ -133,6 +134,7 @@
             <% else %>
               <%= form_with(url: event_plan_items_url(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
                 <%= form.hidden_field :schedule_id, value: schedule.id %>
+                <%= form.hidden_field :mode, value: mode, id: SecureRandom.uuid %>
                 <%= form.submit inactive ? I18n.t('card.inactive') : I18n.t('card.add'), class: "add-plan-button p-2 text-sm font-bold min-h-5 normal-button", disabled: inactive, data: { turbo_frame: "event_#{@event.id}"} %>
               <% end %>
             <% end %>
