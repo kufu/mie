@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.3.0'
 
-gem 'rails', '~> 7.2.2'
+gem 'rails', '~> 8.0'
 
 gem 'propshaft'
 
@@ -17,7 +17,7 @@ gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.16'
 
 gem 'rack-contrib', '~> 2.3.0'
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 8.0.0'
 
 gem 'jsbundling-rails', '~> 1.2'
 gem 'stimulus-rails', '~> 1.3'
