@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
       @schedule_table.days.each do |day|
         @table = @schedule_table[day]
         @table.rows.each do |row|
-          throw :abort, [row, @table.track_list] if row.schedules.map(&:id).include?(params[:schedule_id])
+          throw :abort, [row, @table.track_list] if row.schedules.map(&:id).include?(@item.schedule.id)
         end
       end
     end
