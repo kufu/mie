@@ -23,7 +23,7 @@ Bundler.require(*Rails.groups)
 module Mie
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
     config.middleware.use Rack::Locale
 
     require 'i18n/backend/fallbacks'
