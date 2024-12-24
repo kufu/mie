@@ -93,4 +93,22 @@ class SchedulesTest < ApplicationSystemTestCase
     table_rows = all('tr')
     assert table_rows[2].find_button(class: ['remove-plan-button'])
   end
+
+  test 'when one schedule remove from plan, that schedule button to be add button' do
+    visit event_schedules_path(event_name: events(:kaigi).name)
+
+    all(class: ['add-plan-button'])[1].click
+    find(class: ['confirm-terms-of-service-button']).click
+
+    # wait for turbo frame
+    if has_selector?('dialog', visible: true, wait: 0.25.seconds)
+      has_no_selector?('dialog', visible: true, wait: 1.seconds)
+    end
+
+    all(class: ['remove-plan-button'])[0].click
+
+    sleep 1 # FIXME: this is workaround
+    table_rows = all('tr')
+    assert_equal 3, table_rows[2].all(class: ['add-plan-button']).count
+  end
 end
