@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   class InvalidStateError < StandardError; end
 
   before_action :make_sure_user_logged_in
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: %i[show update destroy]
   before_action :check_user_belongs_to_team, only: %i[show update destroy]
 
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation

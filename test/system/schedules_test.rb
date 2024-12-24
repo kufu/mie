@@ -43,7 +43,7 @@ class SchedulesTest < ApplicationSystemTestCase
 
   test 'anker works' do
     visit "#{event_schedules_path(event_name: events(:kaigi).name)}#2024-03-19"
-    find_button(class: 'tab-btn-active').has_text?('2024-03-19')
+    assert find_button(class: 'tab-btn-active').has_text?('2024-03-19')
   end
 
   test 'dialog shown up' do
