@@ -20,6 +20,10 @@ class Schedule
         date = schedules[0].start_at.strftime('%Y%m%d')
         [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end
+
+      def updated_at
+        @updated_at ||= schedules.map(&:updated_at).max
+      end
     end
   end
 end

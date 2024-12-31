@@ -18,5 +18,9 @@ class Schedule
     def [](key)
       @map[key]
     end
+
+    def updated_at
+      @updated_at ||= @schedules.map(&:updated_at).max
+    end
   end
 end
