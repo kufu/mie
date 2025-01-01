@@ -16,7 +16,7 @@ gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.16'
 
-gem 'rack-contrib', '~> 2.3.0'
+gem 'rack-contrib', '~> 2.5.0'
 gem 'rails-i18n', '~> 8.0.0'
 
 gem 'jsbundling-rails', '~> 1.2'
