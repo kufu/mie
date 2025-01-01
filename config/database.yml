@@ -22,11 +22,16 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: mie_development
-  host: "127.0.0.1"
-  user: postgres
-  port: 25432
+  primary: &primary_development
+    <<: *default
+    database: mie_development
+    host: "127.0.0.1"
+    user: postgres
+    port: 25432
+  cache:
+    <<: *primary_development
+    database: mie_development_cache
+    migrations_paths: db/cache_migrate
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -86,7 +91,12 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: mie_production
-  username: mie
-  password: <%= ENV['MIE_DATABASE_PASSWORD'] %>
+  primary: &primary_production
+    <<: *default
+    database: mie_production
+    username: mie
+    password: <%= ENV['MIE_DATABASE_PASSWORD'] %>
+  cache:
+    <<: *primary_production
+    database: mie_production_cache
+    migrations_paths: db/cache_migrate

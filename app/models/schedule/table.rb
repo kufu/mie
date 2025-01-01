@@ -18,5 +18,9 @@ class Schedule
 
       @rows = grouped_schedules.map { |_, v| Schedule::Table::Row.new(v) }.sort_by(&:sort_key)
     end
+
+    def updated_at
+      @updated_at ||= rows.map(&:updated_at).max
+    end
   end
 end

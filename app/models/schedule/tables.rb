@@ -18,5 +18,18 @@ class Schedule
     def [](key)
       @map[key]
     end
+
+    # Schedules::Table is the only one for each events
+    def id
+      @id ||= @schedules[0].track.event.name
+    end
+
+    def updated_at
+      @updated_at ||= @schedules.map(&:updated_at).max
+    end
+
+    def cache_key
+      "schedules/#{id}-#{updated_at.to_fs(:usec)}"
+    end
   end
 end

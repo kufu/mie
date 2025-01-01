@@ -54,5 +54,18 @@ class Schedule
 
       assert_equal %w[A B], table.track_list
     end
+
+    test '#updated_at returns newest updated at value in table' do
+      feature_time = Time.current.change(usec: 0) + 10.seconds
+
+      # this schedule on day1 row 0
+      schedules(:kaigi_day1_time1_track1).update!(updated_at: feature_time)
+
+      schedules = events(:kaigi).schedules
+      tables = Schedule::Tables.new(schedules)
+      @table = tables[tables.days.first]
+
+      assert_equal feature_time, @table.updated_at
+    end
   end
 end

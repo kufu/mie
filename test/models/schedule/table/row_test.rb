@@ -5,13 +5,11 @@ require 'test_helper'
 class Schedule
   class Table
     class RowTest < ActiveSupport::TestCase
-      def setup
-        schedules = events(:kaigi).schedules
-        @tables = Schedule::Tables.new(schedules)
-      end
-
       test 'each rows mapping correct track infomations with fixture' do
-        day1 = @tables['2024-03-18']
+        schedules = events(:kaigi).schedules
+        tables = Schedule::Tables.new(schedules)
+
+        day1 = tables['2024-03-18']
 
         assert_equal day1.rows[0].start_end, '10:00 - 10:30'
         assert_equal day1.rows[0].tracks['TrackA'], schedules(:kaigi_day1_time1_track1)
@@ -28,7 +26,7 @@ class Schedule
         assert_equal day1.rows[3].start_end, '11:45 - 12:30'
         assert_equal day1.rows[3].tracks['TrackA'], schedules(:kaigi_day1_time4_track1)
 
-        day2 = @tables['2024-03-19']
+        day2 = tables['2024-03-19']
 
         assert_equal day2.rows[0].start_end, '09:00 - 09:30'
         assert_equal day2.rows[0].tracks['TrackA'], schedules(:kaigi_day2_time1_track1)
@@ -45,6 +43,19 @@ class Schedule
 
         assert_equal day2.rows[3].start_end, '13:00 - 14:00'
         assert_equal day2.rows[3].tracks['TrackA'], schedules(:kaigi_day2_time4_track1)
+      end
+
+      test '#updated_at returns newest updated at value in row' do
+        feature_time = Time.current.change(usec: 0) + 10.seconds
+
+        # this schedule on day1 row 0
+        schedules(:kaigi_day1_time1_track1).update!(updated_at: feature_time)
+
+        schedules = events(:kaigi).schedules
+        tables = Schedule::Tables.new(schedules)
+        day1 = tables['2024-03-18']
+
+        assert_equal feature_time, day1.rows[0].updated_at
       end
     end
   end
