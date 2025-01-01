@@ -59,4 +59,4 @@ gem 'rexml', '~> 3.2'
 
 gem 'solid_queue', '~> 0.3.0'
 
-gem "solid_cache", "~> 1.0"
+gem 'solid_cache', '~> 1.0'
