@@ -28,5 +28,28 @@ class Schedule
 
       assert_equal feature_time, tables.updated_at
     end
+
+    test "#id returns schedules event name" do
+      assert_equal events(:kaigi).name, @tables.id
+    end
+
+    test "#cache_key returns cache key with cache version string" do
+      assert_match /schedules\/#{events(:kaigi).name}-\d{20}/, @tables.cache_key
+    end
+
+    test "when schedule record updated, #cache_key version string changes" do
+      old_key = @tables.cache_key
+
+      feature_time = Time.current + 10.seconds
+
+      # this schedule on day1 row 0
+      schedules(:kaigi_day1_time1_track1).update!(updated_at: feature_time)
+
+      schedules = events(:kaigi).schedules
+      # rebuild
+      tables = Schedule::Tables.new(schedules)
+
+      refute_equal tables.cache_key, old_key
+    end
   end
 end
