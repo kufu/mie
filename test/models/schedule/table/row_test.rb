@@ -46,7 +46,7 @@ class Schedule
       end
 
       test '#updated_at returns newest updated at value in row' do
-        feature_time = Time.current + 10.seconds
+        feature_time = Time.current.change(usec: 0) + 10.seconds
 
         # this schedule on day1 row 0
         schedules(:kaigi_day1_time1_track1).update!(updated_at: feature_time)
