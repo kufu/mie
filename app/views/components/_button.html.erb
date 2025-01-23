@@ -1,0 +1,6 @@
+<% variant ||= "secondary" %>
+<% classes ||= "" %>
+<% onClick ||= "" %>
+<button class="<%= "normal-button" if variant == "secondary" %> <%= "primary-button" if variant == "primary" %> <%= classes %>"  onclick="<%= onClick %>">
+    <%= title %>
+</button>
