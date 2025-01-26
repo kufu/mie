@@ -1,6 +1,7 @@
 <% variant ||= "secondary" %>
 <% classes ||= "" %>
-<% onClick ||= "" %>
-<button class="<%= "normal-button" if variant == "secondary" %> <%= "primary-button" if variant == "primary" %> <%= classes %>"  onclick="<%= onClick %>">
+<% icon ||= "" %>
+<button class="px-3 py-2 inline-flex gap-x-1 items-center align-middle border border-solid border-[var(--textColor)] rounded-lg <%= "primary-button" if variant == "primary" %> <%= classes %>">
+    <%= raw icon %>
     <%= title %>
 </button>
