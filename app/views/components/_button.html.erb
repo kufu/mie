@@ -1,7 +1,9 @@
 <% variant ||= "secondary" %>
 <% classes ||= "" %>
 <% icon ||= "" %>
-<button class="px-3 py-2 inline-flex gap-x-1 items-center align-middle border border-solid border-[var(--textColor)] rounded-lg <%= "primary-button" if variant == "primary" %> <%= classes %>">
+<button class="px-3 py-2 inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[var(--textColor)] rounded-lg <%= "primary-button" if variant == "primary" %> <%= classes %>">
     <%= raw icon %>
+    <span class="text-base font-bold ">
     <%= title %>
+    </span>
 </button>
