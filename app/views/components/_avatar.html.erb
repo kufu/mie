@@ -1,0 +1,8 @@
+<% size ||= "default" %>
+<% classes ||= "" %>
+<% icon_classes = [
+  "rounded-full",
+  (size == "huge" ? "w-16 h-16" : size == "small" ? "w-6 h-6" : "w-10 h-10"),
+  classes
+].join(" ") %>
+<img src="<%= url %>" class="<%= icon_classes %>" alt="ユーザーのアイコン">
