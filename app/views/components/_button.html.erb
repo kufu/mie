@@ -13,7 +13,7 @@
   "text-base font-bold",
   (disabled ? "text-[#CDCFD5]" : "text-[#131416]"),
 ].join(" ") %>
-<button class="<%= button_classes %>" onclick="<%= onClick %>">
+<button class="<%= button_classes %>" onclick="<%= onClick %>" disabled="<%= disabled %>">
   <%= raw icon %>
   <span class="<%= text_classes %>">
     <%= title %>
