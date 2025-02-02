@@ -1,0 +1,45 @@
+<% if false %>
+必要なパラメータ:
+- title: ダイアログのタイトル（必須）
+- content: ダイアログの本文（ブロックとして渡す）（必須）
+オプションパラメータ:
+- action_button: アクションボタンの設定（オプション）
+  - title: ボタンのテキスト
+  - classes: ボタンのクラス
+  - onClick: クリック時の処理
+<% end %>
+
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center">
+  <div class="bg-white rounded-lg w-[480px] max-h-[90vh] flex flex-col rounded-[8px]">
+    <%# ヘッダー部分 %>
+    <div class="px-4 py-2 border-b">
+      <h2 class="text-xl font-bold">
+        <%= title %>
+      </h2>
+    </div>
+
+    <%# 本文部分 %>
+    <div class="p-4 overflow-y-auto">
+      <%= yield %>
+    </div>
+
+    <%# フッター部分（ボタン） %>
+    <div class="p-4 border-t flex justify-end gap-3">
+      <%# 閉じるボタン（常に表示） %>
+      <%= render "components/button",
+        title: "閉じる",
+        size: "s"
+      %>
+
+      <%# アクションボタン（オプション） %>
+      <% if local_assigns[:action_button].present? %>
+        <%= render "components/button",
+          title: action_button[:title],
+          size: "s",
+          classes: action_button[:classes],
+          onClick: action_button[:onClick]
+        %>
+      <% end %>
+    </div>
+  </div>
+</div>
