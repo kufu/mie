@@ -1,0 +1,20 @@
+<% if false %>
+必要なパラメータ:
+- label: ラベルテキスト（必須）
+オプションパラメータ:
+- classes: 追加のCSSクラス
+<% end %>
+
+<% classes ||= "" %>
+<% input_id = "input_#{SecureRandom.hex(8)}" %>
+
+<div class="<%= classes %>">
+  <label
+    for="<%= input_id %>"
+    class="block mb-1 text-sm font-bold"
+  >
+    <%= label %>
+  </label>
+
+  <%= yield input_id %>
+</div>
