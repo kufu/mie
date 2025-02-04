@@ -1,0 +1,24 @@
+<% if false %>
+使用例:
+<%= render "components/tabs", tabs: [
+  { label: "タブ1", content: "タブ1のコンテンツ" },
+  { label: "タブ2", content: "タブ2のコンテンツ" }
+] %>
+<% end %>
+
+<div>
+  <div class="flex border-b border-[#CDCFD5]">
+    <% tabs.each_with_index do |tab, index| %>
+      <button class="px-4 pt-2 pb-[5px] text-sm border-b-[3px] <%= index == 0 ? 'font-bold border-[#5E626E]' : 'font-medium border-transparent' %>">
+        <%= tab[:label] %>
+      </button>
+    <% end %>
+  </div>
+  <div class="mt-4">
+    <% tabs.each_with_index do |tab, index| %>
+      <div <%= index == 0 ? '' : 'hidden' %>>
+        <%= tab[:content] %>
+      </div>
+    <% end %>
+  </div>
+</div>
