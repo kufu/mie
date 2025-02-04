@@ -1,7 +1,12 @@
 <% classes ||= "" %>
 <% placeholder ||= "" %>
+<% id ||= nil %>
 <% text_field_classes = [
 "border border-[var(--textColor)] rounded-md px-4 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500",
   classes
 ].join(" ") %>
-<input type="text" class="<%= text_field_classes %>" placeholder="<%= placeholder %>" />
+<input type="text"
+  class="<%= text_field_classes %>"
+  placeholder="<%= placeholder %>"
+  <%= "id=#{id}" if id.present? %>
+/>
