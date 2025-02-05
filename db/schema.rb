@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_034755) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -179,7 +179,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_034755) do
     t.string "hostname"
     t.text "metadata"
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.index ["last_heartbeat_at"], name: "index_solid_queue_processes_on_last_heartbeat_at"
+    t.index ["name", "supervisor_id"], name: "index_solid_queue_processes_on_name_and_supervisor_id", unique: true
     t.index ["supervisor_id"], name: "index_solid_queue_processes_on_supervisor_id"
   end
 
@@ -210,7 +212,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_034755) do
     t.text "arguments"
     t.string "queue_name"
     t.integer "priority", default: 0
-    t.boolean "static", default: true
+    t.boolean "static", default: true, null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
