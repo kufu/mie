@@ -57,7 +57,7 @@ gem 'rqrcode', '~> 2.2'
 
 gem 'rexml', '~> 3.2'
 
-gem 'solid_queue', '1.0.2'
+gem 'solid_queue', '1.1.3'
 
 gem 'solid_cache', '~> 1.0'
 
