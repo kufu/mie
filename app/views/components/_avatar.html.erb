@@ -1,8 +1,16 @@
 <% size ||= "m" %>
 <% classes ||= "" %>
+<% show_tooltip ||= false %> <!-- ツールチップ表示を制御 -->
 <% icon_classes = [
-  "rounded-full",
+  "rounded-full border-2 border-[#CECFD5]",
   (size == "l" ? "w-16 h-16" : size == "s" ? "w-6 h-6" : "w-10 h-10"),
   classes
 ].join(" ") %>
-<img src="<%= url %>" class="<%= icon_classes %>" alt="ユーザーのアイコン">
+<div class="relative group">
+    <img src="<%= url %>" class="<%= icon_classes %>" alt="<%= "#{name.presence || 'ユーザー'}のアイコン" %>">
+    <% if show_tooltip && name.present? %>
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg">
+            <%= name %>
+        </div>
+    <% end %>
+</div>
