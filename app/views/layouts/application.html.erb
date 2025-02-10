@@ -18,16 +18,13 @@
         --textColor: <%= @event.event_theme.text_color %>;
       }
     </style>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=auto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+JP:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <% if Rails.env.test? %>
       <%= tag :meta, name: :rails_env, content: Rails.env %>
     <% end %>
-    
     <meta property="og:title" content="RubyKaigi Schedule.select">
     <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
     <% unless Rails.env.test? %>
@@ -39,13 +36,10 @@
     <% end %>
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image"/>
-    
     <%= yield(:head) %>
-    
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
-  <body class="bg-[#f8f7f6] leading-4" style="font-family: 'Roboto', 'Noto Sans JP', sans-serif;">
+  <body class="bg-[#f8f7f6] leading-4 font-sans">
     <header>
       <%= render 'layouts/header' %>
     </header>
