@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :triggers, only: %i[index show edit update]
+    resources :trophies
   end
 
   get '*path', controller: 'application', action: 'not_found'

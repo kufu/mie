@@ -10,7 +10,7 @@ class Trophy < ApplicationRecord
   validates :description, presence: true
   validates :icon_url, presence: true
   validates :rarity, presence: true
-  validates :special, presence: true
+  validates :special, inclusion: { in: [true, false] }
 
   enum :rarity, { common: 0, uncommon: 1, rare: 2, mythic_rare: 3 }, default: :common
 
