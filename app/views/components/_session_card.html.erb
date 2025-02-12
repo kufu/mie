@@ -1,0 +1,36 @@
+<% if schedule.present? %>
+  <div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2">
+    <%# スケジュール情報の展開 %>
+    <div class="text-sm"><%= schedule[:language] %>・<%= schedule[:location] %></div>
+    <a href="<%= schedule[:session_url] %>" class="text-lg font-semibold text-accent underline underline-offset-4 block">
+      <%= schedule[:session_title] %>
+    </a>
+
+    <%# 登壇者情報 %>
+    <div class="flex items-center gap-x-2">
+      <%= render 'components/avatar', name: schedule[:presenter][:name], url: schedule[:presenter][:avatar_url], size: 'm' %>
+      <div>
+        <span class="text-sm font-bold"><%= schedule[:presenter][:name] %></span>
+        <span class="text-sm text-shade-30">@<%= schedule[:presenter][:handle] %></span>
+      </div>
+    </div>
+
+    <%# フレンズボタン（参加者リスト）%>
+    <%= render 'components/friends_button', profiles: attendees, onClick: "console.log('FIXME: clicked Friends Button')" %>
+
+    <%# 追加・削除ボタン %>
+    <%= render("components/button",
+      icon: scheduled ? render("components/icons/close") : render("components/icons/add"),
+      title: scheduled ? "Remove from My Schedule" : "Add to My Schedule",
+      onClick: scheduled ? "console.log('FIXME: remove')" : "console.log('FIXME: add')") %>
+  </div>
+<% else %>
+  <%# スケジュールが `nil` の場合に表示するビュー %>
+  <div class="bg-transparent rounded-lg p-4 flex flex-col gap-y-2 border-2 border-dashed border-shade-30">
+    <p class="text-lg text-shade-30">Schedule.blank?</p>
+    <span class="font-bold text-shade-30">Friends</span>
+    <%= render 'components/friends_button', profiles: friends, onClick: "console.log('FIXME: clicked Friends Button')" %>
+    <span class="font-bold text-shade-30">Your Team</span>
+    <%= render 'components/friends_button', profiles: team_members, onClick: "console.log('FIXME: clicked Friends Button')" %>
+  </div>
+<% end %>
