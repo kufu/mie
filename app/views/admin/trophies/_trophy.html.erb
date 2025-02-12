@@ -1,0 +1,16 @@
+<div class="flex h-64">
+  <div>
+    <div><img class="h-28 w-28" src="<%= trophy.icon_url %>" alt="Trophy image for <%= trophy.name %>"></div>
+  </div>
+  <div class="p-2">
+    <h2 class="text-2xl font-bold pb-2"><%= trophy.name %></h2>
+    <div class="text-xl my-2"><%= trophy.description %></div>
+    <div class="my-2">Rarity: <%= trophy.rarity %></div>
+    <div class="my-2">Order: <%= trophy.order %></div>
+    <div class="my-2">Special: <%= trophy.special %></div>
+    <div class="flex my-2">
+      <div class="mr-2">Created:<%= trophy.created_at %></div>
+      <div>Updated: <%= trophy.updated_at %></div>
+    </div>
+  </div>
+</div>
