@@ -15,22 +15,19 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   primary: &primary_development
     <<: *default
-    database: mie_development
-    host: "127.0.0.1"
-    user: postgres
-    port: 25432
+    database: storage/development.sqlite3
   cache:
     <<: *primary_development
-    database: mie_development_cache
+    database: storage/development_cache.sqlite3
     migrations_paths: db/cache_migrate
 
   # The specified database role being used to connect to postgres.
@@ -65,10 +62,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: mie_test
-  host: "127.0.0.1"
-  user: postgres
-  port: 25432
+  database: storage/test.sqlite3
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -93,10 +87,8 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: mie_production
-    username: mie
-    password: <%= ENV['MIE_DATABASE_PASSWORD'] %>
+    database: storage/production.sqlite3
   cache:
     <<: *primary_production
-    database: mie_production_cache
+    database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
