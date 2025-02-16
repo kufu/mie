@@ -1,6 +1,6 @@
 class CreateFriends < ActiveRecord::Migration[7.1]
   def change
-    create_table :friends, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
+    create_table :friends, id: :uuid do |t|
       t.uuid :from, null: false
       t.uuid :to, null: false
 

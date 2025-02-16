@@ -1,6 +1,6 @@
 class CreateTriggers < ActiveRecord::Migration[7.1]
   def change
-    create_table :triggers, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
+    create_table :triggers, id: :uuid do |t|
       t.string :description, null: false
       t.string :key, null: false
       t.jsonb :action, null: false

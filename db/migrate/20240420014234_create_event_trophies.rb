@@ -1,6 +1,6 @@
 class CreateEventTrophies < ActiveRecord::Migration[7.1]
   def change
-    create_table :event_trophies, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
+    create_table :event_trophies, id: :uuid do |t|
       t.references :event, type: :uuid, null: false, foreign_key: true
       t.references :trophy, type: :uuid, null: false, foreign_key: true
 
