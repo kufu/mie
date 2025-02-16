@@ -1,5 +1,7 @@
 class AddReferencesToEvents < ActiveRecord::Migration[6.1]
   class MigrationEvent < ActiveRecord::Base
+    include UuidPrimaryKey
+
     self.table_name = :events
   end
 
