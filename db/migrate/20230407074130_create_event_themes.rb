@@ -1,7 +1,7 @@
 class CreateEventThemes < ActiveRecord::Migration[6.1]
   def change
-    create_table :event_themes, id: :uuid  do |t|
-      t.uuid :event_id, null: false, foreign_key: true
+    create_table :event_themes, id: :string  do |t|
+      t.string :event_id, null: false, foreign_key: true
       t.string :main_color, null: false, default: '#0B374D'
       t.string :sub_color, null: false, default: '#EBE0CE'
       t.string :accent_color, null: false, default: '#D7D165'
