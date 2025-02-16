@@ -9,8 +9,8 @@ gem 'rails', '~> 8.0'
 
 gem 'propshaft'
 
-# Use postgresql as the database for Active Record
-gem 'pg', '~> 1.5'
+gem 'sqlite3', '~> 2.5'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
