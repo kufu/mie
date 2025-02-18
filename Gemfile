@@ -62,3 +62,5 @@ gem 'solid_queue', '1.1.3'
 gem 'solid_cache', '~> 1.0'
 
 gem 'activerecord-session_store', '~> 2.1'
+
+gem 'mission_control-jobs', '~> 1.0'

@@ -46,5 +46,7 @@ Rails.application.routes.draw do
     resources :trophies
   end
 
+  mount MissionControl::Jobs::Engine, at: "/admin/jobs"
+
   get '*path', controller: 'application', action: 'not_found'
 end
