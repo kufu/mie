@@ -1,7 +1,7 @@
 class CreateProfilesTable < ActiveRecord::Migration[7.1]
   def change
-    create_table :profiles, id: :uuid, default: -> { 'gen_random_uuid()' } do |t|
-      t.references :user, type: :uuid, null: false, foreign_key: true
+    create_table :profiles, id: :string do |t|
+      t.references :user, type: :string, null: false, foreign_key: true
       t.string :provider, null: false
       t.string :uid, null: false
       t.string :name, null: false

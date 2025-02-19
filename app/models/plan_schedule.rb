@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PlanSchedule < ApplicationRecord
+  include UuidPrimaryKey
+
   include ActiveModel::Validations
   validates_with Validators::EventEqualityValidator
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  include UuidPrimaryKey
+
   has_one :event_theme, dependent: :destroy
   has_many :tracks
   has_many :speakers
