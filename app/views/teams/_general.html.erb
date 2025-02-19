@@ -1,0 +1,25 @@
+<div class="space-y-6">
+  <div>
+    <div class="mb-4">
+      <h2 id="team-settings-heading" class="text-base font-bold">Team Settings</h2>
+    </div>
+
+    <div class="p-4 rounded-lg bg-[#FCFCFD] shadow-sm space-y-4">
+      <%= render "components/form_control", label: "Team name", required: true do |input_id| %>
+        <%= render "components/text_field",
+          id: input_id,
+          classes: "w-full" %>
+      <% end %>
+      <%= render "components/button",
+        title: "Save" %>
+    </div>
+  </div>
+
+  <% if @team.admin?(@user) %>
+    <div>
+      <%= render "components/button",
+        title: "Delete team",
+        classes: "text-red-600" %>
+    </div>
+  <% end %>
+</div>
