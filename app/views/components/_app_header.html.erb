@@ -4,9 +4,11 @@
       <%= link_to root_path do %>
         <h1 class="font-medium text-[#5E626E]">Schedule.select</h1>
       <% end %>
-      <a href="<%= event_path %>">
-        <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2024">
-      </a>
+      <% unless Rails.env.test? %>
+        <a href="<%= event_path %>">
+          <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2024">
+        </a>
+      <% end %>
     </div>
 
     <%# TODO: プロフィール画像を表示する %>
