@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Trophy < ApplicationRecord
+  include UuidPrimaryKey
+
   has_many :profile_trophies, dependent: :destroy
   has_many :profiles, through: :profile_trophies
   has_one :event_trophy

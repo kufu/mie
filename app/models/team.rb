@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Team < ApplicationRecord
+  include UuidPrimaryKey
+
   has_many :team_profiles, dependent: :destroy
   has_many :profiles, through: :team_profiles, dependent: :destroy
 

@@ -1,6 +1,6 @@
 class ConvertSchedulesTrack < ActiveRecord::Migration[7.1]
   def up
-    add_column :schedules, :track_id, :uuid
+    add_column :schedules, :track_id, :string
 
     #Schedule.all.each do |schedule|
     #  track = Track.find_or_create_by!(event: schedule.event, name: schedule.track_name)
@@ -22,7 +22,7 @@ class ConvertSchedulesTrack < ActiveRecord::Migration[7.1]
     end
 
     remove_column :schedules, :track_name
-    change_column :schedules, :track_id, :uuid, null: false
+    change_column :schedules, :track_id, :string, null: false
     add_foreign_key :schedules, :tracks
   end
 

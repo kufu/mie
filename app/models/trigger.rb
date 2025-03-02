@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Trigger < ApplicationRecord
+  include UuidPrimaryKey
+
   class TriggerError < StandardError; end
   class KeyNotMatchError < TriggerError; end
   class NoLeftError < TriggerError; end
