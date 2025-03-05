@@ -10,17 +10,19 @@
   <h1 class="mb-4 text-2xl">Profile</h1>
   <div class="flex flex-col p-4 space-y-4 rounded-lg bg-[#FCFCFD] shadow-md">
     <div class="flex flex-col justify-center items-center gap-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-x-2">
-          <img src="<%= @profile.avatar_url %>" class="w-16 h-16 rounded-full object-cover">
-          <h2 class="text-2xl truncate max-w-[calc(100%-2rem)]"><%= @profile.name %></h2>
+      <%= turbo_frame_tag @profile do %>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-x-2">
+            <img src="<%= @profile.avatar_url %>" class="w-16 h-16 rounded-full object-cover">
+            <h2 class="text-2xl truncate max-w-[calc(100%-2rem)]"><%= @profile.name %></h2>
+          </div>
+          <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
+            <%= render 'components/button', title: 'Edit', data_action: 'click->dialog#open' %>
+            <%= render 'dialog', profile: @profile %>
+          </div>
         </div>
-        <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
-          <%= render 'components/button', title: 'Edit', data_action: 'click->dialog#open' %>
-          <%= render 'dialog', profile: @profile %>
-        </div>
-      </div>
-      <p class="w-full text-left leading-6"><%= @profile.introduce %></p>
+        <p class="w-full text-left leading-6"><%= @profile.introduce %></p>
+      <% end %>
       <div class="w-full text-left">
         <h3 class="mb-1 font-bold text-xs">Your Team</h3>
         <p>Team Name</p>
