@@ -1,17 +1,17 @@
-<div class="bg-gray-100 rounded-lg p-4 shadow-md border">
-  <%# トグルボタン %>
-  <button class="flex items-center justify-between w-full text-left font-bold text-lg py-2"
+<div class="bg-gray-100 rounded-lg p-3 shadow-md border">
+  <div class="flex items-center justify-between">
+    <button id="toggle-button-<%= session_id %>" class="flex items-center text-left py-2 gap-1"
           onclick="toggleSession('<%= session_id %>')">
-    <div class="flex items-center space-x-2">
-      <i id="icon-<%= session_id %>" class="fa-solid fa-angle-right"></i>
-      <span><%= start_end %></span>
-    </div>
+        <i id="icon-<%= session_id %>" class="fa-solid fa-angle-right md:hidden"></i>
+        <span class="font-bold text-lg"><%= start_end %></span>
+    </button>
+    <span class="hidden sm:inline font-bold text-lg"><%= start_end %></span>
     <% if location.present? %>
       <%= render 'components/badge', label: location %>
     <% end %>
-  </button>
+  </div>
   <%# セッションリスト (最初の1つはデフォルト表示) %>
-  <div id="<%= session_id %>" class="mt-2 flex flex-col gap-y-4">
+  <div id="<%= session_id %>" class="mt-2 flex flex-wrap flex-row gap-4">
     <% sessions.each_with_index do |session, index| %>
       <div class="session-item <%= index > 0 ? 'hidden' : '' %>">
         <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: scheduled %>
@@ -40,4 +40,26 @@
       iconElement.classList.toggle("fa-angle-down", !isExpanded);
     }
   }
+
+  // 画面に応じた処理
+  function handleResize() {
+    const toggleButtons = document.querySelectorAll('[id^="toggle-button-"]');
+    toggleButtons.forEach(button => {
+      if (window.innerWidth >= 640) {
+        button.classList.add('hidden');
+      } else {
+        button.classList.remove('hidden');
+      }
+    });
+
+    const sessionItems = document.querySelectorAll('.session-item');
+    if (window.innerWidth >= 640) {
+      sessionItems.forEach(item => {
+        item.classList.remove('hidden');
+      });
+    }
+  }
+
+  window.addEventListener('resize', handleResize);
+  document.addEventListener('DOMContentLoaded', handleResize);
 </script>
