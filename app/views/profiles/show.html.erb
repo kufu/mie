@@ -25,15 +25,37 @@
         <h3 class="mb-1 font-bold text-xs">Your Team</h3>
         <p>Team Name</p>
       </div>
-      <div class="w-full text-left">
-        <h3 class="mb-1 font-bold text-xs">Trophies</h3>
-        <div class="flex flex-wrap gap-2">
-          <%# TODO: トロフィー画像に差し替える %>
-          <% 15.times do |i| %>
-            <img src="<%= @profile.avatar_url %>" class="w-10 h-10 rounded-full object-cover">
-          <% end %>
+      <% if @profile.trophies&.present? %>
+        <div class="w-full text-left">
+          <h3 class="mb-1 font-bold text-xs">Trophies</h3>
+          <div class="flex flex-wrap gap-2">
+            <% @profile.trophies.order(:order).each do |trophy| %>
+              <div data-controller="dialog" data-dialog-element-id-value="<%= trophy.id %>-dialog">
+                <img
+                  data-action="click->dialog#open"
+                  src="<%= image_url trophy.icon_url %>"
+                  class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>"
+                  />
+                <dialog id="<%= trophy.id %>-dialog" class="dialog">
+                  <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                    <p class="text-xl"><%= trophy.name %></p>
+                  </div>
+                  <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                    <div class="w-full p-6">
+                      <%= turbo_frame_tag trophy, src: trophy_path(trophy), loading: :lazy  %>
+                    </div>
+                  </div>
+                  <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                    <div class="flex justify-end">
+                      <button type="button" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></button>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div class="w-full text-left">
         <h3 class="mb-1 font-bold text-xs">Your 2D Code</h3>
         <div class="flex justify-center items-center">
