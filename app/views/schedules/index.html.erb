@@ -1,55 +1,97 @@
 <% content_for :head do %>
   <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
 <% end %>
-
 <%= turbo_frame_tag @event, refresh: :morph do %>
-<div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
-  <label class="flex sm:hidden flex-col items-center mb-2">
-    <span class="mb-2 text-sm font-bold text-[rgb(112,109,101)]">
-      <%= I18n.t('nav.select_locale') %>
-    </span>
-    <div class="relative box-border w-[16.25em]" data-controller="locale" data-locale-current-value="<%= session[:locale] %>">
-      <select data-action="change->locale#change" class="py-[3px] px-2 min-h-[30px] appearance-none cursor-pointer outline-none rounded-md border border-solid border-[rgb(214,211,208)] bg-white ps-2 pe-8 text-sm text-[rgb(35,34,30)] w-full align-middle">
-        <% grouped_timezones.map do |k, v| %>
-          <optgroup label="<%= k %>">
-            <% v.map do |locale| %>
-              <option label="<%= locale %>" value="<%= locale %>" <%= locale == session[:locale] ? "selected" : nil %>><%= locale %></option>
-            <% end %>
-          </optgroup>
+  <div data-controller="schedule-table" class="">
+    <div class="flex  overflow-x-auto overflow-y-hidden gap-2 p-0">
+      <div class="relative flex justify-center flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+        <% @schedule_table.days.each do |day| %>
+          <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+            <%= day %>
+          </button>
         <% end %>
-      </select>
+      </div>
     </div>
-  </label>
-  <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
-    <div class="relative flex sm:block justify-center flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
-      <% @schedule_table.days.each do |day| %>
-        <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
-          <%= day %>
-        </button>
-      <% end %>
-    </div>
-  </div>
-  <% cache [@schedule_table, @plan] do %>
-    <div class="mt-4 overflow-y-auto">
-      <% @schedule_table.days.each do |day| %>
-        <div id="schedule-<%= day %>" class="schedule-table hidden">
-          <table class="hidden sm:table h-full w-full border-collapse border-spacing-0">
-            <thead>
-            <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
-            <% @schedule_table[day].track_list.each do |track| %>
-              <th class="p-4 text-sm leading-4 border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= track %></th>
-            <% end %>
-            </thead>
-            <tbody>
-            <% @schedule_table[day].rows.each do |row| %>
-              <%= render partial: 'table_row', locals: { row: row, plan: @plan, track_list: @schedule_table[day].track_list } %>
-            <% end %>
-            </tbody>
-          </table>
-          <div class="sm:hidden" id="mobile-table-<%= day %>">
-            <% @schedule_table[day].rows.each do |row| %>
-              <%= render partial: 'mobile_table_row', locals: { row: row, plan: @plan, track_list: @schedule_table[day].track_list } %>
-            <% end %>
+    <% cache [@schedule_table, @plan] do %>
+      <div class="overflow-y-auto">
+        <% @schedule_table.days.each do |day| %>
+          <div id="schedule-<%= day %>" class="py-3 pr-3 schedule-table hidden">
+            <div class="flex flex-row gap-x-3">
+              <div class="flex flex-col">
+                <%= render partial: 'components/timeline', locals: { events: [
+                {start_time: "11:00", end_time: "12:00", participating: true},
+                {start_time: "14:00", end_time: "15:00", participating: true},
+              ], start_time: '11:00', end_time: '17:00' } %>
+              </div>
+              <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
+                <%= render 'components/session', 
+                    session_id: "session-1", 
+                    start_end: "11:00 - 12:00", 
+                    location: "Large Hall", 
+                    sessions: [{
+                      language: "English",
+                      location: "Room A",
+                      session_url: "https://example.com/session/1",
+                      session_title: "Introduction to Ruby",
+                      presenter: {
+                        name: "John Doe",
+                        avatar_url: "https://avatars.githubusercontent.com/u/100",
+                        handle: "johndoe"
+                      }
+                    },{
+                    language: "English",
+                    location: "Room A",
+                    session_url: "https://example.com/session/1",
+                    session_title: "Introduction to Ruby",
+                    presenter: {
+                    name: "John Doe",
+                    avatar_url: "https://avatars.githubusercontent.com/u/100",
+                    handle: "johndoe"
+                    }
+                    }],
+                    attendees: [
+                      {
+                        name: "Alice",
+                        avatar_url: "https://avatars.githubusercontent.com/u/101",
+                      }
+                    ],
+                    scheduled: true
+                  %>
+                <%= render 'components/session', 
+                    session_id: "session-2", 
+                    start_end: "11:00 - 12:00", 
+                    location: "Large Hall", 
+                    sessions: [{
+                      language: "English",
+                      location: "Room A",
+                      session_url: "https://example.com/session/1",
+                      session_title: "Introduction to Ruby",
+                      presenter: {
+                        name: "John Doe",
+                        avatar_url: "https://avatars.githubusercontent.com/u/100",
+                        handle: "johndoe"
+                      }
+                    },{
+                    language: "English",
+                    location: "Room A",
+                    session_url: "https://example.com/session/1",
+                    session_title: "Introduction to Ruby",
+                    presenter: {
+                    name: "John Doe",
+                    avatar_url: "https://avatars.githubusercontent.com/u/100",
+                    handle: "johndoe"
+                    }
+                    }],
+                    attendees: [
+                      {
+                        name: "Alice",
+                        avatar_url: "https://avatars.githubusercontent.com/u/101",
+                      }
+                    ],
+                    scheduled: true
+                  %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
@@ -57,5 +99,4 @@
   <% end %>
 </div>
 <% end %>
-
 <%= turbo_frame_tag "modal" %>
