@@ -9,6 +9,8 @@ class TeamsController < ApplicationController
 
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
+  def index; end
+
   # GET /teams/1
   def show
     @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
