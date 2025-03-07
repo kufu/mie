@@ -11,6 +11,19 @@ Rails.application.routes.draw do
   end
   resources :profiles, only: %i[show update]
 
+  resources :teams do
+    resources :members, only: %i[create update destroy]
+  end
+
+  resources :triggers, only: %i[show]
+
+  resources :trophies, only: %i[show]
+
+  namespace :admin do
+    resources :triggers, only: %i[index show edit update]
+    resources :trophies
+  end
+
   scope '/:event_name', as: 'event' do
     get '/', to: 'static#top'
     get '/terms-of-service', to: 'static#terms_of_service'
@@ -32,19 +45,6 @@ Rails.application.routes.draw do
   end
 
   resolve('PlanSchedule') { %i[event item] }
-
-  resources :teams, except: :index do
-    resources :members, only: %i[create update destroy]
-  end
-
-  resources :triggers, only: %i[show]
-
-  resources :trophies, only: %i[show]
-
-  namespace :admin do
-    resources :triggers, only: %i[index show edit update]
-    resources :trophies
-  end
 
   mount MissionControl::Jobs::Engine, at: "/admin/jobs"
 
