@@ -43,8 +43,9 @@
     <header>
       <%= render 'components/app_header' %>
     </header>
-    <div class="p-4 sm:p-8">
+    <main class="min-h-screen">
       <%= yield %>
-    </div>
+    </main>
+      <%= render 'components/footer' %>
   </body>
 </html>
