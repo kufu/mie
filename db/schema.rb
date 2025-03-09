@@ -10,13 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-  enable_extension "pgcrypto"
-
-  create_table "event_themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "event_id", null: false
+ActiveRecord::Schema[8.0].define(version: 2025_02_05_023156) do
+  create_table "event_themes", id: :string, force: :cascade do |t|
+    t.string "event_id", null: false
     t.string "main_color", default: "#0B374D", null: false
     t.string "sub_color", default: "#EBE0CE", null: false
     t.string "accent_color", default: "#D7D165", null: false
@@ -28,9 +24,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.string "text_color", default: "#23221F", null: false
   end
 
-  create_table "event_trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "event_id", null: false
-    t.uuid "trophy_id", null: false
+  create_table "event_trophies", id: :string, force: :cascade do |t|
+    t.string "event_id", null: false
+    t.string "trophy_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id", "trophy_id"], name: "index_event_trophies_on_event_id_and_trophy_id", unique: true
@@ -38,51 +34,51 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.index ["trophy_id"], name: "index_event_trophies_on_trophy_id"
   end
 
-  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "events", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "friends", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "from", null: false
-    t.uuid "to", null: false
+  create_table "friends", id: :string, force: :cascade do |t|
+    t.string "from", null: false
+    t.string "to", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from", "to"], name: "index_friends_on_from_and_to", unique: true
   end
 
-  create_table "plan_schedules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "plan_id", null: false
-    t.uuid "schedule_id", null: false
+  create_table "plan_schedules", id: :string, force: :cascade do |t|
+    t.string "plan_id", null: false
+    t.string "schedule_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "memo", default: "", null: false
   end
 
-  create_table "plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "plans", id: :string, force: :cascade do |t|
     t.string "title", null: false
     t.string "description", default: "", null: false
-    t.uuid "user_id", null: false
+    t.string "user_id", null: false
     t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_hash"
     t.boolean "initial", default: true, null: false
-    t.uuid "event_id", null: false
+    t.string "event_id", null: false
   end
 
-  create_table "profile_trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "profile_id", null: false
-    t.uuid "trophy_id", null: false
+  create_table "profile_trophies", id: :string, force: :cascade do |t|
+    t.string "profile_id", null: false
+    t.string "trophy_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_profile_trophies_on_profile_id"
     t.index ["trophy_id"], name: "index_profile_trophies_on_trophy_id"
   end
 
-  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
+  create_table "profiles", id: :string, force: :cascade do |t|
+    t.string "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
     t.string "name", null: false
@@ -93,14 +89,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "schedule_speakers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "schedule_id", null: false
-    t.uuid "speaker_id", null: false
+  create_table "schedule_speakers", id: :string, force: :cascade do |t|
+    t.string "schedule_id", null: false
+    t.string "speaker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "schedules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "schedules", id: :string, force: :cascade do |t|
     t.string "title", null: false
     t.string "description", default: "", null: false
     t.datetime "start_at", precision: nil, null: false
@@ -108,7 +104,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "language", default: 0, null: false
-    t.uuid "track_id", null: false
+    t.string "track_id", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -120,128 +116,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "solid_queue_blocked_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.string "queue_name", null: false
-    t.integer "priority", default: 0, null: false
-    t.string "concurrency_key", null: false
-    t.datetime "expires_at", null: false
-    t.datetime "created_at", null: false
-    t.index ["concurrency_key", "priority", "job_id"], name: "index_solid_queue_blocked_executions_for_release"
-    t.index ["expires_at", "concurrency_key"], name: "index_solid_queue_blocked_executions_for_maintenance"
-    t.index ["job_id"], name: "index_solid_queue_blocked_executions_on_job_id", unique: true
-  end
-
-  create_table "solid_queue_claimed_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.bigint "process_id"
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_claimed_executions_on_job_id", unique: true
-    t.index ["process_id", "job_id"], name: "index_solid_queue_claimed_executions_on_process_id_and_job_id"
-  end
-
-  create_table "solid_queue_failed_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.text "error"
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_failed_executions_on_job_id", unique: true
-  end
-
-  create_table "solid_queue_jobs", force: :cascade do |t|
-    t.string "queue_name", null: false
-    t.string "class_name", null: false
-    t.text "arguments"
-    t.integer "priority", default: 0, null: false
-    t.string "active_job_id"
-    t.datetime "scheduled_at"
-    t.datetime "finished_at"
-    t.string "concurrency_key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["active_job_id"], name: "index_solid_queue_jobs_on_active_job_id"
-    t.index ["class_name"], name: "index_solid_queue_jobs_on_class_name"
-    t.index ["finished_at"], name: "index_solid_queue_jobs_on_finished_at"
-    t.index ["queue_name", "finished_at"], name: "index_solid_queue_jobs_for_filtering"
-    t.index ["scheduled_at", "finished_at"], name: "index_solid_queue_jobs_for_alerting"
-  end
-
-  create_table "solid_queue_pauses", force: :cascade do |t|
-    t.string "queue_name", null: false
-    t.datetime "created_at", null: false
-    t.index ["queue_name"], name: "index_solid_queue_pauses_on_queue_name", unique: true
-  end
-
-  create_table "solid_queue_processes", force: :cascade do |t|
-    t.string "kind", null: false
-    t.datetime "last_heartbeat_at", null: false
-    t.bigint "supervisor_id"
-    t.integer "pid", null: false
-    t.string "hostname"
-    t.text "metadata"
-    t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.index ["last_heartbeat_at"], name: "index_solid_queue_processes_on_last_heartbeat_at"
-    t.index ["name", "supervisor_id"], name: "index_solid_queue_processes_on_name_and_supervisor_id", unique: true
-    t.index ["supervisor_id"], name: "index_solid_queue_processes_on_supervisor_id"
-  end
-
-  create_table "solid_queue_ready_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.string "queue_name", null: false
-    t.integer "priority", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_ready_executions_on_job_id", unique: true
-    t.index ["priority", "job_id"], name: "index_solid_queue_poll_all"
-    t.index ["queue_name", "priority", "job_id"], name: "index_solid_queue_poll_by_queue"
-  end
-
-  create_table "solid_queue_recurring_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.string "task_key", null: false
-    t.datetime "run_at", null: false
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_recurring_executions_on_job_id", unique: true
-    t.index ["task_key", "run_at"], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
-  end
-
-  create_table "solid_queue_recurring_tasks", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "schedule", null: false
-    t.string "command", limit: 2048
-    t.string "class_name"
-    t.text "arguments"
-    t.string "queue_name"
-    t.integer "priority", default: 0
-    t.boolean "static", default: true, null: false
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["key"], name: "index_solid_queue_recurring_tasks_on_key", unique: true
-    t.index ["static"], name: "index_solid_queue_recurring_tasks_on_static"
-  end
-
-  create_table "solid_queue_scheduled_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.string "queue_name", null: false
-    t.integer "priority", default: 0, null: false
-    t.datetime "scheduled_at", null: false
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_scheduled_executions_on_job_id", unique: true
-    t.index ["scheduled_at", "priority", "job_id"], name: "index_solid_queue_dispatch_all"
-  end
-
-  create_table "solid_queue_semaphores", force: :cascade do |t|
-    t.string "key", null: false
-    t.integer "value", default: 1, null: false
-    t.datetime "expires_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["expires_at"], name: "index_solid_queue_semaphores_on_expires_at"
-    t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
-    t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
-  end
-
-  create_table "speakers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "speakers", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.string "handle", default: "", null: false
     t.string "thumbnail", default: "", null: false
@@ -250,12 +125,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.datetime "updated_at", null: false
     t.string "github"
     t.string "twitter"
-    t.uuid "event_id", null: false
+    t.string "event_id", null: false
   end
 
-  create_table "team_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "team_id", null: false
-    t.uuid "profile_id", null: false
+  create_table "team_profiles", id: :string, force: :cascade do |t|
+    t.string "team_id", null: false
+    t.string "profile_id", null: false
     t.integer "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -264,14 +139,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.index ["team_id"], name: "index_team_profiles_on_team_id"
   end
 
-  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "teams", id: :string, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tracks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "event_id", null: false
+  create_table "tracks", id: :string, force: :cascade do |t|
+    t.string "event_id", null: false
     t.string "name", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -280,18 +155,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.index ["event_id"], name: "index_tracks_on_event_id"
   end
 
-  create_table "triggers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "triggers", id: :string, force: :cascade do |t|
     t.string "description", null: false
     t.string "key", null: false
-    t.jsonb "action", null: false
+    t.json "action", null: false
     t.integer "amount", null: false
     t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "conditions", default: []
+    t.json "conditions", default: []
   end
 
-  create_table "trophies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "trophies", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
     t.string "icon_url", null: false
@@ -302,7 +177,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
     t.boolean "special", default: false, null: false
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :string, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false, null: false
@@ -316,12 +191,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_035546) do
   add_foreign_key "profile_trophies", "trophies"
   add_foreign_key "profiles", "users"
   add_foreign_key "schedules", "tracks"
-  add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "team_profiles", "profiles"
   add_foreign_key "team_profiles", "teams"
   add_foreign_key "tracks", "events"

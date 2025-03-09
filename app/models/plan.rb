@@ -37,6 +37,8 @@ class PlanDatetimeOverlapValidator < ActiveModel::Validator
 end
 
 class Plan < ApplicationRecord
+  include UuidPrimaryKey
+
   include BCrypt
   include Events
 

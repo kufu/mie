@@ -1,0 +1,43 @@
+<div class="bg-gray-100 rounded-lg p-4 shadow-md border">
+  <%# トグルボタン %>
+  <button class="flex items-center justify-between w-full text-left font-bold text-lg py-2"
+          onclick="toggleSession('<%= session_id %>')">
+    <div class="flex items-center space-x-2">
+      <i id="icon-<%= session_id %>" class="fa-solid fa-angle-right"></i>
+      <span><%= start_end %></span>
+    </div>
+    <% if location.present? %>
+      <%= render 'components/badge', label: location %>
+    <% end %>
+  </button>
+  <%# セッションリスト (最初の1つはデフォルト表示) %>
+  <div id="<%= session_id %>" class="mt-2 flex flex-col gap-y-4">
+    <% sessions.each_with_index do |session, index| %>
+      <div class="session-item <%= index > 0 ? 'hidden' : '' %>">
+        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: scheduled %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  function toggleSession(sessionId) {
+    const sessionElement = document.getElementById(sessionId);
+    const iconElement = document.getElementById(`icon-${sessionId}`);
+    const sessionItems = sessionElement.querySelectorAll(".session-item");
+
+    if (sessionElement) {
+      const isExpanded = sessionItems.length > 1 && !sessionItems[1].classList.contains("hidden");
+
+      // 最初の1件以外をトグル
+      sessionItems.forEach((el, index) => {
+        if (index > 0) {
+          el.classList.toggle("hidden", isExpanded);
+        }
+      });
+
+      // アイコンの向きを変更
+      iconElement.classList.toggle("fa-angle-right", isExpanded);
+      iconElement.classList.toggle("fa-angle-down", !isExpanded);
+    }
+  }
+</script>

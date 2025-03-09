@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TeamProfile < ApplicationRecord
+  include UuidPrimaryKey
+
   belongs_to :team
   belongs_to :profile
 

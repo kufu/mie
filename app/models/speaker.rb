@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Speaker < ApplicationRecord
+  include UuidPrimaryKey
   include Events
 
   has_many :schedule_speakers
