@@ -8,14 +8,23 @@
     <%# 登壇者情報 %>
     <div class="flex items-center gap-x-2">
       <%= render 'components/avatar', name: schedule[:presenter][:name], url: schedule[:presenter][:avatar_url], size: 'm' %>
-      <div>
+      <div class="flex flex-col">
         <span class="text-sm font-bold"><%= schedule[:presenter][:name] %></span>
         <span class="text-sm text-shade-30">@<%= schedule[:presenter][:handle] %></span>
       </div>
     </div>
     <%# フレンズボタン（参加者リスト）%>
     <% if attendees.present? %>
-      <%= render 'components/friends_button', profiles: attendees, onClick: "console.log('FIXME: clicked Friends Button')" %>
+      <%= render 'components/friends_button', 
+          profiles: attendees, 
+          session_info: {
+            time: start_end,
+            language: schedule[:language],
+            location: schedule[:location],
+            title: schedule[:session_title],
+            presenter: schedule[:presenter]
+          }
+      %>
     <% end %>
     <%# 追加・削除ボタン %>
     <%= render("components/button",
