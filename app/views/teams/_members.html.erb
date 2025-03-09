@@ -1,0 +1,35 @@
+<div class="flex items-center justify-between mb-4">
+  <h2 class="text-base font-bold">Members</h2>
+  <%= render "components/button",
+    title: "Invite",
+    size: "s" %>
+</div>
+
+<div class="bg-[#FCFCFD] rounded-lg shadow-sm">
+  <ul class="px-4 divide-y divide-gray-100">
+    <% 5.times do |i| %>
+      <li class="py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <%= render "components/avatar",
+              url: "https://github.com/ruby.png",
+              name: "ruby kun #{i + 1}",
+              show_tooltip: true %>
+            <div>
+              <p class="text-xs font-bold text-gray-500"><%= i == 4 ? "Team Manager" : "Member" %></p>
+              <p class="text-base"><%= "ruby kun #{i + 1}" %></p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <%= render "components/button",
+              title: "Edit",
+              size: "s" %>
+            <%= render "components/button",
+              title: "Remove",
+              size: "s" %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
