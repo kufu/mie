@@ -14,7 +14,7 @@
   <div id="<%= session_id %>" class="mt-2 flex flex-wrap flex-row gap-4">
     <% sessions.each_with_index do |session, index| %>
       <div class="session-item <%= index > 0 ? 'hidden' : '' %>">
-        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: scheduled %>
+        <%= render 'components/session_card', schedule: session, start_end: start_end, attendees: attendees, scheduled: scheduled %>
       </div>
     <% end %>
   </div>
