@@ -24,72 +24,35 @@
               ], start_time: '11:00', end_time: '17:00' } %>
               </div>
               <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
-                <%= render 'components/session', 
-                    session_id: "session-1", 
-                    start_end: "11:00 - 12:00", 
-                    location: "Large Hall", 
-                    sessions: [{
-                      language: "English",
-                      location: "Room A",
-                      session_url: "https://example.com/session/1",
-                      session_title: "Introduction to Ruby",
-                      presenter: {
-                        name: "John Doe",
-                        avatar_url: "https://avatars.githubusercontent.com/u/100",
-                        handle: "johndoe"
-                      }
-                    },{
-                    language: "English",
-                    location: "Room A",
-                    session_url: "https://example.com/session/1",
-                    session_title: "Introduction to Ruby",
-                    presenter: {
-                    name: "John Doe",
-                    avatar_url: "https://avatars.githubusercontent.com/u/100",
-                    handle: "johndoe"
-                    }
-                    }],
-                    attendees: [
-                      {
-                        name: "Alice",
-                        avatar_url: "https://avatars.githubusercontent.com/u/101",
-                      }
-                    ],
-                    scheduled: true
+                <% @schedule_table[day].rows.each do |row| %>
+                  <%= render 'components/session',
+                             session_id: row.turbo_stream_id,
+                             start_end: row.start_end,
+                             location: "Large Hall",
+                             sessions: row.schedules.map { |schedule|
+                               {
+                                 language: schedule.language,
+                                 location: schedule.track.name,
+                                 session_url: "https://example.com/session/1",
+                                 session_title: schedule.title,
+                                 presenter: {
+                                   name: schedule.speakers.first&.name,
+                                   avatar_url: schedule.speakers.first&.thumbnail,
+                                   handle: schedule.speakers.first&.handle
+                                 }
+                               }
+                             },
+                             attendees: @user.profile.friend_profiles.select { |profile|
+                               @friends_schedules_map[profile.id].include?(row.schedules.first.id) # FIXME
+                             }.map { |profile|
+                               {
+                                 name: profile.name,
+                                 avatar_url: profile.avatar_url,
+                               }
+                             },
+                             scheduled: row.schedules.any? { @user.current_plan.schedules.include?(_1) }
                   %>
-                <%= render 'components/session', 
-                    session_id: "session-2", 
-                    start_end: "11:00 - 12:00", 
-                    location: "Large Hall", 
-                    sessions: [{
-                      language: "English",
-                      location: "Room A",
-                      session_url: "https://example.com/session/1",
-                      session_title: "Introduction to Ruby",
-                      presenter: {
-                        name: "John Doe",
-                        avatar_url: "https://avatars.githubusercontent.com/u/100",
-                        handle: "johndoe"
-                      }
-                    },{
-                    language: "English",
-                    location: "Room A",
-                    session_url: "https://example.com/session/1",
-                    session_title: "Introduction to Ruby",
-                    presenter: {
-                    name: "John Doe",
-                    avatar_url: "https://avatars.githubusercontent.com/u/100",
-                    handle: "johndoe"
-                    }
-                    }],
-                    attendees: [
-                      {
-                        name: "Alice",
-                        avatar_url: "https://avatars.githubusercontent.com/u/101",
-                      }
-                    ],
-                    scheduled: true
-                  %>
+                  <% end %>
               </div>
             </div>
           </div>
