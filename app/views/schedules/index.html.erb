@@ -31,6 +31,7 @@
                              location: "Large Hall",
                              sessions: row.schedules.map { |schedule|
                                {
+                                 id: schedule.id,
                                  language: schedule.language,
                                  location: schedule.track.name,
                                  session_url: "https://example.com/session/1",
@@ -50,7 +51,7 @@
                                  avatar_url: profile.avatar_url,
                                }
                              },
-                             scheduled: row.schedules.any? { @user.current_plan.schedules.include?(_1) }
+                             scheduled: row.schedules.find { @user.current_plan.schedules.include?(_1) }
                   %>
                   <% end %>
               </div>
