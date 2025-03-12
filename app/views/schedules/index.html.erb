@@ -43,15 +43,15 @@
                                  }
                                }
                              },
-                             attendees: @user.profile.friend_profiles.select { |profile|
+                             attendees: @user&.profile&.friend_profiles&.select { |profile|
                                @friends_schedules_map[profile.id].include?(row.schedules.first.id) # FIXME
-                             }.map { |profile|
+                             }&.map { |profile|
                                {
                                  name: profile.name,
                                  avatar_url: profile.avatar_url,
                                }
-                             },
-                             scheduled: row.schedules.find { @user.current_plan.schedules.include?(_1) }
+                             } || [],
+                             scheduled: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }
                   %>
                   <% end %>
               </div>
