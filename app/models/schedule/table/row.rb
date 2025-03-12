@@ -16,7 +16,7 @@ class Schedule
         @sort_key = schedules[0].start_at
       end
 
-      def turbo_stream_id
+      def turbo_frames_id
         date = schedules[0].start_at.strftime('%Y%m%d')
         [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end

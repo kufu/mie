@@ -28,7 +28,7 @@
               </div>
               <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
                 <% @schedule_table[day].rows.each do |row| %>
-                  <%= turbo_frame_tag row.turbo_stream_id do %>
+                  <%= turbo_frame_tag row.turbo_frames_id do %>
                     <%= render 'components/session',
                                row: row,
                                location: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }&.track&.name,

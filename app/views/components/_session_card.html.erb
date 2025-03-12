@@ -25,7 +25,7 @@
     <%= form_with(url: event_item_url(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
       <%= form.button(type: :submit,
                       class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
-                      data: { turbo_frame: row.turbo_stream_id }) do %>
+                      data: { turbo_frame: row.turbo_frames_id }) do %>
         <%= render("components/icons/close") %>
         <span class="text-base font-bold text-[#131416]">
           <%= I18n.t('card.remove') %>
@@ -38,7 +38,7 @@
       <%= form.hidden_field :schedule_id, value: schedule.id %>
       <%= form.button(type: :submit, class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
                       disabled: inactive,
-                      data: { turbo_frame: row.turbo_stream_id}) do %>
+                      data: { turbo_frame: row.turbo_frames_id}) do %>
         <%= render("components/icons/add") %>
         <span class="text-base font-bold <% inactive ? "text-[#CDCFD5]" : "text-[#131416]" %>">
           <%= inactive ? I18n.t('card.inactive') : I18n.t('card.add') %>
