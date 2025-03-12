@@ -20,12 +20,7 @@ class ItemsController < ApplicationController
     end
     @plan.update!(initial: false) if @plan.initial
 
-    if request.format.turbo_stream?
-      set_attributes_for_turbo_stream
-      render 'update'
-    else
-      redirect_to event_plan_path(@plan, event_name: @event.name)
-    end
+    redirect_to event_schedules_path(@event.name)
   end
 
   def update
@@ -37,13 +32,7 @@ class ItemsController < ApplicationController
     @item.destroy!
     @plan.update!(initial: false)
 
-    case params[:mode]
-    when 'schedule'
-      set_attributes_for_turbo_stream
-      render 'update'
-    when 'plan'
-      redirect_to event_plan_path(@plan, event_name: @event.name)
-    end
+    redirect_to event_schedules_path(@event.name)
   end
 
   private
@@ -72,26 +61,4 @@ class ItemsController < ApplicationController
   def check_item_belongs_to_event
     render status: :not_found, body: nil unless @item.schedule.track.event == @event
   end
-
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-  def set_attributes_for_turbo_stream
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
-
-    @row, @track_list = catch(:abort) do
-      @schedule_table.days.each do |day|
-        @table = @schedule_table[day]
-        @table.rows.each do |row|
-          throw :abort, [row, @table.track_list] if row.schedules.map(&:id).include?(@item.schedule.id)
-        end
-      end
-    end
-
-    return unless @user.profile
-
-    @friends_schedules_map = @user.profile.friend_profiles.to_h do |profile|
-      [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
-    end
-  end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
