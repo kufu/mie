@@ -1,21 +1,32 @@
 <div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
-      <% if sessions.size > 1 %>
+      <% if row.schedules.size > 1 %>
         <i data-sessions-target="icon" class="fa-solid fa-angle-right md:hidden"></i>
       <% end %>
-        <span class="font-bold text-lg"><%= start_end %></span>
+        <span class="font-bold text-lg"><%= row.start_end %></span>
     </button>
-    <span class="hidden sm:inline font-bold text-lg"><%= start_end %></span>
+    <span class="hidden sm:inline font-bold text-lg"><%= row.start_end %></span>
     <% if location.present? %>
       <%= render 'components/badge', label: location %>
     <% end %>
   </div>
   <%# セッションリスト (最初の1つはデフォルト表示) %>
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
-    <% sessions.each do |session| %>
+    <% row.schedules.each do |session| %>
       <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %><%# FIXME %>">
-        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: scheduled  %>
+        <%= render 'components/session_card',
+                   schedule: session,
+                   attendees: @user&.profile&.friend_profiles&.select { |profile|
+                     @friends_schedules_map[profile.id].include?(session.id) # FIXME
+                   }&.map { |profile|
+                     {
+                       name: profile.name,
+                       avatar_url: profile.avatar_url,
+                     }
+                   } || [],
+                   scheduled: scheduled
+        %>
       </div>
     <% end %>
   </div>
