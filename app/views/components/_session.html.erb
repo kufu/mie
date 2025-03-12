@@ -1,6 +1,6 @@
 <div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
-    <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1">
+    <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if sessions.size > 1 %>
         <i data-sessions-target="icon" class="fa-solid fa-angle-right md:hidden"></i>
       <% end %>
@@ -14,32 +14,9 @@
   <%# セッションリスト (最初の1つはデフォルト表示) %>
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
     <% sessions.each do |session| %>
-      <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden' : '' %><%# FIXME %>">
-        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: session == scheduled %>
+      <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %><%# FIXME %>">
+        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: scheduled  %>
       </div>
     <% end %>
   </div>
 </div>
-<script>
-  // 画面に応じた処理
-  function handleResize() {
-    const toggleButtons = document.querySelectorAll('[id^="toggle-button-"]');
-    toggleButtons.forEach(button => {
-      if (window.innerWidth >= 640) {
-        button.classList.add('hidden');
-      } else {
-        button.classList.remove('hidden');
-      }
-    });
-
-    const sessionItems = document.querySelectorAll('.session-item');
-    if (window.innerWidth >= 640) {
-      sessionItems.forEach(item => {
-        item.classList.remove('hidden');
-      });
-    }
-  }
-
-  window.addEventListener('resize', handleResize);
-  document.addEventListener('DOMContentLoaded', handleResize);
-</script>
