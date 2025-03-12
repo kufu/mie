@@ -13,7 +13,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
       post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
            params: { schedule_id: schedules(:six).id }
     end
-    assert_redirected_to event_plan_path(plans(:one), event_name: events(:party).name)
+    assert_redirected_to event_schedules_path(event_name: events(:party).name)
   end
 
   test 'Add new item to plan with turbo frames' do
@@ -108,7 +108,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
       delete event_item_url(item, event_name: events(:party).name)
     end
 
-    assert_response :ok
+    assert_redirected_to event_schedules_path(event_name: events(:party).name)
   end
 
   test 'Reject delete other users item' do
