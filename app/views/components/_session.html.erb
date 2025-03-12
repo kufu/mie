@@ -14,8 +14,8 @@
   <%# セッションリスト (最初の1つはデフォルト表示) %>
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
     <% sessions.each do |session| %>
-      <div data-sessions-target="session" class="<%= session[:id] == scheduled&.id ? 'selected' : scheduled ? 'hidden' : '' %><%# FIXME %>">
-        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: session[:id] == scheduled&.id %>
+      <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden' : '' %><%# FIXME %>">
+        <%= render 'components/session_card', schedule: session, attendees: attendees, scheduled: session == scheduled %>
       </div>
     <% end %>
   </div>

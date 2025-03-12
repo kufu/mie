@@ -1,17 +1,19 @@
 <% if schedule.present? %>
   <div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2">
     <%# スケジュール情報の展開 %>
-    <div class="text-sm"><%= schedule[:language] %>・<%= schedule[:location] %></div>
-    <a href="<%= schedule[:session_url] %>" class="text-lg font-semibold text-accent underline underline-offset-4 block">
-      <%= schedule[:session_title] %>
+    <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
+    <a href="<%#= FIXME %>" class="text-lg font-semibold text-accent underline underline-offset-4 block">
+      <%= schedule.title %>
     </a>
     <%# 登壇者情報 %>
     <div class="flex items-center gap-x-2">
-      <%= render 'components/avatar', name: schedule[:presenter][:name], url: schedule[:presenter][:avatar_url], size: 'm' %>
-      <div>
-        <span class="text-sm font-bold"><%= schedule[:presenter][:name] %></span>
-        <span class="text-sm text-shade-30">@<%= schedule[:presenter][:handle] %></span>
-      </div>
+      <% schedule.speakers.each do |speaker| %>
+        <%= render 'components/avatar', name: speaker.name, url: speaker.thumbnail, size: 'm' %>
+        <div>
+          <span class="text-sm font-bold"><%= speaker.name %></span>
+          <span class="text-sm text-shade-30"><%= speaker.handle %></span>
+        </div>
+      <% end %>
     </div>
     <%# フレンズボタン（参加者リスト）%>
     <% if attendees.present? %>
