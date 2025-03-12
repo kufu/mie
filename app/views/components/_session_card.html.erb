@@ -1,39 +1,49 @@
-<% if schedule.present? %>
-  <div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2">
-    <%# スケジュール情報の展開 %>
-    <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
-    <a href="<%#= FIXME %>" class="text-lg font-semibold text-accent underline underline-offset-4 block">
-      <%= schedule.title %>
-    </a>
-    <%# 登壇者情報 %>
-    <div class="flex flex-col">
-      <% schedule.speakers.each do |speaker| %>
-        <div class="flex items-center gap-x-2">
-          <%= render 'components/avatar', name: speaker.name, url: speaker.thumbnail, size: 'm' %>
-          <div>
-            <span class="text-sm font-bold"><%= speaker.name %></span>
-            <span class="text-sm text-shade-30"><%= speaker.handle %></span>
-          </div>
+<div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2">
+  <%# スケジュール情報の展開 %>
+  <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
+  <a href="<%#= FIXME %>" class="text-lg font-semibold text-accent underline underline-offset-4 block">
+    <%= schedule.title %>
+  </a>
+  <%# 登壇者情報 %>
+  <div class="flex flex-col">
+    <% schedule.speakers.each do |speaker| %>
+      <div class="flex items-center gap-x-2">
+        <%= render 'components/avatar', name: speaker.name, url: speaker.thumbnail, size: 'm' %>
+        <div>
+          <span class="text-sm font-bold"><%= speaker.name %></span>
+          <span class="text-sm text-shade-30"><%= speaker.handle %></span>
         </div>
-      <% end %>
-    </div>
-    <%# フレンズボタン（参加者リスト）%>
-    <% if attendees.present? %>
-      <%= render 'components/friends_button', profiles: attendees, onClick: "console.log('FIXME: clicked Friends Button')" %>
+      </div>
     <% end %>
-    <%# 追加・削除ボタン %>
-    <%= render("components/button",
-      icon: scheduled ? render("components/icons/close") : render("components/icons/add"),
-      title: scheduled ? "Remove from My Schedule" : "Add to My Schedule",
-      onClick: scheduled ? "console.log('FIXME: remove')" : "console.log('FIXME: add')") %>
   </div>
-<% else %>
-  <%# スケジュールが `nil` の場合に表示するビュー %>
-  <div class="bg-transparent rounded-lg p-4 flex flex-col gap-y-2 border-2 border-dashed border-shade-30">
-    <p class="text-lg text-shade-30">Schedule.blank?</p>
-    <span class="font-bold text-shade-30">Friends</span>
-    <%= render 'components/friends_button', profiles: friends, onClick: "console.log('FIXME: clicked Friends Button')" %>
-    <span class="font-bold text-shade-30">Your Team</span>
-    <%= render 'components/friends_button', profiles: team_members, onClick: "console.log('FIXME: clicked Friends Button')" %>
-  </div>
-<% end %>
+  <%# フレンズボタン（参加者リスト）%>
+  <% if attendees.present? %>
+    <%= render 'components/friends_button', profiles: attendees, onClick: "console.log('FIXME: clicked Friends Button')" %>
+  <% end %>
+  <%# 追加・削除ボタン %>
+  <% if scheduled == schedule %>
+    <%= form_with(url: event_item_url(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
+      <%= form.button(type: :submit,
+                      class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
+                      data: { turbo_frame: "event_#{@event.id}" }) do %>
+        <%= render("components/icons/close") %>
+        <span class="text-base font-bold text-[#131416]">
+          <%= I18n.t('card.remove') %>
+        </span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= form_with(url: event_plan_items_url(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
+      <% inactive = scheduled && schedule != scheduled %>
+      <%= form.hidden_field :schedule_id, value: schedule.id %>
+      <%= form.button(type: :submit, class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
+                      disabled: inactive,
+                      data: { turbo_frame: "event_#{@event.id}"}) do %>
+        <%= render("components/icons/add") %>
+        <span class="text-base font-bold <% inactive ? "text-[#CDCFD5]" : "text-[#131416]" %>">
+          <%= inactive ? I18n.t('card.inactive') : I18n.t('card.add') %>
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
