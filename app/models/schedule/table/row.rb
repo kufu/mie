@@ -3,7 +3,7 @@
 class Schedule
   class Table
     class Row
-      attr_reader :start_end, :timezone, :schedules, :tracks, :sort_key
+      attr_reader :start_at, :end_at, :start_end, :timezone, :schedules, :tracks, :sort_key
 
       def initialize(schedules)
         @start_at = I18n.l(schedules[0].start_at, format: :timetable)

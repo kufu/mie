@@ -18,10 +18,13 @@
           <div id="schedule-<%= day %>" class="py-3 pr-3 schedule-table hidden">
             <div class="flex flex-row gap-x-3">
               <div class="flex flex-col">
-                <%= render partial: 'components/timeline', locals: { events: [
-                {start_time: "11:00", end_time: "12:00", participating: true},
-                {start_time: "14:00", end_time: "15:00", participating: true},
-              ], start_time: '11:00', end_time: '17:00' } %>
+                <%= render partial: 'components/timeline',
+                           locals: {
+                             events: @schedule_table[day].rows.map { { start_time: _1.start_at, end_time: _1.end_at, participating: true } },
+                             start_time: @schedule_table[day].rows.first.start_at,
+                             end_time: @schedule_table[day].rows.last.end_at,
+                           }
+                %>
               </div>
               <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
                 <% @schedule_table[day].rows.each do |row| %>
@@ -32,14 +35,13 @@
                                scheduled: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }
                     %>
                   <% end %>
-                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
+        <% end %>
         </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 <% end %>
 <%= turbo_frame_tag "modal" %>
