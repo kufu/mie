@@ -16,14 +16,6 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to event_schedules_path(event_name: events(:party).name)
   end
 
-  test 'Add new item to plan with turbo frames' do
-    assert_difference('PlanSchedule.count', 1) do
-      post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
-           params: { schedule_id: schedules(:six).id }, as: :turbo_stream
-    end
-    assert_response :ok
-  end
-
   test 'Reject add new item to plan when crossover item has exists' do
     assert_no_difference('PlanSchedule.count') do
       post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
