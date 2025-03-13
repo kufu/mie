@@ -6,6 +6,8 @@ class AdminController < ApplicationController
 
   before_action :make_sure_user_is_admin
 
+  skip_after_action :check_trophy
+
   private
 
   def make_sure_user_is_admin

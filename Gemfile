@@ -12,7 +12,7 @@ gem 'propshaft'
 gem 'sqlite3', '~> 2.5'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.16'
 
