@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root to: redirect('/2024')
+  get "up" => "rails/health#show", as: :rails_health_check
 
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/session', to: 'sessions#delete'
