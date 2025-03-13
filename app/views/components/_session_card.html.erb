@@ -47,7 +47,7 @@
         <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
           <div class="flex justify-end">
             <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
-            <%= form_with(url: event_plans_url(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
+            <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
               <%= form.hidden_field :title %>
               <%= form.hidden_field :description %>
               <%= form.hidden_field :public %>
@@ -60,7 +60,7 @@
       </dialog>
     </div>
   <% elsif scheduled == schedule %>
-    <%= form_with(url: event_item_url(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
+    <%= form_with(url: event_item_path(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
       <%= form.button(type: :submit,
                       class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
                       data: { turbo_frame: row.turbo_frames_id }) do %>
@@ -71,7 +71,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <%= form_with(url: event_plan_items_url(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
+    <%= form_with(url: event_plan_items_path(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
       <% inactive = scheduled && schedule != scheduled %>
       <%= form.hidden_field :schedule_id, value: schedule.id %>
       <%= form.button(type: :submit, class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2",
