@@ -3,7 +3,7 @@
 class Schedule
   class Table
     class Row
-      attr_reader :start_end, :timezone, :schedules, :tracks, :sort_key
+      attr_reader :start_at, :end_at, :start_end, :timezone, :schedules, :tracks, :sort_key
 
       def initialize(schedules)
         @start_at = I18n.l(schedules[0].start_at, format: :timetable)
@@ -16,7 +16,7 @@ class Schedule
         @sort_key = schedules[0].start_at
       end
 
-      def turbo_stream_id
+      def turbo_frames_id
         date = schedules[0].start_at.strftime('%Y%m%d')
         [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end
