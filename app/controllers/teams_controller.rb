@@ -9,7 +9,9 @@ class TeamsController < ApplicationController
 
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
-  def index; end
+  def index
+    @profile = @user&.profile if @user
+  end
 
   # GET /teams/1
   def show
