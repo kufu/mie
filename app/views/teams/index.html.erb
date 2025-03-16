@@ -1,1 +1,48 @@
-index
+<% if my_profile? || @profile.belongs_to_any_team? %>
+  <h2 class="mb-4 text-2xl">Team Settings</h2>
+  <% if @profile.belongs_to_any_team? %>
+    <div class="flex items-center py-4">
+      <% if my_profile? %>
+        <a href="<%= team_path(@user.profile.current_team) %>">
+          <p><%= @user.profile.current_team.name %>
+            (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
+          </p>
+        </a>
+        <% unless @user.profile.current_team.admin?(@user) %>
+          <div class="flex-grow flex justify-end">
+            <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
+              <%= f.submit 'exit', class: 'danger-button' %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <p><%= @profile.current_team.name %>
+          (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
+        </p>
+      <% end %>
+    </div>
+  <% elsif my_profile? %>
+    <div class="flex flex-col justify-center items-center py-16 gap-4">
+      <div class="p-2">
+        <p class="text-[#5E626E]">No teams at this time.</p>
+      </div>
+      <% if false %>
+        <%# TODO: チーム作成ダイアログとの繋ぎ込み %>
+        <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
+      <% end %>
+      <%= render 'components/button', title: 'Create New Team' %>
+      <%# TODO: 招待されたチームがある場合の表示 %>
+      <% if @user.profile.invitations? %>
+        <span class="m-4">OR</span>
+        <ul>
+          <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each_with_index do |invitation, i| %>
+              <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
+                <%= f.hidden_field :role, value: :member %>
+                <li><%= f.submit "join to #{invitation.team.name}", class: "primary-button w-64" %></li>
+              <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
