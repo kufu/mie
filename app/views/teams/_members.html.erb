@@ -1,8 +1,13 @@
 <div class="flex items-center justify-between mb-4">
   <h2 class="text-base font-bold">Members</h2>
-  <%= render "components/button",
-    title: "Invite",
-    size: "s" %>
+  <div data-controller="dialog" data-dialog-element-id-value="invite-member-dialog">
+    <button data-action="click->dialog#open" class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold">
+      <%= I18n.t("button.invite") %>
+    </button>
+    <dialog id="invite-member-dialog" class="p-2">
+      <%= render 'invite_dialog' %>
+    </dialog>
+  </div>
 </div>
 
 <div class="bg-[#FCFCFD] rounded-lg shadow-sm">
