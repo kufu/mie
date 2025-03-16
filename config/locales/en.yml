@@ -129,6 +129,11 @@ en:
     login_required: "Login required."
 
   teams:
+    name: 'Team name'
+    settings: 'Team settings'
+    tabs:
+      general: 'General'
+      members: 'Members'
     about: 'About team feature'
     features:
       - "List all members plan in one page"

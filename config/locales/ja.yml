@@ -87,6 +87,11 @@ ja:
     plan_title: "視聴予定"
 
   teams:
+    name: 'チーム名'
+    settings: 'チーム設定'
+    tabs:
+      general: '一般'
+      members: 'メンバー'
     about: 'チーム機能について'
     features:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
