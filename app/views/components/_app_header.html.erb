@@ -33,7 +33,7 @@
               <% if user.profile&.belongs_to_any_team? %>
                 <%= link_to I18n.t('nav.team_settings'), "#fixme", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
               <% end %>
-              <%= button_to I18n.t('nav.logout'), "#fixme", method: :delete, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
+              <%= button_to I18n.t('nav.sign_out'), "#fixme", method: :delete, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
             </div>
           </div>
         </div>
