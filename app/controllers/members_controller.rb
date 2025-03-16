@@ -18,13 +18,13 @@ class MembersController < ApplicationController
 
     if profile
       if @team_profile.save
-        render :dialog, status: :created
+        render 'teams/_members', status: :created
       else
-        render 'dialog', status: :unprocessable_entity
+        render 'teams/_members', status: :unprocessable_entity
       end
     else
       @dialog_errors << I18n.t('errors.user_not_found', user: params[:profile_name])
-      render 'dialog', status: :unprocessable_entity
+      render 'teams/_members', status: :unprocessable_entity
     end
   end
 
@@ -37,9 +37,9 @@ class MembersController < ApplicationController
     invitation_user_check(old_role)
 
     if @dialog_errors.empty? && @team_profile.save
-      old_role == 'invitation' ? redirect_to(@team) : render('dialog')
+      redirect_to team_path(@team)
     else
-      render 'dialog', status: :unprocessable_entity
+      render 'teams/_members', status: :unprocessable_entity
     end
   end
 
@@ -54,10 +54,10 @@ class MembersController < ApplicationController
         session[:breakout_turbo] = true
         redirect_to profile_path, status: :see_other
       else
-        render 'dialog'
+        render "teams/_members"
       end
     else
-      render 'dialog', status: :unprocessable_entity
+      render "teams/_members", status: :unprocessable_entity
     end
   end
 

@@ -90,6 +90,7 @@ en:
     manage_members: Members
     username_to_invite: "User name to invite"
     delete_team: "Are you sure delete this team?"
+    remove_member: "Are you sure remove this member from the team?"
     edit_introduce: "Edit introduce yourself"
     read_qrcode_to_be_friend: "Read QR code to add friend"
   button:
