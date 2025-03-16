@@ -11,11 +11,13 @@
   <%= render "components/tabs", tabs: [
     {
       label: I18n.t('teams.tabs.general'),
-      content: render(partial: "teams/general", locals: { team: @team })
+      content: render(partial: "teams/general", locals: { team: @team }),
+      id: 'general-tab-button'
     },
     {
       label: I18n.t('teams.tabs.members'),
-      content: render(partial: "teams/members", locals: { team: @team })
+      content: render(partial: "teams/members", locals: { team: @team }),
+      id: 'member-tab-button'
     }
   ] %>
 </div>

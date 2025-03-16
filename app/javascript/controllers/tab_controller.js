@@ -6,6 +6,10 @@ export default class extends Controller {
   static values = { current: { type: Number, default: 0 } };
 
   connect () {
+    const id = window.location.hash;
+    this.buttonTargets.forEach((el, i) => {
+      if ('#' + this.buttonId(el) === id) this.currentValue = i;
+    });
     this.switch({ target: this.buttonTargets[this.currentValue] });
   }
 
@@ -24,5 +28,15 @@ export default class extends Controller {
     this.tabTargets.forEach((element, i) => {
       this.currentValue === i ? element.classList.remove('hidden') : element.classList.add('hidden');
     });
+
+    if (this.currentValue > 0) {
+      window.location.hash = this.buttonId(this.buttonTargets[this.currentValue]);
+    } else {
+      window.location.hash = '';
+    }
+  }
+
+  buttonId (element) {
+    return element.id.replace('-tab-button', '');
   }
 }
