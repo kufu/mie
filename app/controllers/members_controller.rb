@@ -18,13 +18,14 @@ class MembersController < ApplicationController
 
     if profile
       if @team_profile.save
-        render 'teams/_members', status: :created
+        render 'create', status: :created
       else
-        render 'teams/_members', status: :unprocessable_entity
+        @dialog_errors << I18n.t('errors.member_exists', user: params[:profile_name])
+        render 'teams/_invite_dialog', status: :unprocessable_entity
       end
     else
       @dialog_errors << I18n.t('errors.user_not_found', user: params[:profile_name])
-      render 'teams/_members', status: :unprocessable_entity
+      render 'teams/_invite_dialog', status: :unprocessable_entity
     end
   end
 

@@ -128,6 +128,7 @@ en:
     no_admins: "Require at least one admin must exists."
     only_one_team: "Target user already belongs to other team."
     login_required: "Login required."
+    member_exists: "User %{user} is already a member of this team."
 
   teams:
     name: 'Team name'

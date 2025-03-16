@@ -111,6 +111,7 @@ ja:
     no_admins: "最低でも1人の管理者が必要です"
     only_one_team: "対象のユーザーは既に他のチームに所属しています"
     login_required: "ログインが必要です"
+    member_exists: "%{user}は既にチームに参加しています"
 
   time:
     formats:
