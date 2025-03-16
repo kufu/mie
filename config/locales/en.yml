@@ -39,6 +39,9 @@ en:
     plan: "My Plans"
     profile: "Profile"
     team: "Team"
+    team_settings: "Team Settings"
+    sign_out: "Sign out"
+    sign_in: "Sign in"
   info:
     create_plan_title: "Create your RubyKaigi Plans"
     create_plan_text: "Create your RubyKaigi Plans with RubyKaigi mie.ru kun. Agree to Terms of service and press create button."

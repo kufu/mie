@@ -7,6 +7,9 @@ import { application } from "./application"
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import FriendCodeController from "./friend_code_controller"
 application.register("friend-code", FriendCodeController)
 

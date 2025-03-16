@@ -1,3 +1,6 @@
+<%#
+  @param user [User, nil] ユーザーオブジェクト
+%>
 <header class="w-full h-16 px-4 bg-gradient-to-b from-[#FFEB0C] from-0% via-transparent via-20% to-[#FCFCFD] to-20%">
   <div class="h-full flex justify-between items-center">
     <div class="flex flex-col gap-2 pt-2">
@@ -11,11 +14,35 @@
       <% end %>
     </div>
 
-    <%# TODO: プロフィール画像を表示する %>
-    <img
-      src="https://placehold.jp/150x150.png"
-      alt="Profile"
-      class="w-10 h-10 rounded-full"
-    >
+    <div class="relative" data-controller="dropdown">
+      <% if user %>
+        <div>
+          <button type="button" 
+                  class="flex items-center cursor-pointer"
+                  data-action="click->dropdown#toggle">
+            <img
+              src="<%= user.profile&.avatar_url || 'https://placehold.jp/150x150.png' %>"
+              alt="Profile"
+              class="w-10 h-10 rounded-full"
+            >
+          </button>
+          <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+               data-dropdown-target="menu">
+            <div class="py-1">
+              <%= link_to I18n.t('nav.profile'), "#fixme", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
+              <% if user.profile&.belongs_to_any_team? %>
+                <%= link_to I18n.t('nav.team_settings'), "#fixme", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
+              <% end %>
+              <%= button_to I18n.t('nav.logout'), "#fixme", method: :delete, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to "#fixme", class: "inline-flex items-center py-1 px-2 border border-[#5E626E] text-sm text-black font-bold rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer gap-1" do %>
+          <span><%= I18n.t('nav.sign_in') %></span>
+          <%= render("components/icons/chevron_right") %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </header>
