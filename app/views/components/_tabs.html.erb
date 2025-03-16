@@ -6,17 +6,17 @@
 ] %>
 <% end %>
 
-<div>
+<div data-controller="tab">
   <div class="flex border-b border-[#CDCFD5]">
-    <% tabs.each_with_index do |tab, index| %>
-      <button class="px-4 pt-2 pb-[5px] text-sm border-b-[3px] <%= index == 0 ? 'font-bold border-[#5E626E]' : 'font-medium border-transparent' %>">
+    <% tabs.each_with_index do |tab| %>
+      <button data-tab-target="button" data-action="tab#switch" class="px-4 pt-2 pb-[5px] text-sm border-b-[3px]">
         <%= tab[:label] %>
       </button>
     <% end %>
   </div>
   <div class="mt-4">
-    <% tabs.each_with_index do |tab, index| %>
-      <div <%= index == 0 ? '' : 'hidden' %>>
+    <% tabs.each do |tab| %>
+      <div data-tab-target="tab" class="hidden">
         <%= tab[:content] %>
       </div>
     <% end %>
