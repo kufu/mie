@@ -20,19 +20,19 @@ class ItemsController < ApplicationController
     end
     @plan.update!(initial: false) if @plan.initial
 
-    redirect_to event_schedules_path(@event.name)
+    redirect_to event_path(@event.name)
   end
 
   def update
     @item.update!(item_params)
-    render 'schedules/_card', locals: { schedule: @item.schedule, mode: :plan, inactive: false }
+    redirect_to event_path(@event.name)
   end
 
   def destroy
     @item.destroy!
     @plan.update!(initial: false)
 
-    redirect_to event_schedules_path(@event.name)
+    redirect_to event_path(@event.name)
   end
 
   private

@@ -13,7 +13,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
       post event_plan_items_url(event_name: events(:party).name, plan_id: plans(:one).id),
            params: { schedule_id: schedules(:six).id }
     end
-    assert_redirected_to event_schedules_path(event_name: events(:party).name)
+    assert_redirected_to event_path(events(:party).name)
   end
 
   test 'Reject add new item to plan when crossover item has exists' do
@@ -100,7 +100,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
       delete event_item_url(item, event_name: events(:party).name)
     end
 
-    assert_redirected_to event_schedules_path(event_name: events(:party).name)
+    assert_redirected_to event_path(events(:party).name)
   end
 
   test 'Reject delete other users item' do
