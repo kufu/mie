@@ -21,7 +21,7 @@ class MembersController < ApplicationController
         if turbo_frame_request?
           render 'create', status: :created
         else
-          redirect_to team_path(@team) + '#members', status: :created
+          redirect_to "#{team_path(@team)}#members", status: :created
         end
       else
         @dialog_errors << I18n.t('errors.member_exists', user: params[:profile_name])
@@ -59,10 +59,10 @@ class MembersController < ApplicationController
         session[:breakout_turbo] = true
         redirect_to profile_path, status: :see_other
       else
-        render "teams/_members"
+        render 'teams/_members'
       end
     else
-      render "teams/_members", status: :unprocessable_entity
+      render 'teams/_members', status: :unprocessable_entity
     end
   end
 
