@@ -35,7 +35,7 @@ class PlansController < ApplicationController
     create_and_set_user unless @user
     @plan = @user.plans.where(event: @event).create!(plan_params)
     add_plan(params[:plan][:add_schedule_id]) if params[:plan][:add_schedule_id]
-    redirect_to event_schedules_path(event_name: @plan.event.name)
+    redirect_to event_path(@plan.event.name)
   end
 
   private
@@ -55,7 +55,7 @@ class PlansController < ApplicationController
       ps.save!
     else
       flash[:error] = @plan.errors.messages[:schedules]
-      redirect_to event_schedules_path(event_name: @plan.event.name) and return
+      redirect_to event_path(event_name: @plan.event.name) and return
     end
   end
 
