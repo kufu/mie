@@ -45,7 +45,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       patch team_member_path(profiles(:profile_two), team_id: teams(:alpha)), params: { role: :admin }
     end
 
-    assert_response :ok
+    assert_redirected_to team_path(teams(:alpha))
   end
 
   test 'admin can change admin to member' do
@@ -55,7 +55,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       patch team_member_path(profiles(:profile_three), team_id: teams(:alpha)), params: { role: :member }
     end
 
-    assert_response :ok
+    assert_redirected_to team_path(teams(:alpha))
   end
 
   test 'admin can not change invitation to member' do

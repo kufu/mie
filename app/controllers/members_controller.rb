@@ -18,7 +18,11 @@ class MembersController < ApplicationController
 
     if profile
       if @team_profile.save
-        render 'create', status: :created
+        if turbo_frame_request?
+          render 'create', status: :created
+        else
+          redirect_to team_path(@team) + '#members', status: :created
+        end
       else
         @dialog_errors << I18n.t('errors.member_exists', user: params[:profile_name])
         render 'teams/_invite_dialog', status: :unprocessable_entity
