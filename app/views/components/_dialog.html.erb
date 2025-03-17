@@ -3,18 +3,14 @@
 - title: ダイアログのタイトル（必須）
 - content: ダイアログの本文（ブロックとして渡す）（必須）
 オプションパラメータ:
-- dialog_id: ダイアログのID（デフォルト: 自動生成）
-- header_content: ヘッダー部分に表示する任意のコンテンツ（オプション）
 - action_button: アクションボタンの設定（オプション）
   - title: ボタンのテキスト
   - classes: ボタンのクラス
   - onClick: クリック時の処理
 <% end %>
 
-<% dialog_id ||= "dialog-#{SecureRandom.hex(4)}" %>
-
-<dialog id="<%= dialog_id %>" class="dialog">
-  <div class="bg-white rounded-lg max-h-[90vh] flex flex-col rounded-[8px]">
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center">
+  <div class="bg-white rounded-lg w-[480px] max-h-[90vh] flex flex-col rounded-[8px]">
     <%# ヘッダー部分 %>
     <div class="px-4 py-2 border-b">
       <h2 class="text-xl font-bold">
@@ -35,11 +31,11 @@
     <%# フッター部分（ボタン） %>
     <div class="p-4 border-t flex justify-end gap-3">
       <%# 閉じるボタン（常に表示） %>
-      <%= render "components/button",
-        title: "Close",
-        size: "s",
-        data_action: "click->dialog#close"
-      %>
+      <button
+        data-action="click->dialog#close"
+        class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold">
+      <%= I18n.t('button.close') %>
+      </button>
 
       <%# アクションボタン（オプション） %>
       <% if local_assigns[:action_button].present? %>
@@ -52,4 +48,4 @@
       <% end %>
     </div>
   </div>
-</dialog>
+</div>

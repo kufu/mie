@@ -7,6 +7,9 @@ import { application } from "./application"
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import FriendCodeController from "./friend_code_controller"
 application.register("friend-code", FriendCodeController)
 
@@ -18,6 +21,12 @@ application.register("locale", LocaleController)
 
 import ScheduleTableController from "./schedule_table_controller"
 application.register("schedule-table", ScheduleTableController)
+
+import SessionsController from "./sessions_controller"
+application.register("sessions", SessionsController)
+
+import TabController from "./tab_controller"
+application.register("tab", TabController)
 
 import WordCounterController from "./word_counter_controller"
 application.register("word-counter", WordCounterController)

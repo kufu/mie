@@ -9,7 +9,10 @@ class TeamsController < ApplicationController
 
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
-  def index; end
+  def index
+    @profile = @user&.profile if @user
+    redirect_to team_path(@profile.current_team) if @profile&.current_team
+  end
 
   # GET /teams/1
   def show
@@ -65,7 +68,7 @@ class TeamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_team
-    @team = Team.find(params[:id])
+    @team = Team.includes(profiles: [:user]).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

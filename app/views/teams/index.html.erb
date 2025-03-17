@@ -1,1 +1,27 @@
-index
+<h2 class="mb-4 text-2xl"><%= I18n.t('teams.settings') %></h2>
+<div class="flex flex-col justify-center items-center py-16 gap-4">
+  <div class="p-2">
+    <p class="text-[#5E626E]">No teams at this time.</p>
+  </div>
+  <%= link_to I18n.t("button.create_new_team"), new_team_path, class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold" %>
+  <% if @user.profile.invitations? %>
+    <span class="m-4">OR</span>
+    <ul>
+      <% @profile&.teams_invited&.each do |team| %>
+        <%= form_with(url: team_member_path(@user.profile, team_id: team), method: :patch) do |f| %>
+          <%= f.hidden_field :role, value: :member %>
+          <li><%= f.submit "join to #{team.name}", class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold" %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="p-2">
+    <p class="text-xl"><%= I18n.t('teams.about') %></p>
+    <div class="p-4">
+      <ul class="list-disc list-inside leading-7">
+        <% I18n.t('teams.features').each do |feature| %>
+          <li><%= feature %></li>
+        <% end %>
+      </ul>
+    </div>
+</div>

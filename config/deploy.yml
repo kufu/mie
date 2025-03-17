@@ -1,0 +1,39 @@
+# Name of your application. Used to uniquely configure containers.
+service: mie
+
+# Name of the container image.
+image: <%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>/mie-production/mie
+
+# Deploy to these servers.
+servers:
+  - mie-production-vm.asia-northeast1-b.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+
+# Credentials for your image host.
+registry:
+  server: asia-northeast1-docker.pkg.dev/<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>/mie-production
+  username: _json_key_base64
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Configure builder setup.
+builder:
+  arch: amd64
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
+#
+env:
+  secret:
+    - SECRET_KEY_BASE
+    - GITHUB_KEY
+    - GITHUB_SECRET
+
+# Use a different ssh user than root
+#
+ssh:
+  proxy_command: sh ./.kamal/scripts/gcp-start-iap-tunnel-ssh-proxy-magic.sh gce_instance=%h sshuser=root
+
+# Use a persistent storage volume.
+#
+volumes:
+  - "/volume:/rails/storage"
+

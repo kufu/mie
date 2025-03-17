@@ -1,132 +1,60 @@
 <% content_for :head do %>
-  <meta property="og:url" content="<%= event_schedules_url(event_name: @event.name) %>">
+  <meta property="og:url" content="<%= event_url(@event.name) %>">
 <% end %>
 <%= turbo_frame_tag @event, refresh: :morph do %>
-  <div data-controller="schedule-table" class="">
-    <div class="flex  overflow-x-auto overflow-y-hidden gap-2 p-0">
-      <div class="relative flex justify-center flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
+  <div data-controller="schedule-table">
+    <div class="flex justify-center pb-4">
+      <div class="flex border-b border-[#CDCFD5] w-fit">
         <% @schedule_table.days.each do |day| %>
-          <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
+          <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none text-sm px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
             <%= day %>
           </button>
         <% end %>
       </div>
     </div>
+
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="text-2xl font-bold">Your Schedule</h2>
+      <%= render "components/button", title: "Share", size: "s" %>
+    </div>
+
+    <div class="bg-white rounded-lg p-4 mb-7">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-base font-bold">Description</h3>
+        <%= render "components/button", title: "Edit", size: "s" %>
+      </div>
+      <p class="text-base">説明が入る</p>
+    </div>
+
     <% cache [@schedule_table, @plan] do %>
       <div class="overflow-y-auto">
         <% @schedule_table.days.each do |day| %>
-          <div id="schedule-<%= day %>" class="py-3 pr-3 schedule-table hidden">
+          <div id="schedule-<%= day %>" class="pb-3 pr-3 schedule-table hidden">
             <div class="flex flex-row gap-x-3">
               <div class="flex flex-col">
-                <%= render partial: 'components/timeline', locals: { events: [
-                {start_time: "11:00", end_time: "12:00", participating: true},
-                {start_time: "14:00", end_time: "15:00", participating: true},
-              ], start_time: '11:00', end_time: '17:00' } %>
+                <%= render partial: 'components/timeline',
+                           locals: {
+                             events: @schedule_table[day].rows.map { { start_time: _1.start_at, end_time: _1.end_at, participating: true } },
+                             start_time: @schedule_table[day].rows.first.start_at,
+                             end_time: @schedule_table[day].rows.last.end_at,
+                           }
+                %>
               </div>
               <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
-                <%= render 'components/session', 
-                    session_id: "session-1", 
-                    start_end: "11:00 - 12:00", 
-                    location: "Large Hall", 
-                    sessions: [{
-                      language: "English",
-                      location: "Room A",
-                      session_url: "https://example.com/session/1",
-                      session_title: "Introduction to Ruby",
-                      presenter: {
-                        name: "John Doe",
-                        avatar_url: "https://avatars.githubusercontent.com/u/100",
-                        handle: "johndoe"
-                      }
-                    },{
-                    language: "English",
-                    location: "Room A",
-                    session_url: "https://example.com/session/1",
-                    session_title: "Introduction to Ruby",
-                    presenter: {
-                    name: "John Doe",
-                    avatar_url: "https://avatars.githubusercontent.com/u/100",
-                    handle: "johndoe"
-                    }
-                    }],
-                    attendees: [
-                      {
-                        name: "Alice",
-                        avatar_url: "https://avatars.githubusercontent.com/u/101"
-                      },
-                      {
-                        name: "Bob",
-                        avatar_url: "https://avatars.githubusercontent.com/u/102"
-                      },
-                      {
-                        name: "Charlie",
-                        avatar_url: "https://avatars.githubusercontent.com/u/103"
-                      },
-                      {
-                        name: "David",
-                        avatar_url: "https://avatars.githubusercontent.com/u/104"
-                      },
-                      {
-                        name: "Eve",
-                        avatar_url: "https://avatars.githubusercontent.com/u/105"
-                      },
-                      {
-                        name: "Frank",
-                        avatar_url: "https://avatars.githubusercontent.com/u/106"
-                      }
-                    ],
-                    scheduled: true
-                  %>
-                <%= render 'components/session', 
-                    session_id: "session-2", 
-                    start_end: "11:00 - 12:00", 
-                    location: "Large Hall", 
-                    sessions: [{
-                      language: "English",
-                      location: "Room A",
-                      session_url: "https://example.com/session/1",
-                      session_title: "Introduction to Ruby",
-                      presenter: {
-                        name: "John Doe",
-                        avatar_url: "https://avatars.githubusercontent.com/u/100",
-                        handle: "johndoe"
-                      }
-                    },{
-                    language: "English",
-                    location: "Room A",
-                    session_url: "https://example.com/session/1",
-                    session_title: "Introduction to Ruby",
-                    presenter: {
-                    name: "John Doe",
-                    avatar_url: "https://avatars.githubusercontent.com/u/100",
-                    handle: "johndoe"
-                    }
-                    }],
-                    attendees: [
-                      {
-                        name: "Grace",
-                        avatar_url: "https://avatars.githubusercontent.com/u/107"
-                      },
-                      {
-                        name: "Heidi",
-                        avatar_url: "https://avatars.githubusercontent.com/u/108"
-                      },
-                      {
-                        name: "Ivan",
-                        avatar_url: "https://avatars.githubusercontent.com/u/109"
-                      },
-                      {
-                        name: "Alice",
-                        avatar_url: "https://avatars.githubusercontent.com/u/101",
-                      }
-                    ],
-                    scheduled: true
-                  %>
+                <% @schedule_table[day].rows.each do |row| %>
+                  <%= turbo_frame_tag row.turbo_frames_id do %>
+                    <%= render 'components/session',
+                               row: row,
+                               location: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }&.track&.name,
+                               scheduled: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }
+                    %>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
         <% end %>
-      </div>
+        </div>
     <% end %>
   </div>
 <% end %>

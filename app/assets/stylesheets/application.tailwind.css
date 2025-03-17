@@ -20,16 +20,16 @@
   }
 
   .dialog {
-    @apply w-full sm:max-w-[min(100vw-16px,800px)]
+    @apply w-full sm:max-w-[min(100vw-16px,800px)];
   }
 }
 
 @layer utilities {
   .nav-current {
-    @apply  relative after:content-[''] after:absolute after:right-0 after:bottom-0 after:left-0 after:block after:h-1 after:bg-[var(--mainColor)];
+    @apply relative after:content-[''] after:absolute after:right-0 after:bottom-0 after:left-0 after:block after:h-1 after:bg-[var(--mainColor)];
   }
 
   .tab-btn-active {
-    @apply relative text-[rgb(35,34,30)] border-[var(--mainColor)];
+    @apply relative text-[rgb(35,34,30)] font-bold border-[#5E626E];
   }
 }

@@ -8,6 +8,9 @@ ja:
     plan: "視聴予定"
     profile: "プロフィール"
     team: "チーム"
+    team_settings: "チーム設定"
+    sign_out: "サインアウト"
+    sign_in: "サインイン"
   info:
     create_plan_title: "セッションの視聴予定を作成しませんか？"
     create_plan_text: "RubyKaigi mie.ru 君を使って、RubyKaigi2021 Takeoutのセッション視聴予定表を作成しましょう！ 利用規約に同意の上、予定の作成ボタンを押してください。"
@@ -59,6 +62,7 @@ ja:
     manage_members: メンバー管理
     username_to_invite: "招待するユーザー名"
     delete_team: "このチームを削除しますか？"
+    remove_member: "このメンバーをチームから削除しますか？"
     edit_introduce: "自己紹介を編集"
     read_qrcode_to_be_friend: "QRコードを読み込んで友達追加"
   button:
@@ -81,12 +85,18 @@ ja:
     remove: "削除"
     manage_members: "メンバーを管理"
     delete_team: "チームを削除"
+    leave_team: "チームから離脱"
     add_friend: "友達を追加"
     reload: "再読み込み"
   default_vales:
     plan_title: "視聴予定"
 
   teams:
+    name: 'チーム名'
+    settings: 'チーム設定'
+    tabs:
+      general: '一般'
+      members: 'メンバー'
     about: 'チーム機能について'
     features:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
@@ -105,6 +115,7 @@ ja:
     no_admins: "最低でも1人の管理者が必要です"
     only_one_team: "対象のユーザーは既に他のチームに所属しています"
     login_required: "ログインが必要です"
+    member_exists: "%{user}は既にチームに参加しています"
 
   time:
     formats:
