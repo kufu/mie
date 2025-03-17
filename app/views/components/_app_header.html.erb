@@ -33,9 +33,11 @@
           </div>
         </div>
       <% else %>
-        <%= link_to "#fixme", class: "inline-flex items-center py-1 px-2 border border-[#5E626E] text-sm text-black font-bold rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer gap-1" do %>
-          <span><%= I18n.t('nav.sign_in') %></span>
-          <%= render("components/icons/chevron_right") %>
+        <%= form_tag('/auth/github', method: 'post' , data: { turbo: false }) do %>
+          <button type="submit" class="inline-flex items-center py-1 px-2 border border-[#5E626E] text-sm text-black font-bold rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer gap-1">
+            <span><%= I18n.t('nav.sign_in') %></span>
+            <%= render("components/icons/chevron_right") %>
+          </button>
         <% end %>
       <% end %>
     </div>
