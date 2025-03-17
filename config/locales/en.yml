@@ -112,7 +112,8 @@ en:
     cancel: "Cancel"
     remove: "Remove"
     manage_members: "Manage members"
-    delete_team: "Delete team"
+    delete_team: "Delete the team"
+    leave_team: "Leave from the team"
     add_friend: "Add friend"
     reload: "Reload"
   default_vales:

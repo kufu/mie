@@ -35,9 +35,6 @@
           <% end %>
         </div>
       <% elsif my_profile? %>
-        <div class="flex flex-col justify-center items-center py-4 gap-4">
-          </div>
-          <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
           <% if @user.profile.invitations? %>
             <span class="m-4">OR</span>
             <ul>

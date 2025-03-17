@@ -82,6 +82,7 @@ ja:
     remove: "削除"
     manage_members: "メンバーを管理"
     delete_team: "チームを削除"
+    leave_team: "チームから離脱"
     add_friend: "友達を追加"
     reload: "再読み込み"
   default_vales:
