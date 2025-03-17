@@ -21,6 +21,10 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter var', 'Noto Sans JP var', ...defaultTheme.fontFamily.sans]
+      },
+      textColor: {
+        black: '#131416',
+        ...defaultTheme.colors
       }
     }
   },
