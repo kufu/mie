@@ -9,17 +9,18 @@
 <div>
   <h2 class="text-2xl font-normal mb-4"><%= I18n.t('teams.settings') %></h2>
   <%= render "components/tabs", tabs: [
+    @team.admin?(@user) ?
     {
       label: I18n.t('teams.tabs.general'),
       content: render(partial: "teams/general", locals: { team: @team }),
       id: 'general-tab-button'
-    },
+    } : nil,
     {
       label: I18n.t('teams.tabs.members'),
       content: render(partial: "teams/members", locals: { team: @team }),
       id: 'member-tab-button'
     }
-  ] %>
+  ].compact %>
 </div>
 
 <%= turbo_frame_tag "modal" %>
