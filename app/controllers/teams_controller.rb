@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
 
   def index
     @profile = @user&.profile if @user
+    redirect_to team_path(@profile.current_team) if @profile&.current_team
   end
 
   # GET /teams/1

@@ -36,15 +36,6 @@
         </div>
       <% elsif my_profile? %>
         <div class="flex flex-col justify-center items-center py-4 gap-4">
-          <div class="p-2">
-            <p class="text-xl"><%= I18n.t('teams.about') %></p>
-            <div class="p-4">
-              <ul class="list-disc list-inside leading-7">
-                <% I18n.t('teams.features').each do |feature| %>
-                  <li><%= feature %></li>
-                <% end %>
-              </ul>
-            </div>
           </div>
           <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
           <% if @user.profile.invitations? %>
