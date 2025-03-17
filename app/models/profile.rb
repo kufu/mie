@@ -32,4 +32,8 @@ class Profile < ApplicationRecord
   def invitations?
     team_profiles.where(role: :invitation).exists?
   end
+
+  def teams_invited
+    team_profiles.where(role: :invitation).map(&:team)
+  end
 end

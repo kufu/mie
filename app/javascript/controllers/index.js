@@ -22,5 +22,8 @@ application.register("schedule-table", ScheduleTableController)
 import SessionsController from "./sessions_controller"
 application.register("sessions", SessionsController)
 
+import TabController from "./tab_controller"
+application.register("tab", TabController)
+
 import WordCounterController from "./word_counter_controller"
 application.register("word-counter", WordCounterController)

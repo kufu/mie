@@ -1,25 +1,29 @@
 <div class="space-y-6">
   <div>
     <div class="mb-4">
-      <h2 id="team-settings-heading" class="text-base font-bold">Team Settings</h2>
+      <h2 id="team-settings-heading" class="text-base font-bold"><%= I18n.t('teams.settings') %></h2>
     </div>
 
-    <div class="p-4 rounded-lg bg-[#FCFCFD] shadow-sm space-y-4">
-      <%= render "components/form_control", label: "Team name", required: true do |input_id| %>
-        <%= render "components/text_field",
-          id: input_id,
-          classes: "w-full" %>
-      <% end %>
-      <%= render "components/button",
-        title: "Save" %>
-    </div>
+    <% if @team.admin?(@user) %>
+      <div class="p-4 rounded-lg bg-[#FCFCFD] shadow-sm space-y-4">
+        <%= form_with model: @team do |f| %>
+          <%= render "components/form_control", label: I18n.t('teams.name'), required: true do |input_id| %>
+            <%= f.text_field :name, id: input_id, class: 'border border-[var(--textColor)] rounded-md px-4 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-full' %>
+          <% end %>
+          <div class="mt-4">
+            <%= f.submit I18n.t('button.save'), class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <% if @team.admin?(@user) %>
     <div>
-      <%= render "components/button",
-        title: "Delete team",
-        classes: "text-red-600" %>
+      <%= link_to I18n.t('button.delete_team'), @team, data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.delete_team') }, class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold text-red-600' %>
     </div>
   <% end %>
+  <div>
+    <%= link_to I18n.t('button.leave_team'), team_member_path(@user.profile, team_id: @team), data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.remove_member') }, class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold text-red-600' %>
+  </div>
 </div>

@@ -7,15 +7,17 @@
 <% end %>
 
 <div>
-  <h2 class="text-2xl font-normal mb-4">Team Settings</h2>
+  <h2 class="text-2xl font-normal mb-4"><%= I18n.t('teams.settings') %></h2>
   <%= render "components/tabs", tabs: [
     {
-      label: "General",
-      content: render(partial: "teams/general", locals: { team: @team })
+      label: I18n.t('teams.tabs.general'),
+      content: render(partial: "teams/general", locals: { team: @team }),
+      id: 'general-tab-button'
     },
     {
-      label: "Members",
-      content: render(partial: "teams/members", locals: { team: @team })
+      label: I18n.t('teams.tabs.members'),
+      content: render(partial: "teams/members", locals: { team: @team }),
+      id: 'member-tab-button'
     }
   ] %>
 </div>
