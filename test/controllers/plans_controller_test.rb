@@ -43,7 +43,7 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
     patch event_plan_path(plan, event_name: events(:party).name), params: { plan: { title: 'updated title' } }
 
     plan.reload
-    assert_redirected_to event_plan_path(plan, event_name: events(:party).name)
+    assert_redirected_to event_path(event_name: events(:party).name)
     assert_equal 'updated title', plan.title
   end
 
@@ -52,7 +52,7 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
     patch event_plan_path(plan, event_name: events(:party).name), params: { plan: { description: 'updated desc' } }
 
     plan.reload
-    assert_redirected_to event_plan_path(plan, event_name: events(:party).name)
+    assert_redirected_to event_path(event_name: events(:party).name)
     assert_equal 'updated desc', plan.description
   end
 
@@ -61,7 +61,7 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
     patch event_plan_path(plan, event_name: events(:party).name), params: { plan: { public: false } }
 
     plan.reload
-    assert_redirected_to event_plan_path(plan, event_name: events(:party).name)
+    assert_redirected_to event_path(event_name: events(:party).name)
     assert_not plan.public
   end
 

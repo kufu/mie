@@ -2,10 +2,16 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="dialog"
 export default class extends Controller {
+  static targets = ['dialog'];
   static values = { elementId: String, open: { type: Boolean, default: false } };
 
   connect () {
-    this.dialog = document.getElementById(this.elementIdValue);
+    if (this.hasDialogTarget) {
+      this.dialog = this.dialogTarget;
+    } else {
+      // for compatibility, elementId are deprecated.
+      this.dialog = document.getElementById(this.elementIdValue);
+    }
     if (this.openValue) {
       this.open();
     }
