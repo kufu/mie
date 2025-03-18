@@ -28,7 +28,7 @@
           <%= form_with(url: event_plan_path(@plan, event_name: @event.name), model: @plan) do |f| %>
             <p class="text-base"><%= @plan.description %></p>
             <dialog data-dialog-target="dialog">
-              <%= render 'components/dialog', title: I18n.t("description.form_titme"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
+              <%= render 'components/dialog', title: I18n.t("description.form_title"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
                 <%= render 'components/text_field', form_helper: f, attribute: :description %>
               <% end %>
             </dialog>

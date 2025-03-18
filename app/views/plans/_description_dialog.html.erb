@@ -3,7 +3,7 @@
   <%= form_with(url: event_plan_path(@plan, event_name: @plan.event.name), method: :patch, model: @plan) do |f| %>
     <div data-controller="word-counter" data-word-counter-max-value="<%= plan_description_max_length %>">
       <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
-        <p class="text-xl"><%= I18n.t('description.form_titme') %></p>
+        <p class="text-xl"><%= I18n.t('description.form_title') %></p>
       </div>
       <div class="max-h-[calc(100vh-212px)] overflow-auto">
         <div class="w-full p-6">

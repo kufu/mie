@@ -38,7 +38,7 @@ ja:
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
-    form_titme: "ノートを編集"
+    form_title: "ノートを編集"
   settings:
     title: "設定"
     set_password: "パスワードを設定"
