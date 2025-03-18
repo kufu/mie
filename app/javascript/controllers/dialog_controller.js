@@ -6,7 +6,12 @@ export default class extends Controller {
   static values = { elementId: String, open: { type: Boolean, default: false } };
 
   connect () {
-    this.dialog = this.dialogTarget || document.getElementById(this.elementIdValue);
+    if (this.hasDialogTarget) {
+      this.dialog = this.dialogTarget;
+    } else {
+      // for compatibility, elementId are deprecated.
+      this.dialog = document.getElementById(this.elementIdValue);
+    }
     if (this.openValue) {
       this.open();
     }
