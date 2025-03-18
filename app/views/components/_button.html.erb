@@ -14,14 +14,25 @@
   "text-base font-bold",
   (disabled ? "text-[#CDCFD5]" : "text-[#131416]"),
 ].join(" ") %>
-<button
-  class="<%= button_classes %>"
-  onclick="<%= onClick %>"
-  <%= "disabled" if disabled %>
-  <%= "data-action=#{data_action}" if data_action %>
->
-  <%= raw icon %>
-  <span class="<%= text_classes %>">
+<% form_helper ||= nil %>
+
+<% if form_helper %>
+  <%= form_helper.button type: :submit, class: button_classes, onClick: onClick, disabled: disabled do %>
+    <%= raw icon %>
+    <span class="<%= text_classes %>">
     <%= title %>
   </span>
-</button>
+  <% end %>
+<% else %>
+  <button
+    class="<%= button_classes %>"
+    onclick="<%= onClick %>"
+    <%= "disabled" if disabled %>
+    <%= "data-action=#{data_action}" if data_action %>
+  >
+    <%= raw icon %>
+    <span class="<%= text_classes %>">
+    <%= title %>
+  </span>
+  </button>
+<% end %>
