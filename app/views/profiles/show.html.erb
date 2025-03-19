@@ -17,7 +17,7 @@
             <h2 class="text-2xl truncate max-w-[calc(100%-2rem)]"><%= @profile.name %></h2>
           </div>
           <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
-            <%= render 'components/button', title: I18n.t('button.edit'), data_action: 'click->dialog#open' %>
+            <%= render 'components/button', title: I18n.t('button.edit'), data: { action: 'click->dialog#open' } %>
             <%= render 'dialog', profile: @profile %>
           </div>
         </div>
