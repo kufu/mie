@@ -3,9 +3,7 @@
     <h2 class="text-base font-bold">Members</h2>
     <% if @team.admin?(@user) %>
       <div data-controller="dialog" data-dialog-element-id-value="invite-member-dialog">
-        <button data-action="click->dialog#open" class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold">
-          <%= I18n.t("button.invite") %>
-        </button>
+        <%= render 'components/button', size: 's', title: I18n.t("button.invite"), data: { action: "click->dialog#open" } %>
         <dialog id="invite-member-dialog" class="p-2">
           <%= render 'teams/invite_dialog' %>
         </dialog>

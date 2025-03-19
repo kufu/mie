@@ -11,7 +11,7 @@
             <%= f.text_field :name, id: input_id, class: 'border border-[var(--textColor)] rounded-md px-4 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-full' %>
           <% end %>
           <div class="mt-4">
-            <%= f.submit I18n.t('button.save'), class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold' %>
+            <%= render 'components/button', title: I18n.t('button.save'), form_helper: f %>
           </div>
         <% end %>
       </div>
@@ -20,10 +20,20 @@
 
   <% if @team.admin?(@user) %>
     <div>
-      <%= link_to I18n.t('button.delete_team'), @team, data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.delete_team') }, class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold text-red-600' %>
+      <%= render 'components/button',
+                 title: I18n.t('button.delete_team'),
+                 href: @team,
+                 danger: true,
+                 data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.delete_team') }
+      %>
     </div>
   <% end %>
   <div>
-    <%= link_to I18n.t('button.leave_team'), team_member_path(@user.profile, team_id: @team), data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.remove_member') }, class: 'inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold text-red-600' %>
+    <%= render 'components/button',
+               title: I18n.t('button.leave_team'),
+               href: team_member_path(@user.profile, team_id: @team),
+               danger: true,
+               data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.remove_member') }
+    %>
   </div>
 </div>

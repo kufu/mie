@@ -7,7 +7,7 @@
         </div>
         <div class="flex gap-4 w-full">
           <%= f.text_field :profile_name, class: "border border-[var(--textColor)] rounded-md px-4 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-          <%= f.submit I18n.t('button.invite'), class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold" %>
+          <%= render 'components/button', title: I18n.t('button.invite'), form_helper: f %>
         </div>
       </div>
       <% if @dialog_errors.present? %>
