@@ -1,672 +1,748 @@
 ---
-tompng:
-  title: Writing Weird Code
+ima1zumi:
+  title: Between Character and Character Encoding
   type: keynote
   language: JA
   live_or_recorded: venue
-  description: |-
-    Ruby is a great language to write readable code, and also to write unreadable weird code.
-    In this talk, I will demonstrate how fun it is, and talk about the large effect of writing lots of weird code.
-  speakers:
-  - id: tompng
-spikeolaf:
-  title: The grand strategy of Ruby Parser
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    In RubyKaigi 2023, I presented how to solve three big Ruby parser problems.
-    The solutions were feasible, however they were just tactics.
-    This talk will provide the grand strategy of Ruby Parser.
-  speakers:
-  - id: spikeolaf
-ohbarye:
-  title: Unlocking Potential of Property Based Testing with Ractor
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    Ruby's ease in test-writing and its rich ecosystem are widely acclaimed. However, traditional testing methods, relying on developer-created cases, often miss edge-case bugs. This talk introduces a testing method and a tool to generate numerous cases automatically, known as 'property based testing'. It's not only a transformative solution to detect bugs but also a nice use case of Ractor because the tool generates dozens to hundreds of cases that can run in parallel.
-
-    I'll explore how Ractor enables efficient execution of property based testing through parallel processing. This combination promises faster, more comprehensive testing, reducing reliance on developer expertise for bug detection. This talk aims to unlock Ruby's full testing potential by highlighting the not-well-known test method.
-  speakers:
-  - id: ohbarye
-segiddins:
-  title: Remembering (ok, not really Sarah) Marshal
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: Though the Marshal serialization format has fallen out of favor over
-    the past decade, due to a lack cross-language interoperability and security vulnerabilities,
-    I think there’s a lot to learn from it. Having recently reimplemented Marshal.load
-    to sidestep the security concerns, I want to reintroduce the Ruby community to
-    the gem (see what I did there?) that is binary serialization. Let’s walk through
-    how Marshal works under the hood, and see what ideas from it we can salvage for
-    a modern take on data serialization.
-  speakers:
-  - id: segiddins
-eightbitraptor:
-  title: Strings! Interpolation, Optimisation & Bugs
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: "Join me as we look at how removing 8 lines of code allowed us to speed
-    up some classes of string interpolation by 2x. \n\nThis talk will dive into String
-    interpolation: How interpolations are parsed and compiled, and some of the optimisations
-    that are applied to them. \n\nThen we'll see how a change in the Ruby memory layout
-    caused one of these optimisations to degrade performance, how we found the problem
-    and what we did to fix it!"
-  speakers:
-  - id: eightbitraptor
-hsbt:
-  title: Long journey of Ruby standard library
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: "Ruby has a lot of standard libraries from Ruby 1.8. I promote them
-    democratically with GitHub today via default and bundled gems.  So, I'm working
-    to extract them for Ruby 3.4 continuously and future versions. It's long journey
-    for me.\n\nAfter that, some versions may suddenly happen `LoadError` at `require`
-    when running `bundle exec` or `bin/rails`, for example `matrix` or `net-smtp`.
-    We need to learn what's difference default/bundled gems with standard libraries.
-    \n\nIn this presentation, I will introduce what's the difficult to extract bundled
-    gems from default gems and the details of the functionality that Ruby's `require`
-    and `bundle exec` with default/bundled gems.  You can learn how handle your issue
-    about standard libraries."
-  speakers:
-  - id: hsbt
-yujiyokoo:
-  title: Cross-platform mruby on Sega Dreamcast and Nintendo Wii
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    Do you remember Nintendo Wii? It was a very successful video game console released in 2006. You can now write mruby code that runs on Nintendo Wii, with no hardware modification required. As mruby runs on Sega Dreamcast too, now you can write mruby code that runs on both Dreamcast and Wii (with caveats).
-
-    I have ported the mruby block puzzle game I wrote for Dreamcast to Wii, and now I am porting the presentation application I used to present on Dreamcast at RubyKaigi Takeout 2020. The aim is to run the same mruby code on those 2 platforms with no or little modification.
-
-    In this presentation, I will show you how I have done / am doing the porting work, and how you can write your own cross-platform mruby code for those 2 platforms.
-  speakers:
-  - id: yujiyokoo
-tagomoris:
-  title: Namespace, What and Why
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    Namespace is a feature in development to separate Ruby code, native extensions, and gems into separate spaces. The expected benefits of this feature are:
-    * Making codes and libraries name-collision-free
-    * Having isolated Module/Class instances
-    * Loading different versions of libraries on a Ruby process
-
-    This talk will introduce what the namespace is (will be), why I want this feature in Ruby, and how it will help your applications.
-  speakers:
-  - id: tagomoris
-kokuyouwind:
-  title: Let's use LLMs from Ruby 〜 Refine RBS codes using LLM 〜
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    Large Language Models (LLMs) have evolved rapidly over the past few years and there have already been many practical applications in a variety of fields.
-    Though Python is recognized as a de facto standard language to use LLMs, we are Rubyists so we would like to explore how we use LLMs in the Ruby language.
-
-    In this session, I will explain the basics of Large Language Models(LLMs), and then cover Langchain.rb as a tool to use LLMs from the Ruby language.
-    The development of RBS Goose, which is a tool to refine RBS type signatures, is a good practical example. We’ll share how it works including prompt construction, as well as the tips for LLMs development and our evaluation of its performance, including accuracy and speed, at the combination of various prompts, Few-Shot examples, and LLMs.
-  speakers:
-  - id: kokuyouwind
-osyoyu:
-  title: The depths of profiling Ruby
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: "Useful profilers are capable of accurately tracking program execution
-    and providing sleek visualization, with minimal performance impact. When it comes
-    to Ruby profilers, advanced features such as merging Ruby-level and C-level stacks
-    or recording GC / GVL events would be also wanted.\n\nThere were many challenges
-    in implementing these features in Pf2, my experimental Ruby profiler. In this
-    talk, I will visit the internals of CRuby and present the difficulties in creating
-    a profiler for the interpreter. \n\nIn this talk, I'll discuss the difficulties
-    of creating a Ruby profiler through exploring the internals of CRuby, and introduce
-    Pf2's design choices to overcome challenges. Let us discuss the future of profiling
-    Ruby!"
-  speakers:
-  - id: osyoyu
-jhawthorn:
-  title: 'Vernier: A next generation profiler for CRuby'
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    A good profiler is essential to making faster code.
-
-    Vernier is a new profiler for CRuby 3.2+ which uses new techniques and new APIs in Ruby with more detailed and more accurate results than existing tools. It supports threads (including N:M), ractors, GVL activity, Garbage Collection, idle time, and more!
-
-    In this talk I'll explain the challenges we faced with existing profilers, tradeoffs and changes previously made to stackprof, the new techniques Vernier uses, and how more visibility in what code is run may change how we write Ruby for the better.
-  speakers:
-  - id: jhawthorn
-ima1zumi:
-  title: 'Exploring Reline: Enhancing Command Line Usability'
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: Reline is a pure Ruby implementation of GNU Readline; GNU Readline
-    allows you to write configuration in `.inputrc`, and Reline reads this configuration
-    file and sets key bindings. However, there are many things that GNU Readline can
-    do that Reline cannot. This session will introduce those features and talk about
-    their implementation in Reline.
+  description: In modern computing, Unicode has become the go-to solution for most
+    scenarios. However, challenges related to character encoding still exist and continue
+    to evolve as we adapt to Unicode. By examining how Ruby handles updates to Unicode,
+    this discussion explores the current issues surrounding character encoding.
   speakers:
   - id: ima1zumi
-mullermp:
-  title: Generating a custom SDK for your web service or Rails API
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: Have you ever wanted a Ruby client API to communicate with your web
-    service? Smithy is a protocol-agnostic language for defining services and SDKs.
-    Smithy Ruby is an implementation of Smithy that generates a Ruby SDK using a Smithy
-    model. In this talk, we will explore Smithy and Smithy Ruby to learn how to generate
-    custom feature-rich SDKs that can communicate with any web service, such as a
-    Rails JSON API.
-  speakers:
-  - id: mullermp
-ko1:
-  title: Ractor Enhancements, 2024
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    This talk presents recent updates to Ractor, which enables parallel and concurrent programming on Ruby.
-
-    Ractor still lacks fundamental features. For example, we cannot use “require” method and “timeout” methods on non-main Ractors because of synchronization and implementation issues. We will discuss such problems and how to solve them.
-    From a performance point of view, we have introduced the M:N thread scheduler in Ruby 3.3 and we will show the performance analysis with recent improvements.
-  speakers:
-  - id: ko1
-coe401_:
-  title: An adventure of Happy Eyeballs
+makenowjust:
+  title: Make Parsers Compatible Using Automata Learning
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    The Ruby socket library, familiar to many, actually has an issue: it cannot quickly fallback to the other address family if it fails to resolve names or connect in either IPv6 or IPv4.<br/>
-    I am challenging this with Happy Eyeballs Version 2 (HEv2) algorithm specified in [RFC8305](https://datatracker.ietf.org/doc/html/rfc8305). The algorithm performs name resolution for IPv6 and IPv4 almost simultaneously, prioritizing IPv6 but enabling fallback to IPv4. This sounds like a simple and nice idea!<br/>
-
-    However, as I started the implementation, I realized that understanding the complex properties of HEv2, devising strategies to solve issues, and programming it is a kind of adventure.<br/>
-    In this presentation, I will talk about how to get through them and how interesting it is to implement dual-stack support for socket libraries.<br/>
+    CRuby currently has two parsers, Prism and parse.y, and starting with Ruby 3.4, Prism has become the default parser. Prism is a new Ruby parser that claims to be highly compatible with the traditional parser, parse.y. But, **how can we guarantee this compatibility**?
+    One formal (academic) solution to this problem is **automata learning**, an algorithm to infer an automata from a black-box system. Automata has some benefits, e.g., we can verify two automata are the same. Therefore, we can ensure that Prism and parse.y are the same if their automata obtained by automata learning are the same.
+    In this talk, we provide an overview the automata theory and introduce an algorithm of automata learning called L\*. We will also introduce the case study of **how a compatibility issue in Prism was found using automata learning** ([ruby/prism#3035](https://github.com/ruby/prism/issues/3035)). We believe it will be an interesting talk as an application of the latest academic topics.
   speakers:
-  - id: coe401_
-keystonelemur:
-  title: Refactoring with ASTs and Pattern Matching
+  - id: makenowjust
+maciejmensfeld:
+  title: Bringing Linux pidfd to Ruby
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: Pattern matching in Ruby is not a well understood or frequently used
-    feature, but when paired with ASTs it becomes an incredibly powerful tool for
-    refactoring and code transformations.
+  description: Processes and fork management in Ruby have traditionally relied on
+    PIDs, leading to race conditions and potential security issues in high-throughput
+    systems. While Linux 5.3 introduced pidfd as a solution, Ruby lacks native support
+    for this feature. I'll demonstrate how I bridged this gap using FFI, exploring
+    syscall mappings, zombie process prevention, and practical process management
+    patterns. Through live demonstrations, you'll learn how Linux pidfd APIs can help
+    you eliminate race conditions and make your Ruby applications more reliable in
+    modern environments.
   speakers:
-  - id: keystonelemur
-ioquatix:
-  title: " Leveraging Falcon and Rails for Real-Time Interactivity"
+  - id: maciejmensfeld
+tk0miya:
+  title: Introducing Type Guard to Steep
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    Type checking in Ruby often requires narrowing the types of objects, especially within complex conditionals or method chains. While Steep already supports type narrowing through built-in methods like #is_a? and #nil?, real-world Ruby applications frequently rely on user-defined logic for type narrowing.
+
+    In this talk, I will propose "Type Guard," an enhancement to Steep that enables developers to define custom type narrowing logic. This feature aims to bridge the gap between Steep's capabilities and the diverse needs of real-world Ruby projects, providing a more seamless type-checking experience.
+
+    Attendees will learn how Type Guard works, and how it can be integrated into their projects.
+  speakers:
+  - id: tk0miya
+kateinoigakukun:
+  title: The Evolution of the CRuby Build System
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    The CRuby build system based on GNU Autotools has been evolving over the years, and it has been a critical part of the Ruby development process. However, the current build system has two major challenges; 1. it's showing its age, and it's getting harder to edit and maintain without help from *the* expert person. 2. `./configure && make` takes a long time even on a modern machine with many cores.
+
+    In this talk, I will discuss the evolution of the CRuby build system, the challenges we face today, and the potential future directions. I will also introduce the new build system that I have been working on, which is inspired by the Shake build system.
+  speakers:
+  - id: kateinoigakukun
+dafyddcrosby:
+  title: A side gig for RuboCop, the Bookworm code crawler
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: RuboCop is typically thought of as 'just' a linting or refactoring
+    tool. However, one of RuboCop's foundational features, the NodePattern API, is
+    so useful for crawling Ruby AST that an open-source tool called Bookworm has been
+    written that uses the NodePattern API to understand the large Chef Ruby codebase
+    used at Meta.
+  speakers:
+  - id: dafyddcrosby
+fetburner:
+  title: Continuation is to be continued
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: "Despite the subtle relationship with interpreter implementations,
+    first-class continuations still have unique functionality. In this talk, I will
+    describe how \"callcc\"---a control flow operator which is provided in library
+    \"continuation\"---plays an important role in the context of domain specific language
+    through the \"do syntax\" of list monads. \nIn addition, I also claim how \"callcc\"
+    has some inconveniences---cutting unnecessarily wide program pieces, and resulting
+    in degraded executing performances---and introduce its advanced form, delimited
+    continuation operators can resolve many issues."
+  speakers:
+  - id: fetburner
+k0kubun:
+  title: 'Deoptimization: How YJIT Speeds Up Ruby by Slowing Down'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: Have you wondered why Ruby keeps getting faster at every release despite
+    challenges like handling metaprogramming and dynamic typing? In this talk, you'll
+    discover how YJIT "hides" Ruby's sources of slowness by sometimes "slowing down"
+    Ruby, and why this counterintuitive strategy is key to its performance gains.
+  speakers:
+  - id: k0kubun
+marcoroth:
+  title: Empowering Developers with HTML-Aware ERB Tooling
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: ERB tooling has lagged behind modern web development needs, especially
+    with the rise of Hotwire and HTML-over-the-wire. Discover a new HTML-aware ERB
+    parser that unlocks advanced developer tools like formatters, linters, and LSP
+    integrations, enhancing how we build and ship HTML in our Ruby applications.
+  speakers:
+  - id: marcoroth
+ktou:
+  title: Goodbye fat gem 2025
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    I talked about ["Goodbye fat gem"](https://rubykaigi.org/2020/presentations/ktou.html) at RubyKaigi Takeout 2020. Fat gem is a gem that includes pre-built binaries. Extension libraries can assume that users have build environment with Ruby 2.4 or later. So gems don't need to bundle pre-built binaries for easy to install. Users can build binaries by themselves.
+
+    As of 2025, we're still using fat gem...
+
+    I discussed how to improve this situation with ruby-installer author, Nokogiri maintainer and RubyGems community in 2022:
+
+    * https://gist.github.com/postmodern/4c0cbccc0c7eda4585db0fc5267cdd57
+    * https://github.com/rubygems/rubygems/issues/1296
+
+    I propose a solution based on these discussions.
+  speakers:
+  - id: ktou
+spikeolaf:
+  title: Ruby's Line Breaks
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: "Line break is one of the interesting characters in Ruby grammar.\nFor
+    example, line break on the first line is ignored but on the fourth line works
+    as separator of statements.\n\n```ruby\n1 +\n2\n\np 1\np 2\n```\n\nThis talk will
+    reveal principles and exceptions of line break in Ruby Grammar by analysis of
+    grammar file and \nintroduce new Lrama parser generator feature to reduce implementation
+    complexity of lex state."
+  speakers:
+  - id: spikeolaf
+yfractal:
+  title: 'SDB: Efficient Ruby Stack Scanning Without the GVL'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    Most existing Ruby stack profilers rely on the GVL, which blocks application execution and leads to high CPU usage.
+
+    SDB, on the other hand, releases the GVL when scanning Ruby thread stacks. This design minimizes its impact on Ruby applications, allowing us to increase the sampling rate from 100/s to 1000/s while still consuming very low CPU. This makes SDB a truly always-online stack profiler.
+
+    In this talk, I will explain how to implement a stack profiler without relying on the GVL, along with its benefits and challenges.
+  speakers:
+  - id: yfractal
+sinsoku_listy:
+  title: Automatically generating types by running tests
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    Introducing RBS into an existing application is difficult.
+    It is impractical to manually write types for all methods in an application with many lines of code.
+
+    To solve this issue, I am developing a gem that collects type information at test runtime and automatically inserts it as an embedded RBS type declaration (for rbs-inline).
+    This talk will introduce the development status of the gem, implementation details, and usage.
+  speakers:
+  - id: sinsoku_listy
+tagomoris:
+  title: State of Namespace
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: This presentation will explain what Namespace is, the current state
+    of Namespace, and the things to be done in the future.
+  speakers:
+  - id: tagomoris
+vinistock:
+  title: 'Embracing Ruby magic: Statically analyzing DSLs'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    One of Ruby’s most powerful features is the ability to extend the language itself through meta-programming. We can create rich and elegant DSLs that allow developers to solve problems with flexible and concise code.
+
+    The drawback of DSLs is that they are difficult to analyze statically, reducing the usefulness of developer tooling like editor integrations. Since each gem can define their own DSL, we cannot account for all possible DSLs that may exist in a given application. So what can we do?
+
+    Let’s do a deep dive into the Ruby LSP’s add-on API, which allows any other gem to enhance the static analysis understanding of the language server for a more accurate editor experience. We’ll explore the techniques behind it and which class of problems it can solve.
+  speakers:
+  - id: vinistock
+cristian_planas:
+  title: '50.000 processed records per second: a CRuby & JRuby story'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: In this talk, we will share the fascinating journey of the Zendesk
+    Indexer, a microservice responsible for indexing tens of thousands of records
+    per second from a relational database into ElasticSearch. Originally born from
+    a need to speed up record updates, the Indexer evolved from a series of scripts
+    written in C-Ruby into a full application built in JRuby. Over the years, it incorporated
+    diverse technologies like Riak and S3 and tackled significant challenges, particularly
+    with concurrency, as Zendesk scaled. Now, we are preparing to reintegrate it into
+    the Rails monolith. Attendees will learn valuable lessons about concurrency, safety
+    mechanisms and scaling.
+  speakers:
+  - id: cristian_planas
+kaz0505:
+  title: mruby/c and data-flow programming for small devices
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    In my presentation, I will show how data-flow programming can be used for software development of small devices.
+    The effectiveness of the proposed method is demonstrated with a microcontroller implementation in mruby/c.
+
+    In IoT programming, we want to focus on the flow of data generation and processing.
+    This is data flow programming, also known as the Node-RED development environment.
+
+    Data flow is processed asynchronously.
+    I will explain how to implement this asynchronous processing in a reasonable manner using mruby/c and demonstrate its operation on a real microcontroller.
+  speakers:
+  - id: kaz0505
+fractaledmind:
+  title: Parsing and generating SQLite's SQL dialect with Ruby
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: SQLite's popularity is on the rise, and likewise the ecosystem of tools
+    around it is growing. Unfortunately, SQLite does not expose its parser for 3rd
+    parties to use independently. This greatly limits the ability of developers to
+    build tools that must interact with SQLite's SQL dialect. And so, I have hand-written
+    a 100% Ruby, 100% compatible parser for SQLite's SQL dialect. In addition, having
+    a complete AST permits us to also generate SQL queries from terse, structured
+    Ruby code. In this talk, I will demonstrate how we ensure that the parser is 100%
+    compatible with SQLite's SQL dialect. We will also explore how the parser is implemented
+    and what kind of AST it produces. Then, we will dive into how to use the parser
+    to build tools that can analyze and manipulate SQL queries. Finally, we will look
+    at how to use the generator to build tools that can generate SQL queries programmatically.
+    As Ruby's only full SQLite SQL parser, this library opens up a world of possibilities
+    for developers
+  speakers:
+  - id: fractaledmind
+youchan:
+  title: dRuby on Browser Again!
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    I talked about dRuby on Browser at RubyKaigi2017. This talk is about two of my gems: an implementation of dRuby websocket protocol and a dRuby implementation that runs on browser using opal.
+    Recently, ruby.wasm is one more Ruby option that runs on browsers. I implement a dRuby again!
+    Let's get to experience seemless programming on browser by dRuby.
+  speakers:
+  - id: youchan
+tric:
+  title: 'TRICK 2025: Episode I'
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: '"Feel, don''t think."'
+  speakers:
+  - id: tric
+KnuX:
+  title: Performance Bugs and Low-level Ruby Observability APIs
   type: keynote
   language: EN
   live_or_recorded: venue
   description: |-
-    In the rapidly evolving landscape of web-based gaming, Ruby's potential for building dynamic, real-time interactive experiences is often underrated. This talk aims to shatter this misconception by demonstrating the powerful synergy between Falcon, an asynchronous web server, and Ruby on Rails, the stalwart of web application frameworks.
+    Performance bugs are really annoying. Our tests are still passing! It works on our machine and in staging! It even works for most customers in production!
+    And then someone reports the app hangs, and there's timeouts...
 
-    We will embark on a journey to design and implement a real-time interactive game from the ground up, showcasing how Ruby, when coupled with Falcon's concurrency capabilities, can be a formidable tool in the gaming domain. Key focus areas will include leveraging Falcon's event-driven architecture for managing high-throughput, low-latency game data, and integrating it seamlessly with Rails to create an engaging user experience.
+    How would we know something's not correct? This is where observability tools come in: tools for monitoring, performance and debugging.
+    But have you ever wondered how they work? These tools often require access to Ruby internals that regular Ruby libraries or applications don't have (or need).
 
-    Attendees will gain insights into the nuances of real-time web communication in Ruby, efficient handling of WebSockets, and the application of Rails' robust features in a gaming context.
-  speakers:
-  - id: ioquatix
-peterzhu2118:
-  title: Finding Memory Leaks in the Ruby Ecosystem
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    Ruby 3.3 introduces a powerful new feature for identifying memory leaks. Over the past year we have been working on improving memory usage within Ruby and developing tools to give native extension authors more confidence in memory management.
+    To support these use-cases, the CRuby VM has a number of low-level APIs that can be used to know more about such things as the state of threads, the global VM lock, object creation, garbage collection, etc.
 
-    In this talk, we will explain what memory leaks are, the impacts of memory leaks, our new feature RUBY_FREE_AT_EXIT in Ruby 3.3, and memory leaks found through this feature. In addition, we will discuss our future roadmap for Ruby 3.4 to improve this feature for native gem maintainers.
-  speakers:
-  - id: peterzhu2118
-  - id: HParker
-ydah_:
-  title: Does Ruby Parser dream of highly expressive grammar?
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    The ruby parser grammar file has been subjected to many complicated workarounds due to the limitations by Bison. You've probably thought at least once or twice that if richer DSL support would make grammar files more readable.
-
-    For example, pattern involving multiple repetitions separated by commas, like method call arguments, are quite common. It is only natural to desire a concise way to express them given their frequency. In addition, resolving cases where the added grammar conflicts with the existing one is challenging in ruby, which boasts a flexible grammar. It would be easier to add/change the grammar if there are a solution that could easily resolve this conflict.
-
-    In this talk, cover into the outcomes of incorporating additional functionality to extend the DSL in the parser generator. I believe this extension aims to enhance the maintainability of the grammar, thereby contributing to the future development of ruby's syntax.
-  speakers:
-  - id: ydah_
-p_ck_:
-  title: Community-driven RBS repository
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: "One of the most significant problems of RBS was managing libraries'
-    RBS files.\n\nLibraries' RBS files are important for RBS to be widely used.\nI've
-    developed an `rbs collection` for libraries in recent years. And it improved libraries'
-    RBS management for RBS users. See my talk at [RubyKaigi Takeout 2021](https://rubykaigi.org/2021-takeout/presentations/p_ck_.html).\n\nHowever,
-    there was still a problem if the users wanted to contribute RBS by writing libraries
-    RBS. \n\nNow, the third-party RBS file repository is based on a community-driven
-    system. Anyone can contribute to the repository smoothly.\nI'll describe how I
-    improved this problem, and request you open PRs to the repository!"
-  speakers:
-  - id: p_ck_
-soutaro:
-  title: Embedding it into Ruby code
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    One of the fundamental design principles of RBS is its separation from Ruby code. It's a different language. The type definitions are written in separate files. In this talk, we will review the design, discuss the pros and cons, and share the lessons learned.
-
-    Yeah..., I mean, I'm working for embedding RBS type declarations into Ruby code.
-  speakers:
-  - id: soutaro
-kateinoigakukun:
-  title: RubyGems on ruby.wasm
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    Running gems on WebAssembly is one of the most requested feature from the initial release of `ruby.wasm`.
-
-    Today, `ruby.wasm` experimentally supports RubyGems integration, thanks to a recent WebAssembly ecosystem evolution called [Component Model](https://github.com/WebAssembly/component-model). It supports packaging your Ruby application and gem dependencies in a WebAssembly program!
-
-    This talk will demonstrate the integration and share how it works. I hope it will unlock your interesting ideas.
-  speakers:
-  - id: kateinoigakukun
-KnuX:
-  title: 'Optimizing Ruby: Building an Always-On Production Profiler'
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    In certain online circles, Ruby has a reputation for """being slow""" (very vigorous air quotes). I don’t think this is true; often applications are slow because they are doing a lot more work than expected or intended. It's easy to write innocent-looking code that is actually using expensive abstractions.
-
-    The Ruby 3 series has seen amazing advances in performance. What if, in addition to these advances, we don't have to run as much code? Have you heard the saying "The fastest code is the code which does not run"?
-
-    This is where a profiler comes in: A profiler lets you see where cpu, time, memory and other resources are being spent, and thus can be used to pinpoint exactly why an application is slow, and what it’s doing.
-
-    In this talk, I explore how Datadog’s `ddtrace` open-source profiler works: what’s needed to build a profiler that can be always on, why use sampling, what sources of data the Ruby VM provides, and how you can investigate your Ruby applications with it.
+    In this talk, I'll explore Ruby VM's low-level observability APIs: what they provide, how they can be used, lessons learned from using them, and how you can get started in building your own custom tools for performance bug investigations.
   speakers:
   - id: KnuX
-jeremyevans0:
-  title: Reducing Implicit Allocations During Method Calling
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: When optimizing Ruby code, one of the best strategies is to try to
-    reduce the number of objects the code allocates.  For some types of method calls,
-    Ruby implicitly allocates objects as part of method call.  In some cases, these
-    implicit allocations are unavoidable, but in other cases, they are unnecessary.  This
-    presentation will discuss changes made in Ruby 3.3 and planned for Ruby 3.4 to
-    reduce or eliminate implicit object allocation during method calling.  We'll be
-    going over new virtual machine instructions, changes to virtual machine stack
-    layout in the compiler, method callinfo flags, iseq param flags, and how we fixed
-    multiple bugs discovered during this optimization work.
-  speakers:
-  - id: jeremyevans0
-hasumikin:
-  title: 'Unlock The Universal Parsers: A New PicoRuby Compiler'
+ydah_:
+  title: Dissecting and Reconstructing Ruby Syntactic Structures
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    Lrama-generated-parse.c and Prism are attempting to create a universal parser of the Ruby language. I will show you a new PicoRuby compiler, which has to be the most memory-efficient among all Ruby compilers, designed to leverage those universal parsers.
+    The [parse.y](https://github.com/ruby/ruby/blob/master/parse.y) file, a blueprint for creating Ruby's parser, can be considered a direct representation of Ruby's grammatical structure. However, its syntax rules are highly complex, making it challenging to comprehend its architecture.
 
-    Making a parser universal is not straightforward. This journey starts with investigating CRuby's internal implementation because the Lrama-generated-parser deeply originally depends on CRuby. We are going to replace the dependency with a bunch of code to make the parser universal. Another requirement is to improve the parsers, including Prism, regarding portability.
+    By dissecting and reconstructing the structure of the grammar rules, we can enhance the maintainability of parse.y file. Additionally, through this process, we will gain a deeper understanding of the underlying principles and patterns of Ruby's syntactic structure.
 
-    Finally, writing a memory-efficient VM code generator makes a universal parser a success. Let's delve into the concept of universality and deepen our understanding of it.
+    Let’s embark on a journey to explore the internal workings of the Ruby language and uncover the true laws and principles that govern its grammar structure.
   speakers:
-  - id: hasumikin
-qnighy:
-  title: Getting along with YAML comments with Psych
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: psych-comments allows you to manipulate YAML documents without discarding
-    comments. This talk involves how we tried to automate YAML authoring, how we have
-    gone wrong by (ab)using YAML tags for annotations, and how we solved the problem
-    by bringing this library into being. Audiences will get a grasp of YAML's depths
-    and know how a small library helps automation.
-  speakers:
-  - id: qnighy
-maximecb:
-  title: Breaking the Ruby Performance Barrier
+  - id: ydah_
+osyoyu:
+  title: Benchmark and profile every single change
   type: presentation
   language: EN
   live_or_recorded: venue
   description: |-
-    With each of the past 3 Ruby releases, YJIT has delivered higher and higher performance. However, we are seeing diminishing returns, because as JIT-compiled code becomes faster, it makes up less and less of the total execution time, which is now becoming dominated by C function calls. As such, it may appear like there is a fundamental limit to Ruby’s performance.
+    It's always easy to write 1% slower Ruby code without knowing it. 1% slower code can be a big problem when there are hundreds of them, and it's not easy to find and fix all of them afterwards.
 
-    In the first half of the 20th century, some early airplane designers thought that the speed of sound was a fundamental limit on the speed reachable by airplanes, thus coining the term “sound barrier”. This limit was eventually overcome, as it became understood that airflow behaves differently at supersonic speeds.
+    Benchmarking and profiling every single change ("Benchmark-Driven Development") helps out here! This idea may sound absurd and inefficient, but I have written a 100x faster Sinatra implementation in this fashion. I will introduce recent evolution in profilers which support this style.
 
-    In order to break the Ruby performance barrier, it will be necessary to reduce the dependency on C extensions, and start writing more gems in pure Ruby code. In this talk, I want to look at this problem more in depth, and explore how YJIT can help enable writing pure-Ruby software that delivers high performance levels.
+    Your programs will be faster, even before you can say _premature optimization is the root of all evil_!
+  speakers:
+  - id: osyoyu
+hmsk:
+  title: Running JavaScript within Ruby
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    This talk explores the journey of building [quickjs.rb](https://github.com/hmsk/quickjs.rb), a native Ruby extension for running JavaScript using [QuickJS](https://bellard.org/quickjs/). The project began with the need to execute JavaScript within Ruby in a SaaS and involved diving into native extension development as a newcomer.
+
+    The session will cover how quickjs.rb was introduced into Ruby and Rails projects, discussing the practical outcomes, challenges faced, and insights gained. This talk aims to share perspectives on the impact and possibilities of integrating JavaScript execution into Ruby environments.
+  speakers:
+  - id: hmsk
+maximecb:
+  title: 'ZJIT: Building a Next Generation Ruby JIT'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    YJIT can make Ruby code run faster, but this is a balancing act, because the JIT compiler itself must consume both memory and CPU cycles to compile and optimize your code while it is running. Furthermore, in large-scale production environments such as those of GitHub, Shopify and Stripe, we end up in a situation where YJIT is compiling the same code over and over again on a very large number of servers, which seems very inefficient.
+
+    In this presentation, we will go over the design of ZJIT, a next generation Ruby JIT which aims to save and reuse compiled code between executions. We hope that this will help us eliminate duplicated work while also allowing the compiler to spend more time optimizing code so that we can get better performance.
   speakers:
   - id: maximecb
-koic:
-  title: 'RuboCop: LSP and Prism'
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    Do you remember the "Smarter, Faster" concept for Ruby 4.0?
-
-    RuboCop now includes the built-in LSP as an experimental feature. This feature was essential to meet modern developer experience demands.
-
-    Ruby has some LSP implementations and among them, I will focus on the "Smarter, Faster" concept that RuboCop, the de facto standard Linter and Formatter, is aiming for.
-
-    Currently, RuboCop uses the Parser gem for Ruby syntax parsing. In addition to this, there is a plan to introduce the Prism Ruby parser as an experimental option. I will also talk about their purposes and designs.
-
-    RuboCop will enhance your developer experience by incorporating its built-in LSP. You can receive RuboCop in its current state and future vision.
-  speakers:
-  - id: koic
-udzura:
-  title: An mruby for WebAssembly
+lyninx:
+  title: 'Keeping Secrets: GitHub''s ENV Security Learnings'
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: "The author is developing \"mruby/edge\", a specialized Ruby runtime
-    for WebAssembly (WASM). \n\nOne of the reasons the author started to build a new
-    runtime is that he aimed to create a smaller wasm binary than CRuby's, which is
-    18 MB (observed from 3.3.0 build). A reduction in binary size addresses the diverse
-    use cases of WASM.\n\nAdditionally, mruby/edge associates Ruby methods with corresponding
-    WASM-exported functions. This is in contrast to the implementations of Ruby.wasm
-    and mruby-wasmized-by-emscripten, which only support top-level script execution.\n\nTo
-    accomplish these objectives, the author decided to build a VM from scratch, utilizing
-    mruby's elegant bytecode spec for its instruction set. This places mruby/edge
-    within the “mruby family” as a new member.\n\nThe talk will cover its internal
-    technologies, challenges, mruby VM and WASM insights, and future prospects, including
-    support for WASM Component Model in mruby/edge."
+  description: 'This talk recalls an incident at GitHub in which a security researcher
+    was able to access **all** of the production environment variables from github.com
+    by utilizing obj.send to exploit a vulnerability in our codebase. We''ll walk
+    through the process of identifying the vulnerability, our response to the disclosure,
+    and the internal research around managing secrets in our Ruby apps that followed. '
   speakers:
-  - id: udzura
+  - id: lyninx
+naitoh:
+  title: Improvement of REXML and speed up using StringScanner
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: "REXML is a standard XML library (Bundled Gem) for Ruby implemented
+    in Pure Ruby.\nIt is up to 40% faster between rexml 3.2.6 gem attached to Ruby
+    3.3.0 and rexml 3.4.0 gem attached to Ruby 3.4.0. \nThrough our REXML speedup
+    efforts using StringScanner, I will explain why using StringScanner is faster
+    and how it can be implemented to make it faster."
+  speakers:
+  - id: naitoh
 mametter:
-  title: Good first issues of TypeProf
+  title: Writing Ruby Scripts with TypeProf
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    We show the roadmap for TypeProf, and call for contribution to TypeProf.
+    TypeProf is an LSP server that enhances editor support for Ruby developers. Unlike other Ruby type checkers, TypeProf performs type checking with minimal need for explicit type annotations, aiming to make it easier to integrate into existing workflows.
 
-    TypeProf is a type analyzer that aims to bring the modern developer experience to Ruby without introducing tons of type annotations. Last year, we started reworking its analysis engine for the IDE as the primary target, and demonstrated that TypeProf worked with non-trivial code well.
+    With the release of TypeProf v0.30, bundled with Ruby 3.4, the tool now supports the entire range of Ruby syntax. This milestone makes TypeProf a practical option for developing simple Ruby scripts under certain conditions.
 
-    Then, we progressed the development: now TypeProf has covered more Ruby syntaxes, reduced false positives, and experimentally supported some IDE features including "automatic method rename refactoring"!
-
-    Still, TypeProf is premature. There is still much work. This is not only because it uses the exotic analysis compared to established type systems, but also because it is developed by only a few people.
-
-    In this talk, we explain the new features of TypeProf, and show "good first issues" for those who are willing to contribute to TypeProf. We hope this will lower the bar for contribution, and make TypeProf practical quickly.
+    In this presentation, I will share my hands-on experience of writing Ruby scripts with TypeProf. I will cover how to use the tool effectively, key considerations to keep in mind, recent features added over the past year, and the roadmap for future development.
   speakers:
   - id: mametter
-ahogappa0613:
-  title: It's about time to pack Ruby and Ruby scripts in one binary
+DmitryPogrebnoy:
+  title: 'Demystifying Ruby Debuggers: A Deep Dive into Internals'
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    Know the tool you are using! Maximize your debugger knowledge with our in-depth talk! Gain vital insights of Byebug, debug gem and RubyMine Debugger. Uncover the secrets of Ruby debugger internals. This talk will equip you with an advanced understanding of how ruby debuggers work and provide you with useful insights of how tools like RubyMine Debugger can speed up your debugging process.
+
+    Expert-led talk, “Demystifying Debugger”, offers a sophisticated exploration into the labyrinths of advanced debugging tools at the disposal of Ruby developers. Elevate your debugging from a routine task to an expert skill.
+  speakers:
+  - id: DmitryPogrebnoy
+asonas:
+  title: How to make the Groovebox
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    Ruby is designed to execute every combination of operating systems and architectures.
-    However, it’s not easily portable because it's impossible to execute by only sharing a Ruby scripts.
-    It needs to install Ruby of the same version and Gems in order to execute.
+    Ruby isn't just for the Web. Did you know you can create music with it too?
 
-    One solution to the issues is "one binary,” which involves creating an executable file that contains Ruby script and Gems necessary to execute.
-    I am developing a game engine by Ruby, so I must create one binary when distributing the game.
-    I developed a Gem to package Ruby, scripts, and Gems into a single executable file.
-    This Gem was developed to not depend on the Ruby version without changing Ruby.
-    Additionally, it has unique features compared to similar Gems.
-    In this session, I will demonstrate the features of this Gem while providing an overview of what it accomplishes.
+    In this talk, I will demonstrate how groovebox-ruby was built from scratch as a functional groovebox using Ruby.
+    What is a groovebox? It's a machine for sketching musical ideas, equipped with tools like synthesizers, step sequencers, filters, samplers, and interactive controls such as buttons, knobs, and displays.
+
+    With groovebox-ruby, I began by implementing synthesizer basics like VCOs (Voltage Controlled Oscillators) and VCFs (Voltage Controlled Filters) to understand how these components shape sound. I then added a step sequencer, allowing users to program patterns and interact dynamically with MIDI inputs.
+
+    Reimplementing these features in Ruby deepened my understanding of synthesizers, particularly the roles of oscillators and filters. Ruby's extensibility also enabled modular design, such as chaining filters, using MIDI controllers, and building a distributed step sequencer with dRuby.
   speakers:
-  - id: ahogappa0613
-eregontp:
-  title: From Interpreting C Extensions to Compiling Them
+  - id: asonas
+hasumikin:
+  title: 'MicroRuby: True Microcontroller Ruby'
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    PicoRuby's VM is mruby/c.
+    While it has the advantage of being memory-saving, it also has disadvantages such as a lack of Ruby language specifications and the inability to call Ruby methods from C.
+
+    By integrating the mruby VM into PicoRuby's features of memory-saving runtime compilation and a practical development ecosystem, MicroRuby brings ISO/IEC 30170-compliant Ruby to microcontroller programming and expands the scope of application development.
+    In this session, I will provide a detailed explanation of the technical barriers that this project has overcome.
+  speakers:
+  - id: hasumikin
+p0deje:
+  title: Bazel for Ruby
   type: presentation
   language: EN
   live_or_recorded: venue
   description: |-
-    Since the start, TruffleRuby took a unique approach to support C (and C++) extensions: to interpret and just-in-time compile them. This gave some unique advantages like optimizing and inlining C and Ruby together in the JIT and being able to debug C and Ruby in a single debugger.
-    However it also has some downsides including long warmup times (it takes a while to JIT compile all the C extension code), compatibility with huge C extensions (e.g. grpc) and slower installation of C extensions gems.
-    In the last release, TruffleRuby changed the approach to run C extensions natively, like CRuby.
-    In this talk, we would like to tell you this story, illustrate the challenges and discuss which parts of the C API could be improved.
-    We also explore how to run C extensions faster by using “Inline caches in C”, which could also be applied in CRuby.
-    Come and learn from 10 years of implementing and optimizing C extensions in various ways!
+    From Apple, Google, and Nvidia to Airbnb, Figma, and Stripe - top companies use Bazel to power their builds. Nowadays, with canonical support for Ruby language, Bazel isn't just for Java and C++ anymore!
+
+    Learn how Bazel can transform the development experience in your Ruby projects! We'll talk about leveraging Bazel's speed, scalability, and reliability to streamline your workflows, improve code quality, make tests blazing fast, and boost developer productivity:
+
+    - Seamlessly integrate Bazel with popular tools and frameworks like Rails, RSpec, and RuboCop.
+    - Optimize test execution from minutes to seconds.
+    - Integrate remote caching and execution to supercharge your development and CI pipelines.
+    - Manage dependencies with ease and precision, ensuring consistent and reproducible builds.
+    - Unlock advanced build features like hermeticity and fine-grained invalidation.
+
+    Leave this session with the knowledge and resources you need to start using Bazel in your Ruby projects today!
   speakers:
-  - id: eregontp
+  - id: p0deje
+koic:
+  title: 'RuboCop: Modularity and AST Insights'
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    RuboCop has long faced issues with a lack of modularity and is now encountering new challenges due to changes in the parser engine.
+
+    There has been extensive development of custom cop extension gems, but these extension methods have relied on RuboCop's implementation for a long time. RuboCop is widely used behind the scenes in the Ruby ecosystem. For example, the backends of Ruby LSP and Standard Ruby utilize RuboCop's engine. However, the division of responsibilities with these tools has been insufficient. The introduction of the plugin system using lint_roller and the Ruby LSP add-on aim to resolve these issues. I will discuss the adoption and availability of integrating these into RuboCop.
+
+    Another major issue is the maintenance status of the Parser gem, which has long been RuboCop's backend parser. I will talk about RuboCop's future backend strategy based on Prism.
+
+    You will gain insights into new methods of extending RuboCop and the upcoming changes in the near future.
+  speakers:
+  - id: koic
+tenderlove:
+  title: Speeding up Class#new
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: Many Ruby developers like to initialize new objects, so let's take
+    a dive into Ruby object initialization! What makes creating an object slow? Can
+    we use Ruby to speed it up?  In this talk, we will examine the internals of the
+    `Class#new` method, explore the trade-offs between Ruby and C method calls, and
+    experiment with a Ruby implementation of `Class#new`. Additionally, we will discuss
+    strategies for speeding up Ruby method calls, such as inline caches, while also
+    considering the drawbacks of moving from C to Ruby.
+  speakers:
+  - id: tenderlove
+s01:
+  title: You Can Save Lives With End-to-end Encryption in Ruby
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    "Why do you need End-to-end Encryption in Ruby?"
+
+    This talk will cover the Ruby implementation of the Messaging Layer Security protocol (RFC 9420), which enables authenticated key exchange in group messaging systems. By learning how end-to-end encryption in group messaging works, you could be more confident about the security of your daily messages that are sent through your messaging apps. And yes, it does save actual lives.
+
+    This talk covers how the protocol works, details of the Ruby implementation, why it is important for Ruby, and the ongoing work on the future of modern cryptography in Ruby.
+  speakers:
+  - id: s01
 duerst:
-  title: Squeezing Unicode Names into Ruby Regular Expressions
+  title: Write you a Barrier - Automatic Insertion of Write Barriers
   type: presentation
-  language: EN
+  language: JA
   live_or_recorded: venue
-  description: |-
-    This talk discusses the future of Ruby regular expressions. Ruby allows matching characters with many Unicode properties. The 'name' property is special, and requires special treatment. Unicode character names are different for each character and up to 80 or more characters long.
-
-    We show how we can use the structure of the names to produce a compact representation of the data that can be efficiently searched. The solution relies on tries and radix trees as data structures, and care to try to use every single bit of memory. We compare memory requirements and speed with implementations for other languages such as Python, Perl, and Java.
+  description: Currently, inserting write barriers into C extension code for Ruby
+    is difficult and error-prone. We present a new tool that we created to add or
+    check for write barriers automatically. We explain the benefits of using the tool
+    for C extension creation, give implementation details, and show the tool's limitations.
   speakers:
   - id: duerst
-s_isshiki1969:
-  title: Running Optcarrot (faster) on my own Ruby.
+  - id: joetake
+coe401_:
+  title: Making TCPSocket.new "Happy"!
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    These past few years, I have been working on a yet another Ruby implementation named "monoruby".
-    *Monoruby* is written in Rust, consists of a parser, garbage collector, bytecode-based interpreter, and just-in-time compiler. All of these components were built from scratch.
-    This is not just a toy project; we ran the Optcarrot benchmark on *monoruby* and its performance was comparable to other modern and fast Ruby implementations such as YJIT and TruffleRuby.
-    In this talk, I would like to present the design and implementation details of *monoruby*.
+    I introduced Happy Eyeballs Version 2 (RFC8305) (hereafter HEv2) into the socket library's `Socket.tcp` and `TCPSocket.new`.
+    This algorithm addresses the issue of delays that occur when DNS resolution for one address family takes too long, or when one of the candidate IP addresses is unavailable, preventing fallback to other options.
+
+    At RubyKaigi 2024, I presented how HEv2 was implemented in `Socket.tcp` (written in Ruby). And I initially planned to apply the same approach to `TCPSocket.new` (written in C). However, things did not go as expected, and the work began with reimplementing `Socket.tcp` itself.
+
+    This was a deeply rewarding project—so much so that it turned me, a Rubyist with an interest in networking, into a Ruby committer.
+
+    In this presentation, I will revisit HEv2, particularly focusing on `TCPSocket.new`, and share the journey of how it was implemented, merged, and eventually released as part of Ruby 3.4.
   speakers:
-  - id: s_isshiki1969
-sylph01:
-  title: Adding Security to Microcontroller Ruby
+  - id: coe401_
+amomchilov:
+  title: 'From C extension to pure C: Migrating RBS'
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: |-
-    "Actual" Internet of Things with Ruby is here!
-
-    Continuing on the journey through Ruby's cryptographic libraries, I gave it a shot to make Raspberry Pi Pico W speak TLS in PicoRuby, making it even closer to other languages' environments.
-
-    This talk will cover how networking, cryptography, and HTTP/HTTPS is implemented both in your normal Ruby and mruby world.
+  description: "Learn how we migrated RBS to remove its dependency on the Ruby VM
+    and expose a new C API. In addition to being faster and more memory-efficient,
+    it’s now more portable: tools like Prism, Sorbet, JRuby and TruffleRuby will be
+    able to use RBS directly. Type checkers like Steep and Sorbet will now be able
+    to parse multiple RBS files in parallel, unconstrained by the GVL.  \n  \nThe
+    Ruby VM offers many luxuries that can help ease C extension development, such
+    as garbage collection, exceptions, and the many built-in data structures like
+    `Array` and `Hash`. Unfortunately, to be maximally portable and multi-threaded,
+    some C extensions like RBS and Prism will need to forego these conveniences. We’ll
+    show techniques for replicating them in pure C.\n\nJoin us to explore advanced
+    techniques in writing C extensions and see how this universal RBS parser paves
+    the way for improved tooling and collaboration in the Ruby ecosystem."
   speakers:
-  - id: sylph01
+  - id: amomchilov
+junk0612:
+  title: The Implementations of Advanced LR Parser Algorithm
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: |-
+    I have been working on a better implementation of the LR algorithm to improve parse.y using Lrama.
+    In Lrama 0.7, which is designed for CRuby 3.5, the parser can now be generated using IELR, an algorithm that is one step further from LALR, with a wider range of languages that can be parsed than LALR.
+    In this presentation, I will discuss the detailed theory of IELR and its implementation in Lrama.
+  speakers:
+  - id: junk0612
 rubylangorg:
   title: Ruby Committers and the World
   type: presentation
-  language: JA
+  language: EN/JA
   live_or_recorded: venue
   description: CRuby committers on stage!
   speakers:
   - id: rubylangorg
-k0kubun:
-  title: YJIT Makes Rails 1.7x Faster
+soutaro:
+  title: API for docs
   type: presentation
   language: EN
   live_or_recorded: venue
   description: |-
-    Have you enabled Ruby 3.3 YJIT? You’re using a much slower Ruby if you haven’t. YJIT makes Railsbench 1.7x faster. In production, YJIT presents a 17% speedup to millions of requests per second at Shopify.
+    Steep provides documentation features integrated with editors. You can read Ruby code with documentations of classes and methods, which hovers near the cursor. You can write Ruby code with completion suggestions with documentation, helping you select the best option from the list.
 
-    Why does YJIT make Ruby so much faster? In this talk, you’ll explore the latest YJIT optimizations that have a huge impact on your application’s performance. Once you understand what you're missing out on, you can't help but enable YJIT.
+    The feature can be seen as a variant of traditional documentation tools, like RDoc and YARD. However, it is essentially different from other tools: instead of generating human-readable files, it provides an API. The API provides a data structure that allows retrieving the documentation associated with each component of Ruby programs.
+
+    In this talk, I will outline the implementation, discuss the requirements, and share design considerations behind the feature.
   speakers:
-  - id: k0kubun
-m3m0r7:
-  title: 'How to implement a RubyVM with PHP? '
+  - id: soutaro
+s_isshiki1969:
+  title: Improving my own Ruby
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    *monoruby* is a new Ruby implementation I am working on, written in Rust, built from scratch, and consisting of a parser, interpreter, garbage collector, and just-in-time (JIT) compiler. Since the last RubyKaigi, I have made progress in Rubygems support and other performance improvements.
+    This time I want to present the details of the optimizations and the various features for performance tuning. Meaningful optimization requires measurement and evaluation, so I have implemented features to record where and why various events such as JIT compilation, JIT code invalidation, and deoptimization (back to the interpreter) occurred, and to display the generated assembly for each virtual machine instruction. The actual optimizations implemented in *monoruby* include machine code inlining, method inlining, polymorphic method call optimization, faster instance variable access, faster array access, etc.
+    Making the Ruby compiler is fun.
+  speakers:
+  - id: s_isshiki1969
+udzura:
+  title: Running ruby.wasm on Pure Ruby Wasm Runtime
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    The speaker has developed a WebAssembly(wasm) runtime named Wardite, which is implemented entirely in pure Ruby.
+    Wardite implements core wasm specifications and instructions, enabling the successful execution of ruby.wasm with basic Ruby functionalities. This talk will explore the technical challenges of implementing a wasm runtime in pure Ruby and problems encountered during development. Key topics include the implementation of WASI preview 1 support, performance enhancements using ruby-prof and perf, and core wasm specification compliance testing.
+    The talk will provide a comprehensive overview of the progress made so far and the future directions for Wardite, highlighting its potential impact on the Ruby and WebAssembly ecosystems. Attendees will gain insights into the current status of Wardite, its architecture, and the approaches taken to efficiently implement WebAssembly runtime in Ruby.
+  speakers:
+  - id: udzura
+jeremyevans0:
+  title: Eliminating Unnecessary Implicit Allocations
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: This is a followup to my RubyKaigi 2024 presentation, "Reducing Implicit
+    Allocations During Method Calling", discussing an entirely new set of allocation
+    reduction optimizations included in Ruby 3.4.  This presentation will describe
+    allocation regressions that occurred while developing these optimizations, and
+    the allocation test suite added to prevent future regressions.  It will also discuss
+    other bugs that were found as a result of this optimization work, and how they
+    were fixed. Finally, it will discuss the implicit allocations that remain, and
+    why they would be challenging to address.
+  speakers:
+  - id: jeremyevans0
+alanwusx:
+  title: A taxonomy of Ruby calls
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: Calls are an essential feature of Ruby and there are an eye dazzling
+    number of options available for declaring and calling methods and blocks. In this
+    talk, I will explore interesting interactions between call related features and
+    put forward a classification of them based on my experience with their implementation
+    in the CRuby interpreter and YJIT.
+  speakers:
+  - id: alanwusx
+ahogappa:
+  title: The Ruby One-Binary Tool, Enhanced with Kompo
+  type: presentation
+  language: JA
+  live_or_recorded: venue
+  description: "I want to introduce a Ruby one-binary conversion tool. I am developing
+    a gem called Kompo. Kompo was developed to make one-binary Ruby game engines,
+    which I can develop in Ruby as a hobby. \nKompo is based on the concept of “easy
+    to run anywhere reasonably fast.” Now, a simple program with `Sinatra` + `SQLite`
+    can be made one binary. \nHowever, Kompo cannot include anything besides Ruby
+    scripts in the binary because it achieves one binary by overriding `require,`
+    which is sufficient. If you want to make a Ruby on Rails app one-binary, you need
+    to include YAML, etc., in the binary and also be able to read it via `IO.read`,
+    etc. \nSo, I have provided Kompo with a means for users to access binary data
+    freely. This allows you to read the YAML files in the binary using `IO.read`,
+    etc. \nIn this session, I will describe the details of this implementation and
+    demonstrate how Ruby can be run as one binary."
+  speakers:
+  - id: ahogappa
+ko1:
+  title: Toward Ractor local GC
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    Garbage collection (GC) is a big challenge in multi-Ractor systems. In the current implementation, all Ractors share a global heap, and GC requires stopping all Ractors to perform GC. This approach negatively impacts object allocation and GC performance.
+
+    Ideally, GC should be executed in parallel for each Ractor's local heap. However, shareable objects make it difficult to track references and implement fully parallel GC.
+
+    To address this, we propose Ractor-local GC, which focuses on collecting non-shareable, Ractor-local objects in parallel, while continuing to perform global GC for shareable objects by pausing all Ractors, as in the current system. This hybrid approach allows most GC operations to run in parallel, improving overall performance. Furthermore, since shareable objects are expected to be relatively few compared to non-shareable objects, the frequency of global GC should remain low.
+
+    This talk will present the design of Ractor-local GC and the progress of its implementation.
+  speakers:
+  - id: ko1
+Morriar:
+  title: Inline RBS comments for seamless type checking with Sorbet
+  type: presentation
+  language: EN
+  live_or_recorded: venue
+  description: |-
+    In this talk, we'll explore how integrating the RBS parser into Sorbet allows us to include type information as comments directly into our Ruby code. This integration enables fast type checking with an appealing syntax while enhancing type safety and code navigation for large-scale projects.
+
+    We'll discuss the improvements we made to the `ruby/rbs` parser, which can now function without the need for the RubyVM. This enhancement not only makes it compatible with Sorbet but also opens the door for use from other C/C++/Rust tools.
+
+    We'll also showcase our tool to automatically convert Sorbet RBI signatures into RBS comments, addressing some of the differences and challenges between the two syntaxes.
+
+    Join us to discover how Sorbet and RBS can work together to elevate your Ruby development experience.
+  speakers:
+  - id: Morriar
+sue445:
+  title: Road to Go gem
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    Have you ever implemented a virtual machine (VM) of any kind? In the past, I implemented a Java Virtual Machine (JVM) using PHP. My current workplace primarily uses Ruby on Rails, but I am a beginner in both Ruby and Ruby on Rails.
+    **Go** talks about Ruby native extension gem with **Go**. (a.k.a. **Go** gem)
 
-    To better understand Ruby, I thought I needed some practical experience. Therefore, I decided to implement a RubyVM myself, using my experience of building a JVM with PHP. This project aims to deepen my understanding of Ruby and accelerate my learning process.
+    I created https://github.com/ruby-go-gem/go-gem-wrapper for Go gem.
 
-    In this presentation, I will discuss how to implement a RubyVM using PHP and cover the basics of VM implementation.
+    This is a library to make it easier to create Go gem. (contains both Go module and Ruby gem)
+
+    I will talk the following regarding go-gem-wrapper and Go gem.
+
+    * Auto-generate (almost) all of Go's bindings  from `ruby.h`. (about 1,100 functions)
+    * Parse  CRuby's `ruby.h` with Ruby
+    * C lang's pointer difficulties from `ruby.h` parser's point of view
+    * Run `go test` with CRuby
+    * Pros/Cons of Go gem
+    * My bundler's patch for Go gem
   speakers:
-  - id: m3m0r7
-remore:
-  title: Turning CDN edge into a Rack web server with ruby.wasm
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    This is my story on how I started my side project to use CDN edge experimentally as a Rack web server for my personal Sinatra application.
-
-    In this talk, we will explore how it works with a live demo, delve into how I experimentally migrated from my traditional Unicorn/Nginx setup, and discuss what it takes to develop an app in an edge computing environment. We'll also touch on a few practical aspects such as performance and limitations in the last half of the discussion so that you can learn what it's like to build your own Rack app taking advantage of the resilience and scalability of a globally distributed computing platform.
-  speakers:
-  - id: remore
-tenderlove:
-  title: Speeding up Instance Variables with Red-Black Trees
+  - id: sue445
+tompng:
+  title: Analyzing Ruby Code in IRB
   type: presentation
   language: JA
   live_or_recorded: venue
-  description: The introduction of Object Shapes helped speed up cached instance variable
-    reads as well as decreased the machine code required for JIT compilation. But
-    what about cache misses?  Is there any way we can speed up instance variable access
-    in that case? Ruby 3.3 introduced a red-black tree cache to speed up instance
-    variable cache misses. Let’s learn how instance variables are implemented, and
-    how the red black tree cache speeds them up!
+  description: |-
+    IRB analyzes the input code for many purposes: syntax highlighting, detecting termination of multiline input, auto-indent and completion.
+    Some of them uses token-base, some uses syntax-tree based analysis.
+    Let's explore why, how and what's interesting especially when IRB receives weird input code.
+    In this talk, I will also show the strategy of making IRB more weird-code tolerant by migrating these analysis to use Prism.
   speakers:
-  - id: tenderlove
-MikeMcQuaid:
-  title: Using "modern" Ruby to build a better, faster Homebrew
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: Homebrew is a popular macOS package manager in the Ruby community and
-    is also written in Ruby. When it was first created, it used the (fairly old) Ruby
-    supplied by macOS and, until recently, has been tied to this version. Learn in
-    this talk how and why Homebrew now ships its own Ruby to all users,  modern Ruby
-    tooling we now rely heavily on (e.g. Sorbet, RuboCop, etc.), how Ruby versions
-    and our love of ActiveSupport have affected the performance of Homebrew and what
-    we have planned in future to make Homebrew better, faster and more Ruby-like.
-  speakers:
-  - id: MikeMcQuaid
+  - id: tompng
 headius:
-  title: 'JRuby 10: Ruby 3.3 on the Modern JVM'
+  title: Optimizing JRuby 10
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: JRuby is the most widely deploy alternative Ruby in the world. Up through
-    JRuby 9.4, we have maintained compatibility with old JVM versions, focusing on
-    compatibility and support for legacy platforms. With JRuby 10, we're making a
-    huge leap forward, with support for the latest JVM features (native functions
-    and memory, true lightweight fibers, fast startup and warmup) and a complete set
-    of Ruby 3.3 features (including the fiber scheduler, ractors, IO buffers, the
-    prism parser, and more). We're pushing performance beyond anything we've done
-    before. And we need your help to make this journey. Come see how JRuby brings
-    the best of the modern JVM to Ruby, and how you can get involved.
+  description: JRuby 10 is out now with Ruby 3.4 and Rails 8 compatibility! After
+    years of catching up on features, we've finally been able to spend time on long-delayed
+    optimizations. This talk will show some of the best examples, including real-world
+    application performance,  and teach you how to find and fix performance problems
+    in your JRuby applications.
   speakers:
   - id: headius
-m_seki:
-  title: ERB, ancient and future
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: ERB was released in 1999. 25th anniversary. In this talk, I will explain
-    what I was thinking when designing the ERB API 25 years ago. I will also explain
-    how supports block methods.
-  speakers:
-  - id: m_seki
-junk0612:
-  title: 'From LALR to IELR: A Lrama''s Next Step'
+Y_uuu:
+  title: 'Porting PicoRuby to Another Microcontroller: ESP32'
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    In parse.y, there is a variable that represents the state of the Lexer, based on the idea that the Parser and the Lexer can be separated. However, in reality, the state of Parser and Lexer are shared and cannot be said to be separated. Also, the Lexer state is manually managed, but historical history has clouded the view, and additions and modifications must be done with care.
-    With the replacement of the parser generator from Bison to Lrama, the time has come to attack parse.y from the parser generator side, and Lrama is trying to solve this problem by generating an algorithmic parser called PSLR. As a first step, I will show how Lrama can generate a parser for a new algorithm called IELR, which is a prerequisite for PSLR.
-    IELR is an improved version of LALR and can parse grammars that LALR cannot. In this presentation, I will explain the implementation of Lrama and how the parser is actually generated.
+    PicoRuby is a very small implementation of Ruby designed to run on microcontrollers. It is an outstanding open-source project that has already been proven to work on well-known microcontroller boards such as the Raspberry Pi Pico. Moreover, it is thoughtfully designed to facilitate operation on other microcontrollers.
+
+    In my project, I worked on porting PicoRuby to the ESP32, a low-cost and low-power microcontroller module developed by Espressif Systems. The ESP32 supports wireless communication such as Wi-Fi and Bluetooth, making it an excellent match for developing IoT (Internet of Things) systems.
+
+    The process of adapting PicoRuby to different microcontrollers involved continuous hypothesis testing. It required writing build configurations tailored to the specific microcontroller and developing dedicated C source code for it.
+
+    In this presentation, I will introduce the approaches I took and invite you into the deep and fascinating world of embedded systems.
   speakers:
-  - id: junk0612
-Yuryu:
-  title: Ruby and the World Record Pi Calculation
+  - id: Y_uuu
+peterzhu2118:
+  title: Modular Garbage Collectors in Ruby
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: |-
-    I broke the world record of pi calculations with 100 trillion digits. When I was preparing for the challenge, I created a small Ruby script and an ERB template for the calculation software config file to automate benchmarking, and a shell one-liner to create a CSV file for review. The script saved me days of manual work and allowed me to find optimal parameters. The final calculation took 157 days, almost twice as fast as the earliest configurations, which could’ve taken more than 300 days.
-
-    This talk will show you how I turned the vague problem scope (breaking the pi world record) into a smaller solvable task (automation with Ruby). You’ll also learn scripting techniques for benchmarking such as invoking an external program in Ruby, and multiline text formatting with the sed, grep, and paste commands.
-
-    You may not calculate pi, but I’m sure you have a thing or two that you want your computer to do for you!
+  description: "Introduced in [Feature #20470](https://bugs.ruby-lang.org/issues/20470),
+    Ruby 3.4 ships with an experimental API for implementing garbage collectors. \n\nIn
+    addition to the built-in garbage collector, Ruby 3.4 also ships with an experimental
+    garbage collector implemented using the Memory Management Toolkit (MMTk) framework.
+    MMTk provides a wide variety of advanced garbage collector implementations such
+    as Immix and LXR.\n\nIn this talk, we will introduce the Modular GC API, look
+    at how MMTk is implemented using this API, discuss our current progress and future
+    roadmap, and how you can implement your own garbage collector using this API."
   speakers:
-  - id: Yuryu
-KJTsanaktsidis:
-  title: Finding and fixing memory safety bugs in C with ASAN
+  - id: peterzhu2118
+segiddins:
+  title: The Challenges of Building sigstore-ruby
   type: presentation
   language: EN
   live_or_recorded: venue
-  description: |-
-    In order to deliver an experience of programmer happiness to users of Ruby, the developers of CRuby itself (as well as the authors of extension gems) must cut through the dangerous jungle of manual memory management in C. Simple mistakes in the use of pointers, or failing to follow the Ruby garbage collector's rules precisely, can work fine on development machines but cause rare, hard to debug crashes in production environments.
-
-    ASAN (Address SANitizer) is a tool for instrumenting compiled code to catch invalid memory accesses as they happen and crash the program immediately, leading you straight to the buggy code. This is far easier to troubleshoot than crashing at some later point, when the memory corruption has caused some other, totally innocent code to crash!
-
-    In this talk, you'll learn how to enable ASAN in your builds (of both Ruby itself and of extension gems), and how to interpret its output. We'll also cover a little bit about how ASAN works in CRuby.
+  description: Sigstore Ruby now exists. So exciting! But bringing it to life was
+    a challenge, particularly due to the goal of being able to ship it as a part of
+    Ruby itself. Building a sigstore implementation atop only the standard library
+    required writing a TUF client, implementing custom x509 handling, and abstracting
+    over all the supported key types, among other challenges. This talk will explore
+    those challenges, and dive into _why_ a sigstore implementation proves to be such
+    an undertaking, hopefully inspiring some simplification for the next poor soul
+    who attempts to build one from scratch.
   speakers:
-  - id: KJTsanaktsidis
-gedorinku:
-  title: Porting mruby/c for the SNES (Super Famicom)
+  - id: segiddins
+ohbarye:
+  title: On-the-fly Suggestions of Rewriting Method Deprecations
   type: presentation
   language: JA
   live_or_recorded: venue
   description: |-
-    The SNES (Super Nintendo Entertainment System), released in the early 1990s, is known as the Super Famicom in Japan.
+    This talk is for both library authors and their users - showing how to make method deprecations more manageable through automated code analysis and transformation suggestions. While Ruby's ecosystem has various ways to handle method deprecations, the process of updating deprecated code often remains manual and time-consuming.
 
-    I have worked on porting mruby/c to the SNES and successfully ran mruby/c code on it. In this presentation, along with an overview of the SNES's hardware, I will detail the process of porting mruby/c, and introduce how to develop games for the SNES using mruby/c.
+    What if the world were like this? Library authors would only need to define conversion rules for deprecated methods. Client developers would get patches that they could apply immediately to resolve deprecations by simply running their existing programs. In this talk, I will show how my own tool, Deprewriter make this possible. I'll introduce how to analyze deprecated method calls at runtime and suggests code transformations with Ruby's metaprogramming capabilities.
 
-    Moreover, a live demonstration using an actual SNES unit is also planned for this presentation.
+    Through this presentation, I'll explore how Ruby's flexibility can be leveraged to create tools that make deprecation handling more systematic and developer-friendly, potentially paving the way for better
   speakers:
-  - id: gedorinku
-palkan_tula:
-  title: 'Ruby Mixology 101: adding shots of PHP, Elixir, and more'
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    How often have you heard, “I wish Ruby had X from Y”? Developers tend to desire features they love in one language to be available in another. That’s why, for example, we got pattern matching and shorthand Hashes added to Ruby. What’s next? What will inspire the next Ruby syntax addition? Crystal? Elixir? Zig (have you heard about it)? PHP (why not)?
-
-    Let’s embark on a fantastic journey of exploring syntax features from other languages, such as method overloading or null coalescing assignment, and how to port them to Ruby. But why is it fantastic? I want to turn fantasy into reality and show how we can experiment with Ruby syntax additions without waiting for official releases with experimental features.
-  speakers:
-  - id: palkan_tula
-makenowjust:
-  title: Make Your Own Regex Engine!
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: |-
-    Regular expression (regex) is a critical feature in Ruby. However, developers often say, "Regex is complicated and causes bugs.", so they avoid using regex. This seems to be due to their incorrect understanding of how regex matching works. The behavior of regex matching is actually **simple**, and a small regex engine (`kantan-regex`) can be implemented in a program of less than **300 lines**.
-
-    In this talk, I will describe the behavior of regex matching through the implementation of `kantan-regex`.  Furthermore, I will show how, with a few modifications, extensions such as look-around and optimizations such as memoization can be easily implemented. We believe that this talk will help to deepen our understanding of regex implementations and make using regex in everyday life more enjoyable.
-
-    A tutorial on implementing `kantan-regex` is [available](https://makenowjust.github.io/kantan-regex-book/) on Web (Japanese only).
-  speakers:
-  - id: makenowjust
-ledsun:
-  title: Using Ruby in the browser is wonderful.
-  type: presentation
-  language: JA
-  live_or_recorded: venue
-  description: Ruby 3.2 released ruby.wasm, allowing Ruby to run in the browser as
-    WebAssembly. Several features were missing for comfortable programming. For example,
-    require_relative to load other scripts, the new method to initialize JavaScript
-    objects, and some converters between Ruby and JavaScript. I wrote three Ruby programs
-    for the browser, found the missing features, and implemented them. I will introduce
-    my work on ruby.wasm and talk a bit about features I will add in the future. Those
-    who listen to this talk will feel that using Ruby in the browser is wonderful.
-  speakers:
-  - id: ledsun
-vinistock:
-  title: The state of Ruby dev tooling
-  type: presentation
-  language: EN
-  live_or_recorded: venue
-  description: |-
-    During the last few years, the Ruby community invested significant effort into improving developer tooling. A lot of this effort has been divergent; trying out many solutions to find out what works best and fits Rubyists expectations.
-
-    So where are we at this point? How do we compare to other ecosystems? Is it time to converge, unite efforts and reduce fragmentation? And where are we going next? Let’s analyze the full picture of Ruby developer tooling and try to answer these questions together.
-  speakers:
-  - id: vinistock
+  - id: ohbarye
 yukihiro_matz:
   title: Matz Keynote
   type: keynote
