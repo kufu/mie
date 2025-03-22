@@ -30,33 +30,23 @@
         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
         <%= I18n.t('card.add') %>
       </button>
-      <dialog id="<%= terms_of_service_dialog_id %>" class="dialog">
-        <div class="border-solid border-b border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
-          <p class="my-0 text-2xl"><%= I18n.t('dialog.terms_of_service') %></p>
-        </div>
-        <div class="sm:max-h-[calc(100vh-212px)] overflow-auto">
-          <div class="w-full p-6 flex flex-col gap-6 shadow-[0_4px_8px_2px_rgba(3,3,2,0.3)] bg-white">
-            <span class="text-sm"><%= I18n.t('terms_of_service.description') %></span>
-            <div class="bg-[rgb(248,247,246)] sm:h-[400px] w-full overflow-auto">
-              <div class="p-2 h-full">
-                <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
-              </div>
-            </div>
+      <if>
+      <dialog id="<%= terms_of_service_dialog_id %>">
+        <%= render 'components/dialog', title: I18n.t('dialog.terms_of_service') do %>
+          <span class="text-base"><%= I18n.t('terms_of_service.description') %></span>
+          <div class="mt-4 bg-[#E3E5E8] rounded-lg">
+            <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
           </div>
-        </div>
-        <div class="flex flex-col border-solid border-t border-[rgb(214,211,208)] py-4 px-6">
-          <div class="flex justify-end">
-            <button class="normal-button" data-action="click->dialog#close"><%= I18n.t('button.close') %></button>
-            <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
-              <%= form.hidden_field :title %>
-              <%= form.hidden_field :description %>
-              <%= form.hidden_field :public %>
-              <%= form.hidden_field :initial, value: false %>
-              <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-              <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
-            <% end %>
-          </div>
-        </div>
+          <%# TODO: action_button にわたす必要がありそう %>
+          <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
+            <%= form.hidden_field :title %>
+            <%= form.hidden_field :description %>
+            <%= form.hidden_field :public %>
+            <%= form.hidden_field :initial, value: false %>
+            <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+            <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
+          <% end %>
+        <% end %>
       </dialog>
     </div>
   <% elsif scheduled == schedule %>
