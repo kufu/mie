@@ -32,19 +32,17 @@
       </button>
       <if>
       <dialog id="<%= terms_of_service_dialog_id %>">
-        <%= render 'components/dialog', title: I18n.t('dialog.terms_of_service') do %>
-          <span class="text-base"><%= I18n.t('terms_of_service.description') %></span>
-          <div class="mt-4 bg-[#E3E5E8] rounded-lg">
-            <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
-          </div>
-          <%# TODO: action_button にわたす必要がありそう %>
-          <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
+        <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
+          <%= render 'components/dialog', title: I18n.t('dialog.terms_of_service'), action_button: { form_helper: form, title: I18n.t('button.accept_to_add') } do %>
+            <span class="text-base"><%= I18n.t('terms_of_service.description') %></span>
+            <div class="mt-4 bg-[#E3E5E8] rounded-lg">
+              <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
+            </div>
             <%= form.hidden_field :title %>
             <%= form.hidden_field :description %>
             <%= form.hidden_field :public %>
             <%= form.hidden_field :initial, value: false %>
             <%= form.hidden_field :add_schedule_id, value: schedule.id %>
-            <%= form.submit I18n.t('button.accept_to_add'), class: "confirm-terms-of-service-button text-sm font-bold min-h-5 ml-2 primary-button", data: { turbo_frame: "_top" } %>
           <% end %>
         <% end %>
       </dialog>
