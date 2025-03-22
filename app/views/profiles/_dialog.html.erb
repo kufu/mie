@@ -1,13 +1,11 @@
 <%= form_with(url: profile_path, method: :patch, model: profile) do |f| %>
   <div data-controller="dialog">
-    <dialog data-dialog-target="dialog" id="edit-introduce-dialog">
-      <%= render 'components/dialog', title: I18n.t('dialog.edit_introduce'), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
-        <div data-controller="word-counter" data-word-counter-max-value="<%= profile_introduce_max_length %>">
-          <div class="w-full">
-            <%= f.text_area :introduce, class: "border opacity-100 h-72 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
-            <div class="font-xs mt-2 text-[rgb(112,109,101)]">
-              <span data-word-counter-target="counter"></span>/<%= profile_introduce_max_length %>
-            </div>
+    <dialog data-dialog-target="dialog" id="edit-introduce-dialog" data-controller="word-counter" data-word-counter-max-value="<%= profile_introduce_max_length %>">
+      <%= render 'components/dialog', title: I18n.t('dialog.edit_introduce'), action_button: { title: I18n.t('button.save'), form_helper: f, data: { "word-counter-target": :submit } } do %>
+        <div class="w-full">
+          <%= f.text_area :introduce, class: "border opacity-100 h-72 rounded-md border border-[rgb(214,211,208)] bg-white p-2 text-[rgb(35,34,30)] w-full", data: { "word-counter-target": "source", action: "input->word-counter#calc" } %>
+          <div class="font-xs mt-2 text-[rgb(112,109,101)]">
+            <span data-word-counter-target="counter"></span>/<%= profile_introduce_max_length %>
           </div>
         </div>
       <% end %>
