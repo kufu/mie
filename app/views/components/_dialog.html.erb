@@ -26,11 +26,11 @@
     <%# フッター部分（ボタン） %>
     <div class="p-4 border-t flex justify-end gap-3">
       <%# 閉じるボタン（常に表示） %>
-      <button
-        data-action="click->dialog#close"
-        class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold">
-      <%= I18n.t('button.close') %>
-      </button>
+      <%= render "components/button",
+                 title: I18n.t('button.close'),
+                 size: "s",
+                 data_action: "click->dialog#close"
+      %>
 
       <%# アクションボタン（オプション） %>
       <% if local_assigns[:action_button].present? %>
