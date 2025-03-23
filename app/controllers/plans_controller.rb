@@ -14,7 +14,7 @@ class PlansController < ApplicationController
 
   def update
     @plan.update!(plan_params)
-    redirect_to event_plan_url(@plan, event_name: @event.name)
+    redirect_to event_path(event_name: @event.name)
   end
 
   def editable

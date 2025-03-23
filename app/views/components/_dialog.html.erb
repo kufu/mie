@@ -40,10 +40,11 @@
       <%# アクションボタン（オプション） %>
       <% if local_assigns[:action_button].present? %>
         <%= render "components/button",
-          title: action_button[:title],
-          size: "s",
-          classes: action_button[:classes],
-          onClick: action_button[:onClick]
+                   title: action_button[:title],
+                   size: "s",
+                   classes: action_button[:classes],
+                   onClick: action_button[:onClick],
+                   form_helper: action_button[:form_helper]
         %>
       <% end %>
     </div>

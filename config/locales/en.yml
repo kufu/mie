@@ -69,7 +69,7 @@ en:
   description:
     title: "Note for the schedule"
     notice: "This memo will be placed into OGP image when share on SNS."
-    form_titme: "Edit note for schedule"
+    form_title: "Edit note for schedule"
   settings:
     title: "Settings"
     set_password: "Set password"
