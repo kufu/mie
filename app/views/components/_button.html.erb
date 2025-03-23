@@ -4,6 +4,7 @@
 <% icon ||= "" %>
 <% disabled ||= false %>
 <% onClick ||= "" %>
+<% data ||= nil %>
 <% data_action ||= nil %>
 <% button_classes = [
   "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap",
@@ -17,7 +18,7 @@
 <% form_helper ||= nil %>
 
 <% if form_helper %>
-  <%= form_helper.button type: :submit, class: button_classes, onClick: onClick, disabled: disabled do %>
+  <%= form_helper.button type: :submit, class: button_classes, disabled: disabled, data: data do %>
     <%= raw icon %>
     <span class="<%= text_classes %>">
     <%= title %>
@@ -25,6 +26,7 @@
   <% end %>
 <% else %>
   <button
+    type="button"
     class="<%= button_classes %>"
     onclick="<%= onClick %>"
     <%= "disabled" if disabled %>

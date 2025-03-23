@@ -10,8 +10,8 @@
   - onClick: クリック時の処理
 <% end %>
 
-<dialog id="<%= dialog_id %>" class="rounded-lg w-[480px] max-h-[90vh] p-0 backdrop:bg-black/50">
-  <div class="bg-white flex flex-col rounded-[8px]">
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center">
+  <div class="bg-white rounded-lg w-[480px] max-h-[90vh] flex flex-col">
     <%# ヘッダー部分 %>
     <div class="px-4 py-2 border-b">
       <h2 class="text-xl font-bold">
@@ -32,11 +32,11 @@
     <%# フッター部分（ボタン） %>
     <div class="p-4 border-t flex justify-end gap-3">
       <%# 閉じるボタン（常に表示） %>
-      <button
-        data-action="click->dialog#close"
-        class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-2 py-1 text-base font-bold">
-      <%= I18n.t('button.close') %>
-      </button>
+      <%= render "components/button",
+                 title: I18n.t('button.close'),
+                 size: "s",
+                 data_action: "click->dialog#close"
+      %>
 
       <%# アクションボタン（オプション） %>
       <% if local_assigns[:action_button].present? %>
@@ -45,7 +45,8 @@
                    size: "s",
                    classes: action_button[:classes],
                    onClick: action_button[:onClick],
-                   form_helper: action_button[:form_helper]
+                   form_helper: action_button[:form_helper],
+                   data: action_button[:data]
         %>
       <% end %>
     </div>

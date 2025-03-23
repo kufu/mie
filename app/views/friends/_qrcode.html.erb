@@ -1,7 +1,11 @@
 <div class="w-full">
   <%= @qrcode.html_safe %>
-  <div class="flex flex-col w-full mt-4" data-controller="friend-code" data-friend-code-expires-at-value="<%= @trigger.expires_at.to_i * 1000 %>">
-    <p>expires in <span data-friend-code-target="counter"></span> seconds</p>
-    <a href="<%= new_profile_friend_path %>" class="normal-button mr-2"><%= I18n.t('button.reload') %></a>
+  <div class="flex flex-col w-full mt-4 gap-2 justify-center items-center" data-controller="friend-code" data-friend-code-expires-at-value="<%= @trigger.expires_at.to_i * 1000 %>">
+    <p class="text-sm text-center">expires in <span data-friend-code-target="counter"></span> seconds</p>
+    <a href="<%= new_profile_friend_path %>" class="inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 no-underline text-decoration-none w-fit">
+      <span class="text-base font-bold text-[#131416] block leading-none">
+        <%= I18n.t('button.reload') %>
+      </span>
+    </a>
   </div>
 </div>
