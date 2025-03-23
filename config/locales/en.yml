@@ -96,6 +96,9 @@ en:
     remove_member: "Are you sure remove this member from the team?"
     edit_introduce: "Edit introduce yourself"
     read_qrcode_to_be_friend: "Read QR code to add friend"
+    attendee_title: "Friends Who Scheduled to Watch"
+    attendee_friends: "Friends"
+    attendee_no_friends: "No friends have scheduled to attend this session yet"
   button:
     settings: "Settings"
     update_memo: "Update memo"
@@ -119,6 +122,7 @@ en:
     leave_team: "Leave from the team"
     add_friend: "Add friend"
     reload: "Reload"
+    show_more: "Show more"
   default_vales:
     plan_title: "My plans"
 

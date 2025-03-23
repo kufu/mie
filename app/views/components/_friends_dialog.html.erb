@@ -1,13 +1,11 @@
 <%# profiles: name と avatar_url を含むハッシュの配列 %>
-<%# title: ダイアログのタイトル %>
 <%# dialog_id: ダイアログのID %>
 <%# session_info: セッション情報（オプション） %>
-<% title ||= "Friends Who Scheduled to Watch" %>
 <% dialog_id ||= "friends-dialog-#{SecureRandom.hex(4)}" %>
 <% session_info ||= nil %>
 
 <%= render layout: 'components/dialog', locals: { 
-  title: title, 
+  title: t('dialog.attendee_title'), 
   dialog_id: dialog_id, 
   header_content: session_info.present? ? capture do %>
     <div class="bg-gray-100 flex flex-col gap-y-2 p-4">
@@ -42,7 +40,7 @@
 } do %>
   <div class="flex flex-col">
     <div class="flex justify-between border-b pb-2">
-      <div class="text-lg font-bold">Friends</div>
+      <div class="text-lg font-bold"><%= t('dialog.attendee_friends') %></div>
     </div>
     
     <% if profiles.present? %>
@@ -58,7 +56,7 @@
       </div>
     <% else %>
       <div class="py-4 text-center text-gray-500">
-        No friends have scheduled to attend this session yet
+        <%= t('dialog.attendee_no_friends') %>
       </div>
     <% end %>
   </div>

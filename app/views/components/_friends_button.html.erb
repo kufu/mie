@@ -4,7 +4,7 @@
 <div class="flex items-center justify-between bg-shade-90 p-4 rounded-lg">
     <div class="flex -space-x-2">
         <% profiles.first(5).each do |profile| %>
-            <%= render('components/avatar', name: profile.name, url: profile.avatar_url, size: 's') %>
+            <%= render('components/avatar', name: profile[:name], url: profile[:avatar_url], size: 's') %>
         <% end %>
     </div>
     <div data-controller="dialog" data-dialog-element-id-value="<%= dialog_id %>">
@@ -12,8 +12,9 @@
             class="text-[#5E626E] font-semibold hover:text-[var(--textColor)]"
             data-action="click->dialog#open"
         >
-            Show more
+            <%= t('button.show_more') %>
         </button>
+        
         <%= render 'components/friends_dialog', profiles: profiles, dialog_id: dialog_id, session_info: session_info %>
     </div>
 </div>

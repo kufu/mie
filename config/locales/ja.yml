@@ -65,6 +65,9 @@ ja:
     remove_member: "このメンバーをチームから削除しますか？"
     edit_introduce: "自己紹介を編集"
     read_qrcode_to_be_friend: "QRコードを読み込んで友達追加"
+    attendee_title: "参加予定の友達"
+    attendee_friends: "友達"
+    attendee_no_friends: "まだこのセッションに参加予定の友達はいません"
   button:
     settings: "設定"
     update_memo: "メモを更新"
@@ -88,6 +91,7 @@ ja:
     leave_team: "チームから離脱"
     add_friend: "友達を追加"
     reload: "再読み込み"
+    show_more: "もっと見る"
   default_vales:
     plan_title: "視聴予定"
 

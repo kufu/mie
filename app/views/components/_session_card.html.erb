@@ -17,17 +17,41 @@
     <% end %>
   </div>
   <%# フレンズボタン（参加者リスト）%>
-  <% if attendees.present? %>
+  <% 
+    # 仮データを用意（実データがない場合用）
+    dummy_profiles = []
+    if attendees.blank? && defined?(Rails.env) && Rails.env.development?
+      dummy_profiles = [
+        { name: 'Taro Yamada', avatar_url: 'https://i.pravatar.cc/150?img=1', id: '1' },
+        { name: 'Hanako Sato', avatar_url: 'https://i.pravatar.cc/150?img=5', id: '2' },
+        { name: 'Jiro Tanaka', avatar_url: 'https://i.pravatar.cc/150?img=3', id: '3' }
+      ]
+    end
+    
+    # セッション情報の準備（スピーカーが存在するか確認）
+    session_info_hash = {
+      time: defined?(start_end) ? start_end : nil,
+      language: schedule.language,
+      location: schedule.track.name,
+      title: schedule.title
+    }
+    
+    if schedule.speakers.present? && schedule.speakers.first.present?
+      first_speaker = schedule.speakers.first
+      session_info_hash[:presenter] = {
+        name: first_speaker.name,
+        handle: first_speaker.handle,
+        avatar_url: first_speaker.thumbnail
+      }
+    else
+      session_info_hash[:presenter] = nil
+    end
+  %>
+  
+  <% if dummy_profiles.present? %>
     <%= render 'components/friends_button',
-          profiles: attendees,
-          session_info: {
-            time: start_end,
-            language: schedule.language,
-            location: schedule.track.name,
-            title: schedule.title,
-            # FIXME: 複数人に対応
-            presenter: schedule.speakers.first
-          }
+          profiles: dummy_profiles,
+          session_info: session_info_hash
       %>
   <% end %>
   <%# 追加・削除ボタン %>
