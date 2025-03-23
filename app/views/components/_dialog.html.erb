@@ -2,7 +2,7 @@
 必要なパラメータ:
 - title: ダイアログのタイトル（必須）
 - content: ダイアログの本文（ブロックとして渡す）（必須）
-- dialog_id: ダイアログのID（必須）
+- dialog_id: ダイアログのID（オプション）
 オプションパラメータ:
 - action_button: アクションボタンの設定（オプション）
   - title: ボタンのテキスト
@@ -10,8 +10,9 @@
   - onClick: クリック時の処理
 <% end %>
 
-<div class="fixed inset-0 bg-black/50 flex items-center justify-center">
-  <div class="bg-white rounded-lg w-[480px] max-h-[90vh] flex flex-col">
+<% dialog_id ||= "dialog-#{SecureRandom.hex(8)}" %>
+<dialog id="<%= dialog_id %>" class="w-[480px] max-h-[90vh] p-0 backdrop:bg-black/50">
+  <div class="bg-white flex flex-col rounded-lg">
     <%# ヘッダー部分 %>
     <div class="px-4 py-2 border-b">
       <h2 class="text-xl font-bold">
