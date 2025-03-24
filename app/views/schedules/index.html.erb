@@ -23,7 +23,7 @@
         <div data-controller="dialog" class="bg-white rounded-lg p-4 mb-7">
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
-            <%= render "components/button", title: "Edit", size: "s", data_action: 'click->dialog#open' %>
+            <%= render "components/button", title: "Edit", size: "s", data: { action: 'click->dialog#open' } %>
           </div>
           <%= form_with(url: event_plan_path(@plan, event_name: @event.name), model: @plan) do |f| %>
             <p class="text-base"><%= @plan.description %></p>

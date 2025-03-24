@@ -29,7 +29,7 @@
       <%= render "components/button",
                  title: I18n.t('button.close'),
                  size: "s",
-                 data_action: "click->dialog#close"
+                 data: { action: "click->dialog#close" }
       %>
 
       <%# アクションボタン（オプション） %>
