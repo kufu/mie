@@ -24,6 +24,10 @@ class Schedule
       @id ||= @schedules[0].track.event.name
     end
 
+    def tables
+      @map.values
+    end
+
     def updated_at
       @updated_at ||= @schedules.map(&:updated_at).max
     end
