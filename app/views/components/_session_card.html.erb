@@ -20,8 +20,11 @@
   <% if attendees.present? %>
     <%= render 'components/friends_button', profiles: attendees, onClick: "console.log('FIXME: clicked Friends Button')" %>
   <% end %>
+
   <%# 追加・削除ボタン %>
-  <% if @plan.new_record? %>
+  <% if no_buttons %>
+    <%# do nothing %>
+  <% elsif @plan.new_record? %>
     <% terms_of_service_dialog_id = SecureRandom.uuid %>
     <div data-controller="dialog" data-dialog-element-id-value="<%= terms_of_service_dialog_id %>">
       <button class="add-plan-button p-2 text-sm font-bold min-h-5 normal-button"
