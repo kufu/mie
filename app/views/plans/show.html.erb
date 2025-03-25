@@ -4,147 +4,58 @@
   <meta property="og:url" content="<%= event_plan_url(event_name: @plan.event.name) %>">
 <% end %>
 
-<%= turbo_frame_tag @plan do %>
-  <div class="flex flex-col sm:flex-row items-center mx-auto mt-3 mb-6 max-w-[1120px]">
-    <div class="w-full">
-      <div class="flex flex-col sm:flex-row items-center gap-2">
-        <div class="flex w-full sm:w-fit">
-          <span class="box-content inline-flex items-center justify-center gap-1 border border-transparent bg-white py-2 px-1 whitespace-nowrap text-sm font-bold min-w-[3.5em] min-h-[1em]">
-            <%= I18n.t(@plan.public? ? 'settings.visible' : 'settings.invisible') %>
-          </span>
-          <div class=""><h1 class="text-2xl"><%= @plan.title %></h1></div>
-        </div>
-        <div class="flex sm:flex-grow justify-end w-full sm:w-fit gap-2">
-          <div class="" data-controller="dialog" data-dialog-element-id-value="edit-title-dialog">
-            <% if @plan.user == @user %>
-              <button
-                class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-                data-action="click->dialog#open"
-              >
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
-                <%= I18n.t('button.edit') %>
-              </button>
-            <% end %>
-            <%= render 'rename_dialog', plan: @plan %>
-          </div>
-          <% if @plan.user == @user %>
-            <div data-controller="dialog" data-dialog-element-id-value="edit-setting-dialog" class="flex sm:flex-grow justify-end">
-              <button
-                class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-                data-action="click->dialog#open"
-              >
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
-                <%= I18n.t('settings.title') %>
-              </button>
-            </div>
-            <%= render 'setting_dialog', plan: @plan %>
-          <% else %>
-            <div data-controller="dialog" data-dialog-element-id-value="make-editable-dialog" class="flex sm:flex-grow justify-end">
-              <button
-                class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-                data-action="click->dialog#open"
-              >
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
-                <%= I18n.t('button.make_editable') %>
-              </button>
-              <%= render 'password_dialog', plan: @plan %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mx-auto mt-2 mb-0 max-w-[1120px] flex flex-col gap-3">
-    <div class="flex justify-between items-end">
-      <div class="flex flex-col gap-1">
-        <h1 class="text-base"><%= I18n.t('description.title') %></h1>
-        <span class="text-sm text-[rgb(112,109,101)]"><%= I18n.t('description.notice') %></span>
-      </div>
-      <% if @plan.user == @user %>
-        <div data-controller="dialog" data-dialog-element-id-value="edit-description-dialog">
-          <button
-            class="p-2 text-sm min-h-[calc(0.857143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-            data-action="click->dialog#open"
-          >
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="11" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
-            <%= I18n.t('button.edit') %>
-          </button>
-          <%= render 'description_dialog', plan: @plan %>
-        </div>
+<div data-controller="schedule-table">
+  <div class="flex justify-center pb-4">
+    <div class="flex border-b border-[#CDCFD5] w-fit">
+      <% @plan_table.days.each do |day| %>
+        <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none text-sm px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
+          <%= day %>
+        </button>
       <% end %>
     </div>
-    <div class="p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-      <span class="text-base"><%= @plan.description %></span>
-    </div>
   </div>
 
-  <%= turbo_frame_tag @event do %>
-    <% #TODO: schedules/index と統合してパーシャル化したい %>
-    <% if @plans_table.empty? %>
-      <div class="w-full h-full flex items-center justify-center">
-        <div class="flex items-center justify-center w-[1120px] h-[275px]">
-          <div class="h-28 w-28 bg-cover" style="background-image: url('<%= asset_path("#{@event.name}/rubykaigi.png") %>');"></div>
-          <div class="ml-4">
-            <div class="mb-2">
-              <h1 class="text-2xl"><%= I18n.t('table.no_plans') %></h1>
-            </div>
-            <div class="mb-2">
-              <%= I18n.t('table.no_plans_description') %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% else %>
-      <div data-controller="schedule-table" class="max-w-[1120px] mx-auto">
-        <div class="flex overflow-x-auto overflow-y-hidden gap-2 p-0">
-          <div class="relative flex sm:block justify-center flex-grow shrink-0 basis-auto m-1 before:absolute before:left-0 before:right-0 before:bottom-0 before:border-b-[1px]">
-            <% @plans_table.keys.map do |k| %>
-              <button data-action="click->schedule-table#switch" value="<%= k %>" class="tab-button bg-transparent appearance-none font-bold font-base text-[rgb(112,109,101)] h-10 solid border-0 border-b-[3px] px-4 sm:px-6 box-border border-b-transparent hover:bg-[rgb(248,247,246)] hover:text-[rgb(35,34,30)]">
-                <%= k %>
-              </button>
-            <% end %>
-          </div>
-        </div>
-        <div class="mt-4 overflow-y-auto">
-          <% @plans_table.each do |k, v| %>
-            <div id="schedule-<%= k %>" class="schedule-table hidden">
-              <table class="hidden sm:table h-full w-full border-collapse border-spacing-0">
-                <thead>
-                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] min-w-[184px] text-left"><%= I18n.t('table.start_end') %></th>
-                  <th class="p-4 text-sm border border-solid border-[rgb(214,211,208)] w-auto text-center"><%= I18n.t('table.track') %></th>
-                </thead>
-                <tbody>
-                  <% v.each do |row| %>
-                    <tr>
-                      <th class="py-2">
-                        <div class="flex flex-col gap-1">
-                          <div class="flex items-center">
-                            <p class="text-lg font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
-                            <hr class="w-full h-[1px] mr-4 bg-[rgb(214,211,208)] border-none">
-                          </div>
-                          <p class="text-sm font-bold text-[rgb(112,109,101)] text-left"><%= row[:time][:zone] %></p>
-                        </div>
-                      </th>
-                      <td>
-                        <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-              <div class="sm:hidden" id="mobile-table-<%= k %>">
-                <% v.each do |row| %>
-                  <p class="text-xl font-normal mr-4 shrink-0"><%= row[:time][:range] %></p>
-                  <div class="mt-4 p-2"><%= render("schedules/card", schedule: row[:schedule], mode: :plan, inactive: false) %></div>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-<% end %>
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-2xl font-bold">Your Schedule</h2>
+    <%= render "components/button", title: "Share", size: "s" %>
+  </div>
 
-<%= turbo_frame_tag "modal" %>
+  <div class="bg-white rounded-lg p-4 mb-7">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
+    </div>
+    <p class="text-base"><%= @plan.description %></p>
+  </div>
+
+  <% cache [@plan_table, @plan] do %>
+    <div class="overflow-y-auto">
+      <% @plan_table.days.each do |day| %>
+        <div id="schedule-<%= day %>" class="pb-3 pr-3 schedule-table hidden">
+          <div class="flex flex-row gap-x-3">
+            <div class="flex flex-col" id="schedule-index-timeline-<%= day %>">
+              <%= render partial: 'components/timeline',
+                         locals: {
+                           events: @plan_table[day].rows.map {
+                             { start_time: _1.start_at, end_time: _1.end_at, participating: _1.schedules.any? { |s| @plan.include?(s) } }
+                           },
+                           start_time: @plan_table[day].rows.first.start_at,
+                           end_time: @plan_table[day].rows.last.end_at,
+                         }
+              %>
+            </div>
+            <div class="w-full flex flex-col gap-y-3" id="mobile-table-<%= day %>">
+              <% @plan_table[day].rows.each do |row| %>
+                <%= render 'components/session',
+                           row: row,
+                           location: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }&.track&.name,
+                           scheduled: row.schedules.find { @user&.current_plan&.schedules&.include?(_1) },
+                           no_buttons: true
+                %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+  <% end %>
+  </div>
+</div>

@@ -2,7 +2,6 @@
 
 class ItemsController < ApplicationController
   include EventRouting
-  include ScheduleTable
 
   before_action :set_event
   before_action :set_item, only: %i[update destroy]
@@ -77,8 +76,7 @@ class ItemsController < ApplicationController
   end
 
   def set_schedule_table
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
+    @schedule_table = Schedule::Tables.from_event(@event)
     @row = @schedule_table.tables.map(&:rows).flatten.find { _1.schedules.include?(@item.schedule) }
   end
 

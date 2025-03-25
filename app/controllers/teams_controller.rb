@@ -16,8 +16,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1
   def show
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
+    @schedule_table = Schedule::Tables.from_event(@event)
     @member_schedules_map = @team.profiles.to_h do |profile|
       [profile.id, profile.user.current_plan&.plan_schedules&.map(&:schedule_id) || []]
     end

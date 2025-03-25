@@ -10,6 +10,22 @@ class Schedule
       @table = tables[tables.days.first]
     end
 
+    test '#== can compare two tables equality' do
+      schedules = events(:kaigi).schedules
+      tables = Schedule::Tables.new(schedules)
+      table = tables[tables.days.first]
+
+      assert @table == table
+    end
+
+    test '#== can compare two tables not equality' do
+      schedules = events(:kaigi).schedules
+      tables = Schedule::Tables.new(schedules)
+      table = tables[tables.days.last]
+
+      assert_not @table == table
+    end
+
     test '#track_list returns track names array' do
       assert_equal @table.track_list, %w[TrackA TrackB TrackC]
     end
@@ -53,6 +69,31 @@ class Schedule
       table = Schedule::Table.new([schedule_a, schedule_b])
 
       assert_equal %w[A B], table.track_list
+    end
+
+    test '#expects with same schedule array, it returns same schedules' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      table = Schedule::Table.new(schedules)
+      new_table = table.expect(schedules)
+
+      assert_equal table, new_table
+    end
+
+    test '#expects with empty array, it returns empty schedules' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      table = Schedule::Table.new(schedules)
+      new_table = table.expect([])
+
+      assert new_table.rows.all? { _1.schedules.empty? }
+    end
+
+    test '#expects returns new row object that does not affect the original row' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      table = Schedule::Table.new(schedules)
+      new_table = table.expect(schedules)
+      new_table.rows.pop
+
+      assert_not_equal table.rows.size, new_table.rows.size
     end
 
     test '#updated_at returns newest updated at value in table' do
