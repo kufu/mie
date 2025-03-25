@@ -1,5 +1,6 @@
 
 <% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
   <meta property="og:description" content="<%= @plan.description %>">
   <meta property="og:url" content="<%= event_plan_url(event_name: @plan.event.name) %>">
 <% end %>
