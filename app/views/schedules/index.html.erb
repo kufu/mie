@@ -1,6 +1,11 @@
 <% content_for :head do %>
   <meta property="og:url" content="<%= event_url(@event.name) %>">
 <% end %>
+
+<% if @breakout_turbo %>
+  <% turbo_page_requires_reload %>
+<% end %>
+
 <%= turbo_frame_tag @event, refresh: :morph do %>
   <div data-controller="schedule-table">
     <div class="flex justify-center pb-4">
