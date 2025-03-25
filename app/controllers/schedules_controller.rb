@@ -5,8 +5,7 @@ class SchedulesController < ApplicationController
   include ScheduleTable
 
   def index
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
+    @schedule_table = Schedule::Tables.from_event(@event)
 
     return unless @user&.profile
 

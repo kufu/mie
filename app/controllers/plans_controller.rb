@@ -9,7 +9,7 @@ class PlansController < ApplicationController
 
   def show
     @schedules = @plan.schedules
-    @plans_table = plans_table(@plan)
+    @plan_table = Schedule::Tables.from_event(@event).expect(@schedules)
   end
 
   def update
