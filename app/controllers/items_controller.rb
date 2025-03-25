@@ -2,7 +2,6 @@
 
 class ItemsController < ApplicationController
   include EventRouting
-  include ScheduleTable
 
   before_action :set_event
   before_action :set_item, only: %i[update destroy]

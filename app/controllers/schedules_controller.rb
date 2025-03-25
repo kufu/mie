@@ -2,7 +2,6 @@
 
 class SchedulesController < ApplicationController
   include EventRouting
-  include ScheduleTable
 
   def index
     @schedule_table = Schedule::Tables.from_event(@event)
