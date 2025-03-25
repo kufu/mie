@@ -10,6 +10,22 @@ class Schedule
       @table = tables[tables.days.first]
     end
 
+    test '#== can compare two tables equality' do
+      schedules = events(:kaigi).schedules
+      tables = Schedule::Tables.new(schedules)
+      table = tables[tables.days.first]
+
+      assert @table == table
+    end
+
+    test '#== can compare two tables not equality' do
+      schedules = events(:kaigi).schedules
+      tables = Schedule::Tables.new(schedules)
+      table = tables[tables.days.last]
+
+      assert_not @table == table
+    end
+
     test '#track_list returns track names array' do
       assert_equal @table.track_list, %w[TrackA TrackB TrackC]
     end

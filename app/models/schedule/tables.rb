@@ -4,6 +4,10 @@ class Schedule
   class Tables
     DATE_FORMAT = '%Y-%m-%d'
 
+    def self.from_event(event)
+      Schedule::Tables.new(event.schedules.includes(:speakers, :track).order(:start_at))
+    end
+
     def initialize(schedules)
       @schedules = schedules
       @map = @schedules.group_by { _1.start_at.strftime(DATE_FORMAT) }.to_h do |k, v|
@@ -34,6 +38,14 @@ class Schedule
 
     def cache_key
       "schedules/#{id}-#{updated_at.to_fs(:usec)}"
+    end
+
+    def ==(other)
+      return false unless days == other.days
+
+      days.all? do |key|
+        @map[key] == other[key]
+      end
     end
   end
 end

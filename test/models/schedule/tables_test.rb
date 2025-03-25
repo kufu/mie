@@ -9,6 +9,18 @@ class Schedule
       @tables = Schedule::Tables.new(schedules)
     end
 
+    test '.from_event creates Tables object' do
+      assert_equal @tables, Schedule::Tables.from_event(events(:kaigi))
+    end
+
+    test '#== can compare two tables equality' do
+      assert @tables == Schedule::Tables.new(events(:kaigi).schedules)
+    end
+
+    test '#== can compare two tables not equality' do
+      assert_not @tables == Schedule::Tables.new(events(:party).schedules)
+    end
+
     test 'schedule table can return days of timetables orderd by asc' do
       assert_equal @tables.days, %w[2024-03-18 2024-03-19]
     end

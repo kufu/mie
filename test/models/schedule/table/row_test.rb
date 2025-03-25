@@ -5,6 +5,14 @@ require 'test_helper'
 class Schedule
   class Table
     class RowTest < ActiveSupport::TestCase
+      test '#== can compare two rows equality' do
+        assert Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first == Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first
+      end
+
+      test '#== can compare two rows not equality' do
+        assert Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first != Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.second
+      end
+
       test 'each rows mapping correct track infomations with fixture' do
         schedules = events(:kaigi).schedules
         tables = Schedule::Tables.new(schedules)
