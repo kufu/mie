@@ -42,9 +42,6 @@ class Schedule
       event = Event.build(name: 'track_sort_test')
       event.build_event_theme(
         main_color: '#0B374D',
-        sub_color: '#EBE0CE',
-        accent_color: '#D7D165',
-        text_color: '#23221F',
         overview: 'hoge',
         site_label: 'foo',
         site_url: 'https://example.com'

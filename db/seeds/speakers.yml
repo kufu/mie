@@ -1,27 +1,22 @@
 ---
 keynotes:
-  tompng:
-    id: tompng
-    name: tomoya ishida
-    bio: |-
-      TRICK 2022 Gold Medalist.
-      Maintainer of IRB and Reline.
-      CTO at codeTakt Inc.
-    github_id: tompng
-    twitter_id: tompng
-    gravatar_hash: 3f1fb8caddbb5cf8958c8b82a7bf84c6
-  ioquatix:
-    id: ioquatix
-    name: Samuel Williams
-    bio: Samuel Williams is a renowned Rubyist, the author of Async, and the creator
-      of the Falcon web server. His work focuses on asynchronous I/O and concurrency
-      in Ruby, enhancing its performance and scalability. As member of the Ruby core
-      team, Samuel is pivotal in evolving Ruby's concurrency model. He is a regular
-      speaker at tech conferences, known for making complex topics accessible and
-      engaging.
-    github_id: ioquatix
-    twitter_id: ioquatix
-    gravatar_hash: 1373435a1059a97614969ab154c5b224
+  ima1zumi:
+    id: ima1zumi
+    name: Mari Imaizumi
+    bio: Maintainer of IRB, Reline. A software engineer at STORES Inc.
+    github_id: ima1zumi
+    twitter_id: ima1zumi
+    gravatar_hash: 74b5a82b8710accc1e6189a19f0b4935
+  KnuX:
+    id: KnuX
+    name: Ivo Anjo
+    bio: 'I love to work on Ruby performance and that''s how I ended up at Datadog
+      building a new production open-source Ruby profiler for the `datadog` gem. I
+      believe in bringing profiling to the masses: these kinds of tools should be
+      easy to use and understandable by everyone!'
+    github_id: ivoanjo
+    twitter_id: KnuX
+    gravatar_hash: 5dc208dd24c298889640fb4d1f6e431c
   yukihiro_matz:
     id: yukihiro_matz
     name: Yukihiro "Matz" Matsumoto
@@ -33,119 +28,153 @@ speakers:
   tenderlove:
     id: tenderlove
     name: Aaron Patterson
-    bio: Aaron is on the Rails core team, the Ruby core team, and is a Senior Staff
-      Engineer working at Shopify.  In his free time, he enjoys cooking, playing with
-      cats, and writing weird software.
+    bio: Aaron is on the Ruby core team, the Rails core team, and works as a fully
+      time Ruby committer at Shopify.
     github_id: tenderlove
     twitter_id: tenderlove
     gravatar_hash: f29327647a9cff5c69618bae420792ea
-  HParker:
-    id: HParker
-    name: Adam Hess
-    bio: Adam is a staff software engineer at GitHub on the Ruby Infrastructure team
-      working on improving Ruby for GitHub (and everyone else). He was an early contributor
-      to Ruby's new parser Prism and an avid compiler nerd.
-    github_id: HParker
-    twitter_id: 
-    gravatar_hash: 18a40c6996fbaa47562e16bd42b0f430
-  ahogappa0613:
-    id: ahogappa0613
+  ahogappa:
+    id: ahogappa
     name: ahogappa
     bio: |-
       I am a web application developer at STORES, Inc.
       As a hobby, I develop game engines and tools to pack ruby in one binary.
-    github_id: ahogappa0613
-    twitter_id: 
+    github_id: ahogappa
+    twitter_id:
     gravatar_hash: c53f1542d84fc28ab81b979173af50ae
-  eregontp:
-    id: eregontp
-    name: Benoit Daloze
-    bio: Benoit Daloze is the TruffleRuby lead. He has contributed to many Ruby implementations,
-      including CRuby, TruffleRuby and JRuby. He is the maintainer of ruby/setup-ruby
-      and ruby/spec.
-    github_id: eregon
-    twitter_id: eregontp
-    gravatar_hash: 0ea7f61aec8fee539be0cf39b7bab77c
-  keystonelemur:
-    id: keystonelemur
-    name: Brandon Weaver
-    bio: Brandon is a Principal Software Engineer at Gusto working on the Payroll
-      Services platform. He writes on several Ruby topics from introductory to advanced
-      content, and has invested substantial time into AST tooling and its potential.
-    github_id: baweaver
-    twitter_id: keystonelemur
-    gravatar_hash: f555402e879ef6ad937e41bbaedb465b
+  alanwusx:
+    id: alanwusx
+    name: Alan Wu
+    bio: Alan has been a Ruby committer since 2019, works on YJIT at Shopify, and
+      has some Japanese language proficiency.
+    github_id:
+    twitter_id: alanwusx
+    gravatar_hash: a32c78e5547baf884bf35ec9bec3233f
+  p0deje:
+    id: p0deje
+    name: Alex Rodionov
+    bio: Alex is a quality architect with 15+ years of experience, a Ruby maintainer
+      of the Selenium project, and an author of the Ruby language support in Bazel.
+      He worked with engineers from Apple, Google, Figma, and Stripe on their adoption
+      of Bazel and Ruby.
+    github_id: p0deje
+    twitter_id: p0deje
+    gravatar_hash: d049f551aa71e6326c74002ac8e6788a
+  amomchilov:
+    id: amomchilov
+    name: Alexander Momchilov
+    bio: "[Alexander](https://momchilov.ca) is a staff engineer on Shopify’s Ruby
+      developer experience team, focusing on Tapioca, Sorbet and RBS. His previous
+      background in native iOS/Android development introduced him to the productivity
+      and correctness benefits of type systems and static analysis. He now works on
+      bringing those same benefits to the highly dynamic world of Ruby."
+    github_id: amomchilov
+    twitter_id:
+    gravatar_hash: 78b45a835031f4ce03a6653b3262b5d3
+  Morriar:
+    id: Morriar
+    name: Alexandre Terrasa
+    bio: Alexandre has a PhD in computer science and specializes in typing specifications
+      and implementations. He currently works as a Senior Staff Engineer on the Ruby
+      and Rails Infrastructure team at Shopify. He uses his expertise for the adoption
+      of better Ruby tooling and practices including Sorbet and gradual typing. He
+      previously worked as a core developer on the Nit language for which he implemented
+      parts of the compiler, libraries and tools.
+    github_id: Morriar
+    twitter_id:
+    gravatar_hash: 45235bde1575071487435f6b0c4e44d7
   headius:
     id: headius
     name: Charles Nutter
-    bio: Charles works on JRuby and JVM languages at Red Hat.
+    bio: Charles Oliver Nutter is co-lead of the JRuby project and founder of Headius
+      Enterprises, a new open-source software support business focusing on JRuby and
+      related libraries. Charles loves Ruby and the JVM and has spent the last 20
+      years working to bring the best of both worlds together in JRuby.
     github_id: headius
     twitter_id: headius
     gravatar_hash: f1d37642fdaa1662ff46e4c65731e9ab
+  cristian_planas:
+    id: cristian_planas
+    name: Cristian Planas
+    bio: I am a software engineer currently based in Barcelona. I have been working
+      primarily with Ruby for more than 15 years. After founding my start-up as a
+      solo engineer, I joined Zendesk in their HQ of San Francisco, one of the main
+      companies using Ruby in the world. Performance optimization has been an obsession
+      for me since I founded my first start-up as a solo engineer in 2012. Currently,
+      I occupy the role of Group Tech Lead and Senior Staff Engineer, where I focus
+      on performance.
+    github_id:
+    twitter_id:
+    gravatar_hash: b3ef6958490fcd892b5cb903f3f23953
   rubylangorg:
     id: rubylangorg
     name: CRuby Committers
     bio: ''
-    github_id: 
+    github_id:
     twitter_id: rubylangorg
     gravatar_hash: ce6d997265cefede13ee7e7e2a2cf9b2
   osyoyu:
     id: osyoyu
-    name: Daisuke Aritomo (osyoyu)
-    bio: Computer lover and software engineer at SmartBank, Inc. Interested in performance
-      profiling, and has been recently working on [Pf2](https://github.com/osyoyu/pf2),
-      which is a novel CRuby profiler.
+    name: Daisuke Aritomo
+    bio: Author of the [Pf2 profiler](https://github.com/osyoyu/pf2).
     github_id: osyoyu
     twitter_id: osyoyu
     gravatar_hash: 0a675bac15087f05fbd68411c2a603ce
-  Yuryu:
-    id: Yuryu
-    name: Emma Haruka Iwao
-    bio: Emma is a software engineer at Google, based out of Seattle, WA. Besides
-      software engineering, shes likes games, traveling, and eating delicious food.
-    github_id: yuryu
-    twitter_id: Yuryu
-    gravatar_hash: 8f42a63c15aaa4f3a0372b5d7dc4cd90
-  hsbt:
-    id: hsbt
-    name: Hiroshi SHIBATA
-    bio: OSS programmer, Ruby committer, maintainer of many OSS such as ruby, rubygems,
-      bundler, rake, and administrator of ruby-lang.org. He is working in public relations
-      of technology for ANDPAD Inc. and full time OSS developer for the Ruby programming
-      language.
-    github_id: hsbt
-    twitter_id: hsbt
-    gravatar_hash: eabad423977cfc6873b8f5df62b848a6
+  dafyddcrosby:
+    id: dafyddcrosby
+    name: David T. Crosby
+    bio: David Crosby is a senior production engineer at Meta who works on improving
+      its internal Ruby ecosystem, as well as its open-source Ruby tools like Bookworm,
+      Taste Tester, and Grocery Delivery. David is also an active contributor in the
+      Chef open-source community.
+    github_id: dafyddcrosby
+    twitter_id:
+    gravatar_hash: 96d896f2523064b91d94f3e91bf78a67
+  lyninx:
+    id: lyninx
+    name: Dennis Pacewicz
+    bio: Dennis is a Senior Product Security Engineer at GitHub, working on building
+      security paved paths and improving code security across the open source community.
+      He's based in Toronto, Canada.
+    github_id: lyninx
+    twitter_id:
+    gravatar_hash: 01f6eab2c0632de6ea2f34b0067c119d
+  DmitryPogrebnoy:
+    id: DmitryPogrebnoy
+    name: Dmitry Pogrebnoy
+    bio: "As a seasoned software engineer, I have spent countless hours mastering
+      the intricacies of the Ruby development tools. My deep dive into debugging internals
+      has not only honed my expertise but has also allowed me to contribute to the
+      Ruby and Rails community. \n\nThis talk is a culmination of my professional
+      experience and my personal drive to elevate the standards of Ruby debugging."
+    github_id: DmitryPogrebnoy
+    twitter_id:
+    gravatar_hash: 51ab1f8b002b9d394c8d6e136af82ac2
+  sue445:
+    id: sue445
+    name: Go Sueyoshi
+    bio: "**Gopher** since 1982\n\nI'm an engineer of pixiv.Inc. (AWS, Google Cloud,
+      Kubernetes, GitLab, Sentry, etc etc...)\n\nPretty Cure is my life, and Cure
+      Peace is my wife\U0001F49B"
+    github_id: sue445
+    twitter_id: sue445
+    gravatar_hash: 2b680c5f22146e764e2998dd4595ec93
   makenowjust:
     id: makenowjust
-    name: Hiroya FUJINAMI
+    name: Hiroya Fujinami
     bio: |-
       Ph.D. student at SOKENDAI (NII, National Institute of Informatics). Researcher for information security and formal language. Ruby committer.
       I am the author of Regexp optimization to prevent ReDoS in Ruby 3.2.0.
     github_id: makenowjust
-    twitter_id: 
+    twitter_id:
     gravatar_hash: db1b7e3c6fe6f6a0e9752b2c19bf5473
   hasumikin:
     id: hasumikin
     name: Hitoshi HASUMI
-    bio: |-
-      Creator of PicoRuby & PRK Firmware.
-      Maintainer of IRB.
-      Winner of Fukuoka Ruby Award First Prize in 2020 & 2022, and a Ruby Prize 2021 final nominee.
+    bio: Creator of PicoRuby and PRK Firmware.
     github_id: hasumikin
     twitter_id: hasumikin
     gravatar_hash: d62b18efd2549587e712cebf6403861a
-  KnuX:
-    id: KnuX
-    name: Ivo Anjo
-    bio: 'I love to work on Ruby performance and that''s how I ended up at Datadog
-      where I''m building a new production open-source Ruby profiler for the `ddtrace`
-      gem. I believe in bringing profiling to the masses: profilers should be easy
-      to use and understandable by everyone, and I''m working hard on delivering this
-      vision.'
-    github_id: ivoanjo
-    twitter_id: KnuX
-    gravatar_hash: 5dc208dd24c298889640fb4d1f6e431c
   jeremyevans0:
     id: jeremyevans0
     name: Jeremy Evans
@@ -153,43 +182,50 @@ speakers:
       lead developer of the Sequel database library, the Roda web toolkit, the Rodauth
       authentication framework, and many other Ruby libraries. He is the author of
       "Polished Ruby Programming". He is the maintainer of Ruby ports for the OpenBSD
-      operating system.
+      operating system. He is a Principal Software Engineer at Ubicloud.
     github_id: jeremyevans
     twitter_id: jeremyevans0
     gravatar_hash: f183bcc4176b308c9edabe79299e448f
-  jhawthorn:
-    id: jhawthorn
-    name: John Hawthorn
-    bio: John is a Ruby Committer, a Rails Core member, and a Staff Engineer at GitHub
-      on the Ruby Architecture team. He’s based in Victoria, Canada.
-    github_id: jhawthorn
-    twitter_id: jhawthorn
-    gravatar_hash: 355cd35cc4e716547c8bf3c6b507a1ca
+  joetake:
+    id: joetake
+    name: Joichiro Okoshi
+    bio: |-
+      Joichiro is a senior at the Department of Integrated Information
+      Technology, College of Science and Engineering, Aoyama Gakuin
+      University. He will start the Master Course in the Intelligence and
+      Information Course, Graduate School of Science and Engineering, Aoyama
+      Gakuin University, in April 2025. His main research interest is design
+      and implementation of programming languages.
+    github_id: joetake
+    twitter_id:
+    gravatar_hash: 0f69dda2569a5abd5fc996559d664737
   junk0612:
     id: junk0612
     name: Junichi Kobayashi
-    bio: Working as a Rails programmer at ESM, Inc., with a keen interest in Ruby
-      parsers and their related technologies.
+    bio: |-
+      Working at ESM, Inc., with a keen interest in Ruby parsers and their related technologies.
+      A committer of Lrama parser generator.
     github_id: junk0612
     twitter_id: junk0612
     gravatar_hash: afdb8e40066f7939ff82727bc0c892ce
-  remore:
-    id: remore
-    name: Kay Sawada
-    bio: Kay loves day-to-day engineering. He feels happy at any moment during programming.
-      That's why and how he met Ruby. He is currently working as a senior serverless
-      strategist at Fastly. He also plays the contrabass once in a while.
-    github_id: remore
-    twitter_id: 
-    gravatar_hash: fbe207d1bece86feb799fbc1841ce735
-  KJTsanaktsidis:
-    id: KJTsanaktsidis
-    name: KJ Tsanaktsidis
-    bio: Hi there! I'm a Ruby committer and principal engineer at Zendesk, working
-      on the performance and reliability of our Rails monolith, in Melbourne, Australia.
-    github_id: KJTsanaktsidis
-    twitter_id: KJTsanaktsidis
-    gravatar_hash: 4dea9a58709a16c9a19c8901a2a530cb
+  kaz0505:
+    id: kaz0505
+    name: Kazuaki Tanaka
+    bio: |-
+      Core developer of mruby and mruby/c
+      Associate Professor, Kyushu Institute of Technology
+      Embedded Systems and IoT Researcher
+      In particular, I am actively involved in industrial applications of mruby/c.
+    github_id: kaz0505
+    twitter_id:
+    gravatar_hash: b6f5a25bc0ede34d85d3574b65fe70b9
+  hmsk:
+    id: hmsk
+    name: Kengo Hamasaki
+    bio: A fan of Ruby and Rubyists. Product engineer for [withpersona.com](https://withpersona.com).
+    github_id: hmsk
+    twitter_id: hmsk
+    gravatar_hash: 8358fe546d1b082b163f18a02eec145d
   koic:
     id: koic
     name: Koichi ITO
@@ -204,20 +240,40 @@ speakers:
     id: ko1
     name: Koichi Sasada
     bio: Koichi Sasada is a programmer, mainly developing Ruby interpreter (CRuby/MRI).
-      He received Ph.D (Information Science and Technology) from the University of
+      He received Ph.D. (Information Science and Technology) from the University of
       Tokyo, 2007. Now he is still working on MRI development at STORES, Inc. He is
       also a director of Ruby Association.
     github_id: ko1
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 990397e8b38d6f5f4ae8ff343e8b883a
-  ima1zumi:
-    id: ima1zumi
-    name: Mari Imaizumi
-    bio: Mari Imaizumi is an IRB, Reline committer, and a software engineer at STORES,
-      inc.
-    github_id: ima1zumi
-    twitter_id: ima1zumi
-    gravatar_hash: 74b5a82b8710accc1e6189a19f0b4935
+  maciejmensfeld:
+    id: maciejmensfeld
+    name: Maciej Mensfeld
+    bio: With 16+ years in Ruby, Maciej is a Software Architect, a key contributor
+      to the Karafka ecosystem, and a member of the RubyGems security team. He specializes
+      in building high-performance systems and improving OSS supply chain security.
+      A passionate Rubyist and seasoned gem maintainer, Maciej is dedicated to advancing
+      the Ruby ecosystem and sharing practical insights for creating robust and scalable
+      applications.
+    github_id: mensfeld
+    twitter_id: maciejmensfeld
+    gravatar_hash: c571205817eabfe7ae22de3b74ffe900
+  tric:
+    id: tric
+    name: mame & the judges
+    bio: ''
+    github_id: tric
+    twitter_id:
+    gravatar_hash: e18ba65ac9d718d12645b32099e15c44
+  marcoroth:
+    id: marcoroth
+    name: Marco Roth
+    bio: Marco is a passionate full-stack developer and a dedicated open-source contributor.
+      As a member of the Hotwire and StimulusReflex contributors teams he has open-sourced,
+      maintained, and contributed to several libraries in the Hotwire/Rails ecosystem.
+    github_id: marcoroth
+    twitter_id:
+    gravatar_hash: 181f6cd1105b6202785fbdb147fe874a
   duerst:
     id: duerst
     name: Martin J. Dürst
@@ -229,23 +285,8 @@ speakers:
       his students have contributed to the implementation of Ruby, mostly in the area
       of I18N.
     github_id: duerst
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f52e87b92cafb1e8c6d155076b56ecff
-  qnighy:
-    id: qnighy
-    name: Masaki Hara
-    bio: Software Engineer at Wantedly, Inc., working on improving the company's developer
-      experiences. Fluent in Rust, TypeScript, and Ruby.
-    github_id: qnighy
-    twitter_id: qnighy
-    gravatar_hash: ba655e3712aaabfbca289fe136f85fe4
-  p_ck_:
-    id: p_ck_
-    name: Masataka Kuwabara
-    bio: A maintainer of RBS, a Ruby committer.
-    github_id: pocke
-    twitter_id: p_ck_
-    gravatar_hash: 7f432d4a8aaadcea1ca77ec81a200121
   ohbarye:
     id: ohbarye
     name: Masato Ohba
@@ -254,72 +295,41 @@ speakers:
     github_id: ohbarye
     twitter_id: ohbarye
     gravatar_hash: 0ed400174f90a4bcee05f3455597932f
-  m_seki:
-    id: m_seki
-    name: Masatoshi SEKI
-    bio: Masatoshi Seki is a Ruby committer and the author of several Ruby standard
-      libraries including dRuby, ERB, and Rinda. He’s an expert in object-oriented
-      programming, distributed systems, and eXtreme programming. He has been speaking
-      at RubyKaigi every year since 2006 when the Kaigi first started. He is also
-      Principal Engineer at Canon Medical Systems corp.
-    github_id: seki
-    twitter_id: m_seki
-    gravatar_hash: 40f4d1f2e77078955bd01e9fb4a503ba
-  mullermp:
-    id: mullermp
-    name: Matt Muller
-    bio: Matt Muller is a software engineer and maintainer of AWS SDK for Ruby. You
-      can find him on GitHub as @mullermp.
-    github_id: mullermp
-    twitter_id: 
-    gravatar_hash: 050a145197ec5162f0cf4c2711f47bdc
-  eightbitraptor:
-    id: eightbitraptor
-    name: Matt Valentine-House
-    bio: |-
-      Matt has been writing Ruby since 2007, contributing to the language since 2020, and has been a Ruby core committer since March 2023.
-
-      He works at Shopify in the Ruby Infrastructure team working full time on improving Ruby.
-
-      When he's not scratching his head over a segfault he can be found brewing coffee and building keyboards.
-    github_id: eightbitraptor
-    twitter_id: 
-    gravatar_hash: 43f0363b6c12155c36d0c06043c268fd
+  fetburner:
+    id: fetburner
+    name: Masayuki Mizuno
+    bio: Masayuki Mizuno is a software engineer at Wantedly, Inc. In the university
+      days, he researched the software foundations, especially the formal verification
+      of programming language implementations.
+    github_id: fetburner
+    twitter_id:
+    gravatar_hash: 0a67f7028983c1d9d94250526d5af830
   maximecb:
     id: maximecb
     name: Maxime Chevalier-Boisvert
     bio: Maxime Chevalier-Boisvert obtained a PhD in compiler design at the University
       of Montreal in 2016, where she developed Basic Block Versioning (BBV), a JIT
       compiler architecture optimized for dynamically-typed programming languages.
-      She is currently leading a project at Shopify to build YJIT, a new JIT compiler
-      built inside CRuby.
+      She currently leads a project at Shopify to build and improve YJIT, a new JIT
+      compiler built inside CRuby, and won the Ruby Prize in 2021 for her work on
+      optimizing Ruby’s performance.
     github_id: maximecb
-    twitter_id: 
+    twitter_id:
     gravatar_hash: f1457acc3f8d176db1d28e9f30779ae6
-  m3m0r7:
-    id: m3m0r7
-    name: memory
-    bio: I am a CTO at Liiga, Inc. I enjoy implementing VMs with PHP including JVM
-      and RubyVM. I have some book authors. My hobby is reading binary files.
-    github_id: m3m0r7
-    twitter_id: m3m0r7
-    gravatar_hash: 218473ff7abad0fcd72865da2b23bb5b
-  MikeMcQuaid:
-    id: MikeMcQuaid
-    name: Mike McQuaid
-    bio: Mike McQuaid is the Project Leader and longest running maintainer for the
-      Homebrew package manager for macOS (and Linux). At work, he's the CTO and Cofounder
-      of Workbrew and spent a decade at GitHub, concluding as a principal engineer,
-      working on FOSS stuff. He works from his home in Edinburgh, Scotland where he
-      authored Git in Practice and contributed to a wide array of other open source
-      projects including KDE and the Linux kernel.
-    github_id: MikeMcQuaid
-    twitter_id: MikeMcQuaid
-    gravatar_hash: 215e0166d4d8265395c5d9076da73c70
+  yfractal:
+    id: yfractal
+    name: Mike Yang
+    bio: Senior Developer at a web3 company, improving the observability, scalability,
+      and reliability of Ruby and Go applications. Previously, I was a Senior Developer
+      at DiDi Taxi, where I built an instant messaging system. Passionate about distributed
+      systems and observability.
+    github_id: yfractal
+    twitter_id: yfractal
+    gravatar_hash: c29f3ba1a160925f0d91a1da23ee4603
   coe401_:
     id: coe401_
     name: Misaki Shioi
-    bio: Web application programmer. Rubyist. Member of Asakusa.rb.
+    bio: Rails application developer. Rubyist. Member of Asakusa.rb.
     github_id: shioimm
     twitter_id: coe401_
     gravatar_hash: 5b3338b3676d4f7091a575e584f3a4f4
@@ -330,33 +340,36 @@ speakers:
     github_id: sisshiki1969
     twitter_id: s_isshiki1969
     gravatar_hash: aea43fe34799c7ae03e9793919e39c65
+  naitoh:
+    id: naitoh
+    name: NAITOH Jun
+    bio: "Maintainer of REXML. \nA member of [Red Data Tools](https://red-data-tools.github.io/ja/).\nSoftware
+      Engineer at [MedPeer, Inc.](https://medpeer.co.jp).\nI am the [RBPDF gem](https://rubygems.org/gems/rbpdf)
+      owner of the PDF library used by [Redmine](https://www.redmine.org)."
+    github_id: naitoh
+    twitter_id: naitoh
+    gravatar_hash: 7dd50c456191c49bdfe3dc73a94eddc2
   peterzhu2118:
     id: peterzhu2118
     name: Peter Zhu
-    bio: Peter is a Ruby core committer and Senior Developer at Shopify. He is currently
-      working on improving the performance of Ruby and was a co-author of the Variable
-      Width Allocation project. He is the author of ruby_memcheck, a gem used to find
-      memory leaks in native gems. It has found memory leaks in popular gems such
-      as Nokogiri, protobuf, gRPC, and liquid-c.
+    bio: Peter is a Ruby core committer and Senior Developer at Shopify. He works
+      on improving the performance of Ruby and is currently working on Modular GC
+      and the MMTk integration. He is the co-author of the Variable Width Allocation
+      feature in Ruby, which improves Ruby's performance by optimizing the memory
+      layout. He is also the author of ruby_memcheck, a gem used to find memory leaks
+      in native gems and it has found memory leaks in popular gems such as Nokogiri,
+      protobuf, gRPC, and liquid-c.
     github_id: peterzhu2118
     twitter_id: peterzhu2118
     gravatar_hash: 11b6d3359ac8e679edd1319f5173c8ea
-  sylph01:
-    id: sylph01
+  s01:
+    id: s01
     name: Ryo Kajiwara
     bio: A wild (freelance) programmer. I can do cryptography and authentication/authorization
       a little.
     github_id: sylph01
-    twitter_id: 
+    twitter_id: s01
     gravatar_hash: 3cffaccb703ff33ea0028f9f0caa8e4d
-  gedorinku:
-    id: gedorinku
-    name: Ryota Egusa
-    bio: Software engineer at Wantedly, Inc., focusing on enhancing internal quality
-      of software.
-    github_id: gedorinku
-    twitter_id: gedorinku
-    gravatar_hash: '07820c259d742d974a5c74c991423e45'
   segiddins:
     id: segiddins
     name: Samuel Giddins
@@ -365,91 +378,127 @@ speakers:
       never sleep). He's been working on Ruby tooling for the past decade, and has
       shipped hundreds of bugs across RubyGems & Bundler.
     github_id: segiddins
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 4d6be90af74894fd132fb06dacec04d7
   tagomoris:
     id: tagomoris
     name: Satoshi Tagomori
     bio: |-
-      OSS developer/maintainer: Fluentd, Norikra, MessagePack-Ruby, Woothee and many others mainly about Web services, data collecting and distributed/streaming data processing.
-      Living in Tokyo.
+      OSS developer/maintainer, technical consultant, and independent Web/App service developer.
+      The daytime job is at Sakura Internet.
     github_id: tagomoris
     twitter_id: tagomoris
     gravatar_hash: 002525eada5741b7954ce22c1a066d32
-  ledsun:
-    id: ledsun
-    name: Shigeru Nakajima
-    bio: I am a programmer with 20 years of experience. I have used my experience
-      working with JavaScript and Ruby to implement three browser-oriented applications
-      using ruby.wasm. Six pull requests I wrote were merged into ruby.wasm. I gave
-      a presentation on ruby.wasm at RubyKaigi 2023.
-    github_id: ledsun
-    twitter_id: ledsun
-    gravatar_hash: 4f8c3a1aedaf9aafd6c74ab077d9ad18
-  kokuyouwind:
-    id: kokuyouwind
-    name: Shunsuke Mori (kokuyou)
-    bio: "Ruby on Rails engineer. \nHe works at Leaner Technologies inc. as a member
-      of the technical infrastructure team and surveys LLMs as a part of his technical
-      research.\nHe is also interested in type systems and is developing RBS Goose
-      for RBS type inference."
-    github_id: kokuyouwind
-    twitter_id: kokuyouwind
-    gravatar_hash: 362b5844113addc866c920d8f6d5e6f1
   soutaro:
     id: soutaro
     name: Soutaro Matsumoto
     bio: Soutaro is one of the Ruby core committers, leading the development of RBS,  and
-      developing Steep, a static type checker built on the top of RBS.
+      developing Steep, a static type checker built on the top of RBS. He works at
+      Timee as a software engineer dedicated to the contribution to Ruby.
     github_id: soutaro
     twitter_id: soutaro
     gravatar_hash: 1fab9d01b25e99522f3dfd01e3d4cb51
+  fractaledmind:
+    id: fractaledmind
+    name: Stephen Margheim
+    bio: Hey, I’m Stephen. I'm an American expat living in Berlin with my wife and
+      two dogs. I am a regular contributor to Rails and the sqlite3-ruby gem as well
+      as the maintainer of a handful of gems aimed at making Ruby and Rails the absolute
+      best platforms in the world to run SQLite projects.
+    github_id: fractaledmind
+    twitter_id:
+    gravatar_hash: 684ecf738f6297edbf0baf1d8f9a73d3
+  ktou:
+    id: ktou
+    name: Sutou Kouhei
+    bio: He is a free software programmer and the president of ClearCode Inc. He is
+      maintaining many extension libraries.
+    github_id: kou
+    twitter_id: ktou
+    gravatar_hash: 2d9386b1504e581be390af978e05a8b9
   k0kubun:
     id: k0kubun
     name: Takashi Kokubun
-    bio: Takashi Kokubun is a Staff Developer at Shopify, based in the San Francisco
-      Bay Area. As a Ruby committer, he has worked on JIT compilers for Ruby since
-      2017. He optimizes YJIT at work and RJIT in his spare time.
+    bio: Takashi Kokubun is a Ruby committer and a member of Shopify's YJIT team,
+      based in the San Francisco Bay Area. He has been working on JIT compilers for
+      Ruby since 2017.
     github_id: k0kubun
     twitter_id: k0kubun
     gravatar_hash: '08d5432a5bc31e6d9edec87b94cb1db1'
+  tk0miya:
+    id: tk0miya
+    name: Takeshi KOMIYA
+    bio: Ruby types hacker. One of the maintainers of rbs_rails and the type generators
+      for Rails application. CTO of Time Intermedia Inc.
+    github_id: tk0miya
+    twitter_id:
+    gravatar_hash: dd4be1ffd9da4cfb164fa2948df1f47f
+  sinsoku_listy:
+    id: sinsoku_listy
+    name: Takumi Shotoku
+    bio: I work as a software engineer in Tokyo.
+    github_id: sinsoku
+    twitter_id: sinsoku_listy
+    gravatar_hash: ecad9d801d79f6c6e5df93094690685e
+  tompng:
+    id: tompng
+    name: tomoya ishida
+    bio: |-
+      TRICK 2022 Gold Medalist.
+      Ruby committer.
+      Maintainer of IRB, Reline, ReplTypeCompletor.
+      CTO at codeTakt Inc.
+    github_id: tompng
+    twitter_id: tompng
+    gravatar_hash: 3f1fb8caddbb5cf8958c8b82a7bf84c6
   udzura:
     id: udzura
     name: Uchio KONDO
-    bio: |-
-      A Rubyist from Fukuoka. An Infrastructure Engineer at Mirrativ, Inc.(a live-streaming platform in Japan).
-      Loves Ruby, mruby, Rust, eBPF, WASM, LLVM, MP4 Media File Format and other binaries. A speaker of Several RubyKaigis, a RubyKaigi 2019 Local Organizer, and a co-translator of o'reilly's "Learning eBPF" (Japanese edition).
+    bio: Rubyist, Rustacean wannabe, and system programming novice. Working as a product
+      engineer at SmartHR, Inc. Writer of "mruby system programming (Japanese)" and
+      one of translators on the Japanese edition of "Learning eBPF." Organizer of
+      Fukuoka.rb "2nd season." RubyKaigi speaker since 2016, RubyKaigi local organizer
+      in 2019 (@Fukuoka).
     github_id: udzura
     twitter_id: udzura
     gravatar_hash: 2cf373725ded741824c50fd571eda6e1
   vinistock:
     id: vinistock
     name: Vinicius Stock
-    bio: Vinicius Stock is a Senior Software Developer working on the Ruby developer
-      experience team at Shopify. Vini started his journey writing Ruby on Rails applications
-      in 2015 and now dedicates his time to improve developer tools, language servers,
-      gradual typing and debuggers in the Ruby ecosystem.
+    bio: Vinicius Stock is a Staff developer working on the Ruby DX team at Shopify.
+      Creator of the Ruby LSP, Vini started by writing Rails applications in 2015
+      and is now dedicated full time to improving developer tools, language servers,
+      gradual typing and debuggers for Ruby.
     github_id: vinistock
     twitter_id: vinistock
     gravatar_hash: 63a02648b33347d954c02cbfa9da4c5d
-  palkan_tula:
-    id: palkan_tula
-    name: Vladimir Dementyev
-    bio: Vladimir is a mathematician who found his happiness in programming Ruby,
-      contributing to open source and being an Evil Martian. Author of AnyCable and
-      award-winning Ruby Next.
-    github_id: palkan
-    twitter_id: palkan_tula
-    gravatar_hash: 52cc8a838bf44a589d2572833b2dd1b9
+  youchan:
+    id: youchan
+    name: Yoh Osaki
+    bio: |-
+      Software engineer at ANDPAD inc.
+      Author of gems: drb-websocket, opal-drb, wasm-drb
+      Member of Asakusa.rb, Chidoriashi.rb
+    github_id: youchan
+    twitter_id: youchan
+    gravatar_hash: b54abc5e7463fe6470c379e97e3f2477
   ydah_:
     id: ydah_
     name: Yudai Takada
-    bio: A contributor for [ruby/lrama](https://github.com/ruby/lrama). Co-Founder
-      of [Kyobashi.rb](https://kyobashirb.connpass.com/). A Software engineer at ANDPAD,
-      Inc.
+    bio: Ruby commiter. The maintainer of [Lrama](https://github.com/ruby/lrama) LALR
+      parser generator. Co-Founder of [Kyobashi.rb](https://kyobashirb.connpass.com/).
     github_id: ydah
     twitter_id: ydah_
     gravatar_hash: 9de693b82eb0750d11d715cc9a447965
+  Y_uuu:
+    id: Y_uuu
+    name: Yuhei Okazaki
+    bio: |-
+      IoT Engineer at [Fusic Co., Ltd.](https://fusic.co.jp/) , Mentor at [Fjord Boot Camp](https://bootcamp.fjord.jp/welcome) , living in Fukuoka, Japan. RubyKaigi 2019 Local Organizer.
+      My hobby is playing with ESP32.
+    github_id: yuuu
+    twitter_id: Y_uuu
+    gravatar_hash: 9ec05c5a1b9b0ce9cd53ec3a63838b9a
   spikeolaf:
     id: spikeolaf
     name: Yuichiro Kaneko
@@ -458,31 +507,27 @@ speakers:
     github_id: yui-knk
     twitter_id: spikeolaf
     gravatar_hash: b3ba3ccedfbf4d605f00bafd1a732529
-  yujiyokoo:
-    id: yujiyokoo
-    name: Yuji Yokoo
-    bio: Yuji is a software developer who has lived for a long time in Adelaide, Australia
-      but is now based in Tokyo. He used to be a Windows desktop application developer
-      until he discovered Ruby. Besides programming, he enjoys video games and Brazilian
-      Jiu Jitsu.
-    github_id: yujiyokoo
-    twitter_id: yujiyokoo
-    gravatar_hash: b87628a711b78598dcd409da186cd633
   mametter:
     id: mametter
     name: Yusuke Endoh
     bio: '''A full-time MRI committer at STORES, Inc.  He has been interested in testing,
       analyzing, abusing of Ruby.  He is an advocate of "transcendental programming"
-      that creates a useless program like this bio. (`_`)''.yield_self{|s|eval(t=%q(puts"''#{s.sub(?_,?_+?_)}''.yield_self{|s|eval(t=%q(#{t}))}"))}'
+      that creates a useless program like this bio. (`_`)''.yield_self{|s|eval(t=%q(puts"''#{s.sub(?\_,?\_+?\_)}''.yield_self{|s|eval(t=%q(#{t}))}"))}'
     github_id: mame
     twitter_id: mametter
     gravatar_hash: e73159002200b33d51b7a6a312f2440e
   kateinoigakukun:
     id: kateinoigakukun
     name: Yuta Saito
-    bio: |-
-      A newbie committer to Ruby, Swift, and LLVM, especially working on WebAssembly support for the languages.
-      Also a graduate CS student at Waseda University.
+    bio: A committer to Ruby, Swift, and LLVM, working on WebAssembly support for
+      the languages.
     github_id: kateinoigakukun
-    twitter_id: 
+    twitter_id:
     gravatar_hash: 7a4968fbcd56e81f95a4f3c186141b52
+  asonas:
+    id: asonas
+    name: Yuya Fujiwara
+    bio: I am Software engineer.
+    github_id: asonas
+    twitter_id: asonas
+    gravatar_hash: 1ac0db1ea05c74a21a07549c285b0b0d
