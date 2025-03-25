@@ -34,6 +34,7 @@ class PlansController < ApplicationController
     create_and_set_user unless @user
     @plan = @user.plans.where(event: @event).create!(plan_params)
     add_plan(params[:plan][:add_schedule_id]) if params[:plan][:add_schedule_id]
+    session[:breakout_turbo] = true
     redirect_to event_path(@plan.event.name)
   end
 
