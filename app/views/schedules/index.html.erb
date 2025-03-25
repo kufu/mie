@@ -16,7 +16,9 @@
     <%= turbo_frame_tag @plan do %>
       <div class="flex justify-between items-center mb-2">
         <h2 class="text-2xl font-bold">Your Schedule</h2>
-        <%= render "components/button", title: "Share", size: "s", href: event_plan_path(@plan, event_name: @event.name) %>
+        <% if @plan.persisted? %>
+          <%= render "components/button", title: "Share", size: "s", href: event_plan_path(@plan, event_name: @event.name) %>
+        <% end %>
       </div>
 
       <% unless @plan.new_record? %>
