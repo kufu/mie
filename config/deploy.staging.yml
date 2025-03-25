@@ -12,3 +12,13 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
+
+accessories:
+  litestream:
+    image: litestream/litestream:latest
+    host: mie-staging-vm.asia-northeast1-b.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+    cmd: "replicate"
+    files:
+      - config/litestream.staging.yml:/etc/litestream.yml
+    volumes:
+      - "/volume:/data"
