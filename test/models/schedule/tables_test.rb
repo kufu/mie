@@ -49,6 +49,32 @@ class Schedule
       assert_match(%r{schedules/#{events(:kaigi).name}-\d{20}}, @tables.cache_key)
     end
 
+    test '#expects with same schedule array, it returns same schedules' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      tables = Schedule::Tables.new(schedules)
+      new_tables = tables.expect(schedules)
+
+      assert_equal tables, new_tables
+    end
+
+    test '#expects with empty array, it returns empty schedules' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      tables = Schedule::Tables.new(schedules)
+      new_tables = tables.expect([])
+
+      assert new_tables[new_tables.days.first].rows.all? { _1.schedules.empty? }
+    end
+
+    test '#expects returns new row object that does not affect the original row' do
+      schedules = [schedules(:one), schedules(:one_crossover)]
+      tables = Schedule::Tables.new(schedules)
+      new_tables = tables.expect(schedules)
+      inner_map = new_tables.instance_variable_get(:@map)
+      inner_map.delete(inner_map.keys.first)
+
+      assert_not_equal tables.tables.size, new_tables.tables.size
+    end
+
     test 'when schedule record updated, #cache_key version string changes' do
       old_key = @tables.cache_key
 

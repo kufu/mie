@@ -23,6 +23,12 @@ class Schedule
       track_list == other.track_list && rows == other.rows && day == other.day
     end
 
+    def expect(schedules)
+      dup.tap do |table|
+        table.instance_variable_set(:@rows, rows.map { _1.expect(schedules) })
+      end
+    end
+
     def updated_at
       @updated_at ||= rows.map(&:updated_at).max
     end

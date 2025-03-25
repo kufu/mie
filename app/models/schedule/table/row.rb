@@ -14,6 +14,8 @@ class Schedule
         @schedules = schedules
         @tracks = schedules.to_h { [_1.track.name, _1] }
         @sort_key = schedules[0].start_at
+
+        @date = schedules[0].start_at.strftime('%Y%m%d')
       end
 
       def ==(other)
@@ -25,9 +27,15 @@ class Schedule
           sort_key == other.sort_key
       end
 
+      def expect(schedules)
+        dup.tap do |obj|
+          obj.instance_variable_set(:@schedules, self.schedules.select { schedules.include?(_1) })
+          obj.instance_variable_set(:@tracks, obj.schedules.to_h { [_1.track.name, _1] })
+        end
+      end
+
       def turbo_frames_id
-        date = schedules[0].start_at.strftime('%Y%m%d')
-        [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
+        [@date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end
 
       def updated_at

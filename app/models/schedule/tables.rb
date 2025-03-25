@@ -32,6 +32,13 @@ class Schedule
       @map.values
     end
 
+    def expect(schedules)
+      dup.tap do |obj|
+        obj.instance_variable_set(:@schedules, schedules)
+        obj.instance_variable_set(:@map, @map.transform_values { |v| v.expect(schedules) })
+      end
+    end
+
     def updated_at
       @updated_at ||= @schedules.map(&:updated_at).max
     end

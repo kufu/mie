@@ -6,11 +6,13 @@ class Schedule
   class Table
     class RowTest < ActiveSupport::TestCase
       test '#== can compare two rows equality' do
-        assert Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first == Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first
+        assert_equal Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first,
+                     Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first
       end
 
       test '#== can compare two rows not equality' do
-        assert Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first != Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.second
+        assert_not_equal Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.first,
+                         Schedule::Tables.from_event(events(:kaigi)).tables.first.rows.second
       end
 
       test 'each rows mapping correct track infomations with fixture' do
@@ -64,6 +66,51 @@ class Schedule
         day1 = tables['2024-03-18']
 
         assert_equal feature_time, day1.rows[0].updated_at
+      end
+
+      test '#expects with same schedule array, it returns same schedules' do
+        schedules = [schedules(:one), schedules(:one_crossover)]
+        row = Schedule::Table::Row.new(schedules)
+        new_row = row.expect(schedules)
+
+        assert_equal row, new_row
+      end
+
+      test '#expects with sub array, it returns only sub arrays schedules' do
+        schedules = [schedules(:one), schedules(:one_crossover)]
+        row = Schedule::Table::Row.new(schedules)
+        new_row = row.expect([schedules(:one)])
+
+        assert_equal 1, new_row.schedules.size
+        assert_equal [schedules(:one)], new_row.schedules
+      end
+
+      test '#expects ignores schedule that is not contain original array' do
+        schedules = [schedules(:one), schedules(:one_crossover)]
+        row = Schedule::Table::Row.new(schedules)
+        new_row = row.expect([schedules(:one), schedules(:two)])
+
+        assert_equal 1, new_row.schedules.size
+        assert_equal [schedules(:one)], new_row.schedules
+      end
+
+      test '#expects with empty array, it returns empty schedules' do
+        schedules = [schedules(:one), schedules(:one_crossover)]
+        row = Schedule::Table::Row.new(schedules)
+        new_row = row.expect([])
+
+        assert new_row.schedules.empty?
+      end
+
+      test '#expects returns new row object that does not affect the original row' do
+        schedules = [schedules(:one), schedules(:one_crossover)]
+        row = Schedule::Table::Row.new(schedules)
+        new_row = row.expect(schedules)
+        new_row.schedules.pop
+        new_row.tracks.delete(new_row.tracks.keys.first)
+
+        assert_not_equal row.schedules.size, new_row.schedules.size
+        assert_not_equal row.tracks.keys.size, new_row.tracks.keys.size
       end
     end
   end
