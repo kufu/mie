@@ -10,18 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_023156) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_095231) do
   create_table "event_themes", id: :string, force: :cascade do |t|
     t.string "event_id", null: false
     t.string "main_color", default: "#0B374D", null: false
-    t.string "sub_color", default: "#EBE0CE", null: false
-    t.string "accent_color", default: "#D7D165", null: false
     t.string "overview", default: "", null: false
     t.string "site_label", default: "", null: false
     t.string "site_url", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "text_color", default: "#23221F", null: false
   end
 
   create_table "event_trophies", id: :string, force: :cascade do |t|
