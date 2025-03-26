@@ -6,7 +6,7 @@ image: <%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>/mie-production/mie
 
 # Deploy to these servers.
 servers:
-  - mie-production-vm.asia-northeast1-b.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+  - mie-production-vm.asia-northeast1-a.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
 
 # Credentials for your image host.
 registry:
