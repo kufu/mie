@@ -18,9 +18,9 @@ module Admin
     end
 
     def create
-      @trophy = Trophy.build(trophy_params)
+      @trophy = Trophy.create(trophy_params)
 
-      if @trophy.save
+      if @trophy.persisted?
         redirect_to admin_trophies_path
       else
         pp @trophy.errors
@@ -51,7 +51,7 @@ module Admin
     end
 
     def trophy_params
-      params.expect(trophy: %i[name description icon_url rarity order special])
+      params.expect(trophy: %i[name description rarity order special icon])
     end
   end
 end
