@@ -5,14 +5,15 @@
 <% disabled ||= false %>
 <% data ||= nil %>
 <% danger ||= false %>
-<% data ||= nil %>
+<% text_size ||= "text-base" %>
 <% button_classes = [
   "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap",
   (size == "s" ? "px-2 py-1" : "px-3 py-2"),
   classes
 ].join(" ") %>
 <% text_classes = [
-  "text-base font-bold",
+  text_size,
+  "font-bold",
   (disabled ? "text-[#CDCFD5]" : "text-[#131416]"),
   (danger ? "text-red-600" : nil)
 ].join(" ") %>

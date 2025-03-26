@@ -32,7 +32,8 @@
       <%= render 'components/button',
                  title: I18n.t('card.add'),
                  icon: render("components/icons/add"),
-                 data: { action: "click->dialog#open" }
+                 data: { action: "click->dialog#open" },
+                 text_size: 'text-sm'
       %>
       <dialog id="<%= terms_of_service_dialog_id %>">
         <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
@@ -56,7 +57,8 @@
                  title: I18n.t('card.remove'),
                  icon: render("components/icons/close"),
                  data: { turbo_frame: row.turbo_frames_id },
-                 form_helper: form
+                 form_helper: form,
+                 text_size: 'text-sm'
       %>
     <% end %>
   <% else %>
@@ -67,7 +69,8 @@
                  title: inactive ? I18n.t('card.inactive') : I18n.t('card.add'),
                  icon: render("components/icons/add"),
                  data: { turbo_frame: row.turbo_frames_id },
-                 form_helper: form
+                 form_helper: form,
+                 text_size: 'text-sm'
       %>
     <% end %>
   <% end %>
