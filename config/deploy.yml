@@ -37,3 +37,12 @@ ssh:
 volumes:
   - "/volume:/rails/storage"
 
+accessories:
+  litestream:
+    image: litestream/litestream:latest
+    host: mie-production-vm.asia-northeast1-a.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+    cmd: "replicate"
+    files:
+      - config/litestream.production.yml:/etc/litestream.yml
+    volumes:
+      - "/volume:/data"
