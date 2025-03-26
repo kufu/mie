@@ -66,3 +66,5 @@ gem 'activerecord-session_store', '~> 2.1'
 gem 'mission_control-jobs', '~> 1.0'
 
 gem 'bootsnap', require: false
+
+gem 'active_storage_db', '~> 1.4'
