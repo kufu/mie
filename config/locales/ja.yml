@@ -35,6 +35,8 @@ ja:
       start_end_time: "開始/終了 (%{zone})"
       language: "言語"
       description: "トークの詳細"
+      friends: "友達"
+      team: "チーム (%{team_name})"
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"

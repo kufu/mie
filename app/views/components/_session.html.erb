@@ -19,8 +19,18 @@
                    row: row,
                    schedule: session,
                    attendees: @user&.profile&.friend_profiles&.select { |profile| @friends_schedules_map[profile.id].include?(session.id) } || [],
-                   scheduled: scheduled
+                   scheduled: scheduled 
         %>
+      </div>
+    <% end %>
+    <% 
+      # すべてのスケジュールがscheduledでないかどうかをチェック
+      all_unscheduled = row.schedules.none? { |s| s == scheduled }
+    %>
+    
+    <% if all_unscheduled %>
+      <div class="w-[288px]">
+        <%= render 'components/session_card_blank' %>
       </div>
     <% end %>
   </div>
