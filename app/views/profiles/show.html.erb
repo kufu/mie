@@ -56,7 +56,7 @@
               <div data-controller="dialog" data-dialog-element-id-value="<%= trophy.id %>-dialog">
                 <img
                   data-action="click->dialog#open"
-                  src="<%= image_url trophy.icon_url %>"
+                  src="<%= image_url url_for(trophy.icon) %>"
                   class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>"
                   />
                 <dialog id="<%= trophy.id %>-dialog" class="dialog">

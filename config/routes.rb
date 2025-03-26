@@ -45,6 +45,5 @@ Rails.application.routes.draw do
   resolve('PlanSchedule') { %i[event item] }
 
   mount MissionControl::Jobs::Engine, at: "/admin/jobs"
-
-  get '*path', controller: 'application', action: 'not_found'
+  mount ActiveStorageDB::Engine => '/active_storage_db'
 end

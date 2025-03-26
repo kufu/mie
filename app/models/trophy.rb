@@ -10,11 +10,12 @@ class Trophy < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :icon_url, presence: true
   validates :rarity, presence: true
   validates :special, inclusion: { in: [true, false] }
 
   enum :rarity, { common: 0, uncommon: 1, rare: 2, mythic_rare: 3 }, default: :common
 
   scope :global_trophies, -> { all.left_outer_joins(:event_trophy).where(event_trophies: { event: nil }) }
+
+  has_one_attached :icon
 end
