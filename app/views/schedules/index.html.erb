@@ -36,7 +36,7 @@
             <p class="text-base"><%= @plan.description %></p>
             <dialog data-dialog-target="dialog">
               <%= render 'components/dialog', title: I18n.t("description.form_title"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
-                <%= render 'components/text_field', form_helper: f, attribute: :description %>
+                <%= render 'components/textarea', form_helper: f, attribute: :description, rows: 5 %>
               <% end %>
             </dialog>
           <% end %>
