@@ -14,4 +14,13 @@ class Schedule < ApplicationRecord
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, length: { in: 0..1024 }
   validates :language, presence: true
+
+  def language_text
+    case language
+    when 'en' then 'English'
+    when 'ja' then 'Japanese'
+    when 'en & ja' then 'English & Japanese'
+    else language
+    end
+  end
 end
