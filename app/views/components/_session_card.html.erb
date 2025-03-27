@@ -1,11 +1,19 @@
 <div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[#5E626E]' if scheduled == schedule %>">
   <%# スケジュール情報の展開 %>
   <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
-  <a href="<%#= FIXME %>" class="text-lg font-semibold text-accent underline underline-offset-4 block h-[56px] overflow-hidden">
-    <span class="line-clamp-2">
-      <%= schedule.title %>
-    </span>
-  </a>
+
+  <% common_classes = "text-lg font-semibold text-accent block h-[56px] overflow-hidden" %>
+  <% tag_name = schedule.speakers.first.present? ? :a : :p %>
+  <% tag_options = {
+    class: [common_classes, schedule.speakers.first.present? ? "underline underline-offset-4" : nil].compact,
+    href: schedule.speakers.first.present? ? "https://rubykaigi.org/2025/presentations/#{schedule.speakers.first.handle_without_at}" : nil,
+    target: schedule.speakers.first.present? ? "_blank" : nil
+  }.compact %>
+
+  <%= content_tag(tag_name, **tag_options) do %>
+    <span class="line-clamp-2"><%= schedule.title %></span>
+  <% end %>
+
   <%# 登壇者情報 %>
   <div class="flex flex-col">
     <% schedule.speakers.each do |speaker| %>
