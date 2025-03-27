@@ -67,6 +67,7 @@
       <%= form.hidden_field :schedule_id, value: schedule.id %>
       <%= render 'components/button',
                  title: inactive ? I18n.t('card.inactive') : I18n.t('card.add'),
+                 disabled: inactive,
                  icon: render("components/icons/add"),
                  data: { turbo_frame: row.turbo_frames_id },
                  form_helper: form,
