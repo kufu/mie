@@ -7,14 +7,14 @@
 <% danger ||= false %>
 <% text_size ||= "text-base" %>
 <% button_classes = [
-  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap",
+  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[#FCFCFD] rounded-lg whitespace-nowrap",
   (size == "s" ? "px-2 py-1" : "px-3 py-2"),
+  (disabled ? "border-[#E3E5E8] text-[#CDCFD5]" : "border-[#5E626E] text-[#131416]"),
   classes
 ].join(" ") %>
 <% text_classes = [
   text_size,
   "font-bold",
-  (disabled ? "text-[#CDCFD5]" : "text-[#131416]"),
   (danger ? "text-red-600" : nil)
 ].join(" ") %>
 <% form_helper ||= nil %>
