@@ -1,4 +1,4 @@
-<div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2">
+<div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[#5E626E]' if scheduled == schedule %>">
   <%# スケジュール情報の展開 %>
   <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
   <a href="<%#= FIXME %>" class="text-lg font-semibold text-accent underline underline-offset-4 block h-[56px] overflow-hidden">
@@ -67,6 +67,7 @@
       <%= form.hidden_field :schedule_id, value: schedule.id %>
       <%= render 'components/button',
                  title: inactive ? I18n.t('card.inactive') : I18n.t('card.add'),
+                 disabled: inactive,
                  icon: render("components/icons/add"),
                  data: { turbo_frame: row.turbo_frames_id },
                  form_helper: form,

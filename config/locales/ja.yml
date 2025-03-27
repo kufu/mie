@@ -22,10 +22,10 @@ ja:
     no_plans: "視聴予定のトークを登録しましょう！"
     no_plans_description: "トーク一覧から予定を追加しよう"
   card:
-    add: "スケジュールに追加する"
-    added: "スケジュールに追加されています"
-    remove: "スケジュールから削除します"
-    inactive: "同じ時間のスケジュールが登録されています"
+    add: "スケジュールに追加"
+    added: "スケジュールに追加済み"
+    remove: "スケジュールから削除"
+    inactive: "スケジュールに追加"
     show_detail: "詳細を表示"
     detail:
       title: "トークの詳細"
@@ -93,12 +93,12 @@ ja:
     plan_title: "視聴予定"
 
   teams:
-    name: 'チーム名'
-    settings: 'チーム設定'
+    name: "チーム名"
+    settings: "チーム設定"
     tabs:
-      general: '一般'
-      members: 'メンバー'
-    about: 'チーム機能について'
+      general: "一般"
+      members: "メンバー"
+    about: "チーム機能について"
     features:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
       - "ユーザーは1つのチームにしか所属することができません"
