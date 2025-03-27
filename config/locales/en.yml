@@ -56,7 +56,7 @@ en:
     add: "Add to my schedule"
     added: "Added to my schedule"
     remove: "Remove from my schedule"
-    inactive: "Another track selected"
+    inactive: "Add to my schedule"
     show_detail: "Show detail"
     detail:
       title: "The details"
@@ -87,7 +87,7 @@ en:
   dialog:
     edit_title: "Edit the title"
     edit_name: "Edit the name"
-    edit_memo: "Edit a note for \"%{title}\""
+    edit_memo: 'Edit a note for "%{title}"'
     terms_of_service: "Terms of service"
     input_password: "Input password"
     manage_members: Members
@@ -136,12 +136,12 @@ en:
     member_exists: "User %{user} is already a member of this team."
 
   teams:
-    name: 'Team name'
-    settings: 'Team settings'
+    name: "Team name"
+    settings: "Team settings"
     tabs:
-      general: 'General'
-      members: 'Members'
-    about: 'About team feature'
+      general: "General"
+      members: "Members"
+    about: "About team feature"
     features:
       - "List all members plan in one page"
       - "User can join to only one team"
