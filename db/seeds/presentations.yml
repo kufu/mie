@@ -336,6 +336,7 @@ lyninx:
     and the internal research around managing secrets in our Ruby apps that followed. '
   speakers:
   - id: lyninx
+  - id: Creastery
 naitoh:
   title: Improvement of REXML and speed up using StringScanner
   type: presentation
@@ -740,7 +741,7 @@ ohbarye:
 
     What if the world were like this? Library authors would only need to define conversion rules for deprecated methods. Client developers would get patches that they could apply immediately to resolve deprecations by simply running their existing programs. In this talk, I will show how my own tool, Deprewriter make this possible. I'll introduce how to analyze deprecated method calls at runtime and suggests code transformations with Ruby's metaprogramming capabilities.
 
-    Through this presentation, I'll explore how Ruby's flexibility can be leveraged to create tools that make deprecation handling more systematic and developer-friendly, potentially paving the way for better
+    Through this presentation, I'll explore how Ruby's flexibility can be leveraged to create tools that make deprecation handling more systematic and developer-friendly.
   speakers:
   - id: ohbarye
 yukihiro_matz:
