@@ -1,6 +1,7 @@
 <% if false %>
 必要なパラメータ:
-なし
+- form_helper: フォームヘルパーオブジェクト（form_withなどから渡される）
+- attribute: フォームのフィールド名
 
 オプションパラメータ:
 - classes: 追加のCSSクラス
@@ -13,14 +14,20 @@
 <% placeholder ||= "" %>
 <% id ||= nil %>
 <% rows ||= 3 %>
+<% form_helper ||= nil %>
+<% attribute ||= nil %>
 <% textarea_classes = [
   "border border-[var(--textColor)] rounded-md px-3 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-full resize-y",
   classes
 ].join(" ") %>
 
-<textarea
-  class="<%= textarea_classes %>"
-  placeholder="<%= placeholder %>"
-  rows="<%= rows %>"
-  <%= "id=#{id}" if id.present? %>
-></textarea>
+<% if form_helper %>
+  <%= form_helper.text_area attribute, class: textarea_classes, placeholder: placeholder, id: id, rows: rows %>
+<% else %>
+  <textarea
+    class="<%= textarea_classes %>"
+    placeholder="<%= placeholder %>"
+    rows="<%= rows %>"
+    <%= "id=#{id}" if id.present? %>
+  ></textarea>
+<% end %>
