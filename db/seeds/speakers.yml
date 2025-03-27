@@ -472,6 +472,15 @@ speakers:
     github_id: vinistock
     twitter_id: vinistock
     gravatar_hash: 63a02648b33347d954c02cbfa9da4c5d
+  Creastery:
+    id: Creastery
+    name: Wei Lin Ngo
+    bio: Wei Lin is a Lead Offensive Security Engineer at Praetorian focusing on product
+      and application security. He's previously a Senior Web Security Researcher at
+      STAR Labs.
+    github_id:
+    twitter_id: Creastery
+    gravatar_hash: 3c9ce99665dca738fbb1b9adbfcea683
   youchan:
     id: youchan
     name: Yoh Osaki
