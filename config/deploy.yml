@@ -32,6 +32,13 @@ env:
 ssh:
   proxy_command: sh ./.kamal/scripts/gcp-start-iap-tunnel-ssh-proxy-magic.sh gce_instance=%h sshuser=root
 
+# Utilities
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
 # Use a persistent storage volume.
 #
 volumes:
