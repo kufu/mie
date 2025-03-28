@@ -18,20 +18,20 @@
       </div>
     </div>
 
-    <%= turbo_frame_tag @plan do %>
-      <div data-controller="share"
-           data-share-title-value="<%= @plan.title %>"
-           data-share-text-value="<%= @plan.description %>"
-           data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
-           class="flex justify-between items-center mb-2"
-      >
-        <h2 class="text-2xl font-bold">Your Schedule</h2>
-        <% if @plan.persisted? %>
-          <%= render "components/button", title: I18n.t('button.share'), size: "s", data: { action: 'click->share#click' } %>
-        <% end %>
-      </div>
+    <% unless @plan.new_record? %>
+      <%= turbo_frame_tag @plan do %>
+        <div data-controller="share"
+             data-share-title-value="<%= @plan.title %>"
+             data-share-text-value="<%= @plan.description %>"
+             data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
+             class="flex justify-between items-center mb-2"
+        >
+          <h2 class="text-2xl font-bold">Your Schedule</h2>
+          <% if @plan.persisted? %>
+            <%= render "components/button", title: I18n.t('button.share'), size: "s", data: { action: 'click->share#click' } %>
+          <% end %>
+        </div>
 
-      <% unless @plan.new_record? %>
         <div data-controller="dialog" class="bg-white rounded-lg p-4 mb-7">
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
