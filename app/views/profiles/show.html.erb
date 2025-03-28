@@ -13,7 +13,7 @@
       <%= turbo_frame_tag @profile do %>
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-x-2">
-            <img src="<%= @profile.avatar_url %>" class="w-16 h-16 rounded-full object-cover">
+            <img src="<%= @profile.avatar_url %>" class="w-16 h-16 rounded-full border-2 border-[#CECFD5]">
             <h2 class="text-2xl truncate max-w-[calc(100%-2rem)]"><%= @profile.name %></h2>
           </div>
           <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
