@@ -35,17 +35,10 @@
     </span>
   <% end %>
 <% else %>
-  <button
-    type="button"
-    class="<%= button_classes %>"
-    <%= "disabled" if disabled %>
-    <% data&.keys&.each do |k| %>
-      <%= "data-#{k}=#{data[k]}" %>
-    <% end %>
-  >
+  <%= tag.button class: button_classes, disabled: disabled, data: data do %>
     <%= raw icon %>
     <span class="<%= text_classes %>">
-     <%= title %>
+      <%= title %>
     </span>
-  </button>
+  <% end %>
 <% end %>
