@@ -43,6 +43,7 @@
                  title: I18n.t('card.add'),
                  icon: render("components/icons/add"),
                  data: { action: "click->dialog#open" },
+                 classes: 'items-center w-full',
                  text_size: 'text-sm'
       %>
       <dialog id="<%= terms_of_service_dialog_id %>">
@@ -68,6 +69,7 @@
                  icon: render("components/icons/close"),
                  data: { turbo_frame: row.turbo_frames_id },
                  form_helper: form,
+                 classes: 'items-center w-full',
                  text_size: 'text-sm'
       %>
     <% end %>
@@ -81,6 +83,7 @@
                  icon: render("components/icons/add"),
                  data: { turbo_frame: row.turbo_frames_id },
                  form_helper: form,
+                 classes: 'items-center w-full',
                  text_size: 'text-sm'
       %>
     <% end %>
