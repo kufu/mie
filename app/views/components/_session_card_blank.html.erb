@@ -20,5 +20,6 @@
             <%= t('card.team', team_name: @team&.name) %>
         </div> 
         <%# FIXME: チームメンバーのプロフィールを表示 %>
+        <%= render 'components/friends_button', profiles: dummy_profiles, onClick: "alert('test')" %>
     <% end %>
 </div> 
