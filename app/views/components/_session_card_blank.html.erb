@@ -5,31 +5,20 @@
     <div class="flex flex-col gap-y-1 text-sub font-bold">
         <%= t('card.friends') %>
         <% 
-            # 仮のプロフィールデータ
             dummy_profiles = [
-                { name: 'Ruby Takusankaku', avatar_url: 'https://i.pravatar.cc/150?img=1', id: '1' },
-                { name: 'Hanako Sato', avatar_url: 'https://i.pravatar.cc/150?img=5', id: '2' },
-                { name: 'Jiro Tanaka', avatar_url: 'https://i.pravatar.cc/150?img=3', id: '3' }
+                Data.define(:name, :avatar_url, :id).new("kinoppyd", "https://i.pravatar.cc/150?img=1", 1),
+                Data.define(:name, :avatar_url, :id).new("kinoppyd", "https://i.pravatar.cc/150?img=2", 1),
+                Data.define(:name, :avatar_url, :id).new("kinoppyd", "https://i.pravatar.cc/150?img=3", 1),
+                Data.define(:name, :avatar_url, :id).new("kinoppyd", "https://i.pravatar.cc/150?img=4", 1),
+                Data.define(:name, :avatar_url, :id).new("kinoppyd", "https://i.pravatar.cc/150?img=5", 1),
             ]
-            
-            # 仮のセッション情報
-            dummy_session_info = {
-                time: defined?(start_end) ? start_end : '04:30 - 05:00',
-                language: 'ja',
-                location: 'Large Hall',
-                title: 'デモセッション',
-                presenter: {
-                    name: 'Demo Presenter',
-                    handle: 'demo_presenter',
-                    avatar_url: 'https://i.pravatar.cc/150?img=8'
-                }
-            }
         %>
-        <%= render 'components/friends_button', profiles: [], onClick: "alert('test')" %>
+        <%= render 'components/friends_button', profiles: dummy_profiles, onClick: "alert('test')" %>
     </div>
     <% if @team.present? %>
         <div class="flex flex-col gap-y-1 text-sub font-bold">
             <%= t('card.team', team_name: @team&.name) %>
         </div> 
+        <%# FIXME: チームメンバーのプロフィールを表示 %>
     <% end %>
 </div> 
