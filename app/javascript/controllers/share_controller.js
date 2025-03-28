@@ -10,6 +10,8 @@ export default class extends Controller {
         title: this.titleValue,
         text: this.textValue,
         url: this.urlValue
+      }).catch((_error) => {
+        // do nothing
       })
     } else {
       alert("Web Share API not supported.")
