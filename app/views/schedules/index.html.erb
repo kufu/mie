@@ -19,10 +19,19 @@
     </div>
 
     <%= turbo_frame_tag @plan do %>
-      <div class="flex justify-between items-center mb-2">
+      <div data-controller="share" class="flex justify-between items-center mb-2">
         <h2 class="text-2xl font-bold">Your Schedule</h2>
         <% if @plan.persisted? %>
-          <%= render "components/button", title: I18n.t('button.share'), size: "s", href: event_plan_path(@plan, event_name: @event.name) %>
+          <%= render "components/button",
+                     title: I18n.t('button.share'),
+                     size: "s",
+                     data: {
+                       action: 'click->share#click',
+                       "share-title-value": @plan.title,
+                       "share-text-value": @plan.description,
+                       "share-url-value": event_plan_url(@plan, event_name: @event.name),
+                     }
+          %>
         <% end %>
       </div>
 
