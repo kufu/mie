@@ -106,7 +106,11 @@ ActiveRecord::Base.transaction do
       schedule.update!(
         title: presentation['title'],
         description: presentation['description'],
-        language: presentation['language'].then { Schedule.languages.has_key?(_1) ? _1 : "en & ja" }.downcase
+        language: case presentation['language']
+          when 'EN' then 'en'
+          when 'JA' then 'ja'
+          else 'en & ja'
+        end
       )
     end
   end

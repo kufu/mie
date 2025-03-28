@@ -1,6 +1,6 @@
 <div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[#5E626E]' if scheduled == schedule %>">
   <%# スケジュール情報の展開 %>
-  <div class="text-sm"><%= schedule.language %>・<%= schedule.track.name %></div>
+  <div class="text-sm"><%= schedule.language_text %>・<%= schedule.track.name %></div>
 
   <% common_classes = "text-lg font-semibold text-accent block h-[56px] overflow-hidden" %>
   <% tag_name = schedule.speakers.first.present? ? :a : :p %>
