@@ -14,7 +14,7 @@ export default class extends Controller {
         // do nothing
       })
     } else {
-      alert("Web Share API not supported.")
+      window.open(this.urlValue, "_blank")
     }
   }
 }
