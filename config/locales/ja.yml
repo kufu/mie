@@ -106,6 +106,9 @@ ja:
   trophy:
     rarity: "レアリティ"
 
+  trigger:
+    error: "すでに条件を満たしています"
+
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"
     password_incorrect: "パスワードが違います"

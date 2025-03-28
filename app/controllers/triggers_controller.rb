@@ -5,8 +5,12 @@ class TriggersController < ApplicationController
   before_action :make_sure_user_logged_in
 
   def show
-    trigger = Trigger.find(params[:id])
-    trigger.perform(@user.profile, params[:key])
+    begin
+      trigger = Trigger.find(params[:id])
+      trigger.perform(@user.profile, params[:key])
+    rescue StandardError => _e
+      flash[:error] = I18n.t('trigger.error')
+    end
 
     redirect_to profile_path
   end

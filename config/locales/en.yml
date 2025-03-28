@@ -149,6 +149,9 @@ en:
   trophy:
     rarity: "Rarity"
 
+  trigger:
+    error: "Already satisfied the condition"
+
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
