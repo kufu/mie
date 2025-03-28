@@ -5,8 +5,8 @@
         <h1 class="font-medium text-[#5E626E]">Schedule.select</h1>
       <% end %>
       <% unless Rails.env.test? %>
-        <a href="<%= event_path %>">
-          <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2024">
+        <a href="https://rubykaigi.org/2025/" target="_blank">
+          <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2025">
         </a>
       <% end %>
     </div>
