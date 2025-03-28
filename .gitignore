@@ -11,6 +11,9 @@
 # Ignore bundler config.
 /.bundle
 
+# system file
+/**/.DS_Store
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

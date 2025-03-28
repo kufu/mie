@@ -1,0 +1,4 @@
+dbs:
+  - path: /data/staging.sqlite3
+    replicas:
+      - url: gcs://mie-staging-litestream/database

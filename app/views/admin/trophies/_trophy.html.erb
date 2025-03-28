@@ -1,6 +1,6 @@
 <div class="flex h-64">
   <div>
-    <div><img class="h-28 w-28" src="<%= trophy.icon_url %>" alt="Trophy image for <%= trophy.name %>"></div>
+    <div><img class="h-28 w-28" src="<%= url_for(trophy.icon) if trophy.icon.attached? %>" alt="Trophy image for <%= trophy.name %>"></div>
   </div>
   <div class="p-2">
     <h2 class="text-2xl font-bold pb-2"><%= trophy.name %></h2>

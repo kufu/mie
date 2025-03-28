@@ -1,6 +1,11 @@
 <% content_for :head do %>
   <meta property="og:url" content="<%= event_url(@event.name) %>">
 <% end %>
+
+<% if @breakout_turbo %>
+  <% turbo_page_requires_reload %>
+<% end %>
+
 <%= turbo_frame_tag @event, refresh: :morph do %>
   <div data-controller="schedule-table">
     <div class="flex justify-center pb-4">
@@ -16,20 +21,22 @@
     <%= turbo_frame_tag @plan do %>
       <div class="flex justify-between items-center mb-2">
         <h2 class="text-2xl font-bold">Your Schedule</h2>
-        <%= render "components/button", title: "Share", size: "s" %>
+        <% if @plan.persisted? %>
+          <%= render "components/button", title: I18n.t('button.share'), size: "s", href: event_plan_path(@plan, event_name: @event.name) %>
+        <% end %>
       </div>
 
       <% unless @plan.new_record? %>
         <div data-controller="dialog" class="bg-white rounded-lg p-4 mb-7">
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
-            <%= render "components/button", title: "Edit", size: "s", data_action: 'click->dialog#open' %>
+            <%= render "components/button", title: I18n.t('button.edit'), size: "s", data: { action: 'click->dialog#open' } %>
           </div>
           <%= form_with(url: event_plan_path(@plan, event_name: @event.name), model: @plan) do |f| %>
             <p class="text-base"><%= @plan.description %></p>
             <dialog data-dialog-target="dialog">
               <%= render 'components/dialog', title: I18n.t("description.form_title"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
-                <%= render 'components/text_field', form_helper: f, attribute: :description %>
+                <%= render 'components/textarea', form_helper: f, attribute: :description, rows: 5 %>
               <% end %>
             </dialog>
           <% end %>
@@ -42,10 +49,12 @@
         <% @schedule_table.days.each do |day| %>
           <div id="schedule-<%= day %>" class="pb-3 pr-3 schedule-table hidden">
             <div class="flex flex-row gap-x-3">
-              <div class="flex flex-col">
+              <div class="flex flex-col" id="schedule-index-timeline-<%= day %>">
                 <%= render partial: 'components/timeline',
                            locals: {
-                             events: @schedule_table[day].rows.map { { start_time: _1.start_at, end_time: _1.end_at, participating: true } },
+                             events: @schedule_table[day].rows.map {
+                               { start_time: _1.start_at, end_time: _1.end_at, participating: _1.schedules.any? { |s| @plan.include?(s) } }
+                             },
                              start_time: @schedule_table[day].rows.first.start_at,
                              end_time: @schedule_table[day].rows.last.end_at,
                            }

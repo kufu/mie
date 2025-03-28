@@ -42,6 +42,8 @@ class Plan < ApplicationRecord
   include BCrypt
   include Events
 
+  delegate :include?, to: :schedules
+
   belongs_to :user
   belongs_to :event
   has_many :plan_schedules

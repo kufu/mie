@@ -1,0 +1,4 @@
+dbs:
+  - path: /data/production.sqlite3
+    replicas:
+      - url: gcs://mie-production-litestream/database

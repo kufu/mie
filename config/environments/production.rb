@@ -3,6 +3,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.time_zone = "Tokyo"
+
   # ActiveRecord::SessionStore
   config.session_store :active_record_store, key: '_rubykaigi_app_session'
 
@@ -73,4 +75,6 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.active_storage.service = :db
 end

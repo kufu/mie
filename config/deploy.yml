@@ -6,7 +6,7 @@ image: <%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>/mie-production/mie
 
 # Deploy to these servers.
 servers:
-  - mie-production-vm.asia-northeast1-b.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+  - mie-production-vm.asia-northeast1-a.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
 
 # Credentials for your image host.
 registry:
@@ -32,8 +32,24 @@ env:
 ssh:
   proxy_command: sh ./.kamal/scripts/gcp-start-iap-tunnel-ssh-proxy-magic.sh gce_instance=%h sshuser=root
 
+# Utilities
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
 # Use a persistent storage volume.
 #
 volumes:
   - "/volume:/rails/storage"
 
+accessories:
+  litestream:
+    image: litestream/litestream:latest
+    host: mie-production-vm.asia-northeast1-a.<%= ENV['MIE_GOOGLE_CLOUD_PROJECT'] %>
+    cmd: "replicate"
+    files:
+      - config/litestream.production.yml:/etc/litestream.yml
+    volumes:
+      - "/volume:/data"

@@ -2,14 +2,13 @@
 
 class PlansController < ApplicationController
   include EventRouting
-  include ScheduleTable
 
   before_action :set_plan, except: :create
   before_action :check_user_owns_plan, only: :update
 
   def show
     @schedules = @plan.schedules
-    @plans_table = plans_table(@plan)
+    @plan_table = Schedule::Tables.from_event(@event).expect(@schedules)
   end
 
   def update
@@ -35,6 +34,7 @@ class PlansController < ApplicationController
     create_and_set_user unless @user
     @plan = @user.plans.where(event: @event).create!(plan_params)
     add_plan(params[:plan][:add_schedule_id]) if params[:plan][:add_schedule_id]
+    session[:breakout_turbo] = true
     redirect_to event_path(@plan.event.name)
   end
 
