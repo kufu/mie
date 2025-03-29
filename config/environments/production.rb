@@ -6,7 +6,7 @@ Rails.application.configure do
   config.time_zone = "Tokyo"
 
   # ActiveRecord::SessionStore
-  config.session_store :active_record_store, key: '_rubykaigi_app_session'
+  config.session_store :active_record_store, key: '_rubykaigi_app_session', expire_after: 2.months
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
