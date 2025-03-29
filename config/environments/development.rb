@@ -6,7 +6,7 @@ Rails.application.configure do
   config.time_zone = "Tokyo"
 
   # ActiveRecord::SessionStore
-  config.session_store :active_record_store, key: '_rubykaigi_app_session'
+  config.session_store :active_record_store, key: '_rubykaigi_app_session', expire_after: 2.months
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
