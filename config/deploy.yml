@@ -22,6 +22,8 @@ builder:
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
 env:
+  clear:
+    PORT: 80
   secret:
     - SECRET_KEY_BASE
     - GITHUB_KEY
