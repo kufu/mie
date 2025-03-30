@@ -26,7 +26,7 @@
              data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
              class="flex justify-between items-center mb-2"
         >
-          <h2 class="text-2xl font-bold">Your Schedule</h2>
+          <h2 class="text-2xl font-bold"><%= @plan.title %></h2>
           <% if @plan.persisted? %>
             <%= render "components/button", title: I18n.t('button.share'), size: "s", data: { action: 'click->share#click' } %>
           <% end %>
@@ -37,14 +37,10 @@
             <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
             <%= render "components/button", title: I18n.t('button.edit'), size: "s", data: { action: 'click->dialog#open' } %>
           </div>
-          <%= form_with(url: event_plan_path(@plan, event_name: @event.name), model: @plan) do |f| %>
             <p class="text-base"><%= @plan.description %></p>
-            <dialog data-dialog-target="dialog">
-              <%= render 'components/dialog', title: I18n.t("description.form_title"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
-                <%= render 'components/textarea', form_helper: f, attribute: :description, rows: 5 %>
-              <% end %>
-            </dialog>
-          <% end %>
+          <dialog data-dialog-target="dialog" id="schedule-edit-dialog">
+            <%= render 'plans/form', plan: @plan %>
+          </dialog>
         </div>
       <% end %>
     <% end %>
