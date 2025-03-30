@@ -6,7 +6,7 @@
 
 <%= render layout: 'components/dialog', locals: { 
   title: t('dialog.attendee_title'), 
-  dialog_id: dialog_id, 
+  dialog_id: dialog_id,
   header_content: session_info.present? ? capture do %>
     <div class="bg-gray-100 flex flex-col gap-y-2 p-4">
       <% if session_info[:time].present? %>
@@ -24,10 +24,11 @@
       </div>
       <% if session_info[:presenter].present? %>
         <div class="flex items-center">
-          <% if session_info[:presenter][:avatar_url].present? %>
-            <img src="<%= session_info[:presenter][:avatar_url] %>" alt="<%= session_info[:presenter][:name] %>" class="w-10 h-10 rounded-full mr-2">
-          <% end %>
-          <div class="flex flex-col">
+          <%= render 'components/avatar', 
+                     name: session_info[:presenter][:name], 
+                     url: session_info[:presenter][:avatar_url], 
+                     size: 'm' %>
+          <div class="ml-2 flex flex-col">
             <span class="text-sm font-bold"><%= session_info[:presenter][:name] %></span>
             <% if session_info[:presenter][:handle].present? %>
               <span class="text-sm text-gray-500">@<%= session_info[:presenter][:handle] %></span>
@@ -39,14 +40,14 @@
   <% end : nil
 } do %>
   <div class="flex flex-col">
-    <div class="flex justify-between border-b pb-2">
+    <div class="flex justify-between border-b pb-2 mb-4">
       <div class="text-lg font-bold"><%= t('dialog.attendee_friends') %></div>
     </div>
     
     <% if profiles.present? %>
-      <div class="flex flex-col px-2">
+      <div class="flex flex-col divide-y">
         <% profiles.each do |profile| %>
-          <div class="flex items-center py-3 border-b">
+          <div class="flex items-center py-3">
             <%= render 'components/avatar', name: profile[:name], url: profile[:avatar_url], size: 'm' %>
             <div class="ml-2">
               <%= profile[:name] %>
