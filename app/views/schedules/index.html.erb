@@ -38,7 +38,7 @@
             <%= render "components/button", title: I18n.t('button.edit'), size: "s", data: { action: 'click->dialog#open' } %>
           </div>
             <p class="text-base"><%= @plan.description %></p>
-          <dialog data-dialog-target="dialog">
+          <dialog data-dialog-target="dialog" id="schedule-edit-dialog">
             <%= render 'plans/form', plan: @plan %>
           </dialog>
         </div>

@@ -1,5 +1,14 @@
 <%= form_with(url: event_plan_path(plan, event_name: plan.event.name), model: plan) do |f| %>
   <%= render 'components/dialog', title: I18n.t("description.form_title"), action_button: { title: I18n.t('button.save'), form_helper: f } do %>
     <%= render 'components/textarea', form_helper: f, attribute: :description, rows: 5 %>
+    <% if plan.errors[:description].present? %>
+      <div class="m-2 text-red-500">
+        <ul>
+          <% plan.errors.where(:description).each do |e| %>
+            <li><%= e.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

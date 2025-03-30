@@ -12,8 +12,11 @@ class PlansController < ApplicationController
   end
 
   def update
-    @plan.update!(plan_params)
-    redirect_to event_path(event_name: @event.name)
+    if @plan.update(plan_params)
+      redirect_to event_path(event_name: @event.name)
+    else
+      render '_form', plan: @plan
+    end
   end
 
   def editable
