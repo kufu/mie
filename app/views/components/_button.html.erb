@@ -3,38 +3,42 @@
 <% classes ||= "" %>
 <% icon ||= "" %>
 <% disabled ||= false %>
-<% onClick ||= "" %>
 <% data ||= nil %>
-<% data_action ||= nil %>
+<% danger ||= false %>
+<% text_size ||= "text-base" %>
 <% button_classes = [
-  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap",
+  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[#FCFCFD] rounded-lg whitespace-nowrap",
   (size == "s" ? "px-2 py-1" : "px-3 py-2"),
+  (disabled ? "border-[#E3E5E8] text-[#CDCFD5]" : "border-[#5E626E] text-[#131416]"),
   classes
 ].join(" ") %>
 <% text_classes = [
-  "text-base font-bold",
-  (disabled ? "text-[#CDCFD5]" : "text-[#131416]"),
+  text_size,
+  "font-bold",
+  (danger ? "text-red-600" : nil)
 ].join(" ") %>
 <% form_helper ||= nil %>
+<% href ||= nil %>
 
 <% if form_helper %>
-  <%= form_helper.button type: :submit, class: button_classes, disabled: disabled, data: data do %>
+  <%= form_helper.button type: :submit, class: button_classes, data: data, disabled: disabled do %>
     <%= raw icon %>
     <span class="<%= text_classes %>">
     <%= title %>
   </span>
   <% end %>
-<% else %>
-  <button
-    type="button"
-    class="<%= button_classes %>"
-    onclick="<%= onClick %>"
-    <%= "disabled" if disabled %>
-    <%= "data-action=#{data_action}" if data_action %>
-  >
+<% elsif href %>
+  <%= link_to href, data: data, class: button_classes, disabled: disabled do %>
     <%= raw icon %>
     <span class="<%= text_classes %>">
-    <%= title %>
-  </span>
-  </button>
+      <%= title %>
+    </span>
+  <% end %>
+<% else %>
+  <%= tag.button class: button_classes, disabled: disabled, data: data do %>
+    <%= raw icon %>
+    <span class="<%= text_classes %>">
+      <%= title %>
+    </span>
+  <% end %>
 <% end %>

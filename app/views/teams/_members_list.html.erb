@@ -19,16 +19,25 @@
                 <%= form_with(url: team_member_path(tp.profile, team_id: @team), method: :patch) do |f| %>
                   <% if tp.admin? %>
                     <%= f.hidden_field :role, value: :member %>
-                    <%= f.submit I18n.t('button.set_member'), class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold" %>
+                    <%= render 'components/button', title: I18n.t('button.set_member'), form_helper: f %>
                   <% end %>
                   <% if tp.member? %>
                     <%= f.hidden_field :role, value: :admin %>
-                    <%= f.submit I18n.t('button.set_admin'), class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold" %>
+                    <%= render 'components/button', title: I18n.t('button.set_admin'), form_helper: f %>
                   <% end %>
                 <% end %>
               <% end %>
               <%= form_with(url: "/teams/#{@team.id}/members/#{tp.profile.id}", method: :delete) do |f| %>
-                <%= f.submit tp.invitation? ? I18n.t('button.cancel') : I18n.t('button.remove'), data: { turbo_confirm: I18n.t("dialog.remove_member"), turbo_frame: ActionView::RecordIdentifier.dom_id(@team) }, class: "inline-flex gap-x-1 items-center align-middle justify-center border border-solid border-[#5E626E] bg-[#FCFCFD] rounded-lg whitespace-nowrap px-3 py-2 text-base font-bold text-red-600" %>
+                <%= render 'components/button',
+                           title: tp.invitation? ? I18n.t('button.cancel') : I18n.t('button.remove'),
+                           danger: true,
+                           form_helper: f,
+                           data: {
+                             turbo_confirm: I18n.t("dialog.remove_member"),
+                             turbo_frame: ActionView::RecordIdentifier.dom_id(@team)
+                           }
+
+                %>
               <% end %>
             <% end %>
           </div>

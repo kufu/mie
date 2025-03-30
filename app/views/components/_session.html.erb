@@ -1,8 +1,12 @@
+<% no_buttons ||= false %>
+
 <div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if row.schedules.size > 1 %>
-        <i data-sessions-target="icon" class="fa-solid fa-angle-right md:hidden"></i>
+        <div class="w-8 h-8 flex items-center justify-center bg-[#FCFCFD] border border-solid border-[#5E626E] rounded-lg">
+          <i data-sessions-target="icon" class="fa-solid fa-angle-right md:hidden"></i>
+        </div>
       <% end %>
         <span class="font-bold text-lg"><%= row.start_end %></span>
     </button>
@@ -13,15 +17,21 @@
   </div>
   <%# セッションリスト (最初の1つはデフォルト表示) %>
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
-    <% row.schedules.each do |session| %>
-      <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %><%# FIXME %>">
-        <%= render 'components/session_card',
-                   row: row,
-                   schedule: session,
-                   attendees: @user&.profile&.friend_profiles&.select { |profile| @friends_schedules_map[profile.id].include?(session.id) } || [],
-                   scheduled: scheduled
-        %>
-      </div>
+    <% if row.schedules.empty? %>
+      <%# TODO: blank component %>
+      <div>から</div>
+    <% else %>
+      <% row.schedules.each do |session| %>
+        <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %> w-full md:w-[288px]">
+          <%= render 'components/session_card',
+                     row: row,
+                     schedule: session,
+                     attendees: [],
+                     scheduled: scheduled,
+                     no_buttons: no_buttons
+          %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

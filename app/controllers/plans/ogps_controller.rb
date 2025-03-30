@@ -42,7 +42,7 @@ module Plans
               padding: 44px 34px 240px 64px;
               line-height: 1.5;
               font-size: 58px;
-              color: #{@event.event_theme.text_color};
+              color: #000000;
               word-break: break-all;
             }
             .ogp-body {

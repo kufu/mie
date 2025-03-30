@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: redirect('/2024')
+  root to: redirect('/2025')
   get "up" => "rails/health#show", as: :rails_health_check
 
   get '/auth/:provider/callback', to: 'sessions#create'
@@ -45,6 +45,5 @@ Rails.application.routes.draw do
   resolve('PlanSchedule') { %i[event item] }
 
   mount MissionControl::Jobs::Engine, at: "/admin/jobs"
-
-  get '*path', controller: 'application', action: 'not_found'
+  mount ActiveStorageDB::Engine => '/active_storage_db'
 end

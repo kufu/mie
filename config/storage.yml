@@ -1,0 +1,6 @@
+db:
+  service: DB
+
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>

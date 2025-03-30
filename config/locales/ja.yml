@@ -22,10 +22,10 @@ ja:
     no_plans: "視聴予定のトークを登録しましょう！"
     no_plans_description: "トーク一覧から予定を追加しよう"
   card:
-    add: "スケジュールに追加する"
-    added: "スケジュールに追加されています"
-    remove: "スケジュールから削除します"
-    inactive: "同じ時間のスケジュールが登録されています"
+    add: "スケジュールに追加"
+    added: "スケジュールに追加済み"
+    remove: "スケジュールから削除"
+    inactive: "スケジュールに追加"
     show_detail: "詳細を表示"
     detail:
       title: "トークの詳細"
@@ -76,6 +76,7 @@ ja:
     edit: "編集"
     save: "保存"
     close: "閉じる"
+    share: "共有"
     accept_to_add: "同意して追加する"
     make_editable: "パスワードを入力して編集"
     check_password: "編集可能にする"
@@ -96,18 +97,21 @@ ja:
     plan_title: "視聴予定"
 
   teams:
-    name: 'チーム名'
-    settings: 'チーム設定'
+    name: "チーム名"
+    settings: "チーム設定"
     tabs:
-      general: '一般'
-      members: 'メンバー'
-    about: 'チーム機能について'
+      general: "一般"
+      members: "メンバー"
+    about: "チーム機能について"
     features:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
       - "ユーザーは1つのチームにしか所属することができません"
 
   trophy:
     rarity: "レアリティ"
+
+  trigger:
+    error: "すでに条件を満たしています"
 
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"

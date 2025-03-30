@@ -1,12 +1,12 @@
-<header class="w-full h-16 px-4 bg-gradient-to-b from-[#FFEB0C] from-0% via-transparent via-20% to-[#FCFCFD] to-20%">
+<header class="w-full h-16 px-4 bg-gradient-to-b from-[var(--mainColor)] from-0% via-transparent via-20% to-[#FCFCFD] to-20%">
   <div class="h-full flex justify-between items-center">
     <div class="flex flex-col gap-2 pt-2">
       <%= link_to root_path do %>
         <h1 class="font-medium text-[#5E626E]">Schedule.select</h1>
       <% end %>
       <% unless Rails.env.test? %>
-        <a href="<%= event_path %>">
-          <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2024">
+        <a href="https://rubykaigi.org/2025/" target="_blank">
+          <img class="h-3" src="<%= asset_path("#{@event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi 2025">
         </a>
       <% end %>
     </div>
@@ -14,13 +14,13 @@
     <div class="relative">
       <% if @user&.profile %>
         <div data-controller="dropdown">
-          <button type="button" 
+          <button type="button"
                   class="flex items-center cursor-pointer"
                   data-action="click->dropdown#toggle">
             <img
               src="<%= @user.profile&.avatar_url || 'https://placehold.jp/150x150.png' %>"
               alt="Profile"
-              class="w-10 h-10 rounded-full"
+              class="w-10 h-10 rounded-full border-2 border-[#CECFD5]"
             >
           </button>
           <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"

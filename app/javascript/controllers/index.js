@@ -25,6 +25,9 @@ application.register("schedule-table", ScheduleTableController)
 import SessionsController from "./sessions_controller"
 application.register("sessions", SessionsController)
 
+import ShareController from "./share_controller"
+application.register("share", ShareController)
+
 import TabController from "./tab_controller"
 application.register("tab", TabController)
 

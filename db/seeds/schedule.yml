@@ -1,171 +1,183 @@
 ---
-may15:
+apr16:
   events:
   - type: break
-    begin: '10:00'
-    end: '11:00'
+    begin: '09:00'
+    end: '10:00'
     name: Door Open
   - type: keynote
-    begin: '11:00'
-    end: '12:00'
+    begin: '10:00'
+    end: '11:00'
     talks:
-      Large Hall: tompng
+      Main Hall: ima1zumi
+  - type: talk
+    begin: '11:10'
+    end: '11:40'
+    talks:
+      Main Hall: makenowjust
+      Sub Hall: maciejmensfeld
+      Pearls Room: tk0miya
+  - type: talk
+    begin: '11:50'
+    end: '12:20'
+    talks:
+      Main Hall: kateinoigakukun
+      Sub Hall: dafyddcrosby
+      Pearls Room: fetburner
   - type: break
-    begin: '12:00'
-    end: '13:30'
+    begin: '12:20'
+    end: '14:00'
     name: Lunch Break
   - type: talk
-    begin: '13:30'
-    end: '14:00'
+    begin: '14:00'
+    end: '14:30'
     talks:
-      Large Hall: spikeolaf
-      Small Hall: ohbarye
-      Large Studio: segiddins
+      Main Hall: k0kubun
+      Sub Hall: marcoroth
+      Pearls Room: ktou
   - type: talk
-    begin: '14:10'
-    end: '14:40'
+    begin: '14:40'
+    end: '15:10'
     talks:
-      Large Hall: eightbitraptor
-      Small Hall: hsbt
-      Large Studio: yujiyokoo
-  - type: talk
-    begin: '14:50'
-    end: '15:20'
-    talks:
-      Large Hall: tagomoris
-      Small Hall: kokuyouwind
-      Large Studio: osyoyu
+      Main Hall: spikeolaf
+      Sub Hall: yfractal
+      Pearls Room: sinsoku_listy
   - type: break
-    begin: '15:20'
-    end: '16:00'
+    begin: '15:10'
+    end: '15:40'
     name: Afternoon Break
   - type: talk
-    begin: '16:00'
-    end: '16:30'
+    begin: '15:40'
+    end: '16:10'
     talks:
-      Large Hall: jhawthorn
-      Small Hall: ima1zumi
-      Large Studio: mullermp
+      Main Hall: tagomoris
+      Sub Hall: vinistock
+      Pearls Room: cristian_planas
   - type: talk
-    begin: '16:40'
-    end: '17:10'
+    begin: '16:20'
+    end: '16:50'
     talks:
-      Large Hall: ko1
-      Small Hall: coe401_
-      Large Studio: keystonelemur
-may16:
+      Main Hall: kaz0505
+      Sub Hall: fractaledmind
+      Pearls Room: youchan
+  - type: talk
+    begin: '17:00'
+    end: '18:00'
+    talks:
+      Main Hall: tric
+apr17:
   events:
   - type: keynote
-    begin: '10:20'
-    end: '11:20'
+    begin: '10:00'
+    end: '11:00'
     talks:
-      Large Hall: ioquatix
+      Main Hall: KnuX
   - type: talk
-    begin: '11:30'
-    end: '12:00'
+    begin: '11:10'
+    end: '11:40'
     talks:
-      Large Hall: peterzhu2118
-      Small Hall: ydah_
-      Large Studio: p_ck_
+      Main Hall: ydah_
+      Sub Hall: osyoyu
+      Pearls Room: hmsk
+  - type: talk
+    begin: '11:50'
+    end: '12:20'
+    talks:
+      Main Hall: maximecb
+      Sub Hall: lyninx
+      Pearls Room: naitoh
   - type: break
-    begin: '12:00'
-    end: '13:30'
+    begin: '12:20'
+    end: '14:00'
     name: Lunch Break
   - type: talk
-    begin: '13:30'
-    end: '14:00'
+    begin: '14:00'
+    end: '14:30'
     talks:
-      Large Hall: soutaro
-      Small Hall: kateinoigakukun
-      Large Studio: KnuX
+      Main Hall: mametter
+      Sub Hall: DmitryPogrebnoy
+      Pearls Room: asonas
   - type: talk
-    begin: '14:10'
-    end: '14:40'
+    begin: '14:40'
+    end: '15:10'
     talks:
-      Large Hall: jeremyevans0
-      Small Hall: hasumikin
-      Large Studio: qnighy
-  - type: talk
-    begin: '14:50'
-    end: '15:20'
-    talks:
-      Large Hall: maximecb
-      Small Hall: koic
-      Large Studio: udzura
+      Main Hall: hasumikin
+      Sub Hall: p0deje
+      Pearls Room: koic
   - type: break
-    begin: '15:20'
-    end: '16:00'
+    begin: '15:10'
+    end: '15:40'
     name: Afternoon Break
   - type: talk
-    begin: '16:00'
-    end: '16:30'
+    begin: '15:40'
+    end: '16:10'
     talks:
-      Large Hall: mametter
-      Small Hall: ahogappa0613
-      Large Studio: eregontp
+      Main Hall: tenderlove
+      Sub Hall: s01
+      Pearls Room: duerst
   - type: talk
-    begin: '16:40'
-    end: '17:10'
+    begin: '16:20'
+    end: '16:50'
     talks:
-      Large Hall: duerst
-      Small Hall: s_isshiki1969
-      Large Studio: sylph01
+      Main Hall: coe401_
+      Sub Hall: amomchilov
+      Pearls Room: junk0612
   - type: lt
-    begin: '17:20'
-    end: '18:20'
+    begin: '17:00'
+    end: '18:00'
     name: Lightning Talks
-may17:
+apr18:
   events:
   - type: talk
-    begin: '10:10'
-    end: '11:20'
+    begin: '09:50'
+    end: '11:00'
     talks:
-      Large Hall: rubylangorg
+      Main Hall: rubylangorg
   - type: talk
-    begin: '11:30'
-    end: '12:00'
+    begin: '11:10'
+    end: '11:40'
     talks:
-      Large Hall: k0kubun
-      Small Hall: m3m0r7
-      Large Studio: remore
+      Main Hall: soutaro
+      Sub Hall: s_isshiki1969
+      Pearls Room: udzura
+  - type: talk
+    begin: '11:50'
+    end: '12:20'
+    talks:
+      Main Hall: jeremyevans0
+      Sub Hall: alanwusx
+      Pearls Room: ahogappa
   - type: break
-    begin: '12:00'
-    end: '13:30'
+    begin: '12:20'
+    end: '14:00'
     name: Lunch Break
   - type: talk
-    begin: '13:30'
-    end: '14:00'
+    begin: '14:00'
+    end: '14:30'
     talks:
-      Large Hall: tenderlove
-      Small Hall: MikeMcQuaid
-      Large Studio: headius
+      Main Hall: ko1
+      Sub Hall: Morriar
+      Pearls Room: sue445
   - type: talk
-    begin: '14:10'
-    end: '14:40'
+    begin: '14:40'
+    end: '15:10'
     talks:
-      Large Hall: m_seki
-      Small Hall: junk0612
-      Large Studio: Yuryu
-  - type: talk
-    begin: '14:50'
-    end: '15:20'
-    talks:
-      Large Hall: KJTsanaktsidis
-      Small Hall: gedorinku
-      Large Studio: palkan_tula
+      Main Hall: tompng
+      Sub Hall: headius
+      Pearls Room: Y_uuu
   - type: break
-    begin: '15:20'
-    end: '16:00'
+    begin: '15:10'
+    end: '15:40'
     name: Afternoon Break
   - type: talk
-    begin: '16:00'
-    end: '16:30'
+    begin: '15:40'
+    end: '16:10'
     talks:
-      Large Hall: makenowjust
-      Small Hall: ledsun
-      Large Studio: vinistock
+      Main Hall: peterzhu2118
+      Sub Hall: segiddins
+      Pearls Room: ohbarye
   - type: keynote
-    begin: '16:40'
-    end: '17:40'
+    begin: '16:20'
+    end: '17:20'
     talks:
-      Large Hall: yukihiro_matz
+      Main Hall: yukihiro_matz

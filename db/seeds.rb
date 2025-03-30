@@ -10,12 +10,9 @@
 
 ActiveRecord::Base.transaction do
 
-  base_event = Event.find_or_initialize_by(name: '2024')
+  base_event = Event.find_or_initialize_by(name: '2025')
   base_event.build_event_theme(
-    main_color: "#FFEB00",
-    sub_color: "#FF3F46",
-    accent_color: "#80F142",
-    text_color: "#000000"
+    main_color: "#FF5719"
   ) if base_event.new_record?
   base_event.save!
   base_event.reload
@@ -109,7 +106,11 @@ ActiveRecord::Base.transaction do
       schedule.update!(
         title: presentation['title'],
         description: presentation['description'],
-        language: presentation['language'].downcase
+        language: case presentation['language']
+          when 'EN' then 'en'
+          when 'JA' then 'ja'
+          else 'en & ja'
+        end
       )
     end
   end
