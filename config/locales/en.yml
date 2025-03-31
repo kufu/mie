@@ -96,7 +96,7 @@ en:
     remove_member: "Are you sure remove this member from the team?"
     edit_introduce: "Edit introduce yourself"
     read_qrcode_to_be_friend: "Read QR code to add friend"
-    attendee_title: "Friends Who Scheduled to Watch"
+    attendee_title: "Attendees"
     attendee_friends: "Friends"
     attendee_no_friends: "No friends have scheduled to attend this session yet"
   button:
