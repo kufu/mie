@@ -22,7 +22,7 @@
       <div>から</div>
     <% else %>
       <% row.schedules.each do |session| %>
-        <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %> w-full md:w-[288px]">
+        <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
           <%= render 'components/session_card',
                      row: row,
                      schedule: session,
@@ -32,7 +32,7 @@
           %>
         </div>
       <% end %>
-      <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : '' %> w-full md:w-[288px]">
+      <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
         <%= render 'components/session_card_blank' %>
       </div>
     <% end %>
