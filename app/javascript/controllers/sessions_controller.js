@@ -20,9 +20,14 @@ export default class extends Controller {
       return;
     }
 
+    const selected = this.sessionTargets.findIndex((el) => el.classList.contains('selected')) >= 0;
+
     this.sessionTargets.forEach((el) => {
       if (!el.classList.contains('selected')) {
         el.classList.toggle('hidden', this.isOpenValue);
+      }
+      if (el.classList.contains('blank-box') && !selected) {
+        el.classList.toggle('hidden', false);
       }
     });
 
