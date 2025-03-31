@@ -32,14 +32,7 @@
           %>
         </div>
       <% end %>
-    <% end %>
-    <% 
-      # すべてのスケジュールがscheduledでないかどうかをチェック
-      all_unscheduled = row.schedules.none? { |s| s == scheduled }
-    %>
-    
-    <% if all_unscheduled %>
-      <div class="w-[288px]">
+      <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : '' %> w-full md:w-[288px]">
         <%= render 'components/session_card_blank' %>
       </div>
     <% end %>
