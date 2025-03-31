@@ -2,6 +2,7 @@
 
 class ItemsController < ApplicationController
   include EventRouting
+  include ProfileScheduleMapping
 
   before_action :set_event
   before_action :set_item, only: %i[update destroy]
@@ -20,7 +21,6 @@ class ItemsController < ApplicationController
     @plan.update!(initial: false) if @plan.initial
 
     set_schedule_table
-    set_friends_schedules_map
 
     if turbo_frame_request?
       render
@@ -39,7 +39,6 @@ class ItemsController < ApplicationController
     @plan.update!(initial: false)
 
     set_schedule_table
-    set_friends_schedules_map
 
     if turbo_frame_request?
       render 'create'
@@ -78,12 +77,5 @@ class ItemsController < ApplicationController
   def set_schedule_table
     @schedule_table = Schedule::Tables.from_event(@event)
     @row = @schedule_table.tables.map(&:rows).flatten.find { _1.schedules.include?(@item.schedule) }
-  end
-
-  def set_friends_schedules_map
-    # TODO: extract to concern, same logic in the schedules_controller
-    @friends_schedules_map = @user&.profile&.friend_profiles.to_h do |profile|
-      [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
-    end
   end
 end

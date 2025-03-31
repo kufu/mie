@@ -2,6 +2,7 @@
 
 class PlansController < ApplicationController
   include EventRouting
+  include ProfileScheduleMapping
 
   before_action :set_plan, except: :create
   before_action :check_user_owns_plan, only: :update
