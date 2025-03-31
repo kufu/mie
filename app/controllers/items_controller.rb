@@ -20,9 +20,9 @@ class ItemsController < ApplicationController
     end
     @plan.update!(initial: false) if @plan.initial
 
-    set_schedule_table
-
     if turbo_frame_request?
+      set_schedule_table
+      set_friends_and_teammates_schedules_mapping
       render
     else
       redirect_to event_path(@event.name)
@@ -38,9 +38,9 @@ class ItemsController < ApplicationController
     @item.destroy!
     @plan.update!(initial: false)
 
-    set_schedule_table
-
     if turbo_frame_request?
+      set_schedule_table
+      set_friends_and_teammates_schedules_mapping
       render 'create'
     else
       redirect_to event_path(@event.name)

@@ -6,6 +6,7 @@ class SchedulesController < ApplicationController
 
   def index
     @schedule_table = Schedule::Tables.from_event(@event)
+    set_friends_and_teammates_schedules_mapping
   end
 
   def dialog

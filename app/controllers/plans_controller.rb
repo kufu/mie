@@ -10,6 +10,7 @@ class PlansController < ApplicationController
   def show
     @schedules = @plan.schedules
     @plan_table = Schedule::Tables.from_event(@event).expect(@schedules)
+    set_friends_and_teammates_schedules_mapping
   end
 
   def update

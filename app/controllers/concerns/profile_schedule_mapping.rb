@@ -3,13 +3,13 @@
 module ProfileScheduleMapping
   extend ActiveSupport::Concern
 
-  included do
-    before_action :set_friends_schedules_mapping
-    before_action :set_teammates_schedules_mapping
+  def set_friends_and_teammates_schedules_mapping
+    set_friends_schedules_mapping
+    set_teammates_schedules_mapping
   end
 
   def set_friends_schedules_mapping
-    return @friends_schedules_map = {}unless @user.profile
+    return @friends_schedules_map = {} unless @user.profile
 
     @friends_schedules_map = @user.profile.friend_profiles.to_h do |profile|
       [profile, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
