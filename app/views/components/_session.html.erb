@@ -1,4 +1,4 @@
-<% no_buttons ||= false %>
+<%# locals: (row:, location:, scheduled:, team: nil, absent_friends: [], absent_teammates: [], no_buttons: false) -%>
 
 <div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
@@ -18,11 +18,12 @@
   <%# セッションリスト (最初の1つはデフォルト表示) %>
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
     <% if row.schedules.empty? %>
-      <%# TODO: blank component %>
-      <div>から</div>
+      <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
+        <%= render 'components/session_card_blank', team:, absent_friends:, absent_teammates: %>
+      </div>
     <% else %>
       <% row.schedules.each do |session| %>
-        <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : '' %> w-full md:w-[288px]">
+        <div data-sessions-target="session" class="<%= session == scheduled ? 'selected' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
           <%= render 'components/session_card',
                      row: row,
                      schedule: session,
@@ -32,6 +33,9 @@
           %>
         </div>
       <% end %>
+      <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
+        <%= render 'components/session_card_blank', team:, absent_friends:, absent_teammates: %>
+      </div>
     <% end %>
   </div>
 </div>

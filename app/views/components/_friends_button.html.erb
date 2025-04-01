@@ -1,13 +1,17 @@
+<%# locals (profiles: []) -%>
+
 <div class="flex items-center justify-between bg-shade-90 p-4 rounded-lg">
-    <div class="flex -space-x-2">
-        <% profiles.first(5).each do |profile| %>
-            <%= render('components/avatar', name: profile.name, url: profile.avatar_url, show_tooltip: true) %>
-        <% end %>
-    </div>
-    <button 
+  <div class="flex -space-x-2 flex-shrink-0">
+    <% profiles.first(5).each do |profile| %>
+      <%= render('components/avatar', name: profile.name, url: profile.avatar_url, show_tooltip: true) %>
+    <% end %>
+  </div>
+  <% if profiles.present? %>
+    <button
         class="text-[#5E626E] font-semibold hover:text-[var(--textColor)]"
         <%= "onclick='#{onClick}'".html_safe if onClick.present? %>
     >
-        Show more
+      Show more
     </button>
+  <% end %>
 </div>

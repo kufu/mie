@@ -16,6 +16,9 @@
   <%= render 'components/session',
              row: @row,
              location: @row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }&.track&.name,
-             scheduled: @row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }
+             scheduled: @row.schedules.find { @user&.current_plan&.schedules&.include?(_1) },
+             team: @user.profile.current_team,
+             absent_friends: @friends_schedules_map.map { (_2 & @row.schedules.map(&:id)).present? ? nil : _1 }.compact,
+             absent_teammates: @teammate_schedules_map.map { (_2 & @row.schedules.map(&:id)).present? ? nil : _1 }.compact
   %>
 <% end %>
