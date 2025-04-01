@@ -1,6 +1,6 @@
 <%# locals: (row:, location:, scheduled:, team: nil, absent_friends: [], absent_teammates: [], no_buttons: false) -%>
 
-<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
+<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if row.schedules.size > 1 %>
