@@ -1,44 +1,29 @@
-<%# 
-  profiles: name と avatar_url を含むハッシュの配列
-  dialog_id: ダイアログのID (オプション)
-  session_info: セッション情報（オプション）
-%>
-<% dialog_id ||= "friends-dialog-#{SecureRandom.hex(4)}" %>
-<% session_info ||= nil %>
-<% header_content = nil %>
+<%# locals: (profiles:, dialog_id:, schedule: nil, header_content: nil) -%>
 
-<% if session_info.present? %>
+<% if schedule.present? %>
   <% header_content = capture do %>
     <div class="bg-gray-100 flex flex-col gap-y-2 p-4">
-      <% if session_info[:time].present? %>
-        <div class="text-lg text-gray-600"><%= session_info[:time] %></div>
-      <% end %>
-      
-      <div class="flex flex-col gap-y-1">
-        <% if session_info[:language].present? || session_info[:location].present? %>
-          <div class="text-base text-gray-500">
-            <%= session_info[:language] %>
-            <% if session_info[:language].present? && session_info[:location].present? %> · <% end %>
-            <%= session_info[:location] %>
-          </div>
-        <% end %>
-        
-        <% if session_info[:title].present? %>
-          <div class="text-xl font-bold"><%= session_info[:title] %></div>
-        <% end %>
+      <div class="text-lg text-gray-600">
+        <%= I18n.l(schedule.start_at, format: :timetable) %> - <%= I18n.l(schedule.end_at, format: :timetable) %>
       </div>
-      
-      <% if session_info[:presenter].present? %>
+
+      <div class="flex flex-col gap-y-1">
+        <div class="text-base text-gray-500">
+          <%= schedule.language_text %> · <%= schedule.track.name %>
+        </div>
+
+        <div class="text-xl font-bold"><%= schedule.title %></div>
+      </div>
+
+      <% schedule.speakers.each do |speaker| %>
         <div class="flex items-center">
-          <%= render 'components/avatar', 
-                     name: session_info[:presenter][:name], 
-                     url: session_info[:presenter][:avatar_url], 
+          <%= render 'components/avatar',
+                     name: speaker.name,
+                     url: speaker.thumbnail,
                      size: 'm' %>
           <div class="ml-2 flex flex-col">
-            <span class="text-sm font-bold"><%= session_info[:presenter][:name] %></span>
-            <% if session_info[:presenter][:handle].present? %>
-              <span class="text-sm text-gray-500">@<%= session_info[:presenter][:handle] %></span>
-            <% end %>
+            <span class="text-sm font-bold"><%= speaker.name %></span>
+            <span class="text-sm text-gray-500">@<%= speaker.handle %></span>
           </div>
         </div>
       <% end %>
@@ -60,9 +45,9 @@
       <div class="flex flex-col divide-y">
         <% profiles.each do |profile| %>
           <div class="flex items-center py-3">
-            <%= render 'components/avatar', name: profile[:name], url: profile[:avatar_url], size: 'm' %>
+            <%= render 'components/avatar', name: profile.name, url: profile.avatar_url, size: 'm' %>
             <div class="ml-2">
-              <%= profile[:name] %>
+              <%= profile.name %>
             </div>
           </div>
         <% end %>

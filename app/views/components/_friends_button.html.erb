@@ -1,4 +1,4 @@
-<%# locals (profiles: [], session_info: nil) -%>
+<%# locals: (profiles: [], schedule: nil) -%>
 
 <% dialog_id = "friends-dialog-#{SecureRandom.hex(4)}" %>
 <div class="flex items-center justify-between bg-shade-90 p-4 rounded-lg">
@@ -16,7 +16,7 @@
         </button>
         
         <dialog data-dialog-target="dialog" id="<%= dialog_id %>">
-            <%= render 'components/friends_dialog', profiles: profiles, dialog_id: dialog_id, session_info: session_info %>
+            <%= render 'components/friends_dialog', profiles: profiles, dialog_id:, schedule: %>
         </dialog>
     </div>
 </div>
