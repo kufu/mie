@@ -66,6 +66,8 @@ en:
       start_end_time: "Start...End time (%{zone})"
       language: "Language"
       description: "Description about the talk"
+    friends: "Friends"
+    team: "Your Team (%{team_name})"
   description:
     title: "Note for the schedule"
     notice: "This memo will be placed into OGP image when share on SNS."

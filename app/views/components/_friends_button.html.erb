@@ -1,10 +1,10 @@
-<%# profiles: name と avatar_url を含むハッシュの配列 %>
-<%# session_info: セッション情報（オプション） %>
+<%# locals (profiles: [], session_info: nil) -%>
+
 <% dialog_id = "friends-dialog-#{SecureRandom.hex(4)}" %>
 <div class="flex items-center justify-between bg-shade-90 p-4 rounded-lg">
     <div class="flex -space-x-2">
         <% profiles.first(5).each do |profile| %>
-            <%= render('components/avatar', name: profile[:name], url: profile[:avatar_url], size: 's') %>
+            <%= render('components/avatar', name: profile.name, url: profile.avatar_url, size: 's') %>
         <% end %>
     </div>
     <div data-controller="dialog" data-dialog-element-id-value="<%= dialog_id %>">
