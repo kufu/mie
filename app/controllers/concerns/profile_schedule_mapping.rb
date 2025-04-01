@@ -17,7 +17,7 @@ module ProfileScheduleMapping
   end
 
   def set_teammates_schedules_mapping
-    return @teammate_schedules_map = {} unless @user.profile
+    return @teammate_schedules_map = {} unless @user.profile&.current_team
 
     @teammate_schedules_map = @user.profile.current_team.profiles.to_h do |profile|
       [profile, profile.user.current_plan&.plan_schedules&.map(&:schedule_id) || []]
