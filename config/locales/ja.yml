@@ -35,6 +35,8 @@ ja:
       start_end_time: "開始/終了 (%{zone})"
       language: "言語"
       description: "トークの詳細"
+      friends: "友達"
+      team: "チーム (%{team_name})"
   description:
     title: "ノート"
     notice: "このノートは、SNSシェア時にOGP画像に埋め込まれます"
@@ -105,6 +107,9 @@ ja:
 
   trophy:
     rarity: "レアリティ"
+
+  trigger:
+    error: "すでに条件を満たしています"
 
   errors:
     time_overlap_error: "「%{left}」と「 %{right}」は、時間が重複しているため同時に選択できません"

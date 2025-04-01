@@ -27,12 +27,16 @@ export default class extends Controller {
     }
 
     let override = true;
+    const selected = this.sessionTargets.findIndex((el) => el.classList.contains('selected')) >= 0;
 
     this.sessionTargets.forEach((el) => {
       if (!el.classList.contains('selected')) {
         el.classList.toggle('hidden', this.isOpenValue);
       } else {
         override = false;
+      }
+      if (el.classList.contains('blank-box') && !selected) {
+        el.classList.toggle('hidden', false);
       }
     });
 
