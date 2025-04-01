@@ -7,8 +7,8 @@
     <% if @team.admin?(@user) %>
       <div class="p-4 rounded-lg bg-[#FCFCFD] shadow-sm space-y-4">
         <%= form_with model: @team do |f| %>
-          <%= render "components/form_control", label: I18n.t('teams.name'), required: true do |input_id| %>
-            <%= render "components/text_field", form_helper: f, attribute: :name, id: input_id %>
+          <%= render "components/form_control", label: I18n.t('teams.name'), required: true, errors: @team.errors.where(:name) do |input_id| %>
+            <%= render "components/text_field", form_helper: f, attribute: :name, id: input_id, classes: "w-full" %>
           <% end %>
           <div class="mt-4">
             <%= render 'components/button', title: I18n.t('button.save'), form_helper: f %>
