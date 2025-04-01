@@ -19,7 +19,11 @@
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
     <% if row.schedules.empty? %>
       <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
-        <%= render 'components/session_card_blank', team:, absent_friends:, absent_teammates: %>
+        <%= render 'components/session_card_blank',
+                   team:,
+                   absent_friends: friends_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact,
+                   absent_teammates: teammates_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact
+        %>
       </div>
     <% else %>
       <% row.schedules.each do |session| %>
