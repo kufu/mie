@@ -1,17 +1,6 @@
 <%= form_with model: @team do |f| %>
-  <% if team.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
-
-      <ul>
-        <% team.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= render "components/form_control", label: I18n.t('teams.name'), required: true do |input_id| %>
-    <%= render "components/text_field", form_helper: f, attribute: :name, id: input_id %>
+  <%= render "components/form_control", label: I18n.t('teams.name'), required: true, errors: team.errors.where(:name) do |input_id| %>
+    <%= render "components/text_field", form_helper: f, attribute: :name, id: input_id, classes: "w-full" %>
   <% end %>
   <div class="mt-4">
     <%= render 'components/button', title: I18n.t('button.save'), form_helper: f %>

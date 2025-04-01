@@ -1,0 +1,6 @@
+<%# locals: (errors:) -%>
+<ul class="mt-2 text-red-500">
+  <% errors.each do |e| %>
+    <li class="text-sm <%= 'mb-1' unless e == errors.last %>"><%= e.full_message %></li>
+  <% end %>
+</ul>

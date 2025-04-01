@@ -3,9 +3,11 @@
 - label: ラベルテキスト（必須）
 オプションパラメータ:
 - classes: 追加のCSSクラス
+- errors: エラーメッセージオブジェクト
 <% end %>
 
 <% classes ||= "" %>
+<% errors ||= nil %>
 <% input_id = "input_#{SecureRandom.hex(8)}" %>
 
 <div class="<%= classes %>">
@@ -15,6 +17,8 @@
   >
     <%= label %>
   </label>
-
-  <%= yield input_id %>
+<%= yield input_id %>
+<% if errors.present? %>
+  <%= render 'components/error_messages', errors: errors %>
+<% end %>
 </div>
