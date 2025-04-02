@@ -18,7 +18,7 @@
              location: @row.schedules.find { @user&.current_plan&.schedules&.include?(_1) }&.track&.name,
              scheduled: @row.schedules.find { @user&.current_plan&.schedules&.include?(_1) },
              team: @user.profile.current_team,
-             absent_friends: @friends_schedules_map.map { (_2 & @row.schedules.map(&:id)).present? ? nil : _1 }.compact,
-             absent_teammates: @teammate_schedules_map.map { (_2 & @row.schedules.map(&:id)).present? ? nil : _1 }.compact
+             friends_schedules_map: @friends_schedules_map,
+             teammates_schedules_map: @teammate_schedules_map
   %>
 <% end %>

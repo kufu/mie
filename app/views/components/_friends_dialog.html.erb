@@ -1,0 +1,62 @@
+<%# locals: (profiles:, dialog_id:, schedule: nil, header_content: nil) -%>
+
+<% if schedule.present? %>
+  <% header_content = capture do %>
+    <div class="bg-gray-100 flex flex-col gap-y-2 p-4">
+      <div class="text-lg text-gray-600">
+        <%= I18n.l(schedule.start_at, format: :timetable) %> - <%= I18n.l(schedule.end_at, format: :timetable) %>
+      </div>
+
+      <div class="flex flex-col gap-y-1">
+        <div class="text-base text-gray-500">
+          <%= schedule.language_text %> · <%= schedule.track.name %>
+        </div>
+
+        <div class="text-xl font-bold"><%= schedule.title %></div>
+      </div>
+
+      <% schedule.speakers.each do |speaker| %>
+        <div class="flex items-center">
+          <%= render 'components/avatar',
+                     name: speaker.name,
+                     url: speaker.thumbnail,
+                     size: 'm' %>
+          <div class="ml-2 flex flex-col">
+            <span class="text-sm font-bold"><%= speaker.name %></span>
+            <span class="text-sm text-gray-500">@<%= speaker.handle %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render layout: 'components/dialog', locals: { 
+  title: t('dialog.attendee_title'), 
+  dialog_id: dialog_id,
+  header_content: header_content
+} do %>
+  <div class="flex flex-col">
+    <div class="flex justify-between border-b pb-2 mb-4">
+      <div class="text-lg font-bold"><%= t('dialog.attendee_friends') %></div>
+    </div>
+    
+    <% if profiles.present? %>
+      <div class="flex flex-col divide-y">
+        <% profiles.each do |profile| %>
+          <div class="flex items-center py-3">
+            <%= render 'components/avatar', name: profile.name, url: profile.avatar_url, size: 'm' %>
+            <div class="ml-2">
+              <%= profile.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <%# 友達がいない場合の表示 %>
+      <div class="py-4 text-center text-gray-500">
+        <%= t('dialog.attendee_no_friends') %>
+      </div>
+    <% end %>
+  </div>
+<% end %> 

@@ -1,6 +1,6 @@
-<%# locals: (row:, location:, scheduled:, team: nil, absent_friends: [], absent_teammates: [], no_buttons: false) -%>
+<%# locals: (row:, location:, scheduled:, team: nil, friends_schedules_map: [], teammates_schedules_map: [], no_buttons: false) -%>
 
-<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-gray-100 rounded-lg p-3 shadow-md border">
+<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-[#E3E5E8] rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if row.schedules.size > 1 %>
@@ -19,7 +19,11 @@
   <div data-sessions-target="sessions" class="mt-2 flex flex-wrap flex-row gap-4">
     <% if row.schedules.empty? %>
       <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
-        <%= render 'components/session_card_blank', team:, absent_friends:, absent_teammates: %>
+        <%= render 'components/session_card_blank',
+                   team:,
+                   absent_friends: friends_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact,
+                   absent_teammates: teammates_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact
+        %>
       </div>
     <% else %>
       <% row.schedules.each do |session| %>
@@ -27,14 +31,18 @@
           <%= render 'components/session_card',
                      row: row,
                      schedule: session,
-                     attendees: [],
+                     attendees: friends_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? _1 : nil }.compact,
                      scheduled: scheduled,
                      no_buttons: no_buttons
           %>
         </div>
       <% end %>
       <div data-sessions-target="session" class="blank-box <%= session == scheduled ? '' : scheduled ? 'hidden md:block' : 'md:block' %> w-full md:w-[288px]">
-        <%= render 'components/session_card_blank', team:, absent_friends:, absent_teammates: %>
+        <%= render 'components/session_card_blank',
+                   team:,
+                   absent_friends: friends_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact,
+                   absent_teammates: teammates_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? nil : _1 }.compact
+        %>
       </div>
     <% end %>
   </div>

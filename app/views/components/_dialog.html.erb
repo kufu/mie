@@ -2,6 +2,7 @@
 必要なパラメータ:
 - title: ダイアログのタイトル（必須）
 - content: ダイアログの本文（ブロックとして渡す）（必須）
+- dialog_id: ダイアログのID（オプション）
 オプションパラメータ:
 - action_button: アクションボタンの設定（オプション）
   - title: ボタンのテキスト
@@ -17,6 +18,11 @@
         <%= title %>
       </h2>
     </div>
+
+    <%# ヘッダー直下部分の追加コンテンツ %>
+    <% if local_assigns[:header_content].present? %>
+      <%= header_content %>
+    <% end %>
 
     <%# 本文部分 %>
     <div class="p-4 overflow-y-auto">

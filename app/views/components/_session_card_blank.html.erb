@@ -1,18 +1,18 @@
 <%# locals: (team: nil, absent_friends: [], absent_teammates: []) -%>
 
-<div class="rounded-lg p-3 flex flex-col gap-y-2 h-full border-2 border-dashed border-shade-30">
-    <p class="text-sub">
-        Schedule.blank?
-    </p>
-    <div class="flex flex-col gap-y-1 text-sub font-bold">
-        <%= t('card.friends') %>
-        <%= render 'components/friends_button', profiles: absent_friends, onClick: "alert('test')" %>
+<div class="rounded-lg p-3 flex flex-col gap-y-2 border-2 border-dashed border-shade-30 text-[#5E626E]">
+  <p class="text-base">
+    Schedule.blank?
+  </p>
+  <div class="flex flex-col">
+    <p class="text-xs font-bold mb-1"><%= t('card.friends') %></p>
+    <%= render 'components/friends_button', profiles: absent_friends %>
+  </div>
+  <% if team.present? %>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold mb-1"><%= t('card.team', team_name: team&.name) %></p>
+      <%# FIXME: チームメンバーのプロフィールを表示 %>
+      <%= render 'components/friends_button', profiles: absent_teammates %>
     </div>
-    <% if team.present? %>
-        <div class="flex flex-col gap-y-1 text-sub font-bold">
-            <%= t('card.team', team_name: team&.name) %>
-        </div> 
-        <%# FIXME: チームメンバーのプロフィールを表示 %>
-        <%= render 'components/friends_button', profiles: absent_teammates, onClick: "alert('test')" %>
-    <% end %>
-</div> 
+  <% end %>
+</div>
