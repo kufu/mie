@@ -36,10 +36,8 @@
     <%= yield(:head) %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body class="bg-[#f8f7f6] leading-4 font-sans">
-    <header>
-      <%= render 'components/app_header' %>
-    </header>
+  <body class="bg-[var(--semantic-neutral-background-sub)] leading-4 font-sans">
+    <%= render 'components/app_header' %>
     <main class="p-4 sm:p-8 min-h-screen">
       <%= yield %>
     </main>
