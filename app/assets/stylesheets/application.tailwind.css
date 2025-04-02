@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* semantic-neutral */
+    --semantic-neutral-text: theme("colors.primitive.shade.10");
+    --semantic-neutral-text-sub: theme("colors.primitive.shade.30");
+    --semantic-neutral-text-disabled: theme("colors.primitive.shade.70");
+    --semantic-neutral-background: theme("colors.primitive.shade.100");
+    --semantic-neutral-background-sub: theme("colors.primitive.shade.90");
+    --semantic-neutral-background-group: theme("colors.primitive.shade.80");
+    --semantic-neutral-line: theme("colors.primitive.shade.30");
+    --semantic-neutral-line-sub: theme("colors.primitive.shade.70");
+  }
+}
+
 @layer components {
   .primary-button {
     @apply box-border cursor-pointer inline-flex justify-center items-center whitespace-nowrap gap-2 text-center rounded-md border border-solid border-[var(--mainColor)] py-3 px-4 font-bold bg-[var(--mainColor)] text-[var(--textColor)] hover:border-[var(--hoverColor)] hover:bg-[var(--hoverColor)] disabled:border-[rgb(202,198,194)] disabled:bg-[rgb(242,242,242)] disabled:cursor-not-allowed;
