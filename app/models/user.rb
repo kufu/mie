@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def current_plan
     plans.where(event: Event.order(created_at: :desc).first).order(created_at: :desc).first
   end
+
+  def current_team
+    profile&.current_team
+  end
 end
