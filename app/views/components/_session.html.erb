@@ -31,7 +31,7 @@
           <%= render 'components/session_card',
                      row: row,
                      schedule: session,
-                     attendees: friends_schedules_map.map { (_2 & row.schedules.map(&:id)).present? ? _1 : nil }.compact,
+                     attendees: friends_schedules_map.map { _2.include?(session.id) ? _1 : nil }.compact,
                      scheduled: scheduled,
                      no_buttons: no_buttons
           %>
