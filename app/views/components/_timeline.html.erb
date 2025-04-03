@@ -42,7 +42,7 @@
   <%# 時刻のブロック %>
   <% (start_hour..end_hour).each do |hour| %>
     <div class="relative w-14" style="height: <%= hour_height %>px">
-      <div class="absolute left-0 top-0 w-12 p-1 text-left text-xs text-[#131416] bg-[#FCFCFD]/70 rounded-r-lg z-10">
+      <div class="absolute left-0 top-0 w-12 p-1 text-left text-xs text-[var(--semantic-neutral-text)] bg-primitive-shade-100/70 rounded-r-lg z-10">
         <%= format_hour(hour) %>
       </div>
     </div>
@@ -57,7 +57,11 @@
       height = minutes_to_height(duration_minutes)
     %>
     <div
-      class="absolute left-0 w-10 ml-4 rounded-lg <%= event[:participating] ? 'bg-[#5E626E]' : 'bg-[#E3E5E8] border-2 border-dashed border-[#5E626E]' %>"
+      class="absolute left-0 w-10 ml-4 rounded-lg <%=
+        event[:participating] ?
+          'bg-primitive-shade-50' :
+          'bg-[var(--semantic-neutral-background-group)] border-2 border-dashed border-[var(--semantic-neutral-line)]'
+      %>"
       style="top: <%= start_offset %>px; height: <%= height %>px;"
     ></div>
   <% end %>

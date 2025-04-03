@@ -9,7 +9,7 @@
   <div class="flex justify-center pb-4">
     <div class="flex border-b border-[#CDCFD5] w-fit">
       <% @plan_table.days.each do |day| %>
-        <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none text-sm px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
+        <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button text-sm text-[var(--semantic-neutral-text)] px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
           <%= day %>
         </button>
       <% end %>
@@ -30,11 +30,11 @@
     <h2 class="text-2xl font-bold"><%= @plan.title %></h2>
   </div>
 
-  <div class="bg-white rounded-lg p-4 mb-7">
+  <div class="bg-[var(--semantic-neutral-background)] rounded-lg p-4 mb-7">
     <div class="flex justify-between items-center mb-2">
-      <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
+      <h3 class="text-base font-bold text-[var(--semantic-neutral-text)]"><%= I18n.t('description.title') %></h3>
     </div>
-    <p class="text-base"><%= @plan.description %></p>
+    <p class="text-base text-[var(--semantic-neutral-text)]"><%= @plan.description %></p>
   </div>
 
   <% cache [@plan_table, @plan] do %>
