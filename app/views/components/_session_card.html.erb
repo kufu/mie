@@ -21,7 +21,7 @@
     <% schedule.speakers.each do |speaker| %>
       <div class="flex items-center gap-x-2">
         <div class="flex-shrink-0">
-          <%= render 'components/avatar', name: speaker.name, url: speaker.thumbnail, size: 'm' %>
+          <%= render 'components/avatar', name: speaker.name, src: speaker.thumbnail %>
         </div>
         <div>
           <span class="text-sm font-bold"><%= speaker.name %></span>

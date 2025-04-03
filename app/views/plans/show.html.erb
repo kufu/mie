@@ -19,7 +19,7 @@
   <div class="flex items-center mb-2">
     <div class="mr-2">
       <% if @plan.user.profile %>
-        <%= render 'components/avatar', url: @plan.user.profile.avatar_url, name: @plan.user.profile.name %>
+        <%= render 'components/avatar', src: @plan.user.profile.avatar_url, name: @plan.user.profile.name %>
       <% else %>
         <div class="relative group">
           <img src="<%= asset_path("default_icon.svg") %>" class="w-10 h-10 p-1 rounded-full border-2 border-[#CECFD5] bg-white">
