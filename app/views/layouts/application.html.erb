@@ -23,7 +23,7 @@
       <%= tag :meta, name: :rails_env, content: Rails.env %>
     <% end %>
     <meta property="og:title" content="RubyKaigi Schedule.select">
-    <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+    <meta property="og:site_name" content="RubyKaigi Schedule.select powered by SmartHR">
     <% unless Rails.env.test? %>
       <% if controller_name == 'plans' && action_name = 'show' && @plan %>
         <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
