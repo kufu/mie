@@ -1,4 +1,4 @@
-<%# locals: (profiles:, dialog_id:, schedule: nil, header_content: nil) -%>
+<%# locals: (profiles:, schedule: nil, header_content: nil) -%>
 
 <% if schedule.present? %>
   <% header_content = capture do %>
@@ -32,7 +32,6 @@
 
 <%= render layout: 'components/dialog', locals: { 
   title: t('dialog.attendee_title'), 
-  dialog_id: dialog_id,
   header_content: header_content
 } do %>
   <div class="flex flex-col">

@@ -1,13 +1,4 @@
-<% if false %>
-必要なパラメータ:
-- title: ダイアログのタイトル（必須）
-- content: ダイアログの本文（ブロックとして渡す）（必須）
-- dialog_id: ダイアログのID（オプション）
-オプションパラメータ:
-- action_button: アクションボタンの設定（オプション）
-  - title: ボタンのテキスト
-  - classes: ボタンのクラス
-<% end %>
+<%# locals: (title:, action_button: nil, header_content: nil) -%>
 
 <div class="fixed inset-0 bg-black/50 flex items-center justify-center">
   <div class="bg-white rounded-lg w-[90vw] md:w-[480px] max-h-[90vh] flex flex-col">
