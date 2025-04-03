@@ -1,21 +1,5 @@
-<% if false %>
-必要なパラメータ:
-- form_helper: フォームヘルパーオブジェクト（form_withなどから渡される）
-- attribute: フォームのフィールド名
+<%# locals: (classes: "", placeholder: "", id: nil, rows: 3, form_helper: nil, attribute: nil) -%>
 
-オプションパラメータ:
-- classes: 追加のCSSクラス
-- placeholder: プレースホルダーテキスト
-- id: textarea要素のID（form_controlと組み合わせて使用する場合に自動で設定される）
-- rows: テキストエリアの行数（デフォルト: 3）
-<% end %>
-
-<% classes ||= "" %>
-<% placeholder ||= "" %>
-<% id ||= nil %>
-<% rows ||= 3 %>
-<% form_helper ||= nil %>
-<% attribute ||= nil %>
 <% textarea_classes = [
   "border border-[var(--textColor)] rounded-md px-3 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-full resize-y",
   classes
