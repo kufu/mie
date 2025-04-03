@@ -1,12 +1,9 @@
-<% classes ||= "" %>
-<% placeholder ||= "" %>
-<% id ||= nil %>
+<%# locals: (classes: "", placeholder: "", id: nil, form_helper: nil, attribute: nil) -%>
+
 <% text_field_classes = [
 "border border-[var(--textColor)] rounded-md px-4 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500",
   classes
 ].join(" ") %>
-<% form_helper ||= nil %>
-<% attribute ||= nil %>
 
 <% if form_helper %>
   <%= form_helper.text_field attribute, class: text_field_classes, placeholder: placeholder, id: id  %>
