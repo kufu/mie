@@ -1,11 +1,5 @@
-<%# `default` か `s` を選択可能 %>
-<% size ||= "default" %>
-<% classes ||= "" %>
-<% icon ||= "" %>
-<% disabled ||= false %>
-<% data ||= nil %>
-<% danger ||= false %>
-<% text_size ||= "text-base" %>
+<%# locals: (title:, size: 'default', classes: "", icon: "", disabled: false, data: nil, danger: false, text_size: 'text-base', form_helper: nil, href: nil) -%>
+
 <% button_classes = [
   "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[#FCFCFD] rounded-lg whitespace-nowrap",
   (size == "s" ? "px-2 py-1" : "px-3 py-2"),
@@ -17,8 +11,6 @@
   "font-bold",
   (danger ? "text-red-600" : nil)
 ].join(" ") %>
-<% form_helper ||= nil %>
-<% href ||= nil %>
 
 <% if form_helper %>
   <%= form_helper.button type: :submit, class: button_classes, data: data, disabled: disabled do %>
