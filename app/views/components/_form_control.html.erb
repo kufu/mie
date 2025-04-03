@@ -1,13 +1,5 @@
-<% if false %>
-必要なパラメータ:
-- label: ラベルテキスト（必須）
-オプションパラメータ:
-- classes: 追加のCSSクラス
-- errors: エラーメッセージオブジェクト
-<% end %>
+<%# locals: (label:, classes: "", errors: nil) -%>
 
-<% classes ||= "" %>
-<% errors ||= nil %>
 <% input_id = "input_#{SecureRandom.hex(8)}" %>
 
 <div class="<%= classes %>">
