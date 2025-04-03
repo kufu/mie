@@ -11,7 +11,7 @@
     <div class="flex justify-center pb-4">
       <div class="flex border-b border-[#CDCFD5] w-fit">
         <% @schedule_table.days.each do |day| %>
-          <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button bg-transparent appearance-none text-sm px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
+          <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button text-sm text-[var(--semantic-neutral-text)] px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
             <%= day %>
           </button>
         <% end %>
@@ -26,18 +26,18 @@
              data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
              class="flex justify-between items-center mb-2"
         >
-          <h2 class="text-2xl font-bold"><%= @plan.title %></h2>
+          <h2 class="text-2xl font-bold text-[var(--semantic-neutral-text)]"><%= @plan.title %></h2>
           <% if @plan.persisted? %>
             <%= render "components/button", title: I18n.t('button.share'), size: "s", data: { action: 'click->share#click' } %>
           <% end %>
         </div>
 
-        <div data-controller="dialog" class="bg-white rounded-lg p-4 mb-7">
+        <div data-controller="dialog" class="bg-[var(--semantic-neutral-background)] rounded-lg p-4 mb-7">
           <div class="flex justify-between items-center mb-2">
-            <h3 class="text-base font-bold"><%= I18n.t('description.title') %></h3>
+            <h3 class="text-base font-bold text-[var(--semantic-neutral-text)]"><%= I18n.t('description.title') %></h3>
             <%= render "components/button", title: I18n.t('button.edit'), size: "s", data: { action: 'click->dialog#open' } %>
           </div>
-            <p class="text-base"><%= @plan.description %></p>
+            <p class="text-base text-[var(--semantic-neutral-text)]"><%= @plan.description %></p>
           <dialog data-dialog-target="dialog" id="schedule-edit-dialog">
             <%= render 'plans/form', plan: @plan %>
           </dialog>

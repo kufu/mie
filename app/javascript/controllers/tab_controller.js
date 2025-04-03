@@ -17,10 +17,10 @@ export default class extends Controller {
     this.buttonTargets.forEach((element, i) => {
       if (element === event.target) {
         this.currentValue = i;
-        element.classList.add('font-bold', 'border-[#5E626E]');
+        element.classList.add('font-bold', 'border-[var(--semantic-neutral-line)]');
         element.classList.remove('font-medium', 'border-transparent');
       } else {
-        element.classList.remove('font-bold', 'border-[#5E626E]');
+        element.classList.remove('font-bold', 'border-[var(--semantic-neutral-line)]');
         element.classList.add('font-medium', 'border-transparent');
       }
     });

@@ -1,8 +1,8 @@
 <%# locals: (row:, schedule:, scheduled:, attendees: [], no_buttons: false) %>
 
-<div class="bg-shade-100 shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[#5E626E]' if scheduled == schedule %>">
+<div class="bg-[var(--semantic-neutral-background)] shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[var(--semantic-neutral-line)]' if scheduled == schedule %>">
   <%# スケジュール情報の展開 %>
-  <div class="text-sm"><%= schedule.language_text %>・<%= schedule.track.name %></div>
+  <div class="text-sm text-[var(--semantic-neutral-text)]"><%= schedule.language_text %>・<%= schedule.track.name %></div>
 
   <% common_classes = "text-lg font-semibold text-accent block h-[56px] overflow-hidden" %>
   <% tag_name = schedule.speakers.first.present? ? :a : :p %>
@@ -24,8 +24,8 @@
           <%= render 'components/avatar', name: speaker.name, url: speaker.thumbnail, size: 'm' %>
         </div>
         <div>
-          <span class="text-sm font-bold"><%= speaker.name %></span>
-          <span class="text-sm text-shade-30"><%= speaker.handle %></span>
+          <span class="text-sm font-bold text-[var(--semantic-neutral-text)]"><%= speaker.name %></span>
+          <span class="text-sm text-[var(--semantic-neutral-text-sub)]"><%= speaker.handle %></span>
         </div>
       </div>
     <% end %>

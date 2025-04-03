@@ -7,9 +7,11 @@
 <% danger ||= false %>
 <% text_size ||= "text-base" %>
 <% button_classes = [
-  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[#FCFCFD] rounded-lg whitespace-nowrap",
+  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[var(--semantic-neutral-background)] rounded-lg whitespace-nowrap",
   (size == "s" ? "px-2 py-1" : "px-3 py-2"),
-  (disabled ? "border-[#E3E5E8] text-[#CDCFD5]" : "border-[#5E626E] text-[#131416]"),
+  (disabled ?
+    "border-[#E3E5E8] text-[#CDCFD5]" :
+    "border-[var(--semantic-neutral-line)] text-[var(--semantic-neutral-text)]"),
   classes
 ].join(" ") %>
 <% text_classes = [

@@ -44,6 +44,6 @@
   }
 
   .tab-btn-active {
-    @apply relative text-[rgb(35,34,30)] font-bold border-[#5E626E];
+    @apply relative text-[var(--semantic-neutral-text)] font-bold border-[var(--semantic-neutral-line)];
   }
 }

@@ -1,14 +1,14 @@
 <%# locals: (row:, location:, scheduled:, team: nil, friends_schedules_map: [], teammates_schedules_map: [], no_buttons: false) -%>
 
-<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-[#E3E5E8] rounded-lg p-3 shadow-md border">
+<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-primitive-shade-80 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if row.schedules.size > 1 %>
-        <div class="w-8 h-8 flex items-center justify-center bg-[#FCFCFD] border border-solid border-[#5E626E] rounded-lg">
+        <div class="w-8 h-8 flex items-center justify-center bg-[var(--semantic-neutral-background)] border border-solid border-[var(--semantic-neutral-line)] rounded-lg">
           <i data-sessions-target="icon" class="fa-solid fa-angle-right md:hidden"></i>
         </div>
       <% end %>
-        <span class="font-bold text-lg"><%= row.start_end %></span>
+        <span class="font-bold text-lg text-[var(--semantic-neutral-text)]"><%= row.start_end %></span>
     </button>
     <span class="hidden sm:inline font-bold text-lg"><%= row.start_end %></span>
     <% if location.present? %>
