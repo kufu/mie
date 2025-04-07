@@ -1,0 +1,9 @@
+<%# locals: (title:) -%>
+
+<div
+  data-controller="notification"
+  class="h-12 w-full flex items-center justify-between p-4 border-b bg-[var(--semantic-neutral-background-group)]"
+>
+  <div class="text-xs font-bold"><%= title %></div>
+  <%= render "components/button", icon: render("components/icons/close"), size: 's', data: { action: "click->notification#close"} %>
+</div>
