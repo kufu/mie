@@ -1,4 +1,4 @@
-<%# locals: (title:, size: 'default', classes: "", icon: "", disabled: false, data: nil, danger: false, text_size: 'text-base', form_helper: nil, href: nil) -%>
+<%# locals: (title: nil, size: 'default', classes: "", icon: nil, disabled: false, data: nil, danger: false, text_size: 'text-base', form_helper: nil, href: nil) -%>
 
 <% button_classes = [
   "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[var(--semantic-neutral-background)] rounded-lg whitespace-nowrap",
@@ -16,23 +16,35 @@
 
 <% if form_helper %>
   <%= form_helper.button type: :submit, class: button_classes, data: data, disabled: disabled do %>
-    <%= raw icon %>
-    <span class="<%= text_classes %>">
-    <%= title %>
-  </span>
+    <% if icon %>
+      <%= raw icon %>
+    <% end %>
+    <% if title %>
+      <span class="<%= text_classes %>">
+        <%= title %>
+      </span>
+    <% end %>
   <% end %>
 <% elsif href %>
   <%= link_to href, data: data, class: button_classes, disabled: disabled do %>
-    <%= raw icon %>
-    <span class="<%= text_classes %>">
-      <%= title %>
-    </span>
+    <% if icon %>
+      <%= raw icon %>
+    <% end %>
+    <% if title %>
+      <span class="<%= text_classes %>">
+        <%= title %>
+      </span>
+    <% end %>
   <% end %>
 <% else %>
   <%= tag.button class: button_classes, disabled: disabled, data: data do %>
-    <%= raw icon %>
-    <span class="<%= text_classes %>">
-      <%= title %>
-    </span>
+    <% if icon %>
+      <%= raw icon %>
+    <% end %>
+    <% if title %>
+      <span class="<%= text_classes %>">
+        <%= title %>
+      </span>
+    <% end %>
   <% end %>
 <% end %>
