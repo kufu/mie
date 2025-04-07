@@ -33,6 +33,10 @@ development:
     <<: *primary_development
     database: storage/development_queue.sqlite3
     migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_development
+    database: storage/development_cable.sqlite3
+    migrations_paths: db/cable_migrate
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -100,3 +104,7 @@ production:
     <<: *primary_development
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
