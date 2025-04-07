@@ -8,7 +8,7 @@
 
 <%= turbo_frame_tag @event, refresh: :morph do %>
   <div data-controller="schedule-table">
-    <div class="flex justify-center pb-4">
+    <div class="flex justify-center bg-white mx-[calc(50%-50vw)] -mt-4 sm:-mt-8">
       <div class="flex border-b border-[#CDCFD5] w-fit">
         <% @schedule_table.days.each do |day| %>
           <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button text-sm text-[var(--semantic-neutral-text)] px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
@@ -24,7 +24,7 @@
              data-share-title-value="<%= @plan.title %>"
              data-share-text-value="<%= @plan.description %>"
              data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
-             class="flex justify-between items-center mb-2"
+             class="flex justify-between items-center my-2"
         >
           <h2 class="text-2xl font-bold text-[var(--semantic-neutral-text)]"><%= @plan.title %></h2>
           <% if @plan.persisted? %>
