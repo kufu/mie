@@ -19,6 +19,9 @@ application.register("hamburger", HamburgerController)
 import LocaleController from "./locale_controller"
 application.register("locale", LocaleController)
 
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
 import ScheduleTableController from "./schedule_table_controller"
 application.register("schedule-table", ScheduleTableController)
 
