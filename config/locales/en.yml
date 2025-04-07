@@ -154,8 +154,7 @@ en:
 
   trophy:
     rarity: "Rarity"
-    notification: "🏆「[%{name}] unlocked!"
-
+    notification: "🏆 [%{name}] unlocked!"
   trigger:
     error: "Already satisfied the condition"
 
