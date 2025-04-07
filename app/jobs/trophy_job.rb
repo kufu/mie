@@ -8,7 +8,16 @@ class TrophyJob < ApplicationJob
       logger.info("Trigger: #{trigger.description}")
       next if trigger.conditions.empty?
 
-      trigger.perform(profile, 'trophy')
+      profile_trophy = trigger.perform(profile, 'trophy')
+      next unless profile_trophy
+
+      Turbo::StreamsChannel.broadcast_prepend_to(
+        profile.user.id,
+        :notification,
+        target: 'notification',
+        partial: 'components/notification',
+        locals: { title: I18n.t('trophy.notification', name: profile_trophy.trophy.name) }
+      )
     end
   rescue Trigger::TriggerError, StandardError => e
     logger.error(e)

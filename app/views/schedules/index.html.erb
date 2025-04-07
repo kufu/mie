@@ -18,13 +18,16 @@
       </div>
     </div>
 
+    <%= turbo_stream_from @user.id, :notification %>
+    <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-50"></div>
+
     <% unless @plan.new_record? %>
       <%= turbo_frame_tag @plan do %>
         <div data-controller="share"
              data-share-title-value="<%= @plan.title %>"
              data-share-text-value="<%= @plan.description %>"
              data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
-             class="flex justify-between items-center my-2"
+             class="flex justify-between items-center mb-2"
         >
           <h2 class="text-2xl font-bold text-[var(--semantic-neutral-text)]"><%= @plan.title %></h2>
           <% if @plan.persisted? %>

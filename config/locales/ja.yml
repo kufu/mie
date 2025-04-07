@@ -111,6 +111,7 @@ ja:
 
   trophy:
     rarity: "レアリティ"
+    notification: "🏆「%{name}」を獲得しました！"
 
   trigger:
     error: "すでに条件を満たしています"
