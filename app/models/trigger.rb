@@ -22,14 +22,16 @@ class Trigger < ApplicationRecord
     check_amount
     check_expires
 
+    ret = nil
     transaction do
       action_as_array.each do |act|
-        Action.new(act).perform(target)
+        ret = Action.new(act).perform(target)
       end
 
       self.amount -= 1
       save!
     end
+    ret
   end
 
   def refresh_key
