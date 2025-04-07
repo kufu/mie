@@ -4,7 +4,7 @@
 <div class="flex items-center justify-between bg-[#F4F4F6] p-2 rounded-lg">
   <div class="flex -space-x-2">
     <% profiles.first(5).each do |profile| %>
-      <%= render('components/avatar', name: profile.name, url: profile.avatar_url, size: 's') %>
+      <%= render('components/avatar', name: profile.name, src: profile.avatar_url, size: 's') %>
     <% end %>
   </div>
   <div data-controller="dialog" data-dialog-element-id-value="<%= dialog_id %>">
@@ -16,7 +16,7 @@
     </button>
 
     <dialog data-dialog-target="dialog" id="<%= dialog_id %>">
-      <%= render 'components/friends_dialog', profiles: profiles, dialog_id:, schedule: %>
+      <%= render 'components/friends_dialog', profiles: profiles, schedule: %>
     </dialog>
   </div>
 </div>

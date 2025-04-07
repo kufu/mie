@@ -1,3 +1,5 @@
+<%# locals: (tabs:) -%>
+
 <% if false %>
 使用例:
 <%= render "components/tabs", tabs: [
@@ -8,7 +10,7 @@
 
 <div data-controller="tab">
   <div class="flex border-b border-[#CDCFD5]">
-    <% tabs.each_with_index do |tab| %>
+    <% tabs.each do |tab| %>
       <button id="<%= tab[:id] %>" data-tab-target="button" data-action="tab#switch" class="px-4 pt-2 pb-[5px] text-sm border-b-[3px]">
         <%= tab[:label] %>
       </button>

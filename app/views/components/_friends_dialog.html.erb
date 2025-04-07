@@ -1,4 +1,4 @@
-<%# locals: (profiles:, dialog_id:, schedule: nil, header_content: nil) -%>
+<%# locals: (profiles:, schedule: nil, header_content: nil) -%>
 
 <% if schedule.present? %>
   <% header_content = capture do %>
@@ -19,8 +19,7 @@
         <div class="flex items-center">
           <%= render 'components/avatar',
                      name: speaker.name,
-                     url: speaker.thumbnail,
-                     size: 'm' %>
+                     src: speaker.thumbnail %>
           <div class="ml-2 flex flex-col">
             <span class="text-sm font-bold"><%= speaker.name %></span>
             <span class="text-sm text-gray-500">@<%= speaker.handle %></span>
@@ -33,7 +32,6 @@
 
 <%= render layout: 'components/dialog', locals: { 
   title: t('dialog.attendee_title'), 
-  dialog_id: dialog_id,
   header_content: header_content
 } do %>
   <div class="flex flex-col">
@@ -45,7 +43,7 @@
       <div class="flex flex-col divide-y">
         <% profiles.each do |profile| %>
           <div class="flex items-center py-3">
-            <%= render 'components/avatar', name: profile.name, url: profile.avatar_url, size: 'm' %>
+            <%= render 'components/avatar', name: profile.name, src: profile.avatar_url %>
             <div class="ml-2">
               <%= profile.name %>
             </div>

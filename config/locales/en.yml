@@ -158,6 +158,9 @@ en:
   trigger:
     error: "Already satisfied the condition"
 
+  avatar:
+    alt_text: "Avatar of %{user}"
+
   time:
     formats:
       default: "%Y-%m-%d %H:%M"

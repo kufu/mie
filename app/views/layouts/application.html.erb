@@ -37,7 +37,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body class="bg-[var(--semantic-neutral-background-sub)] leading-4 font-sans">
-    <%= render 'components/app_header' %>
+    <%= render 'components/app_header', event: @event, profile: @user&.profile %>
     <main class="p-4 sm:p-8 min-h-screen">
       <%= yield %>
     </main>

@@ -1,3 +1,4 @@
+<%# locals: (options:, classes: "", selected: nil, id: nil) -%>
 <% if false %>
 必要なパラメータ:
 - options: 選択肢の配列。単純な値の配列（例：["選択肢1", "選択肢2"]）、またはラベルと値のペアの配列（例：[["ラベル1", "value1"]]）
@@ -7,10 +8,6 @@
 - id: select要素のID（form_controlと組み合わせて使用する場合に自動で設定される）
 <% end %>
 
-<% classes ||= "" %>
-<% options ||= [] %>
-<% selected ||= nil %>
-<% id ||= nil %>
 <% select_classes = [
   "border border-[var(--textColor)] rounded-md px-3 py-2 text-[var(--textColor)] focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[170px] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat",
   classes
