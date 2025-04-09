@@ -38,7 +38,7 @@ module Plans
             }
             .ogp-frame {
         		  width: 1200px;
-              height: 627px;
+              height: 630px;
               overflow: hidden;
               background: no-repeat center url(data:image/png;#{ogp_background_image});
               padding: 44px 34px 240px 64px;
