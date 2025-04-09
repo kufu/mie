@@ -6,8 +6,10 @@ module Plans
     before_action :set_plan
 
     def show
-      send_data IMGKit.new(get_html(@plan.description), quality: 20, width: 800).to_img(:png), type: 'image/png',
-                                                                                               disposition: 'inline'
+      ogp = Rails.cache.fetch("plan-ogp-#{@plan.id}-#{@plan.updated_at.to_i}") do
+        IMGKit.new(get_html(@plan.description), quality: 20, width: 800).to_img(:png)
+      end
+      send_data ogp, type: 'image/png', disposition: 'inline'
     end
 
     private
@@ -36,7 +38,7 @@ module Plans
             }
             .ogp-frame {
         		  width: 1200px;
-              height: 630px;
+              height: 627px;
               overflow: hidden;
               background: no-repeat center url(data:image/png;#{ogp_background_image});
               padding: 44px 34px 240px 64px;
