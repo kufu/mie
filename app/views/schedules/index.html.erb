@@ -8,7 +8,7 @@
 
 <%= turbo_frame_tag @event, refresh: :morph do %>
   <div data-controller="schedule-table">
-    <div class="flex justify-center pb-4">
+    <div class="flex justify-center bg-white mx-[calc(50%-50vw)] -mt-4 sm:-mt-8">
       <div class="flex border-b border-[#CDCFD5] w-fit">
         <% @schedule_table.days.each do |day| %>
           <button data-action="click->schedule-table#switch" value="<%= day %>" class="tab-button text-sm text-[var(--semantic-neutral-text)] px-4 pt-2 pb-[5px] border-b-[3px] border-transparent hover:bg-[rgb(248,247,246)]">
@@ -17,6 +17,9 @@
         <% end %>
       </div>
     </div>
+
+    <%= turbo_stream_from @user.id, :notification %>
+    <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-50"></div>
 
     <% unless @plan.new_record? %>
       <%= turbo_frame_tag @plan do %>
