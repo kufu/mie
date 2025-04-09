@@ -6,7 +6,7 @@ module Plans
     before_action :set_plan
 
     def show
-      ogp = Rails.cache.fetch("plan-ogp-#{@plan.id}-#{@plan.updated_at.to_i}") do
+      ogp = Rails.cache.fetch("plan-ogp-full-#{@plan.id}-#{@plan.updated_at.to_i}") do
         IMGKit.new(get_html(@plan.description), quality: 20, width: 800).to_img(:png)
       end
       send_data ogp, type: 'image/png', disposition: 'inline'
@@ -41,29 +41,20 @@ module Plans
               height: 630px;
               overflow: hidden;
               background: no-repeat center url(data:image/png;#{ogp_background_image});
-              padding: 44px 34px 240px 64px;
+              padding: 44px;
               line-height: 1.5;
               font-size: 58px;
               color: #000000;
               word-break: break-all;
-            }
-            .ogp-body {
-              width: 100%;
-              height: 100%;
-              overflow-y: hidden;
               display: -webkit-box;
-              -webkit-line-clamp: 4;
-              -webkit-box-orient: vertical;
-              padding: 0 10px 0 0;
+              -webkit-box-align: center;
             }
-        #{'    '}
-            .ogp-body::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-                display:none;
+            .ogp-frame p {
+              margin: 44px;
             }
-        #{'	  '}
         	</style>
           </head>
-          <body><div class="ogp-frame"><div class="ogp-body">#{ERB::Util.h(body)}</div></div></body></html>
+          <body><div class="ogp-frame"><p>#{ERB::Util.h(body)}</p></div></body></html>
       HTML
     end
 
