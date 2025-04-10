@@ -20,7 +20,7 @@
 
     <% if @user %>
       <%= turbo_stream_from @user.id, :notification %>
-      <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-50"></div>
+      <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-40"></div>
     <% end %>
 
     <% unless @plan.new_record? %>
