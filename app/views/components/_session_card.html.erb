@@ -65,25 +65,25 @@
       </dialog>
     </div>
   <% elsif scheduled == schedule %>
-    <%= form_with(url: event_item_path(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), method: :delete ) do |form| %>
+    <%= form_with(url: event_item_path(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), data: { action: "submit->sessions#submit" }, method: :delete ) do |form| %>
       <%= render 'components/button',
                  title: I18n.t('card.remove'),
                  icon: render("components/icons/close"),
-                 data: { turbo_frame: row.turbo_frames_id },
+                 data: { turbo_frame: row.turbo_frames_id, "sessions-target": :button },
                  form_helper: form,
                  classes: 'items-center w-full',
                  text_size: 'text-sm'
       %>
     <% end %>
   <% else %>
-    <%= form_with(url: event_plan_items_path(plan_id: @plan.id, event_name: @plan.event.name), method: :post ) do |form| %>
+    <%= form_with(url: event_plan_items_path(plan_id: @plan.id, event_name: @plan.event.name), data: { action: "submit->sessions#submit" }, method: :post ) do |form| %>
       <% inactive = scheduled && schedule != scheduled %>
       <%= form.hidden_field :schedule_id, value: schedule.id %>
       <%= render 'components/button',
                  title: inactive ? I18n.t('card.inactive') : I18n.t('card.add'),
                  disabled: inactive,
                  icon: render("components/icons/add"),
-                 data: { turbo_frame: row.turbo_frames_id },
+                 data: { turbo_frame: row.turbo_frames_id, "sessions-target": :button },
                  form_helper: form,
                  classes: 'items-center w-full',
                  text_size: 'text-sm'

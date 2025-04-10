@@ -1,13 +1,23 @@
 <%# locals: (title: nil, size: 'default', classes: "", icon: nil, disabled: false, data: nil, danger: false, text_size: 'text-base', form_helper: nil, href: nil) -%>
 
 <% button_classes = [
-  "inline-flex gap-x-1 items-center align-middle justify-center border border-solid bg-[var(--semantic-neutral-background)] rounded-lg whitespace-nowrap",
-  (size == "s" ? "px-2 py-1" : "px-3 py-2"),
-  (disabled ?
-    "border-[#E3E5E8] text-[#CDCFD5]" :
-    "border-[var(--semantic-neutral-line)] text-[var(--semantic-neutral-text)]"),
+  "inline-flex",
+  "gap-x-1",
+  "items-center",
+  "align-middle",
+  "justify-center",
+  "border",
+  "border-solid",
+  "bg-[var(--semantic-neutral-background)]",
+  "rounded-lg",
+  "whitespace-nowrap",
+  size == "s" ? "px-2 py-1" : "px-3 py-2",
+  "disabled:border-[#E3E5E8]",
+  "disabled:text-[#CDCFD5]",
+  "border-[var(--semantic-neutral-line)]",
+  "text-[var(--semantic-neutral-text)]",
   classes
-].join(" ") %>
+   ].join(" ") %>
 <% text_classes = [
   text_size,
   "font-bold",
@@ -15,7 +25,7 @@
 ].join(" ") %>
 
 <% if form_helper %>
-  <%= form_helper.button type: :submit, class: button_classes, data: data, disabled: disabled do %>
+  <%= form_helper.button type: :submit, class: button_classes, data: data, disabled: !!disabled do %>
     <% if icon %>
       <%= raw icon %>
     <% end %>
@@ -26,7 +36,7 @@
     <% end %>
   <% end %>
 <% elsif href %>
-  <%= link_to href, data: data, class: button_classes, disabled: disabled do %>
+  <%= link_to href, data: data, class: button_classes, disabled: !!disabled do %>
     <% if icon %>
       <%= raw icon %>
     <% end %>
@@ -37,7 +47,7 @@
     <% end %>
   <% end %>
 <% else %>
-  <%= tag.button type: :button, class: button_classes, disabled: disabled, data: data do %>
+  <%= tag.button type: :button, class: button_classes, disabled: !!disabled, data: data do %>
     <% if icon %>
       <%= raw icon %>
     <% end %>

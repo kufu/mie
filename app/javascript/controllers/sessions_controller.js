@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="sessions"
 export default class extends Controller {
-  static targets = ['icon', 'sessions', 'session'];
+  static targets = ['icon', 'sessions', 'session', 'button'];
   static values = { isOpen: { type: Boolean, default: true }, key: { type: String } };
 
   connect () {
@@ -84,5 +84,11 @@ export default class extends Controller {
         storage.length !== 0
       );
     }
+  }
+
+  submit () {
+    this.buttonTargets.forEach((el) => {
+      el.disabled = true;
+    })
   }
 }
