@@ -3,6 +3,8 @@
   <head prefix="og: http://ogp.me/ns#">
     <title>RubyKaigi Schedule.select</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <% unless Rails.env.test? %>
@@ -34,6 +36,8 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image"/>
     <%= yield(:head) %>
+
+    <link rel="manifest" href="/manifest.json">
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body class="bg-[var(--semantic-neutral-background-sub)] leading-4 font-sans">
