@@ -42,6 +42,12 @@
   </head>
   <body class="bg-[var(--semantic-neutral-background-sub)] leading-4 font-sans">
     <%= render 'components/app_header', event: @event, profile: @user&.profile %>
+
+    <% if @user && params[:controller] != 'schedules' %>
+      <%= turbo_stream_from @user.id, :notification %>
+      <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-40"></div>
+    <% end %>
+
     <main class="p-4 sm:p-8 min-h-screen">
       <%= yield %>
     </main>
