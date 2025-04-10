@@ -62,7 +62,7 @@ class MembersController < ApplicationController
         render 'teams/_members'
       end
     else
-      render 'teams/_members', status: :unprocessable_entity
+      render 'teams/show', status: :unprocessable_entity
     end
   end
 
