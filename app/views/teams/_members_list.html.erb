@@ -2,6 +2,10 @@
   <ul class="px-4 divide-y divide-gray-100">
     <% @team.team_profiles.each do |tp| %>
       <%= turbo_frame_tag tp do %>
+        <% if @team_profile&.errors.present? %>
+          <%= render "components/error_messages", errors: @team_profile.errors %>
+        <% end %>
+
         <li class="py-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
