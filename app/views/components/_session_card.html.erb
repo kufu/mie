@@ -52,7 +52,7 @@
         <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
           <%= render 'components/dialog', title: I18n.t('dialog.terms_of_service'), action_button: { form_helper: form, title: I18n.t('button.accept_to_add') } do %>
             <span class="text-base"><%= I18n.t('terms_of_service.description') %></span>
-            <div class="mt-4 bg-[#E3E5E8] rounded-lg">
+            <div class="mt-4 bg-[#E3E5E8] rounded-lg h-96">
               <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
             </div>
             <%= form.hidden_field :title %>
