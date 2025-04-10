@@ -51,7 +51,7 @@ class TeamsController < ApplicationController
       session[:breakout_turbo] = true
       redirect_to @team, notice: 'Team was successfully updated.', status: :see_other
     else
-      render partial: 'rename_dialog', locals: { team: @team }, status: :unprocessable_entity
+      render 'show', status: :unprocessable_entity
     end
   end
 

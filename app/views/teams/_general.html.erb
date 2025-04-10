@@ -28,6 +28,11 @@
       %>
     </div>
   <% end %>
+
+  <% if @team_profile&.errors.present? %>
+    <%= render "components/error_messages", errors: @team_profile.errors %>
+  <% end %>
+
   <div>
     <%= render 'components/button',
                title: I18n.t('button.leave_team'),
