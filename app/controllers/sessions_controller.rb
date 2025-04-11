@@ -3,7 +3,6 @@
 class SessionsController < ApplicationController
   skip_before_action :set_plan
   skip_before_action :set_locale
-  skip_before_action :set_last_path
 
   def create
     user_info = request.env['omniauth.auth']
@@ -21,7 +20,8 @@ class SessionsController < ApplicationController
       )
     end
 
-    redirect_to session[:last_path] || root_path
+    last_path = session.delete(:last_path)
+    redirect_to last_path || root_path
   end
 
   def delete

@@ -2,7 +2,6 @@
 
 class AdminController < ApplicationController
   skip_before_action :set_locale
-  skip_before_action :set_last_path
 
   before_action :make_sure_user_is_admin
 

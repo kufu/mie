@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :set_user
   before_action :set_plan
   before_action :set_locale
-  before_action :set_last_path
   before_action :breakout_turbo
 
   around_action :with_time_zone
@@ -63,6 +62,7 @@ class ApplicationController < ActionController::Base
     return if @user&.profile
 
     session[:breakout_turbo] = true
+    session[:last_path] = request.fullpath
     redirect_to profile_path, flash: { error: I18n.t('errors.login_required') }
   end
 
@@ -83,10 +83,6 @@ class ApplicationController < ActionController::Base
                'Etc/UTC'
              end
     session[:locale] = locale
-  end
-
-  def set_last_path
-    session[:last_path] = request.fullpath
   end
 
   def with_time_zone(&)
