@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  skip_before_action :set_last_path
-
   def show
     flash.keep if turbo_frame_request?
 
@@ -11,8 +9,6 @@ class ProfilesController < ApplicationController
                else
                  @user&.profile
                end
-
-    set_last_path if @profile
   end
 
   def update
