@@ -50,7 +50,7 @@
       <% end %>
     <% end %>
 
-    <% cache [@schedule_table, @plan] do %>
+    <% cache [@schedule_table, @plan, @friends_schedules_map, @teammate_schedules_map] do %>
       <div class="overflow-y-auto">
         <% @schedule_table.days.each do |day| %>
           <div id="schedule-<%= day %>" class="pb-3 pr-3 schedule-table hidden">
