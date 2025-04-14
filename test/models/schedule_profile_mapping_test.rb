@@ -99,7 +99,7 @@ class ScheduleProfileMappingTest < ActiveSupport::TestCase
     end
 
     mapping = ScheduleProfileMapping.new([profile1, profile2], events(:party))
-    assert_equal current - 1.minute, mapping.updated_at
+    assert_equal (current - 1.minute).to_fs(:usec), mapping.updated_at.to_fs(:usec)
   end
 
   test '#[] are alias of #fetch' do
