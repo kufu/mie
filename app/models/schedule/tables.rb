@@ -25,6 +25,8 @@ class Schedule
 
     # Schedules::Table is the only one for each events
     def id
+      return 'empty' if @schedules.empty?
+
       @id ||= @schedules[0].track.event.name
     end
 
@@ -40,7 +42,7 @@ class Schedule
     end
 
     def updated_at
-      @updated_at ||= @schedules.map(&:updated_at).max
+      @updated_at ||= @schedules.map(&:updated_at).max || Time.at(0)
     end
 
     def cache_key
