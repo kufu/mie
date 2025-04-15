@@ -1,0 +1,58 @@
+const cacheName = "precache";
+const precachedResources = [
+    "<%= asset_path("tailwind.css") %>",
+    "<%= asset_path("inter-font.css") %>",
+    "<%= asset_path("application.js") %>"
+];
+
+self.addEventListener("install", (event) => {
+    self.skipWaiting();
+});
+
+async function precache() {
+    const cache = await caches.open(cacheName);
+    return cache.addAll(precachedResources);
+}
+
+self.addEventListener("activate", event => {
+    event.waitUntil(precache());
+});
+
+self.addEventListener('fetch', (event) => {
+    const requestUrl = new URL(event.request.url);
+
+    if (requestUrl.pathname === '/2025') {
+        // if request failed, load schedules/index from cache
+        event.respondWith(fetch(event.request)
+            .catch(() => caches.match('/2025'))
+        );
+    }
+
+    // When the item modified, load schedules/index to cache it
+    if (requestUrl.pathname.includes('item')) {
+        // actual response
+        event.respondWith(fetch(event.request));
+
+        // Warmup cache after 1 second
+        event.waitUntil(
+            (async () => {
+                const cache = await caches.open(cacheName);
+                const warmupUrl = '/2025';
+
+                setTimeout(() => {
+                    (async () => {
+                        try {
+                            const response = await fetch(warmupUrl);
+                            if (response.ok) {
+                                console.log(`Caching ${warmupUrl}`);
+                                await cache.put(warmupUrl, response.clone());
+                            }
+                        } catch (err) {
+                            // do nothing
+                        }
+                    })()
+                }, 1000)
+            })()
+        );
+    }
+});
