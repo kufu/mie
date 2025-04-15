@@ -6,45 +6,48 @@
           <%= render "components/error_messages", errors: @team_profile.errors %>
         <% end %>
 
-        <li class="py-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
+        <li class="py-4 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="flex-shrink-0">
               <%= render "components/avatar",
-                         src: tp.profile.avatar_url,
-                         name: tp.profile.name,
-                         show_tooltip: true %>
-              <div>
-                <p class="text-xs font-bold text-gray-500"><%= tp.human_attribute_enum(:role) %></p>
-                <p class="text-base"><%= tp.profile.name %></p>
-              </div>
+                          src: tp.profile.avatar_url,
+                          name: tp.profile.name,
+                          show_tooltip: true %>
             </div>
-            <% if @team.admin?(@user) %>
+            <div>
+              <p class="text-xs font-bold text-gray-500"><%= tp.human_attribute_enum(:role) %></p>
+              <p class="text-base truncate"><%= tp.profile.name %></p>
+            </div>
+          </div>
+          <% if @team.admin?(@user) %>
+            <div class="flex flex-wrap gap-2 justify-end">
               <% if tp.admin? || tp.member? %>
                 <%= form_with(url: team_member_path(tp.profile, team_id: @team), method: :patch) do |f| %>
                   <% if tp.admin? %>
                     <%= f.hidden_field :role, value: :member %>
-                    <%= render 'components/button', title: I18n.t('button.set_member'), form_helper: f %>
+                    <%= render 'components/button', title: I18n.t('button.set_member'), form_helper: f, size: 's' %>
                   <% end %>
                   <% if tp.member? %>
                     <%= f.hidden_field :role, value: :admin %>
-                    <%= render 'components/button', title: I18n.t('button.set_admin'), form_helper: f %>
+                    <%= render 'components/button', title: I18n.t('button.set_admin'), form_helper: f, size: 's' %>
                   <% end %>
                 <% end %>
               <% end %>
               <%= form_with(url: "/teams/#{@team.id}/members/#{tp.profile.id}", method: :delete) do |f| %>
                 <%= render 'components/button',
-                           title: tp.invitation? ? I18n.t('button.cancel') : I18n.t('button.remove'),
-                           danger: true,
-                           form_helper: f,
-                           data: {
-                             turbo_confirm: I18n.t("dialog.remove_member"),
-                             turbo_frame: ActionView::RecordIdentifier.dom_id(@team)
-                           }
+                            title: tp.invitation? ? I18n.t('button.cancel') : I18n.t('button.remove'),
+                            danger: true,
+                            form_helper: f,
+                            size: 's',
+                            data: {
+                              turbo_confirm: I18n.t("dialog.remove_member"),
+                              turbo_frame: ActionView::RecordIdentifier.dom_id(@team)
+                            }
 
                 %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </li>
       <% end %>
     <% end %>
