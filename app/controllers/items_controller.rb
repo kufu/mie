@@ -2,7 +2,7 @@
 
 class ItemsController < ApplicationController
   include EventRouting
-  include ScheduleTable
+  include ProfileScheduleMapping
 
   before_action :set_event
   before_action :set_item, only: %i[update destroy]
@@ -20,29 +20,30 @@ class ItemsController < ApplicationController
     end
     @plan.update!(initial: false) if @plan.initial
 
-    if request.format.turbo_stream?
-      set_attributes_for_turbo_stream
-      render 'update'
+    if turbo_frame_request?
+      set_schedule_table
+      set_friends_and_teammates_schedules_mapping
+      render
     else
-      redirect_to event_plan_path(@plan, event_name: @event.name)
+      redirect_to event_path(@event.name)
     end
   end
 
   def update
     @item.update!(item_params)
-    render 'schedules/_card', locals: { schedule: @item.schedule, mode: :plan, inactive: false }
+    redirect_to event_path(@event.name)
   end
 
   def destroy
     @item.destroy!
     @plan.update!(initial: false)
 
-    case params[:mode]
-    when 'schedule'
-      set_attributes_for_turbo_stream
-      render 'update'
-    when 'plan'
-      redirect_to event_plan_path(@plan, event_name: @event.name)
+    if turbo_frame_request?
+      set_schedule_table
+      set_friends_and_teammates_schedules_mapping
+      render 'create'
+    else
+      redirect_to event_path(@event.name)
     end
   end
 
@@ -73,25 +74,8 @@ class ItemsController < ApplicationController
     render status: :not_found, body: nil unless @item.schedule.track.event == @event
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-  def set_attributes_for_turbo_stream
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
-
-    @row, @track_list = catch(:abort) do
-      @schedule_table.days.each do |day|
-        @table = @schedule_table[day]
-        @table.rows.each do |row|
-          throw :abort, [row, @table.track_list] if row.schedules.map(&:id).include?(@item.schedule.id)
-        end
-      end
-    end
-
-    return unless @user.profile
-
-    @friends_schedules_map = @user.profile.friend_profiles.to_h do |profile|
-      [profile.id, profile.user.plans.find_by(event: @event)&.plan_schedules&.map(&:schedule_id) || []]
-    end
+  def set_schedule_table
+    @schedule_table = Schedule::Tables.from_event(@event)
+    @row = @schedule_table.tables.map(&:rows).flatten.find { _1.schedules.include?(@item.schedule) }
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end

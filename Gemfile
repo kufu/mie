@@ -9,10 +9,10 @@ gem 'rails', '~> 8.0'
 
 gem 'propshaft'
 
-# Use postgresql as the database for Active Record
-gem 'pg', '~> 1.5'
+gem 'sqlite3', '~> 2.5'
+
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.16'
 
@@ -57,6 +57,16 @@ gem 'rqrcode', '~> 2.2'
 
 gem 'rexml', '~> 3.2'
 
-gem 'solid_queue', '~> 0.3.0'
+gem 'solid_queue', '1.1.3'
 
 gem 'solid_cache', '~> 1.0'
+
+gem 'activerecord-session_store', '~> 2.1'
+
+gem 'mission_control-jobs', '~> 1.0'
+
+gem 'bootsnap', require: false
+
+gem 'active_storage_db', '~> 1.4'
+
+gem 'solid_cable', '~> 3.0'

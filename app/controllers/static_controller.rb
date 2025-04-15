@@ -3,8 +3,6 @@
 class StaticController < ApplicationController
   include EventRouting
 
-  skip_before_action :set_last_path, only: :terms_of_service
-
   def index
     redirect_to '/2024'
   end

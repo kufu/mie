@@ -1,0 +1,44 @@
+<div class="space-y-6">
+  <div>
+    <div class="mb-4">
+      <h2 id="team-settings-heading" class="text-base font-bold"><%= I18n.t('teams.settings') %></h2>
+    </div>
+
+    <% if @team.admin?(@user) %>
+      <div class="p-4 rounded-lg bg-[#FCFCFD] shadow-sm space-y-4">
+        <%= form_with model: @team do |f| %>
+          <%= render "components/form_control", label: I18n.t('teams.name'), errors: @team.errors.where(:name) do |input_id| %>
+            <%= render "components/text_field", form_helper: f, attribute: :name, id: input_id, classes: "w-full" %>
+          <% end %>
+          <div class="mt-4">
+            <%= render 'components/button', title: I18n.t('button.save'), form_helper: f %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @team.admin?(@user) %>
+    <div>
+      <%= render 'components/button',
+                 title: I18n.t('button.delete_team'),
+                 href: @team,
+                 danger: true,
+                 data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.delete_team') }
+      %>
+    </div>
+  <% end %>
+
+  <% if @team_profile&.errors.present? %>
+    <%= render "components/error_messages", errors: @team_profile.errors %>
+  <% end %>
+
+  <div>
+    <%= render 'components/button',
+               title: I18n.t('button.leave_team'),
+               href: team_member_path(@user.profile, team_id: @team),
+               danger: true,
+               data: { turbo_method: :delete, turbo_confirm: I18n.t('dialog.remove_member') }
+    %>
+  </div>
+</div>

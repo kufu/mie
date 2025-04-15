@@ -1,0 +1,16 @@
+<%# locals: (src:, size: "m", classes: "", name: nil, show_tooltip: false) %>
+
+<% icon_classes = [
+  "rounded-full bg-white border border-[#CECFD5]",
+  (size == "l" ? "w-16 h-16" : size == "s" ? "w-6 h-6" : "w-10 h-10"),
+  classes
+].join(" ") %>
+
+<div class="relative group">
+  <img src="<%= src %>" loading="lazy" class="<%= icon_classes %>" alt="<%= I18n.t("avatar.alt_text", user: name || 'ユーザー') %>">
+  <% if show_tooltip && name.present? %>
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg">
+      <%= name %>
+    </div>
+  <% end %>
+</div>

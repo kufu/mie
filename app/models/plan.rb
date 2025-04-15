@@ -37,6 +37,8 @@ class PlanDatetimeOverlapValidator < ActiveModel::Validator
 end
 
 class Plan < ApplicationRecord
+  include UuidPrimaryKey
+
   include BCrypt
   include Events
 
@@ -53,6 +55,12 @@ class Plan < ApplicationRecord
   scope :recent, lambda {
     order(updated_at: :desc)
   }
+
+  def include?(schedule)
+    # to avoid N+1
+    @schedule_ids ||= plan_schedules.map(&:schedule_id)
+    @schedule_ids.include?(schedule.id)
+  end
 
   def password
     @password ||= Password.new(password_hash)

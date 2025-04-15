@@ -9,10 +9,14 @@ class TeamsController < ApplicationController
 
   rescue_from TeamsController::InvalidStateError, with: :not_permitted_operation
 
+  def index
+    @profile = @user&.profile if @user
+    redirect_to team_path(@profile.current_team) if @profile&.current_team
+  end
+
   # GET /teams/1
   def show
-    @schedules = @event.schedules.includes(:speakers, :track).order(:start_at)
-    @schedule_table = Schedule::Tables.new(@schedules)
+    @schedule_table = Schedule::Tables.from_event(@event)
     @member_schedules_map = @team.profiles.to_h do |profile|
       [profile.id, profile.user.current_plan&.plan_schedules&.map(&:schedule_id) || []]
     end
@@ -47,7 +51,7 @@ class TeamsController < ApplicationController
       session[:breakout_turbo] = true
       redirect_to @team, notice: 'Team was successfully updated.', status: :see_other
     else
-      render partial: 'rename_dialog', locals: { team: @team }, status: :unprocessable_entity
+      render 'show', status: :unprocessable_entity
     end
   end
 
@@ -63,7 +67,7 @@ class TeamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_team
-    @team = Team.find(params[:id])
+    @team = Team.includes(profiles: [:user]).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

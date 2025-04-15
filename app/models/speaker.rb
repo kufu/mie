@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Speaker < ApplicationRecord
+  include UuidPrimaryKey
   include Events
 
   has_many :schedule_speakers
@@ -12,4 +13,8 @@ class Speaker < ApplicationRecord
   validates :handle, length: { in: 0..100 }
   validates :profile, length: { in: 0..1024 }
   validates :thumbnail, presence: true, length: { in: 0..1024 }
+
+  def handle_without_at
+    handle.to_s.delete_prefix('@')
+  end
 end

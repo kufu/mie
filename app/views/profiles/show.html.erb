@@ -7,182 +7,87 @@
 <% end %>
 
 <% if @profile %>
-  <div class="flex flex-col justify-center items-center gap-8">
-
-    <div class="w-full sm:w-1/2">
-      <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-        <%= turbo_frame_tag @profile do %>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <img class="w-24 h-24 sm:w-36 sm:h-36 rounded-full" src="<%= @profile.avatar_url %>">
-            <div class="flex flex-col gap-2 w-full">
-              <div class="flex gap-2">
-                <h1 class="text-xl sm:text-4xl flex-grow"><%= @profile.name %></h1>
-
-                <% if my_profile? %>
-                  <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
-                    <button
-                      class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-                      data-action="click->dialog#open"
-                    >
-                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
-                      <%= I18n.t('button.edit') %>
-                    </button>
-                    <%= render 'dialog', profile: @profile %>
-                  </div>
-                  <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="add-friend-dialog">
-                    <button
-                      class="p-2 text-sm min-h-[calc(0.587143rem+18px)] border-[rgb(214,211,208)] bg-white text-[rgb(35,34,30)] normal-button"
-                      data-action="click->dialog#open"
-                    >
-                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class=" smarthr-ui-Icon" role="img" aria-hidden="true" focusable="false" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"></path></svg>
-                      <%= I18n.t('button.add_friend') %>
-                    </button>
-                    <dialog id="add-friend-dialog" class="dialog">
-                      <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
-                        <p class="text-xl"><%= I18n.t('dialog.read_qrcode_to_be_friend') %></p>
-                      </div>
-                      <div class="max-h-[calc(100vh-212px)] overflow-auto">
-                        <div class="w-full sm:w-[656px] p-6">
-                          <%= turbo_frame_tag 'friend-qr', src: new_profile_friend_path, loading: :lazy  %>
-                        </div>
-                      </div>
-                      <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
-                        <div class="flex justify-end">
-                          <button type="button" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></button>
-                        </div>
-                      </div>
-                    </dialog>
-                  </div>
-                <% end %>
-
-              </div>
-
-              <% if !my_profile? && @profile.user.current_plan %>
-                <div>
-                  <a class="text-blue-700 visited:text-purple-700" href="<%= event_plan_path(@profile.user.current_plan, event_name: @profile.user.current_plan.event.name) %>">
-                    <p><%= @profile.user.current_plan.title %></p>
-                  </a>
-                </div>
-              <% end %>
-
-              <div class="flex-grow">
-                <p><%= @profile.introduce %></p>
-              </div>
-
-              <% if @profile&.trophies&.present? %>
-                <div class="flex flex-wrap gap-1 py-2">
-                  <% @profile.trophies.order(:order).each do |trophy| %>
-                    <div data-controller="dialog" data-dialog-element-id-value="<%= trophy.id %>-dialog">
-                      <img
-                        data-action="click->dialog#open"
-                        src="<%= image_url trophy.icon_url %>"
-                        class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>"
-                      />
-                      <dialog id="<%= trophy.id %>-dialog" class="dialog">
-                        <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
-                          <p class="text-xl"><%= trophy.name %></p>
-                        </div>
-                        <div class="max-h-[calc(100vh-212px)] overflow-auto">
-                          <div class="w-full p-6">
-                            <%= turbo_frame_tag trophy, src: trophy_path(trophy), loading: :lazy  %>
-                          </div>
-                        </div>
-                        <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
-                          <div class="flex justify-end">
-                            <button type="button" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></button>
-                          </div>
-                        </div>
-                      </dialog>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-
-              <div class="self-end">
-                <% if my_profile? %>
-                  <%= form_with(url: '/session', method: :delete) do |f| %>
-                    <%= f.submit I18n.t('button.signout'), class: "p-2 text-sm m-h-[calc(0.857143rem+18px)] normal-button" %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
+  <h1 class="mb-4 text-2xl">Profile</h1>
+  <div class="flex flex-col p-4 space-y-4 rounded-lg bg-[#FCFCFD] shadow-md">
+    <div class="flex flex-col justify-center items-center gap-4">
+      <%= turbo_frame_tag @profile do %>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-x-2">
+            <img src="<%= @profile.avatar_url %>" class="w-16 h-16 rounded-full border-2 border-[#CECFD5]">
+            <h2 class="text-2xl truncate max-w-[calc(100%-2rem)]"><%= @profile.name %></h2>
           </div>
-        <% end %>
-      </div>
-    </div>
-
-    <% if @profile.friend_profiles.present? %>
-      <div class="w-full sm:w-1/2">
-        <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-          <h2 class="text-xl sm:text-4xl">Friends</h2>
-            <div class="flex flex-wrap p-2 gap-4">
-              <% @profile.friend_profiles.each do |friend| %>
-                <a href="/profiles/<%= friend.name %>">
-                  <img src="<%= friend.avatar_url %>" class="h-12 w-12 rounded-full border-2 border-black bg-white" />
-                </a>
-              <% end %>
-            </div>
+          <div class="ml-2" data-controller="dialog" data-dialog-element-id-value="edit-introduce-dialog">
+            <%= render 'components/button', title: I18n.t('button.edit'), data: { action: 'click->dialog#open' } %>
+            <%= render 'dialog', profile: @profile %>
+          </div>
         </div>
-      </div>
-    <% end %>
-
-    <% if my_profile? || @profile.belongs_to_any_team? %>
-      <div class="w-full sm:w-1/2">
-        <div class="w-full sm:min-w-[400px] h-fit p-4 shadow-[0_1px_2px_0_rgba(3,3,2,0.3)] rounded-md bg-white">
-          <h2 class="text-xl sm:text-4xl">Team</h2>
-          <% if @profile.belongs_to_any_team? %>
-            <div class="flex items-center py-4">
-
-              <% if my_profile? %>
-                <a href="<%= team_path(@user.profile.current_team) %>">
-                  <p><%= @user.profile.current_team.name %>
-                    (<%= @user.profile.team_profiles.find_by(team: @user.profile.current_team).human_attribute_enum(:role) %>)
-                  </p>
-                </a>
-                <% unless @user.profile.current_team.admin?(@user) %>
-                  <div class="flex-grow flex justify-end">
-                    <%= form_with(url: team_member_path(@user.profile, team_id: @user.profile.current_team), method: :delete) do |f| %>
-                      <%= f.submit 'exit', class: 'danger-button' %>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% else %>
-                <p><%= @profile.current_team.name %>
-                  (<%= @profile.team_profiles.find_by(team: @profile.current_team).human_attribute_enum(:role) %>)
-                </p>
-              <% end %>
-
-            </div>
-          <% elsif my_profile? %>
-            <div class="flex flex-col justify-center items-center py-4 gap-4">
-              <div class="p-2">
-                <p class="text-xl"><%= I18n.t('teams.about') %></p>
-                <div class="p-4">
-                  <ul class="list-disc list-inside leading-7">
-                    <% I18n.t('teams.features').each do |feature| %>
-                      <li><%= feature %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
-              <a href="<%= new_team_path %>" class="primary-button w-64"><%= I18n.t('button.create_new_team') %></a>
-              <% if @user.profile.invitations? %>
-                <span class="m-4">OR</span>
-                <ul>
-                  <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each_with_index do |invitation, i| %>
-                      <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
-                        <%= f.hidden_field :role, value: :member %>
-                        <li><%= f.submit "join to #{invitation.team.name}", class: "primary-button w-64" %></li>
-                      <% end %>
-                  <% end %>
-                </ul>
-              <% end %>
-            </div>
+        <p class="w-full text-left leading-6"><%= @profile.introduce %></p>
+      <% end %>
+      <% if my_profile? && @profile.belongs_to_any_team? %>
+        <div class="w-full text-left">
+          <h3 class="mb-1 font-bold text-xs">Your Team</h3>
+          <% if my_profile? %>
+            <a href="<%= team_path(@user.profile.current_team) %>">
+              <p><%= @user.profile.current_team.name %></p>
+            </a>
+          <% else %>
+            <p><%= @user.profile.current_team.name %></p>
           <% end %>
         </div>
+      <% elsif my_profile? %>
+          <% if @user.profile.invitations? %>
+            <span class="m-4">OR</span>
+            <ul>
+              <% TeamProfile.where(profile: @user.profile, role: [:invitation]).each_with_index do |invitation, i| %>
+                <%= form_with(url: team_member_path(@user.profile, team_id: invitation.team), method: :patch) do |f| %>
+                  <%= f.hidden_field :role, value: :member %>
+                  <li><%= f.submit "join to #{invitation.team.name}", class: "primary-button w-64" %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @profile.trophies&.present? %>
+        <div class="w-full text-left">
+          <h3 class="mb-1 font-bold text-xs">Trophies</h3>
+          <div class="flex flex-wrap gap-2">
+            <% @profile.trophies.order(:order).each do |trophy| %>
+              <div data-controller="dialog" data-dialog-element-id-value="<%= trophy.id %>-dialog">
+                <img
+                  data-action="click->dialog#open"
+                  src="<%= image_url url_for(trophy.icon) %>"
+                  class="rounded-full h-12 w-12 border-4 <%= trophy.common? ? "border-slate-950" : trophy.uncommon? ? "border-gray-300" : trophy.rare? ? "border-amber-300" : "border-orange-600" %>"
+                  />
+                <dialog id="<%= trophy.id %>-dialog" class="dialog">
+                  <div class="border-b-[1px] border-[rgb(214,211,208)] py-4 px-6 flex flex-col justify-start">
+                    <p class="text-xl"><%= trophy.name %></p>
+                  </div>
+                  <div class="max-h-[calc(100vh-212px)] overflow-auto">
+                    <div class="w-full p-6">
+                      <%= turbo_frame_tag trophy, src: trophy_path(trophy), loading: :lazy  %>
+                    </div>
+                  </div>
+                  <div class="border-t-[1px] border-[rgb(214,211,208)] flex flex-col py-4 px-6">
+                    <div class="flex justify-end">
+                      <button type="button" class="normal-button mr-2" data-action="click->dialog#close"><%= I18n.t('button.close')%></button>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="w-full text-left">
+        <h3 class="mb-1 font-bold text-xs">Your 2D Code</h3>
+        <div class="flex justify-center items-center">
+          <div class="w-40">
+            <%= turbo_frame_tag 'friend-qr', src: new_profile_friend_path, loading: :lazy %>
+          </div>
+        </div>
       </div>
-    <% end %>
-
+    </div>
   </div>
 <% else %>
   <div class="flex items-center justify-center h-96">
@@ -192,8 +97,8 @@
           <div class="flex items-center gap-2">
             <img src="/icons/github-mark.svg" class="w-6 h-6">
             <span class="font-bold">
-              Sign up with GitHub
-            </span>
+                Sign up with GitHub
+              </span>
           </div>
         </button>
       <% end %>

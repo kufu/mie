@@ -1,0 +1,22 @@
+<%= turbo_frame_tag 'team-invite-member-dialog' do %>
+  <%= render "components/dialog", title: I18n.t("dialog.username_to_invite") do %>
+    <%= form_with(url: team_members_path(@team), method: :post) do |f| %>
+      <div>
+        <div class="w-full m-1">
+          <%= f.label :profile_name, I18n.t('dialog.username_to_invite') %>
+        </div>
+        <div class="flex gap-4 w-full">
+          <%= render 'components/text_field', attribute: :profile_name, form_helper: f %>
+          <%= render 'components/button', title: I18n.t('button.invite'), form_helper: f %>
+        </div>
+      </div>
+      <% if @dialog_errors.present? %>
+        <ul>
+          <% @dialog_errors.each do |error| %>
+            <li><p class="text-sm text-red-500"><%= error %></p></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

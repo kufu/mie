@@ -1,0 +1,26 @@
+<%# locals: (tabs:) -%>
+
+<% if false %>
+使用例:
+<%= render "components/tabs", tabs: [
+  { label: "タブ1", content: "タブ1のコンテンツ", id: "ボタン要素のID" },
+  { label: "タブ2", content: "タブ2のコンテンツ", id: "ボタン要素のID" }
+] %>
+<% end %>
+
+<div data-controller="tab">
+  <div class="flex border-b border-[#CDCFD5]">
+    <% tabs.each do |tab| %>
+      <button id="<%= tab[:id] %>" data-tab-target="button" data-action="tab#switch" class="px-4 pt-2 pb-[5px] text-sm border-b-[3px]">
+        <%= tab[:label] %>
+      </button>
+    <% end %>
+  </div>
+  <div class="mt-4">
+    <% tabs.each do |tab| %>
+      <div data-tab-target="tab" class="hidden">
+        <%= tab[:content] %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+<%= turbo_stream.update "schedule-edit-dialog" do %>
+  <%= render partial: "form", locals: { plan: @plan }, formats: [:html] %>
+<% end %>

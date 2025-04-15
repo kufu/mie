@@ -1,0 +1,69 @@
+<%# locals: (events:, start_time:, end_time:) -%>
+<% if false %>
+  必要なパラメータ:
+  - events: イベントの配列。各イベントは以下の構造:
+  { start_time: "HH:MM", end_time: "HH:MM", participating: boolean }
+  - start_time: タイムラインの開始時刻（例: "09:00"）
+  - end_time: タイムラインの終了時刻（例: "18:00"）
+<% end %>
+<%
+  def hour_height
+    160 # 1時間あたりの高さ(px)
+  end
+
+  def minutes_per_hour
+    60
+  end
+
+  def px_per_minute
+    hour_height.to_f / minutes_per_hour
+  end
+
+  def parse_hour(time_str)
+    time_str.split(":")[0].to_i
+  end
+
+  def time_to_minutes(time_str)
+    hours, minutes = time_str.split(":").map(&:to_i)
+    hours * minutes_per_hour + minutes
+  end
+
+  def minutes_to_height(minutes)
+    (minutes * px_per_minute).round
+  end
+
+  def format_hour(hour)
+    "%02d:00" % hour
+  end
+
+  start_hour = parse_hour(start_time)
+  end_hour = parse_hour(end_time)
+%>
+<div class="overflow-y-auto relative">
+  <%# 時刻のブロック %>
+  <% (start_hour..end_hour).each do |hour| %>
+    <div class="relative w-14" style="height: <%= hour_height %>px">
+      <div class="absolute left-0 top-0 w-12 p-1 text-left text-xs text-[var(--semantic-neutral-text)] bg-primitive-shade-100/70 rounded-r-lg z-10">
+        <%= format_hour(hour) %>
+      </div>
+    </div>
+  <% end %>
+  <%# イベントブロック %>
+  <% events.each do |event| %>
+    <%
+      start_minutes = time_to_minutes(event[:start_time])
+      end_minutes = time_to_minutes(event[:end_time])
+      duration_minutes = end_minutes - start_minutes
+      start_offset = minutes_to_height(start_minutes - time_to_minutes("#{start_hour}:00"))
+      height = minutes_to_height(duration_minutes)
+    %>
+    <div
+      class="absolute left-0 w-10 ml-4 rounded-lg <%=
+        event[:participating] ?
+          'bg-primitive-shade-50' :
+          'bg-[var(--semantic-neutral-background-group)] border-2 border-dashed border-[var(--semantic-neutral-line)]'
+      %>"
+      style="top: <%= start_offset %>px; height: <%= height %>px;"
+    ></div>
+  <% end %>
+</div>

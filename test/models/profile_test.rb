@@ -65,6 +65,7 @@ class ProfileTest < ActiveSupport::TestCase
     Friend.create!(from: @profile.id, to: profiles(:profile_one).id)
     Friend.create!(from: @profile.id, to: profiles(:profile_two).id)
 
-    assert_equal [profiles(:profile_one), profiles(:profile_two)], @profile.friend_profiles.to_a
+    assert_equal [profiles(:profile_one), profiles(:profile_two)].sort_by(&:uid),
+                 @profile.friend_profiles.order(:uid).to_a
   end
 end

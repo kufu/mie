@@ -1,0 +1,27 @@
+<div>
+  <div class="flex justify-between border-b-2">
+    <div class="p-2">
+      <span>Event list:</span>
+      <%= link_to "All", admin_trophies_path, class: "ml-2 #{params[:event].nil? ? "primary-button" : "normal-button"}" %>
+      <% @categories.each do |category| %>
+        <%= link_to category, admin_trophies_path(event: category), class: "ml-2 #{params[:event] == category ? "primary-button" : "normal-button"}" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to "New", new_admin_trophy_path, class: "primary-button" %>
+    </div>
+  </div>
+  <div>
+    <% @trophies.each do |trophy| %>
+      <div class="my-4">
+        <%= turbo_frame_tag trophy do %>
+          <div class="flex">
+            <%= render partial: 'trophy', locals: { trophy: }  %>
+            <%= link_to "Edit", edit_admin_trophy_path(trophy), class: "primary-button h-12" %>
+            <%= link_to "Delete", admin_trophy_path(trophy), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "danger-button h-12 ml-4" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

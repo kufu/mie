@@ -1,0 +1,22 @@
+<%# locals: (profiles: [], schedule: nil) -%>
+
+<% dialog_id = "friends-dialog-#{SecureRandom.hex(4)}" %>
+<div class="flex items-center justify-between bg-[#F4F4F6] p-2 rounded-lg">
+  <div class="flex -space-x-2">
+    <% profiles.first(5).each do |profile| %>
+      <%= render('components/avatar', name: profile.name, src: profile.avatar_url, size: 's') %>
+    <% end %>
+  </div>
+  <div data-controller="dialog" data-dialog-element-id-value="<%= dialog_id %>">
+    <button
+      class="text-[#5E626E] text-xs font-semibold hover:text-[var(--textColor)]"
+      data-action="click->dialog#open"
+    >
+      <%= t('button.show_more') %>
+    </button>
+
+    <dialog data-dialog-target="dialog" id="<%= dialog_id %>">
+      <%= render 'components/friends_dialog', profiles: profiles, schedule: %>
+    </dialog>
+  </div>
+</div>

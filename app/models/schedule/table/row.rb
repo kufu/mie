@@ -3,7 +3,7 @@
 class Schedule
   class Table
     class Row
-      attr_reader :start_end, :timezone, :schedules, :tracks, :sort_key
+      attr_reader :start_at, :end_at, :start_end, :timezone, :schedules, :tracks, :sort_key
 
       def initialize(schedules)
         @start_at = I18n.l(schedules[0].start_at, format: :timetable)
@@ -14,11 +14,28 @@ class Schedule
         @schedules = schedules
         @tracks = schedules.to_h { [_1.track.name, _1] }
         @sort_key = schedules[0].start_at
+
+        @date = schedules[0].start_at.strftime('%Y%m%d')
       end
 
-      def turbo_stream_id
-        date = schedules[0].start_at.strftime('%Y%m%d')
-        [date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
+      def ==(other)
+        start_at == other.start_at &&
+          end_at == other.end_at &&
+          timezone == other.timezone &&
+          schedules == other.schedules &&
+          tracks == other.tracks &&
+          sort_key == other.sort_key
+      end
+
+      def expect(schedules)
+        dup.tap do |obj|
+          obj.instance_variable_set(:@schedules, self.schedules.select { schedules.include?(_1) })
+          obj.instance_variable_set(:@tracks, obj.schedules.to_h { [_1.track.name, _1] })
+        end
+      end
+
+      def turbo_frames_id
+        [@date, @start_at.sub(':', '-'), @end_at.sub(':', '-')].join('-')
       end
 
       def updated_at

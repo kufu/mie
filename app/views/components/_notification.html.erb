@@ -1,0 +1,15 @@
+<%# locals: (title:) -%>
+
+<div
+  data-controller="notification"
+  class="h-12 w-full flex items-center justify-between p-4 border-b bg-[var(--semantic-neutral-background-group)] hidden"
+  data-transition-enter="transform transition ease-out duration-150"
+  data-transition-enter-start="-translate-y-full opacity-0"
+  data-transition-enter-end="translate-y-0 opacity-100"
+  data-transition-leave="transition ease-out duration-250"
+  data-transition-leave-start="translate-y-0 opacity-100"
+  data-transition-leave-end="-translate-y-full opacity-0"
+>
+  <div class="text-xs font-bold"><%= title %></div>
+  <%= render "components/button", icon: render("components/icons/close"), size: 's', data: { action: "click->notification#close"} %>
+</div>

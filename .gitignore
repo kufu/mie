@@ -11,6 +11,9 @@
 # Ignore bundler config.
 /.bundle
 
+# system file
+/**/.DS_Store
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -21,6 +24,13 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
 
 # Ignore local envs
 .env.local

@@ -1,0 +1,95 @@
+<%# locals: (row:, schedule:, scheduled:, attendees: [], no_buttons: false) %>
+
+<div class="bg-[var(--semantic-neutral-background)] shadow-md rounded-lg p-4 flex flex-col gap-y-2 <%= 'border-2 border-[var(--semantic-neutral-line)]' if scheduled == schedule %>">
+  <%# スケジュール情報の展開 %>
+  <% cache(schedule) do %>
+    <div class="text-sm text-[var(--semantic-neutral-text)]"><%= schedule.language_text %>・<%= schedule.track.name %></div>
+
+    <% common_classes = "text-lg font-semibold text-accent block h-[56px] overflow-hidden" %>
+    <% tag_name = schedule.speakers.first.present? ? :a : :p %>
+    <% tag_options = {
+      class: [common_classes, schedule.speakers.first.present? ? "underline underline-offset-4" : nil].compact,
+      href: schedule.speakers.first.present? ? "https://rubykaigi.org/2025/presentations/#{schedule.speakers.first.handle_without_at}" : nil,
+      target: schedule.speakers.first.present? ? "_blank" : nil
+    }.compact %>
+
+    <%= content_tag(tag_name, **tag_options) do %>
+      <span class="line-clamp-2"><%= schedule.title %></span>
+    <% end %>
+
+    <%# 登壇者情報 %>
+    <div class="flex flex-col">
+      <% schedule.speakers.each do |speaker| %>
+        <div class="flex items-center gap-x-2">
+          <div class="flex-shrink-0">
+            <%= render 'components/avatar', name: speaker.name, src: speaker.thumbnail %>
+          </div>
+          <div>
+            <span class="text-sm font-bold text-[var(--semantic-neutral-text)]"><%= speaker.name %></span>
+            <span class="text-sm text-[var(--semantic-neutral-text-sub)]"><%= speaker.handle %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <%# フレンズボタン（参加者リスト）%>
+  <% if attendees.present? %>
+    <%= render 'components/friends_button', profiles: attendees, schedule: %>
+  <% end %>
+
+  <%# 追加・削除ボタン %>
+  <% if no_buttons %>
+    <%# do nothing %>
+  <% elsif @plan.new_record? %>
+    <% terms_of_service_dialog_id = SecureRandom.uuid %>
+    <div data-controller="dialog" data-dialog-element-id-value="<%= terms_of_service_dialog_id %>">
+      <%= render 'components/button',
+                 title: I18n.t('card.add'),
+                 icon: render("components/icons/add"),
+                 data: { action: "click->dialog#open" },
+                 classes: 'items-center w-full',
+                 text_size: 'text-sm'
+      %>
+      <dialog id="<%= terms_of_service_dialog_id %>">
+        <%= form_with(url: event_plans_path(@plan, event_name: @plan.event.name), model: @plan, method: :post) do |form| %>
+          <%= render 'components/dialog', title: I18n.t('dialog.terms_of_service'), action_button: { form_helper: form, title: I18n.t('button.accept_to_add') } do %>
+            <span class="text-base"><%= I18n.t('terms_of_service.description') %></span>
+            <div class="mt-4 bg-[#E3E5E8] rounded-lg h-96">
+              <iframe class="h-full w-full" loading="lazy" src="<%= event_terms_of_service_path(event_name: @event.name) %>"></iframe>
+            </div>
+            <%= form.hidden_field :title %>
+            <%= form.hidden_field :description %>
+            <%= form.hidden_field :public %>
+            <%= form.hidden_field :initial, value: false %>
+            <%= form.hidden_field :add_schedule_id, value: schedule.id %>
+          <% end %>
+        <% end %>
+      </dialog>
+    </div>
+  <% elsif scheduled == schedule %>
+    <%= form_with(url: event_item_path(@plan.plan_schedules.find_by(schedule:), event_name: @plan.event.name), data: { action: "submit->sessions#submit" }, method: :delete ) do |form| %>
+      <%= render 'components/button',
+                 title: I18n.t('card.remove'),
+                 icon: render("components/icons/close"),
+                 data: { turbo_frame: row.turbo_frames_id, "sessions-target": :button },
+                 form_helper: form,
+                 classes: 'items-center w-full',
+                 text_size: 'text-sm'
+      %>
+    <% end %>
+  <% else %>
+    <%= form_with(url: event_plan_items_path(plan_id: @plan.id, event_name: @plan.event.name), data: { action: "submit->sessions#submit" }, method: :post ) do |form| %>
+      <% inactive = scheduled && schedule != scheduled %>
+      <%= form.hidden_field :schedule_id, value: schedule.id %>
+      <%= render 'components/button',
+                 title: inactive ? I18n.t('card.inactive') : I18n.t('card.add'),
+                 disabled: inactive,
+                 icon: render("components/icons/add"),
+                 data: { turbo_frame: row.turbo_frames_id, "sessions-target": :button },
+                 form_helper: form,
+                 classes: 'items-center w-full',
+                 text_size: 'text-sm'
+      %>
+    <% end %>
+  <% end %>
+</div>

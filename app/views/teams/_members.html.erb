@@ -1,0 +1,17 @@
+<div id="members">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-base font-bold">Members</h2>
+    <% if @team.admin?(@user) %>
+      <div data-controller="dialog" data-dialog-element-id-value="invite-member-dialog">
+        <%= render 'components/button', size: 's', title: I18n.t("button.invite"), data: { action: "click->dialog#open" } %>
+        <dialog id="invite-member-dialog" class="p-2">
+          <%= render 'teams/invite_dialog' %>
+        </dialog>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="bg-[#FCFCFD] rounded-lg shadow-sm" id="members-list">
+    <%= render 'teams/members_list' %>
+  </div>
+</div>

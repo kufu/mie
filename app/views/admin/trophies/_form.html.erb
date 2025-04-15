@@ -1,0 +1,19 @@
+<%= form_with model: trophy, url: trophy.new_record? ? admin_trophies_path : admin_trophy_path(trophy) do |f| %>
+  <div class="flex h-64">
+    <div>
+      <div><%= image_tag trophy.icon, class: "h-28 w-28", alt: "Trophy image for #{trophy.name}" if trophy.icon.attached? %></div>
+    </div>
+    <div class="p-2">
+      <h2 class="text-2xl font-bold pb-2"><%= f.label :name %>: <%= f.text_field :name %></h2>
+      <div class="text-xl my-2"><%= f.label :description %>: <%= f.text_field :description %></div>
+      <div class="my-2"><%= f.label :icon %>: <%= f.file_field :icon %></div>
+      <div class="my-2"><%= f.label :rarity %>: <%= f.collection_radio_buttons :rarity, Trophy.rarities, :first, :first, {}, class: "ml-3 mr-1" %></div>
+      <div class="my-2"><%= f.label :order %>: <%= f.number_field :order %></div>
+      <div class="my-2"><%= f.label :special %>: <%= f.collection_select :special, [[true, true], [false, false]], :first, :last %></div>
+    </div>
+    <div>
+      <%= f.submit trophy.new_record? ? "Create" : "Update", class: "primary-button" %>
+      <%= link_to "Cancel", admin_trophies_path, class: "normal-button ml-2" %>
+    </div>
+  </div>
+<% end %>

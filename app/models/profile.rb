@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Profile < ApplicationRecord
+  include UuidPrimaryKey
+
   belongs_to :user
   has_many :team_profiles, dependent: :destroy
   has_many :teams, through: :team_profiles
@@ -29,5 +31,9 @@ class Profile < ApplicationRecord
 
   def invitations?
     team_profiles.where(role: :invitation).exists?
+  end
+
+  def teams_invited
+    team_profiles.where(role: :invitation).map(&:team)
   end
 end

@@ -3,6 +3,8 @@
   <head prefix="og: http://ogp.me/ns#">
     <title>RubyKaigi Schedule.select</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <% unless Rails.env.test? %>
@@ -13,23 +15,17 @@
       body {
         --mainColor: <%= @event.event_theme.main_color %>;
         --hoverColor: <%= @event.event_theme.main_color %>;
-        --subColor: <%= @event.event_theme.sub_color %>;
-        --accentColor: <%= @event.event_theme.accent_color %>;
-        --textColor: <%= @event.event_theme.text_color %>;
       }
     </style>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Roboto:wght@400;500&display=auto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+JP:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <% if Rails.env.test? %>
       <%= tag :meta, name: :rails_env, content: Rails.env %>
     <% end %>
-    
     <meta property="og:title" content="RubyKaigi Schedule.select">
-    <meta property="og:site_name" content="RubyKaigi Schedule.select powerd by SmartHR">
+    <meta property="og:site_name" content="RubyKaigi Schedule.select powered by SmartHR">
     <% unless Rails.env.test? %>
       <% if controller_name == 'plans' && action_name = 'show' && @plan %>
         <meta property="og:image" content="<%= event_plan_ogp_url(@plan, event_name: @plan.event.name, h: Digest::MD5.hexdigest(@plan.description)) %>" />
@@ -39,18 +35,22 @@
     <% end %>
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image"/>
-    
     <%= yield(:head) %>
-    
+
+    <link rel="manifest" href="<%= pwa_manifest_path(format: :json) %>">
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
+  <body class="bg-[var(--semantic-neutral-background-sub)] leading-4 font-sans">
+    <%= render 'components/app_header', event: @event, profile: @user&.profile %>
 
-  <body class="bg-[#f8f7f6] leading-4" style="font-family: 'Roboto', 'Noto Sans JP', sans-serif;">
-    <header>
-      <%= render 'layouts/header' %>
-    </header>
-    <div class="p-4 sm:p-8">
+    <% if @user && params[:controller] != 'schedules' %>
+      <%= turbo_stream_from @user.id, :notification %>
+      <div id="notification" class="mb-4 mx-[calc(50%-50vw)] sticky top-0 z-40"></div>
+    <% end %>
+
+    <main class="p-4 sm:p-8 min-h-screen">
       <%= yield %>
-    </div>
+    </main>
+    <%= render 'components/footer' %>
   </body>
 </html>
