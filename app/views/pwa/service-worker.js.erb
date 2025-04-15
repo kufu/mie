@@ -1,4 +1,4 @@
-const cacheName = "precache";
+const cacheName = "precache-v1";
 const precachedResources = [
     "<%= asset_path("tailwind.css") %>",
     "<%= asset_path("inter-font.css") %>",
@@ -18,15 +18,20 @@ self.addEventListener("activate", event => {
     event.waitUntil(precache());
 });
 
+async function cacheFirstWithRefresh(request) {
+    const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
+        if (networkResponse.ok) {
+            const cache = await caches.open(cacheName);
+            cache.put(request, networkResponse.clone());
+        }
+        return networkResponse;
+    });
+
+    return (await caches.match(request)) || (await fetchResponsePromise);
+}
+
 self.addEventListener('fetch', (event) => {
     const requestUrl = new URL(event.request.url);
-
-    if (requestUrl.pathname === '/2025') {
-        // if request failed, load schedules/index from cache
-        event.respondWith(fetch(event.request)
-            .catch(() => caches.match('/2025'))
-        );
-    }
 
     // When the item modified, load schedules/index to cache it
     if (requestUrl.pathname.includes('item')) {
@@ -54,5 +59,14 @@ self.addEventListener('fetch', (event) => {
                 }, 1000)
             })()
         );
+    } else {
+        if (requestUrl.pathname === '/2025') {
+            // if request failed, load schedules/index from cache
+            event.respondWith(fetch(event.request)
+              .catch(() => caches.match('/2025'))
+            );
+        } else {
+            event.respondWith(cacheFirstWithRefresh(event.request));
+        }
     }
 });
