@@ -7,7 +7,7 @@
 ].join(" ") %>
 
 <div class="relative group">
-  <img src="<%= src %>" class="<%= icon_classes %>" alt="<%= I18n.t("avatar.alt_text", user: name || 'ユーザー') %>">
+  <img src="<%= src %>" loading="lazy" class="<%= icon_classes %>" alt="<%= I18n.t("avatar.alt_text", user: name || 'ユーザー') %>">
   <% if show_tooltip && name.present? %>
     <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow-lg">
       <%= name %>

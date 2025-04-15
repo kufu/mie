@@ -42,8 +42,6 @@ class Plan < ApplicationRecord
   include BCrypt
   include Events
 
-  delegate :include?, to: :schedules
-
   belongs_to :user
   belongs_to :event
   has_many :plan_schedules
@@ -57,6 +55,12 @@ class Plan < ApplicationRecord
   scope :recent, lambda {
     order(updated_at: :desc)
   }
+
+  def include?(schedule)
+    # to avoid N+1
+    @schedule_ids ||= plan_schedules.map(&:schedule_id)
+    @schedule_ids.include?(schedule.id)
+  end
 
   def password
     @password ||= Password.new(password_hash)
