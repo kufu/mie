@@ -14,7 +14,7 @@ class ScheduleProfileMapping
   end
 
   def id
-    @id ||= Digest::SHA1.hexdigest(@profiles.map(&:id).sort.join)
+    @id ||= Digest::SHA1.hexdigest([@event.id, *@profiles.map(&:id).sort].join)
   end
 
   def fetch(profile)
