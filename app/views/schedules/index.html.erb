@@ -27,7 +27,7 @@
       <%= turbo_frame_tag @plan do %>
         <div data-controller="share"
              data-share-title-value="<%= @plan.title %>"
-             data-share-text-value="<%= @plan.description %>"
+             data-share-text-value="<%= "#{@plan.description} #rubykaigi" %>"
              data-share-url-value="<%= event_plan_url(@plan, event_name: @event.name) %>"
              class="flex justify-between items-center mb-2"
         >
