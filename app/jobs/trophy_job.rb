@@ -5,7 +5,6 @@ class TrophyJob < ApplicationJob
 
   def perform(profile)
     Trigger.where('description LIKE ?', 'trophy:%').order(description: :asc).each do |trigger|
-      logger.info("Trigger: #{trigger.description}")
       next if trigger.conditions.empty?
 
       profile_trophy = trigger.perform(profile, 'trophy')
