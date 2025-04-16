@@ -23,6 +23,16 @@
         </div>
         <p class="w-full text-left leading-6"><%= @profile.introduce %></p>
       <% end %>
+      <div class="w-full text-left">
+        <h3 class="mb-1 font-bold text-xs">Your Friends</h3>
+        <div class="flex flex-wrap gap-2">
+          <% @profile.friend_profiles.each do |friend| %>
+            <%= link_to "/profiles/#{friend.name}" do %>
+              <%= render "components/avatar", src: friend.avatar_url, name: friend.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
       <% if my_profile? && @profile.belongs_to_any_team? %>
         <div class="w-full text-left">
           <h3 class="mb-1 font-bold text-xs">Your Team</h3>
