@@ -5,8 +5,7 @@
     "dayjs": "^1.11.10",
     "el-transition": "^0.0.7",
     "esbuild": "^0.20.1",
-    "prop-types": "^15.7.2",
-    "typescript": "^4.9.5"
+    "prop-types": "^15.7.2"
   },
   "engines": {
     "node": "20.11.1",
