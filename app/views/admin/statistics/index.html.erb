@@ -1,0 +1,85 @@
+<div class="flex gap-x-4">
+  <div>
+    <h2 class="text-2xl font-bold">Profiles</h2>
+
+    <table class="border-collapse border border-gray-400 table-auto">
+      <thead>
+      <tr>
+        <th class="border border-gray-300">date</th>
+        <th class="border border-gray-300">count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @profiles.each do |key, val| %>
+        <tr>
+          <td class="border border-gray-300"><%= key %></td>
+          <td class="border border-gray-300"><%= val %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2 class="text-2xl font-bold">Friends</h2>
+
+    <table class="border-collapse border border-gray-400 table-auto">
+      <thead>
+      <tr>
+        <th class="border border-gray-300">date</th>
+        <th class="border border-gray-300">count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @friends.each do |key, val| %>
+        <tr>
+          <td class="border border-gray-300"><%= key %></td>
+          <td class="border border-gray-300"><%= val %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2 class="text-2xl font-bold">Teams</h2>
+
+    <table class="border-collapse border border-gray-400 table-auto">
+      <thead>
+      <tr>
+        <th class="border border-gray-300">date</th>
+        <th class="border border-gray-300">count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @teams.each do |key, val| %>
+        <tr>
+          <td class="border border-gray-300"><%= key %></td>
+          <td class="border border-gray-300"><%= val %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2 class="text-2xl font-bold">Teammates</h2>
+
+    <table class="border-collapse border border-gray-400 table-auto">
+      <thead>
+      <tr>
+        <th class="border border-gray-300">date</th>
+        <th class="border border-gray-300">count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @teammates.each do |key, val| %>
+        <tr>
+          <td class="border border-gray-300"><%= key %></td>
+          <td class="border border-gray-300"><%= val %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
