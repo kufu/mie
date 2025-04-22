@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :triggers, only: %i[index show edit update]
     resources :trophies
+    get 'statistics', to: 'statistics#index'
   end
 
   scope '/:event_name', as: 'event' do
