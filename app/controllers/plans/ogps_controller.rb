@@ -3,6 +3,7 @@
 module Plans
   class OgpsController < ApplicationController
     include EventRouting
+
     before_action :set_plan
 
     def show

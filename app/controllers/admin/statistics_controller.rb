@@ -14,20 +14,20 @@ module Admin
     private
 
     def profiles_statistics
-      Profile.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [_1.date, _1.count] }
+      Profile.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [it.date, it.count] }
     end
 
     def friends_statistics
       # friend has 2 records so that count divided by 2
-      Friend.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [_1.date, _1.count / 2] }
+      Friend.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [it.date, it.count / 2] }
     end
 
     def teams_statistics
-      Team.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [_1.date, _1.count] }
+      Team.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [it.date, it.count] }
     end
 
     def teammate_statistics
-      TeamProfile.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [_1.date, _1.count] }
+      TeamProfile.select(CREATE_AT_QUERY).group(:date).order(date: :asc).to_h { [it.date, it.count] }
     end
   end
 end
