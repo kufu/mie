@@ -40,3 +40,11 @@ Style/Documentation:
     - 'test/**/*'
     - 'app/**/*'
     - 'config/**/*'
+
+Naming/PredicateMethod:
+  Exclude:
+    - 'app/models/plan.rb'
+
+Style/OneClassPerFile:
+  Exclude:
+    - 'app/models/plan.rb'
