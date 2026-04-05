@@ -5,9 +5,9 @@ let googleMapsPromise
 async function loadGoogleMaps(apiKey) {
   if (window.google?.maps?.importLibrary) {
     const { Map, InfoWindow, LatLngBounds } = await google.maps.importLibrary('maps')
-    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary('marker')
+    const { AdvancedMarkerElement } = await google.maps.importLibrary('marker')
 
-    return { Map, InfoWindow, LatLngBounds, AdvancedMarkerElement, PinElement }
+    return { Map, InfoWindow, LatLngBounds, AdvancedMarkerElement }
   }
 
   if (googleMapsPromise) {
@@ -31,8 +31,8 @@ async function loadGoogleMaps(apiKey) {
     window.__googleMapsBeaconInit = async () => {
       try {
         const { Map, InfoWindow, LatLngBounds } = await google.maps.importLibrary('maps')
-        const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary('marker')
-        resolve({ Map, InfoWindow, LatLngBounds, AdvancedMarkerElement, PinElement })
+        const { AdvancedMarkerElement } = await google.maps.importLibrary('marker')
+        resolve({ Map, InfoWindow, LatLngBounds, AdvancedMarkerElement })
       } catch (error) {
         reject(error)
       } finally {
@@ -47,13 +47,14 @@ async function loadGoogleMaps(apiKey) {
 }
 
 export default class extends Controller {
-  static targets = ['map', 'status', 'publishButton', 'stopButton', 'count', 'list', 'currentExpiresAt', 'currentExpiresIn']
+  static targets = ['map', 'publishButton', 'stopButton', 'count', 'list', 'currentExpiresAt', 'currentExpiresIn', 'friendFilter']
   static values = {
     apiKey: String,
     mapId: String,
     beaconsUrl: String,
     publishUrl: String,
     destroyUrl: String,
+    friendProfileIds: Array,
     centerLat: Number,
     centerLng: Number,
     zoom: Number,
@@ -64,17 +65,15 @@ export default class extends Controller {
     this.messages = JSON.parse(this.i18nValue || '{}')
     this.markers = new Map()
     this.currentBeacon = null
+    this.allBeacons = []
     this.pollTimer = null
     this.countdownTimer = null
     this.boundsAdjusted = false
 
     if (!this.apiKeyValue) {
       this.disableControls()
-      this.setStatus(this.messages.api_key_missing)
       return
     }
-
-    this.setStatus(this.messages.loading)
 
     try {
       this.googleMaps = await loadGoogleMaps(this.apiKeyValue)
@@ -90,14 +89,12 @@ export default class extends Controller {
 
       await this.refresh().catch((error) => {
         console.error(error)
-        this.setStatus(this.messages.refresh_error)
       })
       this.startPolling()
       this.startCountdown()
     } catch (error) {
       console.error(error)
       this.disableControls()
-      this.setStatus(this.messages.load_error)
     }
   }
 
@@ -108,17 +105,14 @@ export default class extends Controller {
 
   async publish() {
     if (!navigator.geolocation) {
-      this.setStatus(this.messages.geolocation_missing)
+      console.error(new Error(this.messages.geolocation_missing))
       return
     }
 
     this.publishButtonTarget.disabled = true
-    this.setStatus(this.messages.locating)
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
-        this.setStatus(this.messages.publishing)
-
         try {
           await this.request(this.publishUrlValue, {
             method: 'POST',
@@ -133,20 +127,15 @@ export default class extends Controller {
 
           this.boundsAdjusted = false
           await this.refresh()
-          this.setStatus(this.messages.sharing)
-        } catch (_error) {
-          this.setStatus(this.messages.publish_error)
+        } catch (error) {
+          console.error(error)
         } finally {
           this.publishButtonTarget.disabled = false
         }
       },
       (error) => {
         this.publishButtonTarget.disabled = false
-        if (error.code === 1) {
-          this.setStatus(this.messages.geolocation_denied)
-        } else {
-          this.setStatus(this.messages.publish_error)
-        }
+        console.error(error)
       },
       {
         enableHighAccuracy: true,
@@ -158,18 +147,21 @@ export default class extends Controller {
 
   async stopSharing() {
     this.stopButtonTarget.disabled = true
-    this.setStatus(this.messages.stopping)
 
     try {
       await this.request(this.destroyUrlValue, { method: 'DELETE' })
       this.boundsAdjusted = false
       await this.refresh()
-      this.setStatus(this.messages.stopped)
-    } catch (_error) {
-      this.setStatus(this.messages.stop_error)
+    } catch (error) {
+      console.error(error)
     } finally {
       this.stopButtonTarget.disabled = !this.currentBeacon
     }
+  }
+
+  toggleFriendFilter() {
+    this.boundsAdjusted = false
+    this.applyFilter()
   }
 
   async refresh() {
@@ -183,8 +175,21 @@ export default class extends Controller {
     }
 
     const payload = await response.json()
-    this.renderBeacons(payload.beacons || [])
+    this.allBeacons = payload.beacons || []
+    this.applyFilter()
     this.renderCurrentBeacon(payload.current_beacon || null)
+  }
+
+  applyFilter() {
+    this.renderBeacons(this.visibleBeacons())
+  }
+
+  visibleBeacons() {
+    if (!this.friendFilterTarget.checked) {
+      return this.allBeacons
+    }
+
+    return this.allBeacons.filter((beacon) => beacon.current_user || this.friendProfileIdsValue.includes(beacon.profile_id))
   }
 
   renderBeacons(beacons) {
@@ -199,23 +204,14 @@ export default class extends Controller {
 
     beacons.forEach((beacon) => {
       const position = { lat: beacon.latitude, lng: beacon.longitude }
-      const label = beacon.name.toString().trim().slice(0, 1).toUpperCase()
       let marker = this.markers.get(beacon.id)
 
       if (!marker) {
-        const pin = new this.googleMaps.PinElement({
-          background: beacon.current_user ? '#0B374D' : '#FF5719',
-          borderColor: '#FFFFFF',
-          glyphColor: '#FFFFFF',
-          glyphText: label,
-          scale: 1.05
-        })
-
         marker = new this.googleMaps.AdvancedMarkerElement({
           map: this.map,
           position,
           title: beacon.name,
-          content: pin,
+          content: this.avatarMarkerContent(beacon),
           gmpClickable: true
         })
         marker.addEventListener('gmp-click', () => {
@@ -226,6 +222,7 @@ export default class extends Controller {
       } else {
         marker.position = position
         marker.title = beacon.name
+        marker.content = this.avatarMarkerContent(beacon)
       }
     })
 
@@ -249,9 +246,6 @@ export default class extends Controller {
     if (!beacon) {
       this.currentExpiresAtTarget.textContent = '-'
       this.currentExpiresInTarget.textContent = '-'
-      if (this.statusTarget.textContent === this.messages.sharing || this.statusTarget.textContent === this.messages.publishing) {
-        this.setStatus(this.messages.not_sharing)
-      }
       return
     }
 
@@ -355,10 +349,49 @@ export default class extends Controller {
     return container
   }
 
+  avatarMarkerContent(beacon) {
+    const wrapper = document.createElement('div')
+    wrapper.style.display = 'flex'
+    wrapper.style.flexDirection = 'column'
+    wrapper.style.alignItems = 'center'
+    wrapper.style.transform = 'translateY(-8px)'
+
+    const avatar = document.createElement('div')
+    avatar.style.width = '44px'
+    avatar.style.height = '44px'
+    avatar.style.borderRadius = '9999px'
+    avatar.style.overflow = 'hidden'
+    avatar.style.background = '#FFFFFF'
+    avatar.style.boxShadow = '0 6px 18px rgba(0, 0, 0, 0.18)'
+    avatar.style.border = beacon.current_user ? '3px solid #0B374D' : '3px solid #FF5719'
+
+    const image = document.createElement('img')
+    image.src = beacon.avatar_url
+    image.alt = beacon.name
+    image.style.display = 'block'
+    image.style.width = '100%'
+    image.style.height = '100%'
+    image.style.objectFit = 'cover'
+
+    const tail = document.createElement('div')
+    tail.style.width = '0'
+    tail.style.height = '0'
+    tail.style.marginTop = '-1px'
+    tail.style.borderLeft = '8px solid transparent'
+    tail.style.borderRight = '8px solid transparent'
+    tail.style.borderTop = beacon.current_user ? '12px solid #0B374D' : '12px solid #FF5719'
+
+    avatar.appendChild(image)
+    wrapper.appendChild(avatar)
+    wrapper.appendChild(tail)
+
+    return wrapper
+  }
+
   startPolling() {
     this.pollTimer = setInterval(() => {
-      this.refresh().catch(() => {
-        this.setStatus(this.messages.refresh_error)
+      this.refresh().catch((error) => {
+        console.error(error)
       })
     }, 30000)
   }
@@ -380,8 +413,8 @@ export default class extends Controller {
       this.currentExpiresAtTarget.textContent = '-'
       this.currentExpiresInTarget.textContent = '-'
       this.boundsAdjusted = false
-      this.refresh().catch(() => {
-        this.setStatus(this.messages.refresh_error)
+      this.refresh().catch((error) => {
+        console.error(error)
       })
       return
     }
@@ -404,10 +437,6 @@ export default class extends Controller {
     const minutes = Math.floor(seconds / 60)
     const remainder = seconds % 60
     return `${minutes}:${remainder.toString().padStart(2, '0')}`
-  }
-
-  setStatus(message) {
-    this.statusTarget.textContent = message
   }
 
   disableControls() {

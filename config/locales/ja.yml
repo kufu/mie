@@ -137,6 +137,7 @@ ja:
     expires_in: "残り時間"
     accuracy: "精度"
     list_empty: "現在公開中のビーコンはありません。"
+    friends_only: "友達だけ表示"
 
   trophy:
     rarity: "レアリティ"

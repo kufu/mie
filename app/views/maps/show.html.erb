@@ -13,6 +13,7 @@
   data-beacon-map-beacons-url-value="<%= event_beacons_path(event_name: @event.name, format: :json) %>"
   data-beacon-map-publish-url-value="<%= event_beacon_path(event_name: @event.name) %>"
   data-beacon-map-destroy-url-value="<%= event_beacon_path(event_name: @event.name) %>"
+  data-beacon-map-friend-profile-ids-value="<%= json_escape(@friend_profile_ids.to_json) %>"
   data-beacon-map-center-lat-value="<%= @map_center[:latitude] %>"
   data-beacon-map-center-lng-value="<%= @map_center[:longitude] %>"
   data-beacon-map-zoom-value="<%= @map_center[:zoom] %>"
@@ -36,7 +37,8 @@
     expires_in: t('map.expires_in'),
     accuracy: t('map.accuracy'),
     list_empty: t('map.list_empty'),
-    current_user: t('map.current_user')
+    current_user: t('map.current_user'),
+    friends_only: t('map.friends_only')
   }.to_json) %>"
   class="mx-auto max-w-6xl space-y-4"
 >
@@ -59,13 +61,15 @@
   </div>
 
   <div class="rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md">
-    <p data-beacon-map-target="status" class="text-sm text-[var(--semantic-neutral-text-sub)]">
-      <% if @google_maps_api_key.present? %>
-        <%= @current_beacon ? t('map.sharing') : t('map.not_sharing') %>
-      <% else %>
-        <%= t('map.api_key_missing') %>
-      <% end %>
-    </p>
+    <label class="inline-flex cursor-pointer items-center gap-3">
+      <input
+        type="checkbox"
+        class="h-4 w-4 rounded border-[var(--semantic-neutral-line)] text-[var(--mainColor)] focus:ring-[var(--mainColor)]"
+        data-action="change->beacon-map#toggleFriendFilter"
+        data-beacon-map-target="friendFilter"
+      >
+      <span class="text-sm font-bold text-[var(--semantic-neutral-text)]"><%= t('map.friends_only') %></span>
+    </label>
   </div>
 
   <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">

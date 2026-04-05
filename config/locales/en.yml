@@ -180,6 +180,7 @@ en:
     expires_in: "Expires in"
     accuracy: "Accuracy"
     list_empty: "No active beacons right now."
+    friends_only: "Show friends only"
 
   trophy:
     rarity: "Rarity"

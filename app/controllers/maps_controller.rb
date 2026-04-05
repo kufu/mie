@@ -12,6 +12,7 @@ class MapsController < ApplicationController
     @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY'].presence || Rails.application.credentials.dig(:google_maps, :api_key).presence
     @google_maps_map_id = ENV['GOOGLE_MAPS_MAP_ID'].presence || Rails.application.credentials.dig(:google_maps, :map_id).presence
     @google_maps_map_id ||= 'DEMO_MAP_ID' if Rails.env.development? || Rails.env.test?
+    @friend_profile_ids = @user.profile.friend_profile_ids
     @active_beacons = Beacon.active.on_event(@event).includes(:event, profile: :user).order(updated_at: :desc)
     @current_beacon = @active_beacons.find { it.profile_id == @user.profile.id }
     @map_center = map_center

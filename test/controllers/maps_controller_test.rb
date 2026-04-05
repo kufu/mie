@@ -13,10 +13,13 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
 
     omniauth_callback_uid('1234')
     get '/auth/github/callback'
+    Friend.create!(from: profiles(:profile_one).id, to: profiles(:profile_two).id)
 
     get event_map_url(event_name: @event.name)
     assert_response :success
     assert_includes @response.body, 'test-key'
+    assert_includes @response.body, profiles(:profile_two).id
+    assert_includes @response.body, I18n.t('map.friends_only')
   ensure
     ENV['GOOGLE_MAPS_API_KEY'] = old_api_key
   end
