@@ -31,7 +31,7 @@ class Schedule
     end
 
     test '#rows retuns arrays of Schedule::Table::Row' do
-      assert(@table.rows.all? { it.instance_of?(Schedule::Table::Row) })
+      assert(@table.rows.all?(Schedule::Table::Row))
     end
 
     test '#rows returns array sorted by track start time' do
