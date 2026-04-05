@@ -242,6 +242,7 @@ export default class extends Controller {
     this.currentBeacon = beacon
     this.stopButtonTarget.disabled = !beacon
     this.publishButtonTarget.disabled = false
+    this.updatePublishButtonLabel(Boolean(beacon))
 
     if (!beacon) {
       this.currentExpiresAtTarget.textContent = '-'
@@ -437,6 +438,16 @@ export default class extends Controller {
     const minutes = Math.floor(seconds / 60)
     const remainder = seconds % 60
     return `${minutes}:${remainder.toString().padStart(2, '0')}`
+  }
+
+  updatePublishButtonLabel(shared) {
+    const label = this.publishButtonTarget.querySelector('span')
+
+    if (!label) {
+      return
+    }
+
+    label.textContent = shared ? this.messages.update_beacon : this.messages.share_location
   }
 
   disableControls() {

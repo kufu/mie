@@ -38,7 +38,9 @@
     accuracy: t('map.accuracy'),
     list_empty: t('map.list_empty'),
     current_user: t('map.current_user'),
-    friends_only: t('map.friends_only')
+    friends_only: t('map.friends_only'),
+    share_location: t('button.share_location'),
+    update_beacon: t('button.update_beacon')
   }.to_json) %>"
   class="mx-auto max-w-6xl space-y-4"
 >
@@ -49,7 +51,7 @@
     </div>
     <div class="flex flex-wrap gap-2">
       <%= render 'components/button',
-                 title: t('button.share_location'),
+                 title: @current_beacon ? t('button.update_beacon') : t('button.share_location'),
                  classes: 'w-full sm:w-auto',
                  data: { action: 'click->beacon-map#publish', 'beacon-map-target': 'publishButton' } %>
       <%= render 'components/button',
