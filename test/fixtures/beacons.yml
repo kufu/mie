@@ -1,0 +1,23 @@
+active_kaigi:
+  event: kaigi
+  profile: profile_one
+  latitude: 33.839157
+  longitude: 132.765575
+  accuracy_meters: 15
+  expires_at: <%= 20.minutes.from_now %>
+
+expired_kaigi:
+  event: kaigi
+  profile: profile_two
+  latitude: 33.840000
+  longitude: 132.760000
+  accuracy_meters: 25
+  expires_at: <%= 5.minutes.ago %>
+
+party_beacon:
+  event: party
+  profile: profile_three
+  latitude: 35.000000
+  longitude: 135.000000
+  accuracy_meters: 5
+  expires_at: <%= 20.minutes.from_now %>

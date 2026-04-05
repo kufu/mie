@@ -36,6 +36,7 @@ en:
     select_locale: "Select your timezone"
     root: "Top"
     schedule: "Schedule"
+    map: "Beacon (beta)"
     plan: "My Plans"
     profile: "Profile"
     team: "Team"
@@ -124,6 +125,9 @@ en:
     delete_team: "Delete the team"
     leave_team: "Leave from the team"
     add_friend: "Add friend"
+    share_location: "Share my location"
+    update_beacon: "Update location"
+    stop_sharing_location: "Stop sharing"
     reload: "Reload"
     show_more: "Show more"
   default_vales:
@@ -140,6 +144,7 @@ en:
     only_one_team: "Target user already belongs to other team."
     login_required: "Login required."
     member_exists: "User %{user} is already a member of this team."
+    invalid_beacon_access_key: "Invalid beacon access key."
 
   teams:
     name: "Team name"
@@ -151,6 +156,33 @@ en:
     features:
       - "List all members plan in one page"
       - "User can join to only one team"
+
+  map:
+    title: "RubyKaigi Beacon Map"
+    description: "Share your current location for 30 minutes and see where other logged-in attendees are gathering around the city."
+    loading: "Loading map..."
+    locating: "Acquiring your location..."
+    publishing: "Publishing your beacon..."
+    sharing: "Your beacon is now visible for 30 minutes."
+    not_sharing: "Your beacon is not currently visible."
+    stopping: "Stopping your beacon..."
+    stopped: "Your beacon has been removed."
+    publish_error: "Failed to update beacon."
+    stop_error: "Failed to stop beacon."
+    geolocation_missing: "This browser does not support geolocation."
+    geolocation_denied: "Location permission was denied."
+    api_key_missing: "GOOGLE_MAPS_API_KEY is not configured."
+    load_error: "Failed to load Google Maps."
+    refresh_error: "Map loaded, but beacon data could not be refreshed."
+    current_beacon: "Your Beacon"
+    current_user: "You"
+    active_beacons: "Active Beacons"
+    active_count: "%{count} active"
+    expires_at: "Expires at"
+    expires_in: "Expires in"
+    accuracy: "Accuracy"
+    list_empty: "No active beacons right now."
+    friends_only: "Show friends only"
 
   trophy:
     rarity: "Rarity"

@@ -7,6 +7,9 @@ import { application } from "./application"
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
 
+import BeaconMapController from "./beacon_map_controller"
+application.register("beacon-map", BeaconMapController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 

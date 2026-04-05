@@ -5,6 +5,7 @@ ja:
     select_locale: "タイムゾーンを選択してください"
     root: "top"
     schedule: "スケジュール"
+    map: "ビーコン（beta）"
     plan: "視聴予定"
     profile: "プロフィール"
     team: "チーム"
@@ -93,6 +94,9 @@ ja:
     delete_team: "チームを削除"
     leave_team: "チームから離脱"
     add_friend: "友達を追加"
+    share_location: "現在地を共有"
+    update_beacon: "現在地を更新"
+    stop_sharing_location: "共有を停止"
     reload: "再読み込み"
     show_more: "もっと見る"
   default_vales:
@@ -108,6 +112,33 @@ ja:
     features:
       - "同じチームに所属しているメンバーの予定が、一つのページで一覧できるようになります"
       - "ユーザーは1つのチームにしか所属することができません"
+
+  map:
+    title: "ビーコンマップ"
+    description: "現在地を 30 分だけ共有して、町のどこに参加者が集まっているかを地図上で確認できます。"
+    loading: "地図を読み込んでいます..."
+    locating: "現在地を取得しています..."
+    publishing: "ビーコンを公開しています..."
+    sharing: "あなたのビーコンを 30 分間公開中です。"
+    not_sharing: "現在、あなたのビーコンは公開されていません。"
+    stopping: "ビーコンを停止しています..."
+    stopped: "ビーコンを停止しました。"
+    publish_error: "ビーコンの更新に失敗しました。"
+    stop_error: "ビーコンの停止に失敗しました。"
+    geolocation_missing: "このブラウザは位置情報取得に対応していません。"
+    geolocation_denied: "位置情報の利用が拒否されました。"
+    api_key_missing: "GOOGLE_MAPS_API_KEY が設定されていません。"
+    load_error: "Google Maps の読み込みに失敗しました。"
+    refresh_error: "地図は表示されましたが、ビーコン情報の更新に失敗しました。"
+    current_beacon: "あなたのビーコン"
+    current_user: "あなた"
+    active_beacons: "公開中のビーコン"
+    active_count: "%{count} 件"
+    expires_at: "公開終了"
+    expires_in: "残り時間"
+    accuracy: "精度"
+    list_empty: "現在公開中のビーコンはありません。"
+    friends_only: "友達だけ表示"
 
   trophy:
     rarity: "レアリティ"
@@ -130,6 +161,7 @@ ja:
     only_one_team: "対象のユーザーは既に他のチームに所属しています"
     login_required: "ログインが必要です"
     member_exists: "%{user}は既にチームに参加しています"
+    invalid_beacon_access_key: "ビーコン用のアクセスキーが無効です"
 
   time:
     formats:

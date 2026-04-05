@@ -1,0 +1,138 @@
+<% content_for :head do %>
+  <meta property="og:url" content="<%= event_map_url(event_name: @event.name) %>">
+<% end %>
+
+<% if @breakout_turbo %>
+  <% turbo_page_requires_reload %>
+<% end %>
+
+<div
+  data-controller="beacon-map"
+  data-beacon-map-api-key-value="<%= @google_maps_api_key.to_s %>"
+  data-beacon-map-map-id-value="<%= @google_maps_map_id.to_s %>"
+  data-beacon-map-access-key-value="<%= @beacon_access_key %>"
+  data-beacon-map-beacons-url-value="<%= event_beacons_path(event_name: @event.name, format: :json) %>"
+  data-beacon-map-publish-url-value="<%= event_beacon_path(event_name: @event.name) %>"
+  data-beacon-map-destroy-url-value="<%= event_beacon_path(event_name: @event.name) %>"
+  data-beacon-map-friend-profile-ids-value="<%= json_escape(@friend_profile_ids.to_json) %>"
+  data-beacon-map-center-lat-value="<%= @map_center[:latitude] %>"
+  data-beacon-map-center-lng-value="<%= @map_center[:longitude] %>"
+  data-beacon-map-zoom-value="<%= @map_center[:zoom] %>"
+  data-beacon-map-i18n-value="<%= json_escape({
+    loading: t('map.loading'),
+    locating: t('map.locating'),
+    publishing: t('map.publishing'),
+    sharing: t('map.sharing'),
+    not_sharing: t('map.not_sharing'),
+    stopping: t('map.stopping'),
+    stopped: t('map.stopped'),
+    publish_error: t('map.publish_error'),
+    stop_error: t('map.stop_error'),
+    geolocation_missing: t('map.geolocation_missing'),
+    geolocation_denied: t('map.geolocation_denied'),
+    api_key_missing: t('map.api_key_missing'),
+    load_error: t('map.load_error'),
+    refresh_error: t('map.refresh_error'),
+    active_count: t('map.active_count'),
+    expires_at: t('map.expires_at'),
+    expires_in: t('map.expires_in'),
+    accuracy: t('map.accuracy'),
+    list_empty: t('map.list_empty'),
+    current_user: t('map.current_user'),
+    friends_only: t('map.friends_only'),
+    share_location: t('button.share_location'),
+    update_beacon: t('button.update_beacon')
+  }.to_json) %>"
+  class="mx-auto max-w-6xl space-y-4"
+>
+  <div class="flex flex-col gap-4 rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md sm:flex-row sm:items-start sm:justify-between">
+    <div class="space-y-2">
+      <h1 class="text-2xl font-bold text-[var(--semantic-neutral-text)]"><%= t('map.title') %></h1>
+      <p class="max-w-2xl text-sm leading-6 text-[var(--semantic-neutral-text-sub)]"><%= t('map.description') %></p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <%= render 'components/button',
+                 title: @current_beacon ? t('button.update_beacon') : t('button.share_location'),
+                 classes: 'w-full sm:w-auto',
+                 data: { action: 'click->beacon-map#publish', 'beacon-map-target': 'publishButton' } %>
+      <%= render 'components/button',
+                 title: t('button.stop_sharing_location'),
+                 classes: 'w-full sm:w-auto',
+                 data: { action: 'click->beacon-map#stopSharing', 'beacon-map-target': 'stopButton' },
+                 disabled: @current_beacon.blank? %>
+    </div>
+  </div>
+
+  <div class="rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md">
+    <label class="inline-flex cursor-pointer items-center gap-3">
+      <input
+        type="checkbox"
+        class="h-4 w-4 rounded border-[var(--semantic-neutral-line)] text-[var(--mainColor)] focus:ring-[var(--mainColor)]"
+        data-action="change->beacon-map#toggleFriendFilter"
+        data-beacon-map-target="friendFilter"
+      >
+      <span class="text-sm font-bold text-[var(--semantic-neutral-text)]"><%= t('map.friends_only') %></span>
+    </label>
+  </div>
+
+  <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
+    <div class="overflow-hidden rounded-xl bg-[var(--semantic-neutral-background)] shadow-md">
+      <div
+        data-beacon-map-target="map"
+        class="w-full bg-[var(--semantic-neutral-background-sub)]"
+        style="height: 60vh; min-height: 420px;"
+      ></div>
+    </div>
+
+    <div class="space-y-4">
+      <section class="rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-[var(--semantic-neutral-text)]"><%= t('map.current_beacon') %></h2>
+          <span class="rounded-full bg-[var(--semantic-neutral-background-sub)] px-2 py-1 text-xs font-bold text-[var(--semantic-neutral-text-sub)]"><%= t('map.current_user') %></span>
+        </div>
+        <dl class="mt-4 space-y-3 text-sm">
+          <div class="flex items-center justify-between gap-4">
+            <dt class="text-[var(--semantic-neutral-text-sub)]"><%= t('map.expires_in') %></dt>
+            <dd data-beacon-map-target="currentExpiresIn" class="font-bold text-[var(--semantic-neutral-text)]">
+              <%= @current_beacon ? distance_of_time_in_words(Time.current, @current_beacon.expires_at) : '-' %>
+            </dd>
+          </div>
+          <div class="flex items-center justify-between gap-4">
+            <dt class="text-[var(--semantic-neutral-text-sub)]"><%= t('map.expires_at') %></dt>
+            <dd data-beacon-map-target="currentExpiresAt" class="font-bold text-[var(--semantic-neutral-text)]">
+              <%= @current_beacon ? l(@current_beacon.expires_at, format: :default) : '-' %>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-[var(--semantic-neutral-text)]"><%= t('map.active_beacons') %></h2>
+          <span data-beacon-map-target="count" class="rounded-full bg-[var(--semantic-neutral-background-sub)] px-2 py-1 text-xs font-bold text-[var(--semantic-neutral-text-sub)]"><%= @active_beacons.count %></span>
+        </div>
+
+        <div data-beacon-map-target="list" class="mt-4 space-y-3">
+          <% if @active_beacons.empty? %>
+            <p class="rounded-lg bg-[var(--semantic-neutral-background-sub)] p-3 text-sm text-[var(--semantic-neutral-text-sub)]"><%= t('map.list_empty') %></p>
+          <% else %>
+            <% @active_beacons.each do |beacon| %>
+              <div class="flex items-center gap-3 rounded-lg bg-[var(--semantic-neutral-background-sub)] p-3">
+                <img src="<%= beacon.profile.avatar_url %>" alt="<%= t('avatar.alt_text', user: beacon.profile.name) %>" class="h-10 w-10 rounded-full border border-[var(--semantic-neutral-line-sub)] bg-white">
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2">
+                    <p class="truncate text-sm font-bold text-[var(--semantic-neutral-text)]"><%= beacon.profile.name %></p>
+                    <% if beacon.profile_id == @user.profile.id %>
+                      <span class="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-[var(--semantic-neutral-text-sub)]"><%= t('map.current_user') %></span>
+                    <% end %>
+                  </div>
+                  <p class="text-xs text-[var(--semantic-neutral-text-sub)]"><%= t('map.expires_at') %>: <%= l(beacon.expires_at, format: :default) %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
