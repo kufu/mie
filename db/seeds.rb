@@ -12,10 +12,19 @@ ActiveRecord::Base.transaction do
 
   base_event = Event.find_or_initialize_by(name: '2025')
   base_event.build_event_theme(
-    main_color: "#FF5719"
+    main_color: "#FF5719",
+    map_latitude: 33.839157,
+    map_longitude: 132.765575,
+    map_zoom: 13
   ) if base_event.new_record?
   base_event.save!
   base_event.reload
+  base_event.event_theme.update!(
+    main_color: '#FF5719',
+    map_latitude: 33.839157,
+    map_longitude: 132.765575,
+    map_zoom: 13
+  )
 
   speakers_yaml = {}.merge(*YAML.load_file('db/seeds/speakers.yml').values)
 

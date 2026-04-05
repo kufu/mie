@@ -8,7 +8,10 @@ class EventThemeTest < ActiveSupport::TestCase
       main_color: '#000000',
       overview: 'test',
       site_label: 'test',
-      site_url: 'test'
+      site_url: 'test',
+      map_latitude: 35.681236,
+      map_longitude: 139.767125,
+      map_zoom: 13
     }
   end
 

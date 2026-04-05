@@ -8,6 +8,7 @@ class Event < ApplicationRecord
   has_many :speakers
   has_many :event_trophies
   has_many :trophies, through: :event_trophies
+  has_many :beacons, dependent: :destroy
 
   validates :name, presence: true, length: { in: 1..32 }
   validates :event_theme, presence: true
