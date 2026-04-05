@@ -51,6 +51,7 @@ export default class extends Controller {
   static values = {
     apiKey: String,
     mapId: String,
+    accessKey: String,
     beaconsUrl: String,
     publishUrl: String,
     destroyUrl: String,
@@ -457,25 +458,32 @@ export default class extends Controller {
 
   request(url, options = {}) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': csrfToken
+    }
+
+    if (this.accessKeyValue) {
+      headers['X-Beacon-Access-Key'] = this.accessKeyValue
+    }
 
     return fetch(url, {
       credentials: 'same-origin',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
+      headers,
       ...options
-    }).then((response) => {
+    }).then(async (response) => {
+      const body = response.status === 204 ? null : await response.json().catch(() => null)
+
+      if (body?.access_key) {
+        this.accessKeyValue = body.access_key
+      }
+
       if (!response.ok) {
-        throw new Error('Request failed')
+        throw new Error(body?.errors?.join(', ') || 'Request failed')
       }
 
-      if (response.status === 204) {
-        return null
-      }
-
-      return response.json()
+      return body
     })
   }
 }

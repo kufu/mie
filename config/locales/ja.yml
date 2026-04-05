@@ -161,6 +161,7 @@ ja:
     only_one_team: "対象のユーザーは既に他のチームに所属しています"
     login_required: "ログインが必要です"
     member_exists: "%{user}は既にチームに参加しています"
+    invalid_beacon_access_key: "ビーコン用のアクセスキーが無効です"
 
   time:
     formats:

@@ -10,6 +10,7 @@
   data-controller="beacon-map"
   data-beacon-map-api-key-value="<%= @google_maps_api_key.to_s %>"
   data-beacon-map-map-id-value="<%= @google_maps_map_id.to_s %>"
+  data-beacon-map-access-key-value="<%= @beacon_access_key %>"
   data-beacon-map-beacons-url-value="<%= event_beacons_path(event_name: @event.name, format: :json) %>"
   data-beacon-map-publish-url-value="<%= event_beacon_path(event_name: @event.name) %>"
   data-beacon-map-destroy-url-value="<%= event_beacon_path(event_name: @event.name) %>"

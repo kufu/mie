@@ -144,6 +144,7 @@ en:
     only_one_team: "Target user already belongs to other team."
     login_required: "Login required."
     member_exists: "User %{user} is already a member of this team."
+    invalid_beacon_access_key: "Invalid beacon access key."
 
   teams:
     name: "Team name"

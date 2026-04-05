@@ -21,6 +21,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_includes @response.body, profiles(:profile_two).id
     assert_includes @response.body, I18n.t('map.friends_only')
     assert_includes @response.body, I18n.t('button.update_beacon')
+    assert_match(/data-beacon-map-access-key-value="[^"]+"/, @response.body)
   ensure
     ENV['GOOGLE_MAPS_API_KEY'] = old_api_key
   end
