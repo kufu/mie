@@ -31,11 +31,11 @@ class Schedule
     end
 
     test '#rows retuns arrays of Schedule::Table::Row' do
-      assert @table.rows.all? { _1.instance_of?(Schedule::Table::Row) }
+      assert(@table.rows.all? { it.instance_of?(Schedule::Table::Row) })
     end
 
     test '#rows returns array sorted by track start time' do
-      assert_equal @table.rows.map { _1.tracks['TrackA'] }, @table.rows.map { _1.tracks['TrackA'] }.sort_by(&:start_at)
+      assert_equal @table.rows.map { it.tracks['TrackA'] }, @table.rows.map { it.tracks['TrackA'] }.sort_by(&:start_at)
     end
 
     test '#track_list returns track names sorted by Track#position' do
@@ -81,7 +81,7 @@ class Schedule
       table = Schedule::Table.new(schedules)
       new_table = table.expect([])
 
-      assert new_table.rows.all? { _1.schedules.empty? }
+      assert(new_table.rows.all? { it.schedules.empty? })
     end
 
     test '#expects returns new row object that does not affect the original row' do
