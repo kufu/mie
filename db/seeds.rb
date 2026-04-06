@@ -10,9 +10,9 @@
 
 ActiveRecord::Base.transaction do
 
-  base_event = Event.find_or_initialize_by(name: '2025')
+  base_event = Event.find_or_initialize_by(name: '2026')
   base_event.build_event_theme(
-    main_color: "#FF5719"
+    main_color: "#893D24"
   ) if base_event.new_record?
   base_event.save!
   base_event.reload
