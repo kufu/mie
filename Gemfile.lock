@@ -434,7 +434,7 @@ DEPENDENCIES
   wkhtmltoimage-binary
 
 RUBY VERSION
-   ruby 4.0.2p0
+  ruby 4.0.2p0
 
 BUNDLED WITH
-   2.5.3
+  4.0.9
