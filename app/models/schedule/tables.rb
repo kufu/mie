@@ -10,13 +10,13 @@ class Schedule
 
     def initialize(schedules)
       @schedules = schedules
-      @map = @schedules.group_by { it.start_at.strftime(DATE_FORMAT) }.to_h do |k, v|
+      @map = @schedules.group_by { _1.start_at.strftime(DATE_FORMAT) }.to_h do |k, v|
         [k, Schedule::Table.new(v, k)]
       end
     end
 
     def days
-      @map.keys.sort_by { Time.parse(it).to_i }
+      @map.keys.sort_by { Time.parse(_1).to_i }
     end
 
     def [](key)

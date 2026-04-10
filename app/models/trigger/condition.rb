@@ -2,14 +2,9 @@
 
 class Trigger
   class Condition
-    class UndefinedActionError < TriggerError
-    end
-
-    class UndefinedOperatorError < TriggerError
-    end
-
-    class InvalidModelError < TriggerError
-    end
+    UndefinedActionError = Class.new(TriggerError)
+    UndefinedOperatorError = Class.new(TriggerError)
+    InvalidModelError = Class.new(TriggerError)
 
     attr_reader :condition, :target, :props, :attribute
 
@@ -19,7 +14,7 @@ class Trigger
     end
 
     def satisfy?
-      @props = condition[:props].transform_values { transform_target(it) }
+      @props = condition[:props].transform_values { transform_target(_1) }
       check
     end
 
@@ -45,7 +40,7 @@ class Trigger
         count_check(0, 'gt')
       in :not_exists
         count_check(0, 'eq')
-      in { compare: op, value: value }
+      in { compare: op, value: value}
         compare_check(op, value)
       in { count: num, operator: op }
         count_check(num, op)
@@ -81,7 +76,7 @@ class Trigger
 
     def resolve_model_attribute
       objects = subject_model.where(props)
-      Array(@attribute).inject(objects) { |acc, attr| acc.map { it&.public_send(attr) } }
+      Array(@attribute).inject(objects) { |acc, attr| acc.map { _1&.public_send(attr) } }
     end
 
     def compare_check(operator, value)

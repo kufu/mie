@@ -76,6 +76,6 @@ class ItemsController < ApplicationController
 
   def set_schedule_table
     @schedule_table = Schedule::Tables.from_event(@event)
-    @row = @schedule_table.tables.map(&:rows).flatten.find { it.schedules.include?(@item.schedule) }
+    @row = @schedule_table.tables.map(&:rows).flatten.find { _1.schedules.include?(@item.schedule) }
   end
 end

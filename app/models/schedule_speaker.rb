@@ -4,7 +4,6 @@ class ScheduleSpeaker < ApplicationRecord
   include UuidPrimaryKey
 
   include ActiveModel::Validations
-
   validates_with Validators::EventEqualityValidator
 
   belongs_to :schedule
