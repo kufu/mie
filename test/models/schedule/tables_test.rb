@@ -62,7 +62,7 @@ class Schedule
       tables = Schedule::Tables.new(schedules)
       new_tables = tables.expect([])
 
-      assert(new_tables[new_tables.days.first].rows.all? { it.schedules.empty? })
+      assert new_tables[new_tables.days.first].rows.all? { _1.schedules.empty? }
     end
 
     test '#expects returns new row object that does not affect the original row' do

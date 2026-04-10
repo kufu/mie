@@ -12,7 +12,7 @@ class Schedule
         @start_end = "#{@start_at} - #{@end_at}"
         @timezone = schedules[0].end_at.strftime('%Z')
         @schedules = schedules
-        @tracks = schedules.to_h { [it.track.name, it] }
+        @tracks = schedules.to_h { [_1.track.name, _1] }
         @sort_key = schedules[0].start_at
 
         @date = schedules[0].start_at.strftime('%Y%m%d')
@@ -29,8 +29,8 @@ class Schedule
 
       def expect(schedules)
         dup.tap do |obj|
-          obj.instance_variable_set(:@schedules, self.schedules.select { schedules.include?(it) })
-          obj.instance_variable_set(:@tracks, obj.schedules.to_h { [it.track.name, it] })
+          obj.instance_variable_set(:@schedules, self.schedules.select { schedules.include?(_1) })
+          obj.instance_variable_set(:@tracks, obj.schedules.to_h { [_1.track.name, _1] })
         end
       end
 
