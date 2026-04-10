@@ -9,7 +9,7 @@
     <% tag_name = schedule.speakers.first.present? ? :a : :p %>
     <% tag_options = {
       class: [common_classes, schedule.speakers.first.present? ? "underline underline-offset-4" : nil].compact,
-      href: schedule.speakers.first.present? ? "https://rubykaigi.org/2025/presentations/#{schedule.speakers.first.handle_without_at}" : nil,
+      href: schedule.speakers.first.present? ? "https://rubykaigi.org/2026/presentations/#{schedule.speakers.first.handle_without_at}" : nil,
       target: schedule.speakers.first.present? ? "_blank" : nil
     }.compact %>
 

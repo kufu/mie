@@ -57,7 +57,7 @@ self.addEventListener('fetch', (event) => {
         event.waitUntil(
             (async () => {
                 const cache = await caches.open(cacheName);
-                const warmupUrl = '/2025';
+                const warmupUrl = '/2026';
 
                 setTimeout(() => {
                     (async () => {
@@ -75,10 +75,10 @@ self.addEventListener('fetch', (event) => {
             })()
         );
     } else {
-        if (requestUrl.pathname === '/2025') {
+        if (requestUrl.pathname === '/2026') {
             // if request failed, load schedules/index from cache
             event.respondWith(fetch(event.request)
-              .catch(() => caches.match('/2025'))
+              .catch(() => caches.match('/2026'))
             );
         } else {
             event.respondWith(cacheFirstWithRefresh(event.request));
