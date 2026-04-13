@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.0'
+ruby '4.0.2'
 
 gem 'rails', '~> 8.0'
 
@@ -64,8 +64,6 @@ gem 'solid_cache', '~> 1.0'
 gem 'activerecord-session_store', '~> 2.1'
 
 gem 'mission_control-jobs', '~> 1.0'
-
-gem 'bootsnap', require: false
 
 gem 'active_storage_db', '~> 1.4'
 
