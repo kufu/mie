@@ -25,7 +25,7 @@ class Schedule
 
     def expect(schedules)
       dup.tap do |table|
-        table.instance_variable_set(:@rows, rows.map { _1.expect(schedules) })
+        table.instance_variable_set(:@rows, rows.map { it.expect(schedules) })
       end
     end
 
