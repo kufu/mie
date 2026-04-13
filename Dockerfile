@@ -16,8 +16,14 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 wkhtmltopdf fonts-noto-cjk fonts-noto-color-emoji && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 fonts-noto-cjk fonts-noto-color-emoji && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install wkhtmltopdf from binary (not available via apt on Debian Trixie)
+RUN curl -fsSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb -o /tmp/wkhtmltox.deb && \
+    apt-get update -qq && \
+    apt-get install --no-install-recommends -y /tmp/wkhtmltox.deb && \
+    rm -rf /tmp/wkhtmltox.deb /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
 ENV RAILS_ENV="production" \
