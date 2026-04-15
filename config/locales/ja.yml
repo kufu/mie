@@ -162,6 +162,7 @@ ja:
     login_required: "ログインが必要です"
     member_exists: "%{user}は既にチームに参加しています"
     invalid_beacon_access_key: "ビーコン用のアクセスキーが無効です"
+    beacon_out_of_range: "現在地の共有は、マップの中心地から半径 %{radius_km}km 以内でのみ利用できます"
 
   time:
     formats:

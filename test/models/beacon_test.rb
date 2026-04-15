@@ -36,6 +36,17 @@ class BeaconTest < ActiveSupport::TestCase
     end
   end
 
+  test 'publish rejects beacon outside event share radius' do
+    assert_raises ActiveRecord::RecordInvalid do
+      Beacon.publish!(
+        profile: profiles(:profile_four),
+        event: events(:kaigi),
+        latitude: 33.899157,
+        longitude: 132.765575
+      )
+    end
+  end
+
   test 'active scope excludes expired records' do
     assert_equal [beacons(:active_kaigi)], Beacon.active.on_event(events(:kaigi)).to_a
   end

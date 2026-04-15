@@ -145,6 +145,7 @@ en:
     login_required: "Login required."
     member_exists: "User %{user} is already a member of this team."
     invalid_beacon_access_key: "Invalid beacon access key."
+    beacon_out_of_range: "Location sharing is only available within %{radius_km}km of the map center."
 
   teams:
     name: "Team name"

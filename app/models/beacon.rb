@@ -16,6 +16,7 @@ class Beacon < ApplicationRecord
   validates :accuracy_meters, numericality: { greater_than_or_equal_to: 0, only_integer: true }, allow_nil: true
   validates :expires_at, presence: true
   validates :profile_id, uniqueness: { scope: :event_id }
+  validate :location_must_be_within_event_share_radius
 
   def self.publish!(profile:, event:, latitude:, longitude:, accuracy_meters: nil)
     beacon = find_or_initialize_by(profile:, event:)
@@ -31,5 +32,17 @@ class Beacon < ApplicationRecord
 
   def active?
     expires_at.future?
+  end
+
+  private
+
+  def location_must_be_within_event_share_radius
+    return if latitude.blank? || longitude.blank? || event.blank? || event.event_theme.blank?
+    return if event.event_theme.shareable_location?(latitude:, longitude:)
+
+    errors.add(
+      :base,
+      I18n.t('errors.beacon_out_of_range', radius_km: event.event_theme.beacon_share_radius_km)
+    )
   end
 end
