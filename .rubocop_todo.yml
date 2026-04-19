@@ -41,6 +41,7 @@ Style/Documentation:
     - 'app/**/*'
     - 'config/**/*'
 
+
 Naming/PredicateMethod:
   Exclude:
     - 'app/models/plan.rb'

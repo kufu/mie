@@ -1,183 +1,206 @@
 ---
-apr16:
+apr22:
   events:
   - type: break
-    begin: '09:00'
-    end: '10:00'
+    begin: '08:30'
+    end: '09:30'
     name: Door Open
   - type: keynote
-    begin: '10:00'
-    end: '11:00'
+    begin: '09:30'
+    end: '10:30'
     talks:
-      Main Hall: ima1zumi
+      Large Hall: tagomoris
   - type: talk
-    begin: '11:10'
-    end: '11:40'
+    begin: '10:50'
+    end: '11:20'
     talks:
-      Main Hall: makenowjust
-      Sub Hall: maciejmensfeld
-      Pearls Room: tk0miya
+      Large Hall: hasumikin
+      Sub Arena: anmarchenko
+      Small Hall: jimlock
   - type: talk
-    begin: '11:50'
-    end: '12:20'
+    begin: '11:30'
+    end: '12:00'
     talks:
-      Main Hall: kateinoigakukun
-      Sub Hall: dafyddcrosby
-      Pearls Room: fetburner
+      Large Hall: ydah_
+      Sub Arena: TonsOfFun
+      Small Hall: tikkss
   - type: break
-    begin: '12:20'
-    end: '14:00'
+    begin: '12:00'
+    end: '13:30'
     name: Lunch Break
   - type: talk
-    begin: '14:00'
-    end: '14:30'
-    talks:
-      Main Hall: k0kubun
-      Sub Hall: marcoroth
-      Pearls Room: ktou
-  - type: talk
-    begin: '14:40'
-    end: '15:10'
-    talks:
-      Main Hall: spikeolaf
-      Sub Hall: yfractal
-      Pearls Room: sinsoku_listy
-  - type: break
-    begin: '15:10'
-    end: '15:40'
-    name: Afternoon Break
-  - type: talk
-    begin: '15:40'
-    end: '16:10'
-    talks:
-      Main Hall: tagomoris
-      Sub Hall: vinistock
-      Pearls Room: cristian_planas
-  - type: talk
-    begin: '16:20'
-    end: '16:50'
-    talks:
-      Main Hall: kaz0505
-      Sub Hall: fractaledmind
-      Pearls Room: youchan
-  - type: talk
-    begin: '17:00'
-    end: '18:00'
-    talks:
-      Main Hall: tric
-apr17:
-  events:
-  - type: keynote
-    begin: '10:00'
-    end: '11:00'
-    talks:
-      Main Hall: KnuX
-  - type: talk
-    begin: '11:10'
-    end: '11:40'
-    talks:
-      Main Hall: ydah_
-      Sub Hall: osyoyu
-      Pearls Room: hmsk
-  - type: talk
-    begin: '11:50'
-    end: '12:20'
-    talks:
-      Main Hall: maximecb
-      Sub Hall: lyninx
-      Pearls Room: naitoh
-  - type: break
-    begin: '12:20'
+    begin: '13:30'
     end: '14:00'
-    name: Lunch Break
-  - type: talk
-    begin: '14:00'
-    end: '14:30'
     talks:
-      Main Hall: mametter
-      Sub Hall: DmitryPogrebnoy
-      Pearls Room: asonas
+      Large Hall: koic
+      Sub Arena: osyoyu
+      Small Hall: hadashiA
   - type: talk
-    begin: '14:40'
-    end: '15:10'
+    begin: '14:10'
+    end: '14:40'
     talks:
-      Main Hall: hasumikin
-      Sub Hall: p0deje
-      Pearls Room: koic
+      Large Hall: luke-gruber
+      Sub Arena: yujiyokoo
+      Small Hall: kazuho
+  - type: talk
+    begin: '14:50'
+    end: '15:20'
+    talks:
+      Large Hall: spikeolaf
+      Sub Arena: asonas
+      Small Hall: kishima
   - type: break
-    begin: '15:10'
-    end: '15:40'
+    begin: '15:20'
+    end: '16:00'
     name: Afternoon Break
   - type: talk
-    begin: '15:40'
-    end: '16:10'
+    begin: '16:00'
+    end: '16:30'
     talks:
-      Main Hall: tenderlove
-      Sub Hall: s01
-      Pearls Room: duerst
+      Large Hall: tekknolagi
+      Sub Arena: Bakaface
+      Small Hall: youchan
   - type: talk
-    begin: '16:20'
-    end: '16:50'
+    begin: '16:40'
+    end: '17:10'
     talks:
-      Main Hall: coe401_
-      Sub Hall: amomchilov
-      Pearls Room: junk0612
+      Large Hall: tompng
+      Sub Arena: Edouard-chin
+      Small Hall: harukasan
   - type: lt
-    begin: '17:00'
-    end: '18:00'
+    begin: '17:20'
+    end: '18:20'
     name: Lightning Talks
-apr18:
+apr23:
   events:
-  - type: talk
-    begin: '09:50'
-    end: '11:00'
+  - type: keynote
+    begin: '09:30'
+    end: '10:30'
     talks:
-      Main Hall: rubylangorg
+      Large Hall: headius
   - type: talk
-    begin: '11:10'
-    end: '11:40'
+    begin: '10:50'
+    end: '11:20'
     talks:
-      Main Hall: soutaro
-      Sub Hall: s_isshiki1969
-      Pearls Room: udzura
+      Large Hall: ko1
+      Sub Arena: _dak2_
+      Small Hall: fd0
   - type: talk
-    begin: '11:50'
-    end: '12:20'
+    begin: '11:30'
+    end: '12:00'
     talks:
-      Main Hall: jeremyevans0
-      Sub Hall: alanwusx
-      Pearls Room: ahogappa
+      Large Hall: peterzhu2118
+      Sub Arena: udzura
+      Small Hall: m_seki
   - type: break
-    begin: '12:20'
-    end: '14:00'
+    begin: '12:00'
+    end: '13:30'
     name: Lunch Break
   - type: talk
-    begin: '14:00'
-    end: '14:30'
+    begin: '13:30'
+    end: '14:00'
     talks:
-      Main Hall: ko1
-      Sub Hall: Morriar
-      Pearls Room: sue445
+      Large Hall: palkan_tula
+      Sub Arena: ioquatix
+      Small Hall: nagachika
   - type: talk
-    begin: '14:40'
-    end: '15:10'
+    begin: '14:10'
+    end: '14:40'
     talks:
-      Main Hall: tompng
-      Sub Hall: headius
-      Pearls Room: Y_uuu
+      Large Hall: tenderlove
+      Sub Arena: soutaro
+      Small Hall: ryosk7
+  - type: talk
+    begin: '14:50'
+    end: '15:20'
+    talks:
+      Large Hall: jeremyevans0
+      Sub Arena: khasinski
+      Small Hall: ledsun
   - type: break
-    begin: '15:10'
-    end: '15:40'
+    begin: '15:20'
+    end: '16:00'
     name: Afternoon Break
   - type: talk
-    begin: '15:40'
-    end: '16:10'
+    begin: '16:00'
+    end: '16:30'
     talks:
-      Main Hall: peterzhu2118
-      Sub Hall: segiddins
-      Pearls Room: ohbarye
+      Large Hall: maciejmensfeld
+      Sub Arena: cfis
+      Small Hall: White_Green2525
+  - type: talk
+    begin: '16:40'
+    end: '17:10'
+    talks:
+      Large Hall: mametter
+      Sub Arena: jacob-shops
+      Small Hall: ohbarye
+  - type: talk
+    begin: '17:20'
+    end: '17:50'
+    talks:
+      Large Hall: _st0012
+      Sub Arena: s_isshiki1969
+      Small Hall: hachiblog
+apr24:
+  events:
+  - type: talk
+    begin: '09:20'
+    end: '10:30'
+    talks:
+      Large Hall: rubylangorg
+  - type: talk
+    begin: '10:50'
+    end: '11:20'
+    talks:
+      Large Hall: coe401_
+      Sub Arena: nateberkopec
+      Small Hall: kaz0505
+  - type: talk
+    begin: '11:30'
+    end: '12:00'
+    talks:
+      Large Hall: jhawthorn
+      Sub Arena: Envek
+      Small Hall: ktou
+  - type: break
+    begin: '12:00'
+    end: '13:30'
+    name: Lunch Break
+  - type: talk
+    begin: '13:30'
+    end: '14:00'
+    talks:
+      Large Hall: makenowjust
+      Sub Arena: KnuX
+      Small Hall: takaokouji
+  - type: talk
+    begin: '14:10'
+    end: '14:40'
+    talks:
+      Large Hall: hsbt
+      Sub Arena: marcoroth
+      Small Hall: yhara
+  - type: talk
+    begin: '14:50'
+    end: '15:20'
+    talks:
+      Large Hall: eregontp
+      Sub Arena: Morriar
+      Small Hall: Y_uuu
+  - type: break
+    begin: '15:20'
+    end: '16:00'
+    name: Afternoon Break
+  - type: talk
+    begin: '16:00'
+    end: '16:30'
+    talks:
+      Large Hall: k0kubun
+      Sub Arena: segiddins
+      Small Hall: riseshia
   - type: keynote
-    begin: '16:20'
-    end: '17:20'
+    begin: '16:40'
+    end: '17:40'
     talks:
-      Main Hall: yukihiro_matz
+      Large Hall: yukihiro_matz
