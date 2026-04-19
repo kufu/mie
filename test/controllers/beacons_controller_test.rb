@@ -14,7 +14,7 @@ class BeaconsControllerTest < ActionDispatch::IntegrationTest
     get event_beacons_url(event_name: @event.name, format: :json)
     assert_response :success
 
-    assert_equal [beacons(:active_kaigi).id], response.parsed_body['beacons'].map { it['id'] }
+    assert_equal([beacons(:active_kaigi).id], response.parsed_body['beacons'].map { it['id'] })
     assert_equal beacons(:active_kaigi).id, response.parsed_body['current_beacon']['id']
   end
 

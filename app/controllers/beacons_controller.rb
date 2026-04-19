@@ -30,7 +30,8 @@ class BeaconsController < ApplicationController
 
     render json: { beacon: beacon_payload(beacon), access_key: @next_beacon_access_key }
   rescue ActiveRecord::RecordInvalid => e
-    render json: { errors: e.record.errors.full_messages, access_key: @next_beacon_access_key }, status: :unprocessable_entity
+    render json: { errors: e.record.errors.full_messages, access_key: @next_beacon_access_key },
+           status: :unprocessable_entity
   end
 
   def destroy

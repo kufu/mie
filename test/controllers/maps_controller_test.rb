@@ -8,7 +8,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get map when logged in' do
-    old_api_key = ENV['GOOGLE_MAPS_API_KEY']
+    old_api_key = ENV.fetch('GOOGLE_MAPS_API_KEY', nil)
     ENV['GOOGLE_MAPS_API_KEY'] = 'test-key'
 
     omniauth_callback_uid('1234')

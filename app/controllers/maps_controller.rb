@@ -10,8 +10,10 @@ class MapsController < ApplicationController
   skip_after_action :check_trophy
 
   def show
-    @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY'].presence || Rails.application.credentials.dig(:google_maps, :api_key).presence
-    @google_maps_map_id = ENV['GOOGLE_MAPS_MAP_ID'].presence || Rails.application.credentials.dig(:google_maps, :map_id).presence
+    @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY'].presence || Rails.application.credentials.dig(:google_maps,
+                                                                                                    :api_key).presence
+    @google_maps_map_id = ENV['GOOGLE_MAPS_MAP_ID'].presence || Rails.application.credentials.dig(:google_maps,
+                                                                                                  :map_id).presence
     @google_maps_map_id ||= 'DEMO_MAP_ID' if Rails.env.development? || Rails.env.test?
     @beacon_access_key = issue_beacon_access_key(@event)
     @friend_profile_ids = @user.profile.friend_profile_ids

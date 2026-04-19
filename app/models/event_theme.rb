@@ -13,7 +13,8 @@ class EventTheme < ApplicationRecord
 
   validates :main_color, presence: true, format: { with: /\A#[0-9A-Fa-f]{6}\z/ }
   validates :map_latitude, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }, allow_nil: true
-  validates :map_longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }, allow_nil: true
+  validates :map_longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 },
+                            allow_nil: true
   validates :map_zoom, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 20, only_integer: true }
 
   def map_latitude_value
@@ -49,10 +50,10 @@ class EventTheme < ApplicationRecord
     latitude_delta = latitude_radians - center_latitude_radians
     longitude_delta = longitude_radians - center_longitude_radians
 
-    a = Math.sin(latitude_delta / 2)**2 +
-        Math.cos(center_latitude_radians) * Math.cos(latitude_radians) *
-        Math.sin(longitude_delta / 2)**2
-    a = [[a, 0.0].max, 1.0].min
+    a = (Math.sin(latitude_delta / 2)**2) +
+        (Math.cos(center_latitude_radians) * Math.cos(latitude_radians) *
+        (Math.sin(longitude_delta / 2)**2))
+    a = a.clamp(0.0, 1.0)
 
     EARTH_RADIUS_METERS * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   end
