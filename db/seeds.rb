@@ -12,7 +12,7 @@ ActiveRecord::Base.transaction do
 
   base_event = Event.find_or_initialize_by(name: '2026')
   base_event.build_event_theme(
-    main_color: "#893D24"
+    main_color: "#893D24",
     map_latitude: 41.782779353469216,
     map_longitude: 140.7502528746034,
     map_zoom: 13
