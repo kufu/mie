@@ -4,12 +4,18 @@ party-theme:
   overview: 'hoge'
   site_label: 'foo'
   site_url: 'https://example.com'
+  map_latitude: 35.681236
+  map_longitude: 139.767125
+  map_zoom: 13
 dojo-theme:
   event: dojo
   main_color: '#0B374D'
   overview: 'piyo'
   site_label: 'boom'
   site_url: 'https://example.com/2'
+  map_latitude: 34.693725
+  map_longitude: 135.502254
+  map_zoom: 13
 
 kaigi-theme:
   event: kaigi
@@ -17,3 +23,6 @@ kaigi-theme:
   overview: 'piyo'
   site_label: 'boom'
   site_url: 'https://example.com/3'
+  map_latitude: 33.839157
+  map_longitude: 132.765575
+  map_zoom: 13

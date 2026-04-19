@@ -10,33 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_27_040250) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_05_000200) do
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.string "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.string "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_db_files", force: :cascade do |t|
-    t.string "ref", null: false
-    t.binary "data", null: false
     t.datetime "created_at", null: false
+    t.binary "data", null: false
+    t.string "ref", null: false
     t.index ["ref"], name: "index_active_storage_db_files_on_ref", unique: true
   end
 
@@ -46,20 +46,38 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_040250) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "beacons", id: :string, force: :cascade do |t|
+    t.integer "accuracy_meters"
+    t.datetime "created_at", null: false
+    t.string "event_id", null: false
+    t.datetime "expires_at", null: false
+    t.decimal "latitude", precision: 10, scale: 6, null: false
+    t.decimal "longitude", precision: 10, scale: 6, null: false
+    t.string "profile_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "expires_at"], name: "index_beacons_on_event_id_and_expires_at"
+    t.index ["event_id", "profile_id"], name: "index_beacons_on_event_id_and_profile_id", unique: true
+    t.index ["event_id"], name: "index_beacons_on_event_id"
+    t.index ["profile_id"], name: "index_beacons_on_profile_id"
+  end
+
   create_table "event_themes", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "event_id", null: false
     t.string "main_color", default: "#0B374D", null: false
+    t.decimal "map_latitude", precision: 10, scale: 6
+    t.decimal "map_longitude", precision: 10, scale: 6
+    t.integer "map_zoom", default: 13, null: false
     t.string "overview", default: "", null: false
     t.string "site_label", default: "", null: false
     t.string "site_url", default: "", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "event_trophies", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "event_id", null: false
     t.string "trophy_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id", "trophy_id"], name: "index_event_trophies_on_event_id_and_trophy_id", unique: true
     t.index ["event_id"], name: "index_event_trophies_on_event_id"
@@ -67,104 +85,104 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_040250) do
   end
 
   create_table "events", id: :string, force: :cascade do |t|
-    t.string "name", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "friends", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "from", null: false
     t.string "to", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from", "to"], name: "index_friends_on_from_and_to", unique: true
   end
 
   create_table "plan_schedules", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "memo", default: "", null: false
     t.string "plan_id", null: false
     t.string "schedule_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "memo", default: "", null: false
   end
 
   create_table "plans", id: :string, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", default: "", null: false
-    t.string "user_id", null: false
-    t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "password_hash"
-    t.boolean "initial", default: true, null: false
+    t.string "description", default: "", null: false
     t.string "event_id", null: false
+    t.boolean "initial", default: true, null: false
+    t.string "password_hash"
+    t.boolean "public", default: false, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_id", null: false
   end
 
   create_table "profile_trophies", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "profile_id", null: false
     t.string "trophy_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_profile_trophies_on_profile_id"
     t.index ["trophy_id"], name: "index_profile_trophies_on_trophy_id"
   end
 
   create_table "profiles", id: :string, force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "provider", null: false
-    t.string "uid", null: false
-    t.string "name", null: false
     t.string "avatar_url", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "introduce"
+    t.string "name", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "schedule_speakers", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "schedule_id", null: false
     t.string "speaker_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "schedules", id: :string, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", default: "", null: false
-    t.datetime "start_at", precision: nil, null: false
-    t.datetime "end_at", precision: nil, null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "description", default: "", null: false
+    t.datetime "end_at", precision: nil, null: false
     t.integer "language", default: 0, null: false
+    t.datetime "start_at", precision: nil, null: false
+    t.string "title", null: false
     t.string "track_id", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.string "session_id", null: false
-    t.text "data"
     t.datetime "created_at", null: false
+    t.text "data"
+    t.string "session_id", null: false
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "speakers", id: :string, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "handle", default: "", null: false
-    t.string "thumbnail", default: "", null: false
-    t.string "profile", default: "", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "github"
-    t.string "twitter"
     t.string "event_id", null: false
+    t.string "github"
+    t.string "handle", default: "", null: false
+    t.string "name", null: false
+    t.string "profile", default: "", null: false
+    t.string "thumbnail", default: "", null: false
+    t.string "twitter"
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_profiles", id: :string, force: :cascade do |t|
-    t.string "team_id", null: false
+    t.datetime "created_at", null: false
     t.string "profile_id", null: false
     t.integer "role", null: false
-    t.datetime "created_at", null: false
+    t.string "team_id", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_team_profiles_on_profile_id"
     t.index ["team_id", "profile_id"], name: "index_team_profiles_on_team_id_and_profile_id", unique: true
@@ -172,50 +190,52 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_040250) do
   end
 
   create_table "teams", id: :string, force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
   create_table "tracks", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "event_id", null: false
     t.string "name", null: false
     t.integer "position", default: 1, null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id", "name"], name: "index_tracks_on_event_id_and_name", unique: true
     t.index ["event_id"], name: "index_tracks_on_event_id"
   end
 
   create_table "triggers", id: :string, force: :cascade do |t|
-    t.string "description", null: false
-    t.string "key", null: false
     t.json "action", null: false
     t.integer "amount", null: false
-    t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.json "conditions", default: []
+    t.datetime "created_at", null: false
+    t.string "description", null: false
+    t.datetime "expires_at"
+    t.string "key", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trophies", id: :string, force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.integer "rarity", default: 0, null: false
-    t.integer "order", default: 9999, null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "description", null: false
+    t.string "name", null: false
+    t.integer "order", default: 9999, null: false
+    t.integer "rarity", default: 0, null: false
     t.boolean "special", default: false, null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :string, force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin", default: false, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "beacons", "events"
+  add_foreign_key "beacons", "profiles"
   add_foreign_key "event_trophies", "events"
   add_foreign_key "event_trophies", "trophies"
   add_foreign_key "friends", "profiles", column: "from"

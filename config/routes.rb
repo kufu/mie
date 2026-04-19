@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   scope '/:event_name', as: 'event' do
     get '/', to: 'schedules#index'
     get '/terms-of-service', to: 'static#terms_of_service'
+    resource :map, only: %i[show]
+    resource :beacon, only: %i[create destroy]
+    resources :beacons, only: %i[index]
 
     resources :plans, only: %i[show update create] do
       patch '/own', to: 'plans#editable'
