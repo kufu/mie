@@ -19,12 +19,19 @@ export default class extends Controller {
 
   open () {
     document.documentElement.classList.add('overflow-hidden');
+    this.original = this.dialogTarget.cloneNode(true);
 
     this.dialog.addEventListener('close', (e) => {
       document.documentElement.classList.remove('overflow-hidden');
     });
 
     this.dialog.showModal();
+  }
+
+  cancel () {
+    this.dialogTarget.innerHTML = this.original.innerHTML;
+    this.original = undefined;
+    this.dialog.close();
   }
 
   close () {
