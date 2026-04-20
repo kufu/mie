@@ -42,7 +42,7 @@ class Beacon < ApplicationRecord
 
     errors.add(
       :base,
-      I18n.t('errors.beacon_out_of_range', radius_km: event.event_theme.beacon_share_radius_km)
+      I18n.t('errors.beacon_out_of_range', radius_meters: event.event_theme.beacon_share_radius_meters)
     )
   end
 end

@@ -37,12 +37,14 @@ class BeaconTest < ActiveSupport::TestCase
   end
 
   test 'publish rejects beacon outside event share radius' do
+    events(:kaigi).event_theme.update!(beacon_share_radius_meters: 1000)
+
     assert_raises ActiveRecord::RecordInvalid do
       Beacon.publish!(
         profile: profiles(:profile_four),
         event: events(:kaigi),
-        latitude: 33.899157,
-        longitude: 132.765575
+        latitude: 33.850001,
+        longitude: 132.780001
       )
     end
   end

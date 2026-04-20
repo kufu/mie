@@ -7,6 +7,7 @@ party-theme:
   map_latitude: 35.681236
   map_longitude: 139.767125
   map_zoom: 13
+  beacon_share_radius_meters: 5000
 dojo-theme:
   event: dojo
   main_color: '#0B374D'
@@ -16,6 +17,7 @@ dojo-theme:
   map_latitude: 34.693725
   map_longitude: 135.502254
   map_zoom: 13
+  beacon_share_radius_meters: 5000
 
 kaigi-theme:
   event: kaigi
@@ -26,3 +28,4 @@ kaigi-theme:
   map_latitude: 33.839157
   map_longitude: 132.765575
   map_zoom: 13
+  beacon_share_radius_meters: 5000
