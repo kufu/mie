@@ -77,20 +77,21 @@ class BeaconsControllerTest < ActionDispatch::IntegrationTest
   test 'should reject beacon outside event share radius' do
     omniauth_callback_uid('13141516')
     get '/auth/github/callback'
+    @event.event_theme.update!(beacon_share_radius_meters: 1000)
     access_key = beacon_access_key_for(@event)
 
     assert_no_difference('Beacon.count') do
       post event_beacon_url(event_name: @event.name, format: :json), params: {
         beacon: {
-          latitude: 33.899157,
-          longitude: 132.765575,
+          latitude: 33.850001,
+          longitude: 132.780001,
           accuracy_meters: 12
         }
       }, headers: beacon_headers(access_key), as: :json
     end
 
     assert_response :unprocessable_entity
-    assert_includes response.parsed_body['errors'], I18n.t('errors.beacon_out_of_range', radius_km: 5)
+    assert_includes response.parsed_body['errors'], I18n.t('errors.beacon_out_of_range', radius_meters: 1000)
     assert response.parsed_body['access_key'].present?
     refute_equal access_key, response.parsed_body['access_key']
   end

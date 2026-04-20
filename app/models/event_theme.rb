@@ -6,7 +6,7 @@ class EventTheme < ApplicationRecord
   DEFAULT_MAP_LATITUDE = 35.681236
   DEFAULT_MAP_LONGITUDE = 139.767125
   DEFAULT_MAP_ZOOM = 13
-  BEACON_SHARE_RADIUS_METERS = 5_000
+  DEFAULT_BEACON_SHARE_RADIUS_METERS = 5_000
   EARTH_RADIUS_METERS = 6_371_000
 
   belongs_to :event
@@ -16,6 +16,7 @@ class EventTheme < ApplicationRecord
   validates :map_longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 },
                             allow_nil: true
   validates :map_zoom, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 20, only_integer: true }
+  validates :beacon_share_radius_meters, numericality: { greater_than: 0, only_integer: true }
 
   def map_latitude_value
     map_latitude&.to_f || DEFAULT_MAP_LATITUDE
@@ -27,14 +28,6 @@ class EventTheme < ApplicationRecord
 
   def map_zoom_value
     map_zoom || DEFAULT_MAP_ZOOM
-  end
-
-  def beacon_share_radius_meters
-    BEACON_SHARE_RADIUS_METERS
-  end
-
-  def beacon_share_radius_km
-    beacon_share_radius_meters / 1_000
   end
 
   def shareable_location?(latitude:, longitude:)

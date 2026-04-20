@@ -15,7 +15,8 @@ ActiveRecord::Base.transaction do
     main_color: "#893D24",
     map_latitude: 41.782779353469216,
     map_longitude: 140.7502528746034,
-    map_zoom: 13
+    map_zoom: 13,
+    beacon_share_radius_meters: EventTheme::DEFAULT_BEACON_SHARE_RADIUS_METERS
   ) if base_event.new_record?
   base_event.save!
   base_event.reload
@@ -23,7 +24,8 @@ ActiveRecord::Base.transaction do
     main_color: '#893D24',
     map_latitude: 41.782779353469216,
     map_longitude: 140.7502528746034,
-    map_zoom: 13
+    map_zoom: 13,
+    beacon_share_radius_meters: EventTheme::DEFAULT_BEACON_SHARE_RADIUS_METERS
   )
 
   speakers_yaml = {}.merge(*YAML.load_file('db/seeds/speakers.yml').values)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_05_000200) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_20_000000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_000200) do
   end
 
   create_table "event_themes", id: :string, force: :cascade do |t|
+    t.integer "beacon_share_radius_meters", default: 5000, null: false
     t.datetime "created_at", null: false
     t.string "event_id", null: false
     t.string "main_color", default: "#0B374D", null: false
