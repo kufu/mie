@@ -8,7 +8,7 @@
       <% end %>
       <% unless Rails.env.test? %>
         <a href="https://rubykaigi.org/2026/" target="_blank">
-          <img class="h-3" src="<%= asset_path("#{event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi #{event.name}">
+          <img class="h-5 w-auto sm:h-6" src="<%= asset_path("#{event.name}/rubykaigi_logo.svg") %>" alt="RubyKaigi #{event.name}">
         </a>
       <% end %>
     </div>
