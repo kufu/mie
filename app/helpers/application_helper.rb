@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  PWA_VERSION = '2026-2'.freeze
+  PWA_VERSION = '2026-2'
 
   def current_path?(path)
     request.path == path
