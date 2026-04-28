@@ -160,6 +160,7 @@ en:
 
   map:
     title: "RubyKaigi Beacon Map"
+    error_title: "Error"
     description: "Share your current location for 30 minutes and see where other logged-in attendees are gathering around the city."
     loading: "Loading map..."
     locating: "Acquiring your location..."
