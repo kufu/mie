@@ -46,4 +46,12 @@
   .tab-btn-active {
     @apply relative text-[var(--semantic-neutral-text)] font-bold border-[var(--semantic-neutral-line)];
   }
+
+  .event-current {
+    background-color: rgb(105, 217, 222) !important;
+  }
+
+  .event-next {
+    background-color: rgba(105, 217, 222, 0.3) !important;
+  }
 }

@@ -1,6 +1,12 @@
 <%# locals: (row:, location:, scheduled:, team: nil, friends_schedules_map: [], teammates_schedules_map: [], no_buttons: false) -%>
 
-<div data-controller="sessions" data-sessions-is-open-value="<%= !scheduled %>" data-sessions-key-value="<%= row.turbo_frames_id %>" class="bg-primitive-shade-80 rounded-lg p-3 shadow-md border">
+<div data-controller="sessions"
+     data-sessions-is-open-value="<%= !scheduled %>"
+     data-sessions-key-value="<%= row.turbo_frames_id %>"
+     data-schedule-table-target="row"
+     data-start-at="<%= row.started_at.iso8601 %>"
+     data-end-at="<%= row.ended_at.iso8601 %>"
+     class="bg-primitive-shade-80 rounded-lg p-3 shadow-md border">
   <div class="flex items-center justify-between">
     <button data-action="sessions#toggle" class="flex items-center text-left py-2 gap-1 md:hidden">
       <% if row.schedules.size > 1 %>
