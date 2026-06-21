@@ -1,4 +1,4 @@
-const cacheName = "2026-1";
+const cacheName = "<%= pwa_version %>";
 const precachedResources = [
     "<%= asset_path("tailwind.css") %>",
     "<%= asset_path("inter-font.css") %>",
@@ -9,15 +9,21 @@ const nonCacheableResources = [
     "/profile",
     "/teams",
     "/admin",
+    "/manifest",
+    "/service-worker",
     "/map",
     "/beacon",
     "/beacons",
     "/triggers",
     "/session",
-    "/auth"
+    "/auth",
+    "/icon.png",
+    "/apple-touch-icon",
+    "/favicon.ico"
 ];
 
 self.addEventListener("install", (event) => {
+    event.waitUntil(precache());
     self.skipWaiting();
 });
 
@@ -27,29 +33,40 @@ async function precache() {
 }
 
 self.addEventListener("activate", event => {
-    event.waitUntil(precache());
+    event.waitUntil(
+        (async () => {
+            const keys = await caches.keys();
+            await Promise.all(keys.filter((key) => key !== cacheName).map((key) => caches.delete(key)));
+            await precache();
+            await self.clients.claim();
+        })()
+    );
 });
 
 async function cacheFirstWithRefresh(request) {
     const requestUrl = new URL(request.url);
+    const cache = await caches.open(cacheName);
 
-    if (nonCacheableResources.some(path => requestUrl.pathname.includes(path))) {
+    if (nonCacheableResources.some(path => requestUrl.pathname === path || requestUrl.pathname.startsWith(`${path}/`))) {
         return fetch(request);
     }
 
     const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
         if (networkResponse.ok) {
-            const cache = await caches.open(cacheName);
             cache.put(request, networkResponse.clone());
         }
         return networkResponse;
     });
 
-    return (await caches.match(request)) || (await fetchResponsePromise);
+    return (await cache.match(request)) || (await fetchResponsePromise);
 }
 
 self.addEventListener('fetch', (event) => {
     const requestUrl = new URL(event.request.url);
+
+    if (requestUrl.origin !== self.location.origin) {
+        return;
+    }
 
     // When the item modified, load schedules/index to cache it
     if (requestUrl.pathname.includes('item')) {

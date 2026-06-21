@@ -5,9 +5,12 @@ import '@hotwired/turbo-rails';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        const serviceWorkerPath = document.querySelector('meta[name="pwa-service-worker-path"]')?.content || '/service-worker.js'
+
+        navigator.serviceWorker.register(serviceWorkerPath, { updateViaCache: 'none' })
             .then(registration => {
                 console.log('Service Worker registered:', registration);
+                registration.update();
             })
             .catch(error => {
                 console.log('Service Worker registration failed:', error);
