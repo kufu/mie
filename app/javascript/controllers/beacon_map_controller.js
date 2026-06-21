@@ -47,7 +47,7 @@ async function loadGoogleMaps(apiKey) {
 }
 
 export default class extends Controller {
-  static targets = ['map', 'publishButton', 'stopButton', 'count', 'list', 'currentExpiresAt', 'currentExpiresIn', 'friendFilter']
+  static targets = ['map', 'publishButton', 'stopButton', 'count', 'list', 'currentExpiresAt', 'currentExpiresIn', 'friendFilter', 'errorDialog', 'errorMessage']
   static values = {
     apiKey: String,
     mapId: String,
@@ -70,6 +70,12 @@ export default class extends Controller {
     this.pollTimer = null
     this.countdownTimer = null
     this.boundsAdjusted = false
+
+    if (this.hasErrorDialogTarget) {
+      this.errorDialogTarget.addEventListener('close', () => {
+        document.documentElement.classList.remove('overflow-hidden')
+      })
+    }
 
     if (!this.apiKeyValue) {
       this.disableControls()
@@ -95,6 +101,7 @@ export default class extends Controller {
       this.startCountdown()
     } catch (error) {
       console.error(error)
+      this.showErrorDialog(this.messageForError(error, this.messages.load_error))
       this.disableControls()
     }
   }
@@ -102,11 +109,14 @@ export default class extends Controller {
   disconnect() {
     clearInterval(this.pollTimer)
     clearInterval(this.countdownTimer)
+    this.closeErrorDialog()
   }
 
   async publish() {
     if (!navigator.geolocation) {
-      console.error(new Error(this.messages.geolocation_missing))
+      const error = new Error(this.messages.geolocation_missing)
+      console.error(error)
+      this.showErrorDialog(error.message)
       return
     }
 
@@ -130,6 +140,7 @@ export default class extends Controller {
           await this.refresh()
         } catch (error) {
           console.error(error)
+          this.showErrorDialog(this.messageForError(error, this.messages.publish_error))
         } finally {
           this.publishButtonTarget.disabled = false
         }
@@ -137,6 +148,7 @@ export default class extends Controller {
       (error) => {
         this.publishButtonTarget.disabled = false
         console.error(error)
+        this.showErrorDialog(this.messageForGeolocationError(error))
       },
       {
         enableHighAccuracy: true,
@@ -155,6 +167,7 @@ export default class extends Controller {
       await this.refresh()
     } catch (error) {
       console.error(error)
+      this.showErrorDialog(this.messageForError(error, this.messages.stop_error))
     } finally {
       this.stopButtonTarget.disabled = !this.currentBeacon
     }
@@ -449,6 +462,43 @@ export default class extends Controller {
     }
 
     label.textContent = shared ? this.messages.update_beacon : this.messages.share_location
+  }
+
+  showErrorDialog(message) {
+    if (!this.hasErrorDialogTarget || !this.hasErrorMessageTarget) {
+      return
+    }
+
+    this.errorMessageTarget.textContent = message
+    document.documentElement.classList.add('overflow-hidden')
+
+    if (!this.errorDialogTarget.open) {
+      this.errorDialogTarget.showModal()
+    }
+  }
+
+  closeErrorDialog() {
+    document.documentElement.classList.remove('overflow-hidden')
+
+    if (this.hasErrorDialogTarget && this.errorDialogTarget.open) {
+      this.errorDialogTarget.close()
+    }
+  }
+
+  messageForError(error, fallbackMessage) {
+    if (error?.message) {
+      return error.message
+    }
+
+    return fallbackMessage
+  }
+
+  messageForGeolocationError(error) {
+    if (error?.code === 1) {
+      return this.messages.geolocation_denied
+    }
+
+    return this.messageForError(error, this.messages.publish_error)
   }
 
   disableControls() {

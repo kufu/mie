@@ -33,6 +33,7 @@
     api_key_missing: t('map.api_key_missing'),
     load_error: t('map.load_error'),
     refresh_error: t('map.refresh_error'),
+    error_title: t('map.error_title'),
     active_count: t('map.active_count'),
     expires_at: t('map.expires_at'),
     expires_in: t('map.expires_in'),
@@ -45,6 +46,25 @@
   }.to_json) %>"
   class="mx-auto max-w-6xl space-y-4"
 >
+  <dialog data-beacon-map-target="errorDialog" class="border-0 bg-transparent p-0 backdrop:bg-black/50">
+    <div class="fixed inset-0 flex items-center justify-center">
+      <div class="flex max-h-[90vh] w-[90vw] max-w-[480px] flex-col rounded-lg bg-white">
+        <div class="border-b px-4 py-2">
+          <h2 class="text-xl font-bold"><%= t('map.error_title') %></h2>
+        </div>
+        <div class="overflow-y-auto p-4">
+          <p data-beacon-map-target="errorMessage" class="text-sm leading-6 text-[var(--semantic-neutral-text)]"></p>
+        </div>
+        <div class="flex justify-end border-t p-4">
+          <%= render 'components/button',
+                     title: t('button.close'),
+                     size: 's',
+                     data: { action: 'click->beacon-map#closeErrorDialog' } %>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <div class="flex flex-col gap-4 rounded-xl bg-[var(--semantic-neutral-background)] p-4 shadow-md sm:flex-row sm:items-start sm:justify-between">
     <div class="space-y-2">
       <h1 class="text-2xl font-bold text-[var(--semantic-neutral-text)]"><%= t('map.title') %></h1>
